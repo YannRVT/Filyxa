@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Filyxa utilise vos photos pour illustrer les fiches de vos matières.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Filyxa utilise l'appareil photo pour photographier vos matières et leurs étiquettes.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

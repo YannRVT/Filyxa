@@ -10,6 +10,9 @@ import '../features/admin/ui/admin_screen.dart';
 import '../features/auth/ui/invite_screen.dart';
 import '../features/auth/ui/login_screen.dart';
 import '../features/auth/ui/reset_screen.dart';
+import '../features/library/ui/library_screen.dart';
+import '../features/library/ui/material_detail_screen.dart';
+import '../features/library/ui/material_form_screen.dart';
 import '../features/members/ui/members_screen.dart';
 import '../features/session/data/user_space_repository.dart';
 import '../features/session/domain/user_space.dart';
@@ -63,7 +66,24 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(routes: [
             GoRoute(
               path: '/library',
-              builder: (c, _) => placeholder(c, (l) => l.navLibrary, Icons.grid_view_outlined),
+              builder: (_, _) => const LibraryScreen(),
+              routes: [
+                GoRoute(path: 'new', builder: (_, _) => const MaterialFormScreen()),
+                GoRoute(
+                  path: 'import',
+                  builder: (c, _) => placeholder(c, (l) => l.actionImportExcel, Icons.upload_file_outlined),
+                ),
+                GoRoute(
+                  path: ':id',
+                  builder: (_, state) => MaterialDetailScreen(materialId: state.pathParameters['id']!),
+                  routes: [
+                    GoRoute(
+                      path: 'edit',
+                      builder: (_, state) => MaterialFormScreen(materialId: state.pathParameters['id']),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ]),
           StatefulShellBranch(routes: [

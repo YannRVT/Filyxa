@@ -195,5 +195,108 @@
         "type": "String"
       }
     }
-  }
+  },
+  "libraryNew": "Nouvelle matière",
+  "viewGallery": "Galerie",
+  "viewTable": "Tableau",
+  "libraryEmptyTitle": "Votre TissuTech est vide",
+  "libraryEmptyBody": "Ajoutez vos premières matières : scannez l'étiquette d'un échantillon, importez votre fichier Excel ou saisissez-les à la main.",
+  "libraryEmptyViewer": "Aucune matière pour l'instant. Les éditeurs de votre atelier peuvent en ajouter.",
+  "actionScanSample": "Scanner un échantillon",
+  "actionImportExcel": "Importer un fichier Excel",
+  "actionCreateManual": "Saisir à la main",
+  "materialCount": "{count, plural, =0{Aucune matière} =1{1 matière} other{{count} matières}}",
+  "@materialCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "colMaterial": "Matière",
+  "colReference": "Référence",
+  "colComposition": "Composition",
+  "colWeight": "g/m²",
+  "colWidth": "Laize",
+  "colStock": "Stock atelier",
+  "fieldName": "Nom de la matière",
+  "fieldSupplier": "Fournisseur",
+  "fieldSupplierCode": "Code article",
+  "fieldColorName": "Coloris",
+  "fieldColorHex": "Couleur (#RRGGBB)",
+  "photoAdd": "Ajouter une photo",
+  "photoChange": "Changer la photo",
+  "photoRemove": "Retirer la photo",
+  "sectionIdentity": "Identité",
+  "sectionColor": "Couleur et photo",
+  "sectionComposition": "Composition",
+  "sectionTechnical": "Caractéristiques",
+  "sectionCare": "Entretien",
+  "sectionUses": "Usages et certifications",
+  "sectionStock": "Stock atelier",
+  "sectionNotes": "Notes",
+  "addFiber": "Ajouter une fibre",
+  "removeFiber": "Retirer cette fibre",
+  "fiberLabel": "Fibre",
+  "compositionTotal": "Total : {total} %",
+  "@compositionTotal": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "compositionMustBe100": "Le total doit faire 100 %, sans fibre en double",
+  "fieldWeight": "Grammage (g/m²)",
+  "fieldWidth": "Laize (cm)",
+  "fieldWeave": "Armure",
+  "noneOption": "Non renseigné",
+  "fieldCertifications": "Certifications",
+  "fieldUses": "Usages",
+  "fieldStock": "Métrage en stock (m)",
+  "errorRequired": "Champ obligatoire",
+  "errorNumberRange": "Nombre entre {min} et {max}",
+  "@errorNumberRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "errorHex": "Format #RRGGBB attendu (ex. #2F4A6B)",
+  "save": "Enregistrer",
+  "materialSaved": "Matière enregistrée.",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "deleteMaterialTitle": "Supprimer « {name} » ?",
+  "@deleteMaterialTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteMaterialBody": "La matière et sa photo seront définitivement supprimées.",
+  "materialDeleted": "Matière supprimée.",
+  "editStock": "Modifier le stock",
+  "stockUpdated": "Stock mis à jour.",
+  "stockMeters": "{value} m",
+  "@stockMeters": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "materialNotFound": "Cette matière n'existe plus ou n'est pas accessible.",
+  "newMaterialTitle": "Nouvelle matière",
+  "editMaterialTitle": "Modifier la matière",
+  "detailWeight": "Grammage",
+  "detailWidth": "Laize",
+  "photoUploadFailed": "La photo n'a pas pu être envoyée. Réessayez.",
+  "viewerReadOnly": "Lecture seule",
+  "errorEditorsOnly": "Action réservée aux éditeurs et aux administrateurs de l'atelier."
 }

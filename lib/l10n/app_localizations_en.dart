@@ -382,4 +382,222 @@ class AppLocalizationsEn extends AppLocalizations {
   String memberActions(String name) {
     return 'Actions for $name';
   }
+
+  @override
+  String get libraryNew => 'New material';
+
+  @override
+  String get viewGallery => 'Gallery';
+
+  @override
+  String get viewTable => 'Table';
+
+  @override
+  String get libraryEmptyTitle => 'Your TissuTech is empty';
+
+  @override
+  String get libraryEmptyBody =>
+      'Add your first materials: scan a sample label, import your Excel file or enter them by hand.';
+
+  @override
+  String get libraryEmptyViewer =>
+      'No materials yet. Your studio\'s editors can add some.';
+
+  @override
+  String get actionScanSample => 'Scan a sample';
+
+  @override
+  String get actionImportExcel => 'Import an Excel file';
+
+  @override
+  String get actionCreateManual => 'Enter by hand';
+
+  @override
+  String materialCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materials',
+      one: '1 material',
+      zero: 'No materials',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get colMaterial => 'Material';
+
+  @override
+  String get colReference => 'Reference';
+
+  @override
+  String get colComposition => 'Composition';
+
+  @override
+  String get colWeight => 'g/m²';
+
+  @override
+  String get colWidth => 'Width';
+
+  @override
+  String get colStock => 'Studio stock';
+
+  @override
+  String get fieldName => 'Material name';
+
+  @override
+  String get fieldSupplier => 'Supplier';
+
+  @override
+  String get fieldSupplierCode => 'Article code';
+
+  @override
+  String get fieldColorName => 'Colourway';
+
+  @override
+  String get fieldColorHex => 'Colour (#RRGGBB)';
+
+  @override
+  String get photoAdd => 'Add a photo';
+
+  @override
+  String get photoChange => 'Change photo';
+
+  @override
+  String get photoRemove => 'Remove photo';
+
+  @override
+  String get sectionIdentity => 'Identity';
+
+  @override
+  String get sectionColor => 'Colour and photo';
+
+  @override
+  String get sectionComposition => 'Composition';
+
+  @override
+  String get sectionTechnical => 'Specifications';
+
+  @override
+  String get sectionCare => 'Care';
+
+  @override
+  String get sectionUses => 'Uses and certifications';
+
+  @override
+  String get sectionStock => 'Studio stock';
+
+  @override
+  String get sectionNotes => 'Notes';
+
+  @override
+  String get addFiber => 'Add a fibre';
+
+  @override
+  String get removeFiber => 'Remove this fibre';
+
+  @override
+  String get fiberLabel => 'Fibre';
+
+  @override
+  String compositionTotal(String total) {
+    return 'Total: $total%';
+  }
+
+  @override
+  String get compositionMustBe100 =>
+      'The total must be 100%, with no duplicate fibre';
+
+  @override
+  String get fieldWeight => 'Weight (g/m²)';
+
+  @override
+  String get fieldWidth => 'Width (cm)';
+
+  @override
+  String get fieldWeave => 'Weave';
+
+  @override
+  String get noneOption => 'Not specified';
+
+  @override
+  String get fieldCertifications => 'Certifications';
+
+  @override
+  String get fieldUses => 'Uses';
+
+  @override
+  String get fieldStock => 'Metres in stock (m)';
+
+  @override
+  String get errorRequired => 'Required field';
+
+  @override
+  String errorNumberRange(int min, int max) {
+    return 'Number between $min and $max';
+  }
+
+  @override
+  String get errorHex => 'Expected format #RRGGBB (e.g. #2F4A6B)';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get materialSaved => 'Material saved.';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String deleteMaterialTitle(String name) {
+    return 'Delete “$name”?';
+  }
+
+  @override
+  String get deleteMaterialBody =>
+      'The material and its photo will be permanently deleted.';
+
+  @override
+  String get materialDeleted => 'Material deleted.';
+
+  @override
+  String get editStock => 'Edit stock';
+
+  @override
+  String get stockUpdated => 'Stock updated.';
+
+  @override
+  String stockMeters(String value) {
+    return '$value m';
+  }
+
+  @override
+  String get materialNotFound =>
+      'This material no longer exists or is not accessible.';
+
+  @override
+  String get newMaterialTitle => 'New material';
+
+  @override
+  String get editMaterialTitle => 'Edit material';
+
+  @override
+  String get detailWeight => 'Weight';
+
+  @override
+  String get detailWidth => 'Width';
+
+  @override
+  String get photoUploadFailed => 'The photo could not be uploaded. Try again.';
+
+  @override
+  String get viewerReadOnly => 'Read only';
+
+  @override
+  String get errorEditorsOnly =>
+      'Only the studio\'s editors and admins can do this.';
 }
