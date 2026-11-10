@@ -600,4 +600,82 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errorEditorsOnly =>
       'Only the studio\'s editors and admins can do this.';
+
+  @override
+  String get searchHint => 'Search: name, code, supplier, colour, fibre…';
+
+  @override
+  String get clearSearch => 'Clear search';
+
+  @override
+  String get filtersButton => 'Filters';
+
+  @override
+  String get clearFilters => 'Clear filters';
+
+  @override
+  String get showResults => 'Show results';
+
+  @override
+  String get noResultsTitle => 'No results';
+
+  @override
+  String get noResultsBody => 'No material matches your search or filters.';
+
+  @override
+  String resultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+      zero: 'No results',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get filterFiber => 'Fibre';
+
+  @override
+  String get filterFiberAny => 'All fibres';
+
+  @override
+  String filterFiberMin(int pct) {
+    return 'At least $pct%';
+  }
+
+  @override
+  String get filterWeight => 'Weight';
+
+  @override
+  String get filterColor => 'Colour';
+
+  @override
+  String get filterInStock => 'In stock at the studio';
+
+  @override
+  String removeFilter(String label) {
+    return 'Remove filter $label';
+  }
+
+  @override
+  String chipFiberMin(String fiber, int pct) {
+    return '$fiber ≥ $pct%';
+  }
+
+  @override
+  String chipWeightRange(int min, int max) {
+    return '$min–$max g/m²';
+  }
+
+  @override
+  String chipWeightMin(int min) {
+    return '≥ $min g/m²';
+  }
+
+  @override
+  String chipWeightMax(int max) {
+    return '≤ $max g/m²';
+  }
 }

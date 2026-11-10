@@ -1149,6 +1149,120 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Action réservée aux éditeurs et aux administrateurs de l\'atelier.'**
   String get errorEditorsOnly;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rechercher : nom, code, fournisseur, couleur, fibre…'**
+  String get searchHint;
+
+  /// No description provided for @clearSearch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer la recherche'**
+  String get clearSearch;
+
+  /// No description provided for @filtersButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtres'**
+  String get filtersButton;
+
+  /// No description provided for @clearFilters.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer les filtres'**
+  String get clearFilters;
+
+  /// No description provided for @showResults.
+  ///
+  /// In fr, this message translates to:
+  /// **'Afficher les résultats'**
+  String get showResults;
+
+  /// No description provided for @noResultsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun résultat'**
+  String get noResultsTitle;
+
+  /// No description provided for @noResultsBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière ne correspond à votre recherche ou à vos filtres.'**
+  String get noResultsBody;
+
+  /// No description provided for @resultCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucun résultat} =1{1 résultat} other{{count} résultats}}'**
+  String resultCount(int count);
+
+  /// No description provided for @filterFiber.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fibre'**
+  String get filterFiber;
+
+  /// No description provided for @filterFiberAny.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes les fibres'**
+  String get filterFiberAny;
+
+  /// No description provided for @filterFiberMin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Au moins {pct} %'**
+  String filterFiberMin(int pct);
+
+  /// No description provided for @filterWeight.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grammage'**
+  String get filterWeight;
+
+  /// No description provided for @filterColor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur'**
+  String get filterColor;
+
+  /// No description provided for @filterInStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'En stock à l\'atelier'**
+  String get filterInStock;
+
+  /// No description provided for @removeFilter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer le filtre {label}'**
+  String removeFilter(String label);
+
+  /// No description provided for @chipFiberMin.
+  ///
+  /// In fr, this message translates to:
+  /// **'{fiber} ≥ {pct} %'**
+  String chipFiberMin(String fiber, int pct);
+
+  /// No description provided for @chipWeightRange.
+  ///
+  /// In fr, this message translates to:
+  /// **'{min}–{max} g/m²'**
+  String chipWeightRange(int min, int max);
+
+  /// No description provided for @chipWeightMin.
+  ///
+  /// In fr, this message translates to:
+  /// **'≥ {min} g/m²'**
+  String chipWeightMin(int min);
+
+  /// No description provided for @chipWeightMax.
+  ///
+  /// In fr, this message translates to:
+  /// **'≤ {max} g/m²'**
+  String chipWeightMax(int max);
 }
 
 class _AppLocalizationsDelegate

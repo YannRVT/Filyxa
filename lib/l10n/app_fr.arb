@@ -298,5 +298,79 @@
   "detailWidth": "Laize",
   "photoUploadFailed": "La photo n'a pas pu être envoyée. Réessayez.",
   "viewerReadOnly": "Lecture seule",
-  "errorEditorsOnly": "Action réservée aux éditeurs et aux administrateurs de l'atelier."
+  "errorEditorsOnly": "Action réservée aux éditeurs et aux administrateurs de l'atelier.",
+  "searchHint": "Rechercher : nom, code, fournisseur, couleur, fibre…",
+  "clearSearch": "Effacer la recherche",
+  "filtersButton": "Filtres",
+  "clearFilters": "Effacer les filtres",
+  "showResults": "Afficher les résultats",
+  "noResultsTitle": "Aucun résultat",
+  "noResultsBody": "Aucune matière ne correspond à votre recherche ou à vos filtres.",
+  "resultCount": "{count, plural, =0{Aucun résultat} =1{1 résultat} other{{count} résultats}}",
+  "@resultCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filterFiber": "Fibre",
+  "filterFiberAny": "Toutes les fibres",
+  "filterFiberMin": "Au moins {pct} %",
+  "@filterFiberMin": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "filterWeight": "Grammage",
+  "filterColor": "Couleur",
+  "filterInStock": "En stock à l'atelier",
+  "removeFilter": "Retirer le filtre {label}",
+  "@removeFilter": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "chipFiberMin": "{fiber} ≥ {pct} %",
+  "@chipFiberMin": {
+    "placeholders": {
+      "fiber": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "chipWeightRange": "{min}–{max} g/m²",
+  "@chipWeightRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "chipWeightMin": "≥ {min} g/m²",
+  "@chipWeightMin": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "chipWeightMax": "≤ {max} g/m²",
+  "@chipWeightMax": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -603,4 +603,84 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get errorEditorsOnly =>
       'Acțiune rezervată editorilor și administratorilor atelierului.';
+
+  @override
+  String get searchHint => 'Caută: nume, cod, furnizor, culoare, fibră…';
+
+  @override
+  String get clearSearch => 'Șterge căutarea';
+
+  @override
+  String get filtersButton => 'Filtre';
+
+  @override
+  String get clearFilters => 'Șterge filtrele';
+
+  @override
+  String get showResults => 'Afișează rezultatele';
+
+  @override
+  String get noResultsTitle => 'Niciun rezultat';
+
+  @override
+  String get noResultsBody =>
+      'Niciun material nu corespunde căutării sau filtrelor.';
+
+  @override
+  String resultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count de rezultate',
+      few: '$count rezultate',
+      one: '1 rezultat',
+      zero: 'Niciun rezultat',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get filterFiber => 'Fibră';
+
+  @override
+  String get filterFiberAny => 'Toate fibrele';
+
+  @override
+  String filterFiberMin(int pct) {
+    return 'Cel puțin $pct %';
+  }
+
+  @override
+  String get filterWeight => 'Gramaj';
+
+  @override
+  String get filterColor => 'Culoare';
+
+  @override
+  String get filterInStock => 'În stoc în atelier';
+
+  @override
+  String removeFilter(String label) {
+    return 'Elimină filtrul $label';
+  }
+
+  @override
+  String chipFiberMin(String fiber, int pct) {
+    return '$fiber ≥ $pct %';
+  }
+
+  @override
+  String chipWeightRange(int min, int max) {
+    return '$min–$max g/m²';
+  }
+
+  @override
+  String chipWeightMin(int min) {
+    return '≥ $min g/m²';
+  }
+
+  @override
+  String chipWeightMax(int max) {
+    return '≤ $max g/m²';
+  }
 }
