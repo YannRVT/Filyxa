@@ -294,4 +294,93 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get missingConfig =>
       'Configuration Supabase manquante. Copiez env.example.json en env.json, renseignez-le, puis lancez : flutter run --dart-define-from-file=env.json';
+
+  @override
+  String get membersEntry => 'Membres de l\'atelier';
+
+  @override
+  String get membersTitle => 'Membres';
+
+  @override
+  String get membersInvite => 'Inviter';
+
+  @override
+  String get inviteDialogTitle => 'Inviter un membre';
+
+  @override
+  String get inviteSend => 'Envoyer l\'invitation';
+
+  @override
+  String get roleAdminHelp =>
+      'Gère les membres et les paramètres de l\'atelier';
+
+  @override
+  String get roleEditorHelp => 'Crée, modifie, scanne, importe et partage';
+
+  @override
+  String get roleViewerHelp => 'Consulte et exporte, sans rien modifier';
+
+  @override
+  String get youSuffix => 'vous';
+
+  @override
+  String get pendingInvitations => 'Invitations en attente';
+
+  @override
+  String invitationExpiresOn(String date) {
+    return 'Expire le $date';
+  }
+
+  @override
+  String get invitationExpiredShort => 'Expirée';
+
+  @override
+  String get resendInvitation => 'Renvoyer';
+
+  @override
+  String get cancelInvitation => 'Annuler l\'invitation';
+
+  @override
+  String invitationSent(String email) {
+    return 'Invitation envoyée à $email.';
+  }
+
+  @override
+  String get invitationCanceled => 'Invitation annulée.';
+
+  @override
+  String get changeRole => 'Changer le rôle';
+
+  @override
+  String get roleChanged => 'Rôle mis à jour.';
+
+  @override
+  String get removeMember => 'Retirer de l\'atelier';
+
+  @override
+  String removeConfirmTitle(String name) {
+    return 'Retirer $name ?';
+  }
+
+  @override
+  String get removeConfirmBody =>
+      'Cette personne perdra immédiatement l\'accès aux données de l\'atelier. Vous pourrez l\'inviter à nouveau.';
+
+  @override
+  String get removeConfirm => 'Retirer';
+
+  @override
+  String get memberRemoved => 'Membre retiré.';
+
+  @override
+  String get errorLastAdmin =>
+      'L\'atelier doit garder au moins un admin. Nommez d\'abord un autre admin.';
+
+  @override
+  String get lastAdminHint => 'Seul admin de l\'atelier';
+
+  @override
+  String memberActions(String name) {
+    return 'Actions pour $name';
+  }
 }

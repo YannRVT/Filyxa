@@ -292,4 +292,92 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get missingConfig =>
       'Configuração do Supabase em falta. Copie env.example.json para env.json, preencha-o e execute: flutter run --dart-define-from-file=env.json';
+
+  @override
+  String get membersEntry => 'Membros do ateliê';
+
+  @override
+  String get membersTitle => 'Membros';
+
+  @override
+  String get membersInvite => 'Convidar';
+
+  @override
+  String get inviteDialogTitle => 'Convidar um membro';
+
+  @override
+  String get inviteSend => 'Enviar o convite';
+
+  @override
+  String get roleAdminHelp => 'Gere os membros e as definições do ateliê';
+
+  @override
+  String get roleEditorHelp => 'Cria, edita, digitaliza, importa e partilha';
+
+  @override
+  String get roleViewerHelp => 'Consulta e exporta, sem alterar nada';
+
+  @override
+  String get youSuffix => 'você';
+
+  @override
+  String get pendingInvitations => 'Convites pendentes';
+
+  @override
+  String invitationExpiresOn(String date) {
+    return 'Expira a $date';
+  }
+
+  @override
+  String get invitationExpiredShort => 'Expirado';
+
+  @override
+  String get resendInvitation => 'Reenviar';
+
+  @override
+  String get cancelInvitation => 'Cancelar o convite';
+
+  @override
+  String invitationSent(String email) {
+    return 'Convite enviado para $email.';
+  }
+
+  @override
+  String get invitationCanceled => 'Convite cancelado.';
+
+  @override
+  String get changeRole => 'Alterar a função';
+
+  @override
+  String get roleChanged => 'Função atualizada.';
+
+  @override
+  String get removeMember => 'Remover do ateliê';
+
+  @override
+  String removeConfirmTitle(String name) {
+    return 'Remover $name?';
+  }
+
+  @override
+  String get removeConfirmBody =>
+      'Esta pessoa perderá imediatamente o acesso aos dados do ateliê. Poderá convidá-la novamente.';
+
+  @override
+  String get removeConfirm => 'Remover';
+
+  @override
+  String get memberRemoved => 'Membro removido.';
+
+  @override
+  String get errorLastAdmin =>
+      'O ateliê deve manter pelo menos um administrador. Nomeie primeiro outro administrador.';
+
+  @override
+  String get lastAdminHint => 'Único administrador do ateliê';
+
+  @override
+  String memberActions(String name) {
+    return 'Ações para $name';
+  }
 }

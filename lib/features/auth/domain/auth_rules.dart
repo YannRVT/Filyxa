@@ -36,6 +36,7 @@ enum AuthFailure {
   invitationExpired,
   invitationNotFound,
   alreadyMember,
+  lastAdmin,
   forbidden,
   emailNotSent,
   tooManyRequests,
@@ -49,6 +50,7 @@ AuthFailure classifyFailure({String? message, String? code, int? statusCode}) {
   if (text.contains('invitation_expired')) return AuthFailure.invitationExpired;
   if (text.contains('invitation_not_found')) return AuthFailure.invitationNotFound;
   if (text.contains('already_member')) return AuthFailure.alreadyMember;
+  if (text.contains('last_admin')) return AuthFailure.lastAdmin;
   if (text.contains('email_not_sent')) return AuthFailure.emailNotSent;
   if (text.contains('forbidden') || statusCode == 403) return AuthFailure.forbidden;
   if (statusCode == 429 || text.contains('rate limit') || text.contains('over_') ) {

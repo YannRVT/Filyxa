@@ -78,6 +78,13 @@ class AccountScreen extends ConsumerWidget {
                             leading: const Icon(Icons.badge_outlined),
                           ),
                           const Divider(),
+                          ListTile(
+                            leading: const Icon(Icons.group_outlined),
+                            title: Text(l10n.membersEntry),
+                            trailing: const Icon(Icons.chevron_right),
+                            onTap: () => context.go('/account/members'),
+                          ),
+                          const Divider(),
                         ],
                         ListTile(
                           leading: const Icon(Icons.translate),

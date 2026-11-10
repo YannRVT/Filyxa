@@ -294,4 +294,93 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get missingConfig =>
       'Configurația Supabase lipsește. Copiază env.example.json în env.json, completează-l, apoi rulează: flutter run --dart-define-from-file=env.json';
+
+  @override
+  String get membersEntry => 'Membrii atelierului';
+
+  @override
+  String get membersTitle => 'Membri';
+
+  @override
+  String get membersInvite => 'Invită';
+
+  @override
+  String get inviteDialogTitle => 'Invită un membru';
+
+  @override
+  String get inviteSend => 'Trimite invitația';
+
+  @override
+  String get roleAdminHelp => 'Gestionează membrii și setările atelierului';
+
+  @override
+  String get roleEditorHelp =>
+      'Creează, modifică, scanează, importă și partajează';
+
+  @override
+  String get roleViewerHelp => 'Consultă și exportă, fără a modifica nimic';
+
+  @override
+  String get youSuffix => 'tu';
+
+  @override
+  String get pendingInvitations => 'Invitații în așteptare';
+
+  @override
+  String invitationExpiresOn(String date) {
+    return 'Expiră pe $date';
+  }
+
+  @override
+  String get invitationExpiredShort => 'Expirată';
+
+  @override
+  String get resendInvitation => 'Retrimite';
+
+  @override
+  String get cancelInvitation => 'Anulează invitația';
+
+  @override
+  String invitationSent(String email) {
+    return 'Invitație trimisă către $email.';
+  }
+
+  @override
+  String get invitationCanceled => 'Invitație anulată.';
+
+  @override
+  String get changeRole => 'Schimbă rolul';
+
+  @override
+  String get roleChanged => 'Rol actualizat.';
+
+  @override
+  String get removeMember => 'Elimină din atelier';
+
+  @override
+  String removeConfirmTitle(String name) {
+    return 'Elimini pe $name?';
+  }
+
+  @override
+  String get removeConfirmBody =>
+      'Această persoană va pierde imediat accesul la datele atelierului. O poți invita din nou.';
+
+  @override
+  String get removeConfirm => 'Elimină';
+
+  @override
+  String get memberRemoved => 'Membru eliminat.';
+
+  @override
+  String get errorLastAdmin =>
+      'Atelierul trebuie să păstreze cel puțin un admin. Numește mai întâi un alt admin.';
+
+  @override
+  String get lastAdminHint => 'Singurul admin al atelierului';
+
+  @override
+  String memberActions(String name) {
+    return 'Acțiuni pentru $name';
+  }
 }

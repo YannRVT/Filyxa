@@ -10,6 +10,7 @@ import '../features/admin/ui/admin_screen.dart';
 import '../features/auth/ui/invite_screen.dart';
 import '../features/auth/ui/login_screen.dart';
 import '../features/auth/ui/reset_screen.dart';
+import '../features/members/ui/members_screen.dart';
 import '../features/session/data/user_space_repository.dart';
 import '../features/session/domain/user_space.dart';
 import '../features/session/ui/session_screens.dart';
@@ -86,7 +87,13 @@ final routerProvider = Provider<GoRouter>((ref) {
             ),
           ]),
           StatefulShellBranch(routes: [
-            GoRoute(path: '/account', builder: (_, _) => const AccountScreen()),
+            GoRoute(
+              path: '/account',
+              builder: (_, _) => const AccountScreen(),
+              routes: [
+                GoRoute(path: 'members', builder: (_, _) => const MembersScreen()),
+              ],
+            ),
           ]),
         ],
       ),

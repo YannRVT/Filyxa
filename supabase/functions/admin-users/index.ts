@@ -2,7 +2,12 @@
 //
 // POST { action: "create_organization", name, kind }      → super-admin uniquement
 //      { action: "invite", orgId, email, role }            → super-admin ou admin de l'organisation
+//      { action: "set_role", orgId, userId, role }         → super-admin ou admin de l'organisation
+//      { action: "remove_member", orgId, userId }          → super-admin ou admin de l'organisation
+//      { action: "revoke_invitation", invitationId }       → super-admin ou admin de l'organisation
 //      { action: "resend_invitation", email }              → public (invitation valable en attente)
+//
+// Un atelier garde toujours au moins un admin (erreur « last_admin »).
 //
 // L'invitation envoie un code à 6 chiffres par e-mail (modèle « invite » pour un
 // nouveau compte, « magic_link » pour un compte existant). Elle est valable 48 h ;
@@ -12,13 +17,14 @@
 
 import { createClient } from "@supabase/supabase-js";
 import {
-  canInvite,
+  canManageMembers,
   isAlreadyRegistered,
   isOrgKind,
   isRole,
   normalizeEmail,
   normalizeOrgName,
   type Role,
+  wouldLeaveNoAdmin,
 } from "./rules.ts";
 
 const corsHeaders = {
@@ -79,6 +85,25 @@ async function resendInvitation(rawEmail: unknown): Promise<Response> {
   return json({ ok: true });
 }
 
+async function roleIn(orgId: string, userId: string): Promise<Role | null> {
+  const { data } = await admin
+    .from("memberships")
+    .select("role")
+    .eq("org_id", orgId)
+    .eq("user_id", userId)
+    .maybeSingle();
+  return (data?.role as Role) ?? null;
+}
+
+async function adminCount(orgId: string): Promise<number> {
+  const { count } = await admin
+    .from("memberships")
+    .select("user_id", { count: "exact", head: true })
+    .eq("org_id", orgId)
+    .eq("role", "admin");
+  return count ?? 0;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return fail("method_not_allowed", 405);
@@ -131,13 +156,7 @@ Deno.serve(async (req) => {
         if (!email) return fail("invalid_email", 400);
         if (!role) return fail("invalid_role", 400);
 
-        const { data: membership } = await admin
-          .from("memberships")
-          .select("role")
-          .eq("org_id", orgId)
-          .eq("user_id", caller.user.id)
-          .maybeSingle();
-        if (!canInvite({ isSuperadmin, roleInOrg: (membership?.role as Role) ?? null })) {
+        if (!canManageMembers({ isSuperadmin, roleInOrg: await roleIn(orgId, caller.user.id) })) {
           return fail("forbidden", 403);
         }
 
@@ -187,6 +206,54 @@ Deno.serve(async (req) => {
           return fail("email_not_sent", 502);
         }
         return json({ invitation });
+      }
+
+      case "set_role":
+      case "remove_member": {
+        const orgId = typeof body.orgId === "string" ? body.orgId : null;
+        const userId = typeof body.userId === "string" ? body.userId : null;
+        const removing = body.action === "remove_member";
+        const newRole: Role | null = removing ? null : isRole(body.role) ? body.role : null;
+        if (!orgId || !userId) return fail("invalid_member", 400);
+        if (!removing && !newRole) return fail("invalid_role", 400);
+
+        if (!canManageMembers({ isSuperadmin, roleInOrg: await roleIn(orgId, caller.user.id) })) {
+          return fail("forbidden", 403);
+        }
+        const currentRole = await roleIn(orgId, userId);
+        if (!currentRole) return fail("invalid_member", 404);
+        if (wouldLeaveNoAdmin({ adminCount: await adminCount(orgId), currentRole, newRole })) {
+          return fail("last_admin", 409);
+        }
+
+        const query = removing
+          ? admin.from("memberships").delete()
+          : admin.from("memberships").update({ role: newRole });
+        const { error } = await query.eq("org_id", orgId).eq("user_id", userId);
+        if (error) throw error;
+        return json({ ok: true });
+      }
+
+      case "revoke_invitation": {
+        const invitationId = typeof body.invitationId === "string" ? body.invitationId : null;
+        if (!invitationId) return fail("invalid_invitation", 400);
+        const { data: invitation } = await admin
+          .from("invitations")
+          .select("id, org_id")
+          .eq("id", invitationId)
+          .is("accepted_at", null)
+          .is("revoked_at", null)
+          .maybeSingle();
+        if (!invitation) return fail("invalid_invitation", 404);
+        if (!canManageMembers({ isSuperadmin, roleInOrg: await roleIn(invitation.org_id, caller.user.id) })) {
+          return fail("forbidden", 403);
+        }
+        const { error } = await admin
+          .from("invitations")
+          .update({ revoked_at: new Date().toISOString() })
+          .eq("id", invitationId);
+        if (error) throw error;
+        return json({ ok: true });
       }
 
       default:

@@ -294,4 +294,92 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get missingConfig =>
       'Supabase configuration missing. Copy env.example.json to env.json, fill it in, then run: flutter run --dart-define-from-file=env.json';
+
+  @override
+  String get membersEntry => 'Studio members';
+
+  @override
+  String get membersTitle => 'Members';
+
+  @override
+  String get membersInvite => 'Invite';
+
+  @override
+  String get inviteDialogTitle => 'Invite a member';
+
+  @override
+  String get inviteSend => 'Send invitation';
+
+  @override
+  String get roleAdminHelp => 'Manages members and studio settings';
+
+  @override
+  String get roleEditorHelp => 'Creates, edits, scans, imports and shares';
+
+  @override
+  String get roleViewerHelp => 'Views and exports, without changing anything';
+
+  @override
+  String get youSuffix => 'you';
+
+  @override
+  String get pendingInvitations => 'Pending invitations';
+
+  @override
+  String invitationExpiresOn(String date) {
+    return 'Expires $date';
+  }
+
+  @override
+  String get invitationExpiredShort => 'Expired';
+
+  @override
+  String get resendInvitation => 'Resend';
+
+  @override
+  String get cancelInvitation => 'Cancel invitation';
+
+  @override
+  String invitationSent(String email) {
+    return 'Invitation sent to $email.';
+  }
+
+  @override
+  String get invitationCanceled => 'Invitation canceled.';
+
+  @override
+  String get changeRole => 'Change role';
+
+  @override
+  String get roleChanged => 'Role updated.';
+
+  @override
+  String get removeMember => 'Remove from studio';
+
+  @override
+  String removeConfirmTitle(String name) {
+    return 'Remove $name?';
+  }
+
+  @override
+  String get removeConfirmBody =>
+      'This person will immediately lose access to the studio\'s data. You can invite them again later.';
+
+  @override
+  String get removeConfirm => 'Remove';
+
+  @override
+  String get memberRemoved => 'Member removed.';
+
+  @override
+  String get errorLastAdmin =>
+      'The studio must keep at least one admin. Make someone else admin first.';
+
+  @override
+  String get lastAdminHint => 'Only admin of the studio';
+
+  @override
+  String memberActions(String name) {
+    return 'Actions for $name';
+  }
 }

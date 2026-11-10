@@ -603,6 +603,162 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Configuration Supabase manquante. Copiez env.example.json en env.json, renseignez-le, puis lancez : flutter run --dart-define-from-file=env.json'**
   String get missingConfig;
+
+  /// No description provided for @membersEntry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres de l\'atelier'**
+  String get membersEntry;
+
+  /// No description provided for @membersTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres'**
+  String get membersTitle;
+
+  /// No description provided for @membersInvite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inviter'**
+  String get membersInvite;
+
+  /// No description provided for @inviteDialogTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inviter un membre'**
+  String get inviteDialogTitle;
+
+  /// No description provided for @inviteSend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer l\'invitation'**
+  String get inviteSend;
+
+  /// No description provided for @roleAdminHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gère les membres et les paramètres de l\'atelier'**
+  String get roleAdminHelp;
+
+  /// No description provided for @roleEditorHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Crée, modifie, scanne, importe et partage'**
+  String get roleEditorHelp;
+
+  /// No description provided for @roleViewerHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consulte et exporte, sans rien modifier'**
+  String get roleViewerHelp;
+
+  /// No description provided for @youSuffix.
+  ///
+  /// In fr, this message translates to:
+  /// **'vous'**
+  String get youSuffix;
+
+  /// No description provided for @pendingInvitations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Invitations en attente'**
+  String get pendingInvitations;
+
+  /// No description provided for @invitationExpiresOn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Expire le {date}'**
+  String invitationExpiresOn(String date);
+
+  /// No description provided for @invitationExpiredShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Expirée'**
+  String get invitationExpiredShort;
+
+  /// No description provided for @resendInvitation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Renvoyer'**
+  String get resendInvitation;
+
+  /// No description provided for @cancelInvitation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler l\'invitation'**
+  String get cancelInvitation;
+
+  /// No description provided for @invitationSent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Invitation envoyée à {email}.'**
+  String invitationSent(String email);
+
+  /// No description provided for @invitationCanceled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Invitation annulée.'**
+  String get invitationCanceled;
+
+  /// No description provided for @changeRole.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer le rôle'**
+  String get changeRole;
+
+  /// No description provided for @roleChanged.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rôle mis à jour.'**
+  String get roleChanged;
+
+  /// No description provided for @removeMember.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer de l\'atelier'**
+  String get removeMember;
+
+  /// No description provided for @removeConfirmTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer {name} ?'**
+  String removeConfirmTitle(String name);
+
+  /// No description provided for @removeConfirmBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette personne perdra immédiatement l\'accès aux données de l\'atelier. Vous pourrez l\'inviter à nouveau.'**
+  String get removeConfirmBody;
+
+  /// No description provided for @removeConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer'**
+  String get removeConfirm;
+
+  /// No description provided for @memberRemoved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membre retiré.'**
+  String get memberRemoved;
+
+  /// No description provided for @errorLastAdmin.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'atelier doit garder au moins un admin. Nommez d\'abord un autre admin.'**
+  String get errorLastAdmin;
+
+  /// No description provided for @lastAdminHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seul admin de l\'atelier'**
+  String get lastAdminHint;
+
+  /// No description provided for @memberActions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Actions pour {name}'**
+  String memberActions(String name);
 }
 
 class _AppLocalizationsDelegate
