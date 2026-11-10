@@ -31,6 +31,22 @@ supabase/
 
 Prérequis : Flutter 3.47+, [Supabase CLI](https://supabase.com/docs/guides/cli), Docker (pour Supabase en local), Deno.
 
+### Démarrage rapide (local)
+
+```sh
+FLUTTER=/chemin/vers/flutter/bin/flutter ./scripts/dev.sh   # ou ./scripts/dev.sh si flutter est dans le PATH
+```
+
+Le script démarre Supabase si besoin, crée les comptes de démonstration, écrit `env.json`, lance la
+fonction `admin-users` et ouvre l'app dans Chrome. Sur l'écran de connexion, **Connexion rapide (dev)**
+connecte directement Claire. `--reset` repart d'une base vierge, `-d <appareil>` change de cible.
+
+| Compte (mot de passe `Filyxa2027`) | Rôle |
+|---|---|
+| `claire@filyxa.local` | Admin de « Atelier Démo » |
+| `lea@filyxa.local` | Lectrice de « Atelier Démo » |
+| `super@filyxa.local` | Super-admin (console de création d'ateliers) |
+
 ### 1. Supabase en local
 
 ```sh
