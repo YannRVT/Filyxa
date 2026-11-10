@@ -944,4 +944,68 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get adminOrgNameGeneric => 'Nom de l\'organisation';
+
+  @override
+  String get scanTitle => 'Scanner un échantillon';
+
+  @override
+  String get scanIntro =>
+      'Photographiez l\'étiquette de l\'échantillon, bien à plat et nette. Filyxa lit la composition, le grammage, la laize, l\'entretien et le code article ; vous vérifiez avant d\'enregistrer.';
+
+  @override
+  String get scanTakePhoto => 'Prendre une photo';
+
+  @override
+  String get scanImportPhoto => 'Importer une photo';
+
+  @override
+  String get scanReading => 'Lecture de l\'étiquette…';
+
+  @override
+  String scanUsage(int scans, int quota) {
+    return '$scans / $quota scans ce mois-ci';
+  }
+
+  @override
+  String scanQuotaWarning(int percent) {
+    return '$percent % du quota mensuel de scans est utilisé.';
+  }
+
+  @override
+  String get scanQuotaExhausted =>
+      'Quota mensuel de scans atteint. La saisie à la main reste possible.';
+
+  @override
+  String get scanFailureNotLabel =>
+      'Aucune étiquette textile lisible sur cette photo. Reprenez-la de plus près, bien à plat, sans reflet.';
+
+  @override
+  String get scanFailureRefused =>
+      'L\'analyse de cette image a été refusée. Essayez une autre photo.';
+
+  @override
+  String get scanFailureAi =>
+      'Le service de lecture est momentanément indisponible. Réessayez dans un instant.';
+
+  @override
+  String get scanFailureImage =>
+      'Cette image n\'est pas prise en charge (JPEG, PNG ou WebP, 5 Mo maximum).';
+
+  @override
+  String get prefillBanner =>
+      'Fiche pré-remplie par le scan. Vérifiez les champs signalés avant d\'enregistrer.';
+
+  @override
+  String get fieldUncertain => 'Lu avec peu de certitude : à vérifier';
+
+  @override
+  String get sectionUncertain => 'Lecture incertaine : vérifiez cette section.';
+
+  @override
+  String duplicateFound(String name) {
+    return 'Une matière avec ce code article existe déjà : « $name ».';
+  }
+
+  @override
+  String get duplicateOpen => 'Ouvrir la fiche existante';
 }

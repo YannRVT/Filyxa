@@ -261,5 +261,22 @@
   "issueDuplicate": "Code “{value}” appears several times in the file",
   "adminOrgKind": "Organization type",
   "adminNewOrg": "New organization",
-  "adminOrgNameGeneric": "Organization name"
+  "adminOrgNameGeneric": "Organization name",
+  "scanTitle": "Scan a sample",
+  "scanIntro": "Photograph the sample label, flat and in focus. Filyxa reads the composition, weight, width, care and article code; you check before saving.",
+  "scanTakePhoto": "Take a photo",
+  "scanImportPhoto": "Import a photo",
+  "scanReading": "Reading the label…",
+  "scanUsage": "{scans} / {quota} scans this month",
+  "scanQuotaWarning": "{percent}% of the monthly scan quota is used.",
+  "scanQuotaExhausted": "Monthly scan quota reached. You can still enter materials by hand.",
+  "scanFailureNotLabel": "No readable textile label in this photo. Take it again closer, flat, without glare.",
+  "scanFailureRefused": "The analysis of this image was declined. Try another photo.",
+  "scanFailureAi": "The reading service is temporarily unavailable. Try again in a moment.",
+  "scanFailureImage": "This image is not supported (JPEG, PNG or WebP, 5 MB max).",
+  "prefillBanner": "Form pre-filled by the scan. Check the flagged fields before saving.",
+  "fieldUncertain": "Read with low confidence: please check",
+  "sectionUncertain": "Uncertain reading: check this section.",
+  "duplicateFound": "A material with this article code already exists: “{name}”.",
+  "duplicateOpen": "Open the existing material"
 }

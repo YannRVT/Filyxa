@@ -261,5 +261,22 @@
   "issueDuplicate": "Código «{value}» presente várias vezes no ficheiro",
   "adminOrgKind": "Tipo de organização",
   "adminNewOrg": "Nova organização",
-  "adminOrgNameGeneric": "Nome da organização"
+  "adminOrgNameGeneric": "Nome da organização",
+  "scanTitle": "Digitalizar uma amostra",
+  "scanIntro": "Fotografe a etiqueta da amostra, plana e nítida. O Filyxa lê a composição, a gramagem, a largura, os cuidados e o código; verifica antes de guardar.",
+  "scanTakePhoto": "Tirar uma fotografia",
+  "scanImportPhoto": "Importar uma fotografia",
+  "scanReading": "A ler a etiqueta…",
+  "scanUsage": "{scans} / {quota} digitalizações este mês",
+  "scanQuotaWarning": "Foi utilizado {percent} % da quota mensal de digitalizações.",
+  "scanQuotaExhausted": "Quota mensal de digitalizações atingida. A introdução manual continua possível.",
+  "scanFailureNotLabel": "Não há nenhuma etiqueta têxtil legível nesta fotografia. Tire-a de novo mais de perto, plana e sem reflexos.",
+  "scanFailureRefused": "A análise desta imagem foi recusada. Experimente outra fotografia.",
+  "scanFailureAi": "O serviço de leitura está temporariamente indisponível. Tente novamente dentro de instantes.",
+  "scanFailureImage": "Esta imagem não é suportada (JPEG, PNG ou WebP, máximo 5 MB).",
+  "prefillBanner": "Ficha pré-preenchida pela digitalização. Verifique os campos assinalados antes de guardar.",
+  "fieldUncertain": "Lido com pouca certeza: verifique",
+  "sectionUncertain": "Leitura incerta: verifique esta secção.",
+  "duplicateFound": "Já existe um material com este código: «{name}».",
+  "duplicateOpen": "Abrir a ficha existente"
 }

@@ -14,6 +14,8 @@ import '../features/library/ui/library_screen.dart';
 import '../features/library/ui/material_detail_screen.dart';
 import '../features/library/ui/material_form_screen.dart';
 import '../features/members/ui/members_screen.dart';
+import '../features/scanner/domain/scan.dart';
+import '../features/scanner/ui/scanner_screen.dart';
 import '../features/supplier/ui/catalog_import_screen.dart';
 import '../features/supplier/ui/catalog_screen.dart';
 import '../features/supplier/ui/reference_screen.dart';
@@ -76,7 +78,10 @@ final routerProvider = Provider<GoRouter>((ref) {
               path: '/library',
               builder: (_, _) => const LibraryScreen(),
               routes: [
-                GoRoute(path: 'new', builder: (_, _) => const MaterialFormScreen()),
+                GoRoute(
+                  path: 'new',
+                  builder: (_, state) => MaterialFormScreen(prefill: state.extra as ScanPrefill?),
+                ),
                 GoRoute(
                   path: 'import',
                   builder: (c, _) => placeholder(c, (l) => l.actionImportExcel, Icons.upload_file_outlined),
@@ -101,11 +106,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             ),
           ]),
           StatefulShellBranch(routes: [
-            GoRoute(
-              path: '/scan',
-              builder: (c, _) =>
-                  placeholder(c, (l) => l.navScanner, Icons.document_scanner_outlined),
-            ),
+            GoRoute(path: '/scan', builder: (_, _) => const ScannerScreen()),
           ]),
           StatefulShellBranch(routes: [
             GoRoute(

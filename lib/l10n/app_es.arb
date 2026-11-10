@@ -261,5 +261,22 @@
   "issueDuplicate": "El código «{value}» aparece varias veces en el archivo",
   "adminOrgKind": "Tipo de organización",
   "adminNewOrg": "Nueva organización",
-  "adminOrgNameGeneric": "Nombre de la organización"
+  "adminOrgNameGeneric": "Nombre de la organización",
+  "scanTitle": "Escanear una muestra",
+  "scanIntro": "Fotografía la etiqueta de la muestra, plana y nítida. Filyxa lee la composición, el gramaje, el ancho, el cuidado y el código; tú lo compruebas antes de guardar.",
+  "scanTakePhoto": "Hacer una foto",
+  "scanImportPhoto": "Importar una foto",
+  "scanReading": "Leyendo la etiqueta…",
+  "scanUsage": "{scans} / {quota} escaneos este mes",
+  "scanQuotaWarning": "Se ha usado el {percent} % de la cuota mensual de escaneos.",
+  "scanQuotaExhausted": "Cuota mensual de escaneos alcanzada. Puedes seguir introduciendo materiales a mano.",
+  "scanFailureNotLabel": "No hay ninguna etiqueta textil legible en esta foto. Vuelve a hacerla más cerca, plana y sin reflejos.",
+  "scanFailureRefused": "Se ha rechazado el análisis de esta imagen. Prueba con otra foto.",
+  "scanFailureAi": "El servicio de lectura no está disponible en este momento. Inténtalo de nuevo en un instante.",
+  "scanFailureImage": "Esta imagen no es compatible (JPEG, PNG o WebP, 5 MB como máximo).",
+  "prefillBanner": "Ficha rellenada por el escaneo. Comprueba los campos señalados antes de guardar.",
+  "fieldUncertain": "Leído con poca certeza: compruébalo",
+  "sectionUncertain": "Lectura incierta: comprueba esta sección.",
+  "duplicateFound": "Ya existe un material con este código: «{name}».",
+  "duplicateOpen": "Abrir la ficha existente"
 }

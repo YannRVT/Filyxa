@@ -261,5 +261,22 @@
   "issueDuplicate": "Codul „{value}” apare de mai multe ori în fișier",
   "adminOrgKind": "Tipul organizației",
   "adminNewOrg": "Organizație nouă",
-  "adminOrgNameGeneric": "Numele organizației"
+  "adminOrgNameGeneric": "Numele organizației",
+  "scanTitle": "Scanează o mostră",
+  "scanIntro": "Fotografiază eticheta mostrei, dreaptă și clară. Filyxa citește compoziția, gramajul, lățimea, întreținerea și codul articolului; tu verifici înainte de salvare.",
+  "scanTakePhoto": "Fă o fotografie",
+  "scanImportPhoto": "Importă o fotografie",
+  "scanReading": "Se citește eticheta…",
+  "scanUsage": "{scans} / {quota} scanări luna aceasta",
+  "scanQuotaWarning": "S-a folosit {percent} % din cota lunară de scanări.",
+  "scanQuotaExhausted": "Cota lunară de scanări a fost atinsă. Introducerea manuală rămâne posibilă.",
+  "scanFailureNotLabel": "Nicio etichetă textilă lizibilă în această fotografie. Refă-o mai de aproape, dreaptă, fără reflexii.",
+  "scanFailureRefused": "Analiza acestei imagini a fost refuzată. Încearcă o altă fotografie.",
+  "scanFailureAi": "Serviciul de citire este momentan indisponibil. Încearcă din nou în câteva clipe.",
+  "scanFailureImage": "Această imagine nu este acceptată (JPEG, PNG sau WebP, maximum 5 MB).",
+  "prefillBanner": "Fișă precompletată de scanare. Verifică câmpurile semnalate înainte de salvare.",
+  "fieldUncertain": "Citit cu puțină certitudine: de verificat",
+  "sectionUncertain": "Citire incertă: verifică această secțiune.",
+  "duplicateFound": "Există deja un material cu acest cod de articol: „{name}”.",
+  "duplicateOpen": "Deschide fișa existentă"
 }

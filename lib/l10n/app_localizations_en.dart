@@ -941,4 +941,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminOrgNameGeneric => 'Organization name';
+
+  @override
+  String get scanTitle => 'Scan a sample';
+
+  @override
+  String get scanIntro =>
+      'Photograph the sample label, flat and in focus. Filyxa reads the composition, weight, width, care and article code; you check before saving.';
+
+  @override
+  String get scanTakePhoto => 'Take a photo';
+
+  @override
+  String get scanImportPhoto => 'Import a photo';
+
+  @override
+  String get scanReading => 'Reading the label…';
+
+  @override
+  String scanUsage(int scans, int quota) {
+    return '$scans / $quota scans this month';
+  }
+
+  @override
+  String scanQuotaWarning(int percent) {
+    return '$percent% of the monthly scan quota is used.';
+  }
+
+  @override
+  String get scanQuotaExhausted =>
+      'Monthly scan quota reached. You can still enter materials by hand.';
+
+  @override
+  String get scanFailureNotLabel =>
+      'No readable textile label in this photo. Take it again closer, flat, without glare.';
+
+  @override
+  String get scanFailureRefused =>
+      'The analysis of this image was declined. Try another photo.';
+
+  @override
+  String get scanFailureAi =>
+      'The reading service is temporarily unavailable. Try again in a moment.';
+
+  @override
+  String get scanFailureImage =>
+      'This image is not supported (JPEG, PNG or WebP, 5 MB max).';
+
+  @override
+  String get prefillBanner =>
+      'Form pre-filled by the scan. Check the flagged fields before saving.';
+
+  @override
+  String get fieldUncertain => 'Read with low confidence: please check';
+
+  @override
+  String get sectionUncertain => 'Uncertain reading: check this section.';
+
+  @override
+  String duplicateFound(String name) {
+    return 'A material with this article code already exists: “$name”.';
+  }
+
+  @override
+  String get duplicateOpen => 'Open the existing material';
 }

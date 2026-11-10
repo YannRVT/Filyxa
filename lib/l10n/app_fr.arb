@@ -572,5 +572,46 @@
   },
   "adminOrgKind": "Type d'organisation",
   "adminNewOrg": "Nouvelle organisation",
-  "adminOrgNameGeneric": "Nom de l'organisation"
+  "adminOrgNameGeneric": "Nom de l'organisation",
+  "scanTitle": "Scanner un échantillon",
+  "scanIntro": "Photographiez l'étiquette de l'échantillon, bien à plat et nette. Filyxa lit la composition, le grammage, la laize, l'entretien et le code article ; vous vérifiez avant d'enregistrer.",
+  "scanTakePhoto": "Prendre une photo",
+  "scanImportPhoto": "Importer une photo",
+  "scanReading": "Lecture de l'étiquette…",
+  "scanUsage": "{scans} / {quota} scans ce mois-ci",
+  "@scanUsage": {
+    "placeholders": {
+      "scans": {
+        "type": "int"
+      },
+      "quota": {
+        "type": "int"
+      }
+    }
+  },
+  "scanQuotaWarning": "{percent} % du quota mensuel de scans est utilisé.",
+  "@scanQuotaWarning": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "scanQuotaExhausted": "Quota mensuel de scans atteint. La saisie à la main reste possible.",
+  "scanFailureNotLabel": "Aucune étiquette textile lisible sur cette photo. Reprenez-la de plus près, bien à plat, sans reflet.",
+  "scanFailureRefused": "L'analyse de cette image a été refusée. Essayez une autre photo.",
+  "scanFailureAi": "Le service de lecture est momentanément indisponible. Réessayez dans un instant.",
+  "scanFailureImage": "Cette image n'est pas prise en charge (JPEG, PNG ou WebP, 5 Mo maximum).",
+  "prefillBanner": "Fiche pré-remplie par le scan. Vérifiez les champs signalés avant d'enregistrer.",
+  "fieldUncertain": "Lu avec peu de certitude : à vérifier",
+  "sectionUncertain": "Lecture incertaine : vérifiez cette section.",
+  "duplicateFound": "Une matière avec ce code article existe déjà : « {name} ».",
+  "@duplicateFound": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "duplicateOpen": "Ouvrir la fiche existante"
 }

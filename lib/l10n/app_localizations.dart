@@ -1677,6 +1677,108 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Nom de l\'organisation'**
   String get adminOrgNameGeneric;
+
+  /// No description provided for @scanTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scanner un échantillon'**
+  String get scanTitle;
+
+  /// No description provided for @scanIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photographiez l\'étiquette de l\'échantillon, bien à plat et nette. Filyxa lit la composition, le grammage, la laize, l\'entretien et le code article ; vous vérifiez avant d\'enregistrer.'**
+  String get scanIntro;
+
+  /// No description provided for @scanTakePhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prendre une photo'**
+  String get scanTakePhoto;
+
+  /// No description provided for @scanImportPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer une photo'**
+  String get scanImportPhoto;
+
+  /// No description provided for @scanReading.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lecture de l\'étiquette…'**
+  String get scanReading;
+
+  /// No description provided for @scanUsage.
+  ///
+  /// In fr, this message translates to:
+  /// **'{scans} / {quota} scans ce mois-ci'**
+  String scanUsage(int scans, int quota);
+
+  /// No description provided for @scanQuotaWarning.
+  ///
+  /// In fr, this message translates to:
+  /// **'{percent} % du quota mensuel de scans est utilisé.'**
+  String scanQuotaWarning(int percent);
+
+  /// No description provided for @scanQuotaExhausted.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quota mensuel de scans atteint. La saisie à la main reste possible.'**
+  String get scanQuotaExhausted;
+
+  /// No description provided for @scanFailureNotLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune étiquette textile lisible sur cette photo. Reprenez-la de plus près, bien à plat, sans reflet.'**
+  String get scanFailureNotLabel;
+
+  /// No description provided for @scanFailureRefused.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'analyse de cette image a été refusée. Essayez une autre photo.'**
+  String get scanFailureRefused;
+
+  /// No description provided for @scanFailureAi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le service de lecture est momentanément indisponible. Réessayez dans un instant.'**
+  String get scanFailureAi;
+
+  /// No description provided for @scanFailureImage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette image n\'est pas prise en charge (JPEG, PNG ou WebP, 5 Mo maximum).'**
+  String get scanFailureImage;
+
+  /// No description provided for @prefillBanner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche pré-remplie par le scan. Vérifiez les champs signalés avant d\'enregistrer.'**
+  String get prefillBanner;
+
+  /// No description provided for @fieldUncertain.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lu avec peu de certitude : à vérifier'**
+  String get fieldUncertain;
+
+  /// No description provided for @sectionUncertain.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lecture incertaine : vérifiez cette section.'**
+  String get sectionUncertain;
+
+  /// No description provided for @duplicateFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une matière avec ce code article existe déjà : « {name} ».'**
+  String duplicateFound(String name);
+
+  /// No description provided for @duplicateOpen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrir la fiche existante'**
+  String get duplicateOpen;
 }
 
 class _AppLocalizationsDelegate

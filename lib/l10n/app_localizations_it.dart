@@ -945,4 +945,68 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get adminOrgNameGeneric => 'Nome dell\'organizzazione';
+
+  @override
+  String get scanTitle => 'Scansiona un campione';
+
+  @override
+  String get scanIntro =>
+      'Fotografa l\'etichetta del campione, ben piatta e a fuoco. Filyxa legge composizione, grammatura, altezza, manutenzione e codice articolo; tu verifichi prima di salvare.';
+
+  @override
+  String get scanTakePhoto => 'Scatta una foto';
+
+  @override
+  String get scanImportPhoto => 'Importa una foto';
+
+  @override
+  String get scanReading => 'Lettura dell\'etichetta…';
+
+  @override
+  String scanUsage(int scans, int quota) {
+    return '$scans / $quota scansioni questo mese';
+  }
+
+  @override
+  String scanQuotaWarning(int percent) {
+    return 'È stato utilizzato il $percent% della quota mensile di scansioni.';
+  }
+
+  @override
+  String get scanQuotaExhausted =>
+      'Quota mensile di scansioni raggiunta. L\'inserimento manuale resta possibile.';
+
+  @override
+  String get scanFailureNotLabel =>
+      'Nessuna etichetta tessile leggibile in questa foto. Riprendila più da vicino, ben piatta, senza riflessi.';
+
+  @override
+  String get scanFailureRefused =>
+      'L\'analisi di questa immagine è stata rifiutata. Prova un\'altra foto.';
+
+  @override
+  String get scanFailureAi =>
+      'Il servizio di lettura è momentaneamente non disponibile. Riprova tra poco.';
+
+  @override
+  String get scanFailureImage =>
+      'Questa immagine non è supportata (JPEG, PNG o WebP, massimo 5 MB).';
+
+  @override
+  String get prefillBanner =>
+      'Scheda precompilata dalla scansione. Verifica i campi segnalati prima di salvare.';
+
+  @override
+  String get fieldUncertain => 'Letto con poca certezza: da verificare';
+
+  @override
+  String get sectionUncertain => 'Lettura incerta: verifica questa sezione.';
+
+  @override
+  String duplicateFound(String name) {
+    return 'Esiste già un materiale con questo codice articolo: «$name».';
+  }
+
+  @override
+  String get duplicateOpen => 'Apri la scheda esistente';
 }

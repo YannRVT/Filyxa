@@ -428,3 +428,7 @@ enabled = true
 # admin-users vérifie elle-même l'appelant ; le renvoi de code est public.
 [functions.admin-users]
 verify_jwt = false
+
+# analyze-tag vérifie elle-même l'appelant (Éditeur ou Admin d'un atelier).
+[functions.analyze-tag]
+verify_jwt = false
