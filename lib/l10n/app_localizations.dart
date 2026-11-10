@@ -759,6 +759,396 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Actions pour {name}'**
   String memberActions(String name);
+
+  /// No description provided for @libraryNew.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle matière'**
+  String get libraryNew;
+
+  /// No description provided for @viewGallery.
+  ///
+  /// In fr, this message translates to:
+  /// **'Galerie'**
+  String get viewGallery;
+
+  /// No description provided for @viewTable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tableau'**
+  String get viewTable;
+
+  /// No description provided for @libraryEmptyTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre TissuTech est vide'**
+  String get libraryEmptyTitle;
+
+  /// No description provided for @libraryEmptyBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez vos premières matières : scannez l\'étiquette d\'un échantillon, importez votre fichier Excel ou saisissez-les à la main.'**
+  String get libraryEmptyBody;
+
+  /// No description provided for @libraryEmptyViewer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière pour l\'instant. Les éditeurs de votre atelier peuvent en ajouter.'**
+  String get libraryEmptyViewer;
+
+  /// No description provided for @actionScanSample.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scanner un échantillon'**
+  String get actionScanSample;
+
+  /// No description provided for @actionImportExcel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer un fichier Excel'**
+  String get actionImportExcel;
+
+  /// No description provided for @actionCreateManual.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saisir à la main'**
+  String get actionCreateManual;
+
+  /// No description provided for @materialCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucune matière} =1{1 matière} other{{count} matières}}'**
+  String materialCount(int count);
+
+  /// No description provided for @colMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matière'**
+  String get colMaterial;
+
+  /// No description provided for @colReference.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence'**
+  String get colReference;
+
+  /// No description provided for @colComposition.
+  ///
+  /// In fr, this message translates to:
+  /// **'Composition'**
+  String get colComposition;
+
+  /// No description provided for @colWeight.
+  ///
+  /// In fr, this message translates to:
+  /// **'g/m²'**
+  String get colWeight;
+
+  /// No description provided for @colWidth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laize'**
+  String get colWidth;
+
+  /// No description provided for @colStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock atelier'**
+  String get colStock;
+
+  /// No description provided for @fieldName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la matière'**
+  String get fieldName;
+
+  /// No description provided for @fieldSupplier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fournisseur'**
+  String get fieldSupplier;
+
+  /// No description provided for @fieldSupplierCode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code article'**
+  String get fieldSupplierCode;
+
+  /// No description provided for @fieldColorName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coloris'**
+  String get fieldColorName;
+
+  /// No description provided for @fieldColorHex.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur (#RRGGBB)'**
+  String get fieldColorHex;
+
+  /// No description provided for @photoAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une photo'**
+  String get photoAdd;
+
+  /// No description provided for @photoChange.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer la photo'**
+  String get photoChange;
+
+  /// No description provided for @photoRemove.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer la photo'**
+  String get photoRemove;
+
+  /// No description provided for @sectionIdentity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Identité'**
+  String get sectionIdentity;
+
+  /// No description provided for @sectionColor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur et photo'**
+  String get sectionColor;
+
+  /// No description provided for @sectionComposition.
+  ///
+  /// In fr, this message translates to:
+  /// **'Composition'**
+  String get sectionComposition;
+
+  /// No description provided for @sectionTechnical.
+  ///
+  /// In fr, this message translates to:
+  /// **'Caractéristiques'**
+  String get sectionTechnical;
+
+  /// No description provided for @sectionCare.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entretien'**
+  String get sectionCare;
+
+  /// No description provided for @sectionUses.
+  ///
+  /// In fr, this message translates to:
+  /// **'Usages et certifications'**
+  String get sectionUses;
+
+  /// No description provided for @sectionStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock atelier'**
+  String get sectionStock;
+
+  /// No description provided for @sectionNotes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notes'**
+  String get sectionNotes;
+
+  /// No description provided for @addFiber.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une fibre'**
+  String get addFiber;
+
+  /// No description provided for @removeFiber.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer cette fibre'**
+  String get removeFiber;
+
+  /// No description provided for @fiberLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fibre'**
+  String get fiberLabel;
+
+  /// No description provided for @compositionTotal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total : {total} %'**
+  String compositionTotal(String total);
+
+  /// No description provided for @compositionMustBe100.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le total doit faire 100 %, sans fibre en double'**
+  String get compositionMustBe100;
+
+  /// No description provided for @fieldWeight.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grammage (g/m²)'**
+  String get fieldWeight;
+
+  /// No description provided for @fieldWidth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laize (cm)'**
+  String get fieldWidth;
+
+  /// No description provided for @fieldWeave.
+  ///
+  /// In fr, this message translates to:
+  /// **'Armure'**
+  String get fieldWeave;
+
+  /// No description provided for @noneOption.
+  ///
+  /// In fr, this message translates to:
+  /// **'Non renseigné'**
+  String get noneOption;
+
+  /// No description provided for @fieldCertifications.
+  ///
+  /// In fr, this message translates to:
+  /// **'Certifications'**
+  String get fieldCertifications;
+
+  /// No description provided for @fieldUses.
+  ///
+  /// In fr, this message translates to:
+  /// **'Usages'**
+  String get fieldUses;
+
+  /// No description provided for @fieldStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Métrage en stock (m)'**
+  String get fieldStock;
+
+  /// No description provided for @errorRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Champ obligatoire'**
+  String get errorRequired;
+
+  /// No description provided for @errorNumberRange.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nombre entre {min} et {max}'**
+  String errorNumberRange(int min, int max);
+
+  /// No description provided for @errorHex.
+  ///
+  /// In fr, this message translates to:
+  /// **'Format #RRGGBB attendu (ex. #2F4A6B)'**
+  String get errorHex;
+
+  /// No description provided for @save.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer'**
+  String get save;
+
+  /// No description provided for @materialSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matière enregistrée.'**
+  String get materialSaved;
+
+  /// No description provided for @edit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer'**
+  String get delete;
+
+  /// No description provided for @deleteMaterialTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer « {name} » ?'**
+  String deleteMaterialTitle(String name);
+
+  /// No description provided for @deleteMaterialBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'La matière et sa photo seront définitivement supprimées.'**
+  String get deleteMaterialBody;
+
+  /// No description provided for @materialDeleted.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matière supprimée.'**
+  String get materialDeleted;
+
+  /// No description provided for @editStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le stock'**
+  String get editStock;
+
+  /// No description provided for @stockUpdated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock mis à jour.'**
+  String get stockUpdated;
+
+  /// No description provided for @stockMeters.
+  ///
+  /// In fr, this message translates to:
+  /// **'{value} m'**
+  String stockMeters(String value);
+
+  /// No description provided for @materialNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette matière n\'existe plus ou n\'est pas accessible.'**
+  String get materialNotFound;
+
+  /// No description provided for @newMaterialTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle matière'**
+  String get newMaterialTitle;
+
+  /// No description provided for @editMaterialTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier la matière'**
+  String get editMaterialTitle;
+
+  /// No description provided for @detailWeight.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grammage'**
+  String get detailWeight;
+
+  /// No description provided for @detailWidth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laize'**
+  String get detailWidth;
+
+  /// No description provided for @photoUploadFailed.
+  ///
+  /// In fr, this message translates to:
+  /// **'La photo n\'a pas pu être envoyée. Réessayez.'**
+  String get photoUploadFailed;
+
+  /// No description provided for @viewerReadOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lecture seule'**
+  String get viewerReadOnly;
+
+  /// No description provided for @errorEditorsOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Action réservée aux éditeurs et aux administrateurs de l\'atelier.'**
+  String get errorEditorsOnly;
 }
 
 class _AppLocalizationsDelegate

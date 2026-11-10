@@ -45,3 +45,23 @@ values ('d1000000-0000-0000-0000-000000000001', 'Atelier Démo', 'atelier');
 insert into public.memberships (user_id, org_id, role) values
   ('d0000000-0000-0000-0000-000000000002', 'd1000000-0000-0000-0000-000000000001', 'admin'),
   ('d0000000-0000-0000-0000-000000000003', 'd1000000-0000-0000-0000-000000000001', 'viewer');
+
+-- Matières de démonstration de « Atelier Démo » (sans photo : aplat du coloris).
+insert into public.materials (id, org_id, name, supplier_name, supplier_code, color_name, color_hex, atelier_stock_m, notes, created_by)
+values
+  ('d2000000-0000-0000-0000-000000000001', 'd1000000-0000-0000-0000-000000000001', 'Drap laine froide',
+   'Dormeuil', 'DR4521-NV', 'Marine', '#2F4A6B', 42.5, 'Toucher sec et nerveux, tient bien le pli.',
+   'd0000000-0000-0000-0000-000000000002'),
+  ('d2000000-0000-0000-0000-000000000002', 'd1000000-0000-0000-0000-000000000001', 'Gabardine coton stretch',
+   'Marzotto', 'MZ-GB-118', 'Camel', '#B9A58B', 12.5, null, 'd0000000-0000-0000-0000-000000000002'),
+  ('d2000000-0000-0000-0000-000000000003', 'd1000000-0000-0000-0000-000000000001', 'Doublure viscose',
+   null, null, 'Vert sapin', '#1E3B36', 120, null, 'd0000000-0000-0000-0000-000000000002');
+
+insert into public.textile_specs (material_id, composition, weight_gsm, width_cm, weave, care, certifications, uses)
+values
+  ('d2000000-0000-0000-0000-000000000001', '[{"fiber":"WO","pct":62},{"fiber":"PES","pct":38}]', 280, 150, 'twill',
+   '{wash_30,no_bleach,no_tumble,iron_low,dryclean_p}', '{RWS}', '{jacket,trousers}'),
+  ('d2000000-0000-0000-0000-000000000002', '[{"fiber":"CO","pct":97},{"fiber":"EL","pct":3}]', 245, 148, 'twill',
+   '{wash_40,iron_medium}', '{GOTS}', '{trousers,coat}'),
+  ('d2000000-0000-0000-0000-000000000003', '[{"fiber":"CV","pct":100}]', 72, 140, 'plain',
+   '{hand_wash,no_tumble,iron_low}', '{}', '{lining}');

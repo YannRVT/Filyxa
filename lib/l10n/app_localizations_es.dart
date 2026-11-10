@@ -382,4 +382,223 @@ class AppLocalizationsEs extends AppLocalizations {
   String memberActions(String name) {
     return 'Acciones para $name';
   }
+
+  @override
+  String get libraryNew => 'Nuevo material';
+
+  @override
+  String get viewGallery => 'Galería';
+
+  @override
+  String get viewTable => 'Tabla';
+
+  @override
+  String get libraryEmptyTitle => 'Tu TissuTech está vacío';
+
+  @override
+  String get libraryEmptyBody =>
+      'Añade tus primeros materiales: escanea la etiqueta de una muestra, importa tu archivo Excel o introdúcelos a mano.';
+
+  @override
+  String get libraryEmptyViewer =>
+      'Todavía no hay materiales. Los editores de tu taller pueden añadirlos.';
+
+  @override
+  String get actionScanSample => 'Escanear una muestra';
+
+  @override
+  String get actionImportExcel => 'Importar un archivo Excel';
+
+  @override
+  String get actionCreateManual => 'Introducir a mano';
+
+  @override
+  String materialCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiales',
+      one: '1 material',
+      zero: 'Ningún material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get colMaterial => 'Material';
+
+  @override
+  String get colReference => 'Referencia';
+
+  @override
+  String get colComposition => 'Composición';
+
+  @override
+  String get colWeight => 'g/m²';
+
+  @override
+  String get colWidth => 'Ancho';
+
+  @override
+  String get colStock => 'Stock del taller';
+
+  @override
+  String get fieldName => 'Nombre del material';
+
+  @override
+  String get fieldSupplier => 'Proveedor';
+
+  @override
+  String get fieldSupplierCode => 'Código de artículo';
+
+  @override
+  String get fieldColorName => 'Color';
+
+  @override
+  String get fieldColorHex => 'Color (#RRGGBB)';
+
+  @override
+  String get photoAdd => 'Añadir una foto';
+
+  @override
+  String get photoChange => 'Cambiar la foto';
+
+  @override
+  String get photoRemove => 'Quitar la foto';
+
+  @override
+  String get sectionIdentity => 'Identidad';
+
+  @override
+  String get sectionColor => 'Color y foto';
+
+  @override
+  String get sectionComposition => 'Composición';
+
+  @override
+  String get sectionTechnical => 'Características';
+
+  @override
+  String get sectionCare => 'Cuidado';
+
+  @override
+  String get sectionUses => 'Usos y certificaciones';
+
+  @override
+  String get sectionStock => 'Stock del taller';
+
+  @override
+  String get sectionNotes => 'Notas';
+
+  @override
+  String get addFiber => 'Añadir una fibra';
+
+  @override
+  String get removeFiber => 'Quitar esta fibra';
+
+  @override
+  String get fiberLabel => 'Fibra';
+
+  @override
+  String compositionTotal(String total) {
+    return 'Total: $total %';
+  }
+
+  @override
+  String get compositionMustBe100 =>
+      'El total debe ser 100 %, sin fibras repetidas';
+
+  @override
+  String get fieldWeight => 'Gramaje (g/m²)';
+
+  @override
+  String get fieldWidth => 'Ancho (cm)';
+
+  @override
+  String get fieldWeave => 'Ligamento';
+
+  @override
+  String get noneOption => 'Sin indicar';
+
+  @override
+  String get fieldCertifications => 'Certificaciones';
+
+  @override
+  String get fieldUses => 'Usos';
+
+  @override
+  String get fieldStock => 'Metros en stock (m)';
+
+  @override
+  String get errorRequired => 'Campo obligatorio';
+
+  @override
+  String errorNumberRange(int min, int max) {
+    return 'Número entre $min y $max';
+  }
+
+  @override
+  String get errorHex => 'Formato esperado #RRGGBB (p. ej. #2F4A6B)';
+
+  @override
+  String get save => 'Guardar';
+
+  @override
+  String get materialSaved => 'Material guardado.';
+
+  @override
+  String get edit => 'Editar';
+
+  @override
+  String get delete => 'Eliminar';
+
+  @override
+  String deleteMaterialTitle(String name) {
+    return '¿Eliminar «$name»?';
+  }
+
+  @override
+  String get deleteMaterialBody =>
+      'El material y su foto se eliminarán definitivamente.';
+
+  @override
+  String get materialDeleted => 'Material eliminado.';
+
+  @override
+  String get editStock => 'Editar stock';
+
+  @override
+  String get stockUpdated => 'Stock actualizado.';
+
+  @override
+  String stockMeters(String value) {
+    return '$value m';
+  }
+
+  @override
+  String get materialNotFound =>
+      'Este material ya no existe o no es accesible.';
+
+  @override
+  String get newMaterialTitle => 'Nuevo material';
+
+  @override
+  String get editMaterialTitle => 'Editar el material';
+
+  @override
+  String get detailWeight => 'Gramaje';
+
+  @override
+  String get detailWidth => 'Ancho';
+
+  @override
+  String get photoUploadFailed =>
+      'No se ha podido subir la foto. Inténtalo de nuevo.';
+
+  @override
+  String get viewerReadOnly => 'Solo lectura';
+
+  @override
+  String get errorEditorsOnly =>
+      'Acción reservada a los editores y administradores del taller.';
 }
