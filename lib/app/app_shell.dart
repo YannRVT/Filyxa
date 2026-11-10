@@ -5,8 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../l10n/l10n.dart';
 import 'theme.dart';
 
-/// Ordre des branches du routeur ; le Scanner est au centre sur téléphone.
-enum ShellTab { library, studio, scanner, suppliers, account }
+/// Ordre des branches du routeur (l'index de chaque valeur est celui de sa branche).
+/// Le Scanner est au centre sur téléphone.
+enum ShellTab { library, studio, scanner, suppliers, account, catalog }
 
 class _Destination {
   const _Destination(this.tab, this.icon, this.selectedIcon);
@@ -21,10 +22,11 @@ class _Destination {
         ShellTab.scanner => l10n.navScanner,
         ShellTab.suppliers => l10n.navSuppliers,
         ShellTab.account => l10n.navAccount,
+        ShellTab.catalog => l10n.navCatalog,
       };
 }
 
-const _destinations = [
+const _atelierDestinations = [
   _Destination(ShellTab.library, Icons.grid_view_outlined, Icons.grid_view),
   _Destination(ShellTab.studio, Icons.layers_outlined, Icons.layers),
   _Destination(ShellTab.scanner, Icons.document_scanner_outlined, Icons.document_scanner),
@@ -32,14 +34,26 @@ const _destinations = [
   _Destination(ShellTab.account, Icons.person_outline, Icons.person),
 ];
 
+const _supplierDestinations = [
+  _Destination(ShellTab.catalog, Icons.inventory_2_outlined, Icons.inventory_2),
+  _Destination(ShellTab.account, Icons.person_outline, Icons.person),
+];
+
+/// Onglets d'un atelier ou d'un fournisseur.
+List<_Destination> _destinationsFor({required bool supplier}) =>
+    supplier ? _supplierDestinations : _atelierDestinations;
+
 /// Navigation adaptative :
 /// - téléphone : onglets en bas, bouton Scanner central mis en avant ;
 /// - tablette : barre latérale pétrole réduite aux icônes ;
 /// - ordinateur (≥ 1024 px) : barre latérale pétrole complète avec le logo.
 class AppShell extends StatelessWidget {
-  const AppShell({super.key, required this.navigationShell});
+  const AppShell({super.key, required this.navigationShell, this.supplier = false});
 
   final StatefulNavigationShell navigationShell;
+
+  /// Espace fournisseur : Catalogue et Compte au lieu des onglets atelier.
+  final bool supplier;
 
   void _go(int index) => navigationShell.goBranch(
         index,
@@ -52,13 +66,18 @@ class AppShell extends StatelessWidget {
     if (width < FxBreakpoints.tablet) {
       return Scaffold(
         body: navigationShell,
-        bottomNavigationBar: _BottomBar(current: navigationShell.currentIndex, onSelect: _go),
+        bottomNavigationBar: _BottomBar(
+          destinations: _destinationsFor(supplier: supplier),
+          current: navigationShell.currentIndex,
+          onSelect: _go,
+        ),
       );
     }
     return Scaffold(
       body: Row(
         children: [
           _SideBar(
+            destinations: _destinationsFor(supplier: supplier),
             current: navigationShell.currentIndex,
             onSelect: _go,
             expanded: width >= FxBreakpoints.desktop,
@@ -71,8 +90,9 @@ class AppShell extends StatelessWidget {
 }
 
 class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.current, required this.onSelect});
+  const _BottomBar({required this.destinations, required this.current, required this.onSelect});
 
+  final List<_Destination> destinations;
   final int current;
   final ValueChanged<int> onSelect;
 
@@ -88,19 +108,19 @@ class _BottomBar extends StatelessWidget {
           height: 68,
           child: Row(
             children: [
-              for (var i = 0; i < _destinations.length; i++)
+              for (final d in destinations)
                 Expanded(
-                  child: _destinations[i].tab == ShellTab.scanner
+                  child: d.tab == ShellTab.scanner
                       ? _ScanButton(
-                          label: _destinations[i].label(l10n),
-                          selected: current == i,
-                          onTap: () => onSelect(i),
+                          label: d.label(l10n),
+                          selected: current == d.tab.index,
+                          onTap: () => onSelect(d.tab.index),
                         )
                       : _BottomItem(
-                          destination: _destinations[i],
-                          label: _destinations[i].label(l10n),
-                          selected: current == i,
-                          onTap: () => onSelect(i),
+                          destination: d,
+                          label: d.label(l10n),
+                          selected: current == d.tab.index,
+                          onTap: () => onSelect(d.tab.index),
                         ),
                 ),
             ],
@@ -191,8 +211,9 @@ class _ScanButton extends StatelessWidget {
 }
 
 class _SideBar extends StatelessWidget {
-  const _SideBar({required this.current, required this.onSelect, required this.expanded});
+  const _SideBar({required this.destinations, required this.current, required this.onSelect, required this.expanded});
 
+  final List<_Destination> destinations;
   final int current;
   final ValueChanged<int> onSelect;
   final bool expanded;
@@ -200,7 +221,7 @@ class _SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final scannerIndex = _destinations.indexWhere((d) => d.tab == ShellTab.scanner);
+    final scanner = destinations.where((d) => d.tab == ShellTab.scanner).firstOrNull;
     return Container(
       width: expanded ? 232 : 76,
       color: FxColors.petrol,
@@ -227,22 +248,23 @@ class _SideBar extends StatelessWidget {
                       semanticsLabel: 'Filyxa',
                     ),
             ),
-            for (var i = 0; i < _destinations.length; i++)
-              if (_destinations[i].tab != ShellTab.scanner)
+            for (final d in destinations)
+              if (d.tab != ShellTab.scanner)
                 _SideItem(
-                  destination: _destinations[i],
-                  label: _destinations[i].label(l10n),
-                  selected: current == i,
+                  destination: d,
+                  label: d.label(l10n),
+                  selected: current == d.tab.index,
                   expanded: expanded,
-                  onTap: () => onSelect(i),
+                  onTap: () => onSelect(d.tab.index),
                 ),
             const Spacer(),
-            _SideScanButton(
-              label: _destinations[scannerIndex].label(l10n),
-              expanded: expanded,
-              selected: current == scannerIndex,
-              onTap: () => onSelect(scannerIndex),
-            ),
+            if (scanner != null)
+              _SideScanButton(
+                label: scanner.label(l10n),
+                expanded: expanded,
+                selected: current == scanner.tab.index,
+                onTap: () => onSelect(scanner.tab.index),
+              ),
           ],
         ),
       ),

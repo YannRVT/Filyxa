@@ -683,4 +683,267 @@ class AppLocalizationsRo extends AppLocalizations {
   String chipWeightMax(int max) {
     return '≤ $max g/m²';
   }
+
+  @override
+  String get navCatalog => 'Catalog';
+
+  @override
+  String get catalogEmptyTitle => 'Catalogul tău este gol';
+
+  @override
+  String get catalogEmptyBody =>
+      'Importă catalogul dintr-un fișier Excel sau CSV exportat din programul tău de gestiune.';
+
+  @override
+  String get catalogImport => 'Importă un fișier';
+
+  @override
+  String get catalogSettings => 'Disponibilitate';
+
+  @override
+  String referenceCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count de referințe',
+      few: '$count referințe',
+      one: '1 referință',
+      zero: 'Nicio referință',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get showRetired => 'Afișează referințele retrase';
+
+  @override
+  String get retiredBadge => 'Retrasă';
+
+  @override
+  String get colStatus => 'Disponibilitate';
+
+  @override
+  String get colLeadTime => 'Termen';
+
+  @override
+  String get statusAvailable => 'Disponibil';
+
+  @override
+  String get statusLow => 'Stoc redus';
+
+  @override
+  String get statusOnOrder => 'La comandă';
+
+  @override
+  String statusOnOrderWeeks(int weeks) {
+    return 'La comandă · $weeks săpt.';
+  }
+
+  @override
+  String get statusOutOfStock => 'Stoc epuizat';
+
+  @override
+  String get statusHidden => 'Ascunsă';
+
+  @override
+  String get modeExact => 'Cantitate exactă';
+
+  @override
+  String get modeTiers => 'Niveluri';
+
+  @override
+  String get modeHidden => 'Ascunsă';
+
+  @override
+  String get modeExactHelp => 'Atelierele văd metrajul exact din stoc.';
+
+  @override
+  String get modeTiersHelp =>
+      'Atelierele văd doar: disponibil, stoc redus, la comandă sau stoc epuizat.';
+
+  @override
+  String get modeHiddenHelp => 'Atelierele nu văd disponibilitatea.';
+
+  @override
+  String modeDefault(String mode) {
+    return 'Setare generală ($mode)';
+  }
+
+  @override
+  String get thresholdLabel => 'Prag de stoc redus (m)';
+
+  @override
+  String get thresholdHelp =>
+      'Sub acest metraj, referința apare ca „stoc redus”.';
+
+  @override
+  String get leadTimeLabel => 'Termen de reaprovizionare (săptămâni)';
+
+  @override
+  String get leadTimeHelp => 'Afișat când referința este la comandă.';
+
+  @override
+  String get availabilitySettingsTitle => 'Afișarea disponibilității';
+
+  @override
+  String get availabilitySettingsIntro =>
+      'Alege ce văd atelierele din stocul tău. Poți ajusta fiecare referință din fișa ei.';
+
+  @override
+  String get settingsSaved => 'Setări salvate.';
+
+  @override
+  String get referenceRetire => 'Retrage din catalog';
+
+  @override
+  String get referenceRestore => 'Repune în catalog';
+
+  @override
+  String get referenceRetired => 'Referință retrasă din catalogul publicat.';
+
+  @override
+  String get referenceRestored => 'Referință repusă în catalog.';
+
+  @override
+  String retireConfirmTitle(String code) {
+    return 'Retragi „$code”?';
+  }
+
+  @override
+  String get retireConfirmBody =>
+      'Atelierele nu o vor mai vedea. Cei care o folosesc păstrează ultima fișă. O poți repune ulterior.';
+
+  @override
+  String get referenceAvailabilityTitle => 'Disponibilitatea acestei referințe';
+
+  @override
+  String get stockLabel => 'Stoc';
+
+  @override
+  String whatAteliersSee(String value) {
+    return 'Ce văd atelierele: $value';
+  }
+
+  @override
+  String get importTitle => 'Importă catalogul';
+
+  @override
+  String get importPickFile => 'Alege un fișier Excel sau CSV';
+
+  @override
+  String get importPickHelp =>
+      'Fișier .xlsx sau .csv, un rând pe referință și un rând de antet. Maximum 5.000 de rânduri. O referință existentă este actualizată după cod.';
+
+  @override
+  String get importUnreadable =>
+      'Fișierul nu a putut fi citit. Salvează-l în format .xlsx sau .csv și încearcă din nou.';
+
+  @override
+  String importTooMany(int count) {
+    return 'Fișierul conține $count rânduri: maximum 5.000 per import.';
+  }
+
+  @override
+  String get importMappingTitle => 'Asociază coloanele';
+
+  @override
+  String get importMappingIntro =>
+      'Coloanele recunoscute sunt deja asociate. Codul articolului și denumirea sunt obligatorii.';
+
+  @override
+  String get importColumnNone => '— Ignoră —';
+
+  @override
+  String get importFieldName => 'Denumire';
+
+  @override
+  String get importFieldStock => 'Stoc (m)';
+
+  @override
+  String importSummary(int valid, int invalid) {
+    return '$valid rânduri pregătite · $invalid cu erori';
+  }
+
+  @override
+  String get importErrorsTitle => 'Rânduri cu erori (neimportate)';
+
+  @override
+  String importLine(int line) {
+    return 'Rândul $line';
+  }
+
+  @override
+  String importRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importă $count referințe',
+      one: 'Importă 1 referință',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String importRunning(int done, int total) {
+    return 'Import în curs… $done/$total';
+  }
+
+  @override
+  String get importDoneTitle => 'Import finalizat';
+
+  @override
+  String importDone(int inserted, int updated) {
+    return '$inserted create · $updated actualizate';
+  }
+
+  @override
+  String importServerRejected(String message) {
+    return 'Respinsă de server: $message';
+  }
+
+  @override
+  String get importAgain => 'Importă alt fișier';
+
+  @override
+  String get backToCatalog => 'Înapoi la catalog';
+
+  @override
+  String importFileName(String name) {
+    return 'Fișier: $name';
+  }
+
+  @override
+  String get issueMissingCode => 'Lipsește codul articolului';
+
+  @override
+  String get issueMissingName => 'Lipsește denumirea';
+
+  @override
+  String issueComposition(String value) {
+    return 'Compoziție ilizibilă sau diferită de 100 %: „$value”';
+  }
+
+  @override
+  String issueNumber(String field, String value) {
+    return '$field: valoare nevalidă „$value”';
+  }
+
+  @override
+  String issueColor(String value) {
+    return 'Culoare nevalidă „$value” (format #RRGGBB)';
+  }
+
+  @override
+  String issueDuplicate(String value) {
+    return 'Codul „$value” apare de mai multe ori în fișier';
+  }
+
+  @override
+  String get adminOrgKind => 'Tipul organizației';
+
+  @override
+  String get adminNewOrg => 'Organizație nouă';
+
+  @override
+  String get adminOrgNameGeneric => 'Numele organizației';
 }

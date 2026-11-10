@@ -680,4 +680,267 @@ class AppLocalizationsEs extends AppLocalizations {
   String chipWeightMax(int max) {
     return '≤ $max g/m²';
   }
+
+  @override
+  String get navCatalog => 'Catálogo';
+
+  @override
+  String get catalogEmptyTitle => 'Tu catálogo está vacío';
+
+  @override
+  String get catalogEmptyBody =>
+      'Importa tu catálogo desde un archivo Excel o CSV exportado de tu software de gestión.';
+
+  @override
+  String get catalogImport => 'Importar un archivo';
+
+  @override
+  String get catalogSettings => 'Disponibilidad';
+
+  @override
+  String referenceCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count referencias',
+      one: '1 referencia',
+      zero: 'Ninguna referencia',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get showRetired => 'Mostrar las referencias retiradas';
+
+  @override
+  String get retiredBadge => 'Retirada';
+
+  @override
+  String get colStatus => 'Disponibilidad';
+
+  @override
+  String get colLeadTime => 'Plazo';
+
+  @override
+  String get statusAvailable => 'Disponible';
+
+  @override
+  String get statusLow => 'Stock bajo';
+
+  @override
+  String get statusOnOrder => 'Bajo pedido';
+
+  @override
+  String statusOnOrderWeeks(int weeks) {
+    return 'Bajo pedido · $weeks sem.';
+  }
+
+  @override
+  String get statusOutOfStock => 'Agotado';
+
+  @override
+  String get statusHidden => 'Oculta';
+
+  @override
+  String get modeExact => 'Cantidad exacta';
+
+  @override
+  String get modeTiers => 'Niveles';
+
+  @override
+  String get modeHidden => 'Oculta';
+
+  @override
+  String get modeExactHelp => 'Los talleres ven tus metros exactos en stock.';
+
+  @override
+  String get modeTiersHelp =>
+      'Los talleres solo ven: disponible, stock bajo, bajo pedido o agotado.';
+
+  @override
+  String get modeHiddenHelp => 'Los talleres no ven la disponibilidad.';
+
+  @override
+  String modeDefault(String mode) {
+    return 'Ajuste general ($mode)';
+  }
+
+  @override
+  String get thresholdLabel => 'Umbral de stock bajo (m)';
+
+  @override
+  String get thresholdHelp =>
+      'Por debajo de estos metros, la referencia aparece como «stock bajo».';
+
+  @override
+  String get leadTimeLabel => 'Plazo de reposición (semanas)';
+
+  @override
+  String get leadTimeHelp =>
+      'Se muestra cuando la referencia está bajo pedido.';
+
+  @override
+  String get availabilitySettingsTitle => 'Visualización de la disponibilidad';
+
+  @override
+  String get availabilitySettingsIntro =>
+      'Elige qué ven los talleres de tu stock. Puedes ajustar cada referencia desde su ficha.';
+
+  @override
+  String get settingsSaved => 'Ajustes guardados.';
+
+  @override
+  String get referenceRetire => 'Retirar del catálogo';
+
+  @override
+  String get referenceRestore => 'Volver a publicar';
+
+  @override
+  String get referenceRetired => 'Referencia retirada del catálogo publicado.';
+
+  @override
+  String get referenceRestored => 'Referencia publicada de nuevo.';
+
+  @override
+  String retireConfirmTitle(String code) {
+    return '¿Retirar «$code»?';
+  }
+
+  @override
+  String get retireConfirmBody =>
+      'Los talleres ya no la verán. Quienes la usan conservarán su última ficha. Podrás volver a publicarla.';
+
+  @override
+  String get referenceAvailabilityTitle => 'Disponibilidad de esta referencia';
+
+  @override
+  String get stockLabel => 'Stock';
+
+  @override
+  String whatAteliersSee(String value) {
+    return 'Lo que ven los talleres: $value';
+  }
+
+  @override
+  String get importTitle => 'Importar el catálogo';
+
+  @override
+  String get importPickFile => 'Elegir un archivo Excel o CSV';
+
+  @override
+  String get importPickHelp =>
+      'Archivo .xlsx o .csv, una fila por referencia y una fila de encabezados. 5.000 filas como máximo. Una referencia conocida se actualiza por su código.';
+
+  @override
+  String get importUnreadable =>
+      'No se ha podido leer este archivo. Guárdalo en formato .xlsx o .csv e inténtalo de nuevo.';
+
+  @override
+  String importTooMany(int count) {
+    return 'Este archivo contiene $count filas: 5.000 como máximo por importación.';
+  }
+
+  @override
+  String get importMappingTitle => 'Asocia tus columnas';
+
+  @override
+  String get importMappingIntro =>
+      'Las columnas reconocidas ya están asociadas. El código y la denominación son obligatorios.';
+
+  @override
+  String get importColumnNone => '— Ignorar —';
+
+  @override
+  String get importFieldName => 'Denominación';
+
+  @override
+  String get importFieldStock => 'Stock (m)';
+
+  @override
+  String importSummary(int valid, int invalid) {
+    return '$valid filas listas · $invalid con errores';
+  }
+
+  @override
+  String get importErrorsTitle => 'Filas con errores (no importadas)';
+
+  @override
+  String importLine(int line) {
+    return 'Fila $line';
+  }
+
+  @override
+  String importRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importar $count referencias',
+      one: 'Importar 1 referencia',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String importRunning(int done, int total) {
+    return 'Importando… $done/$total';
+  }
+
+  @override
+  String get importDoneTitle => 'Importación terminada';
+
+  @override
+  String importDone(int inserted, int updated) {
+    return '$inserted creadas · $updated actualizadas';
+  }
+
+  @override
+  String importServerRejected(String message) {
+    return 'Rechazada por el servidor: $message';
+  }
+
+  @override
+  String get importAgain => 'Importar otro archivo';
+
+  @override
+  String get backToCatalog => 'Volver al catálogo';
+
+  @override
+  String importFileName(String name) {
+    return 'Archivo: $name';
+  }
+
+  @override
+  String get issueMissingCode => 'Falta el código';
+
+  @override
+  String get issueMissingName => 'Falta la denominación';
+
+  @override
+  String issueComposition(String value) {
+    return 'Composición ilegible o distinta del 100 %: «$value»';
+  }
+
+  @override
+  String issueNumber(String field, String value) {
+    return '$field: valor no válido «$value»';
+  }
+
+  @override
+  String issueColor(String value) {
+    return 'Color no válido «$value» (formato #RRGGBB)';
+  }
+
+  @override
+  String issueDuplicate(String value) {
+    return 'El código «$value» aparece varias veces en el archivo';
+  }
+
+  @override
+  String get adminOrgKind => 'Tipo de organización';
+
+  @override
+  String get adminNewOrg => 'Nueva organización';
+
+  @override
+  String get adminOrgNameGeneric => 'Nombre de la organización';
 }

@@ -19,7 +19,7 @@ class AdminScreen extends ConsumerWidget {
   Future<void> _createAtelier(BuildContext context, WidgetRef ref) async {
     final email = await showDialog<String>(
       context: context,
-      builder: (_) => const _NewAtelierDialog(),
+      builder: (_) => const _NewOrganizationDialog(),
     );
     if (email == null || !context.mounted) return;
     ref.invalidate(adminOrganizationsProvider);
@@ -69,7 +69,7 @@ class AdminScreen extends ConsumerWidget {
         foregroundColor: FxColors.white,
         onPressed: () => _createAtelier(context, ref),
         icon: const Icon(Icons.add),
-        label: Text(l10n.adminNewAtelier),
+        label: Text(l10n.adminNewOrg),
       ),
       body: organizations.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -206,17 +206,18 @@ class _Pill extends StatelessWidget {
 }
 
 /// Création d'un atelier et invitation de son admin. Renvoie l'e-mail invité.
-class _NewAtelierDialog extends ConsumerStatefulWidget {
-  const _NewAtelierDialog();
+class _NewOrganizationDialog extends ConsumerStatefulWidget {
+  const _NewOrganizationDialog();
 
   @override
-  ConsumerState<_NewAtelierDialog> createState() => _NewAtelierDialogState();
+  ConsumerState<_NewOrganizationDialog> createState() => _NewOrganizationDialogState();
 }
 
-class _NewAtelierDialogState extends ConsumerState<_NewAtelierDialog> {
+class _NewOrganizationDialogState extends ConsumerState<_NewOrganizationDialog> {
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
   final _email = TextEditingController();
+  OrgKind _kind = OrgKind.atelier;
   bool _busy = false;
   String? _error;
 
@@ -237,7 +238,7 @@ class _NewAtelierDialogState extends ConsumerState<_NewAtelierDialog> {
       final email = normalizeEmail(_email.text);
       await ref
           .read(adminRepositoryProvider)
-          .createAtelierWithAdmin(name: _name.text.trim(), adminEmail: email);
+          .createOrganizationWithAdmin(name: _name.text.trim(), adminEmail: email, kind: _kind);
       if (mounted) Navigator.of(context).pop(email);
     } on AuthError catch (e) {
       ref.invalidate(adminOrganizationsProvider);
@@ -251,7 +252,7 @@ class _NewAtelierDialogState extends ConsumerState<_NewAtelierDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AlertDialog(
-      title: Text(l10n.adminNewAtelier),
+      title: Text(l10n.adminNewOrg),
       content: SizedBox(
         width: 400,
         child: Form(
@@ -260,11 +261,22 @@ class _NewAtelierDialogState extends ConsumerState<_NewAtelierDialog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Text(l10n.adminOrgKind, style: Theme.of(context).textTheme.labelLarge),
+              const SizedBox(height: FxSpace.xs),
+              SegmentedButton<OrgKind>(
+                segments: [
+                  ButtonSegment(value: OrgKind.atelier, label: Text(l10n.orgKindAtelier), icon: const Icon(Icons.storefront_outlined)),
+                  ButtonSegment(value: OrgKind.supplier, label: Text(l10n.orgKindSupplier), icon: const Icon(Icons.local_shipping_outlined)),
+                ],
+                selected: {_kind},
+                onSelectionChanged: (s) => setState(() => _kind = s.first),
+              ),
+              const SizedBox(height: FxSpace.md),
               TextFormField(
                 controller: _name,
                 autofocus: true,
                 textInputAction: TextInputAction.next,
-                decoration: InputDecoration(labelText: l10n.adminOrgName),
+                decoration: InputDecoration(labelText: l10n.adminOrgNameGeneric),
                 validator: (v) {
                   final length = (v ?? '').trim().length;
                   return length >= 2 && length <= 120 ? null : l10n.errorOrgName;

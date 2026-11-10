@@ -1,12 +1,13 @@
 import 'package:filyxa/app/redirect.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-String? go(String location, {bool loggedIn = true, SpaceStatus status = SpaceStatus.ready, bool superadmin = false}) =>
+String? go(String location, {bool loggedIn = true, SpaceStatus status = SpaceStatus.ready, bool superadmin = false, bool supplier = false}) =>
     decideRedirect(RedirectInput(
       location: location,
       loggedIn: loggedIn,
       status: status,
       isSuperadmin: superadmin,
+      isSupplier: supplier,
     ));
 
 void main() {
@@ -52,6 +53,26 @@ void main() {
     test('la console super-admin est refusée aux autres comptes', () {
       expect(go('/admin'), '/library');
       expect(go('/admin', superadmin: true), isNull);
+    });
+  });
+
+  group('fournisseur', () {
+    test('arrive sur son catalogue', () {
+      expect(go('/login', supplier: true), '/catalog');
+      expect(go('/splash', supplier: true), '/catalog');
+    });
+
+    test('n\'accède pas aux écrans atelier', () {
+      expect(go('/library', supplier: true), '/catalog');
+      expect(go('/library/m1', supplier: true), '/catalog');
+      expect(go('/scan', supplier: true), '/catalog');
+      expect(go('/catalog/import', supplier: true), isNull);
+      expect(go('/account/members', supplier: true), isNull);
+    });
+
+    test('un atelier n\'accède pas au catalogue fournisseur', () {
+      expect(go('/catalog'), '/library');
+      expect(go('/catalog/settings'), '/library');
     });
   });
 }
