@@ -1,0 +1,297 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appTitle => 'Filyxa';
+
+  @override
+  String get navLibrary => 'TissuTech';
+
+  @override
+  String get navStudio => 'Studio';
+
+  @override
+  String get navScanner => 'Scanner';
+
+  @override
+  String get navSuppliers => 'Suppliers';
+
+  @override
+  String get navAccount => 'Account';
+
+  @override
+  String get comingSoonTitle => 'Coming soon';
+
+  @override
+  String get comingSoonBody =>
+      'This section is coming in a future version of Filyxa.';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get newPasswordLabel => 'New password';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm password';
+
+  @override
+  String get passwordHelper =>
+      'At least 8 characters, with at least one letter and one digit';
+
+  @override
+  String get codeLabel => '6-digit code';
+
+  @override
+  String get showPassword => 'Show password';
+
+  @override
+  String get hidePassword => 'Hide password';
+
+  @override
+  String get loginTitle => 'Sign in';
+
+  @override
+  String get loginSubtitle => 'Access your studio\'s material library.';
+
+  @override
+  String get loginButton => 'Sign in';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get haveInvitation => 'I have an invitation';
+
+  @override
+  String get devQuickLogin => 'Quick sign-in (dev)';
+
+  @override
+  String get inviteTitle => 'Join your team';
+
+  @override
+  String get inviteIntro =>
+      'Enter your email and the 6-digit code from the invitation email.';
+
+  @override
+  String get verifyCode => 'Verify code';
+
+  @override
+  String get resendCode => 'Get a new code';
+
+  @override
+  String codeResent(String email) {
+    return 'If an invitation is pending for $email, a new code has just been sent.';
+  }
+
+  @override
+  String get choosePasswordTitle => 'Choose your password';
+
+  @override
+  String choosePasswordIntro(String organization) {
+    return 'Welcome to $organization. Choose the password for your account.';
+  }
+
+  @override
+  String get savePassword => 'Save and continue';
+
+  @override
+  String get invitationExpiredTitle => 'Invitation expired';
+
+  @override
+  String get invitationExpiredBody =>
+      'This invitation has expired. Ask your studio\'s administrator to send you a new one.';
+
+  @override
+  String get invitationNotFound =>
+      'No pending invitation for this address. Check the email you used or ask for a new invitation.';
+
+  @override
+  String get alreadyMember =>
+      'This account already belongs to an organization.';
+
+  @override
+  String get backToLogin => 'Back to sign in';
+
+  @override
+  String get resetTitle => 'Forgot password';
+
+  @override
+  String get resetIntro =>
+      'Enter your account email: you will receive a reset code.';
+
+  @override
+  String get sendCode => 'Send code';
+
+  @override
+  String resetCodeSent(String email) {
+    return 'If an account exists for $email, a 6-digit code has just been sent to it.';
+  }
+
+  @override
+  String get resetButton => 'Change password';
+
+  @override
+  String get passwordChanged => 'Password changed. You are signed in.';
+
+  @override
+  String get errorEmailInvalid => 'Invalid email address';
+
+  @override
+  String get errorPasswordShort => 'At least 8 characters';
+
+  @override
+  String get errorPasswordWeak => 'At least one letter and one digit';
+
+  @override
+  String get errorPasswordMismatch => 'Passwords do not match';
+
+  @override
+  String get errorCodeInvalid => 'Enter the 6-digit code';
+
+  @override
+  String get errorBadCredentials => 'Incorrect email or password';
+
+  @override
+  String get errorCodeExpired =>
+      'Incorrect or expired code. Request a new one.';
+
+  @override
+  String get errorNetwork =>
+      'Unable to connect. Check your network and try again.';
+
+  @override
+  String get errorTooManyRequests =>
+      'Too many attempts. Wait a few minutes before trying again.';
+
+  @override
+  String get errorForbidden => 'Only administrators can do this.';
+
+  @override
+  String get errorEmailNotSent =>
+      'The email could not be sent. Try again in a few minutes.';
+
+  @override
+  String get errorGeneric => 'Something went wrong. Try again.';
+
+  @override
+  String get errorOrgName => 'Between 2 and 120 characters';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get logout => 'Sign out';
+
+  @override
+  String get accountTitle => 'My account';
+
+  @override
+  String get languageLabel => 'Language';
+
+  @override
+  String get organizationLabel => 'Organization';
+
+  @override
+  String get roleLabel => 'Role';
+
+  @override
+  String get roleAdmin => 'Admin';
+
+  @override
+  String get roleEditor => 'Editor';
+
+  @override
+  String get roleViewer => 'Viewer';
+
+  @override
+  String get superadminConsole => 'Super-admin console';
+
+  @override
+  String get noOrgTitle => 'No organization';
+
+  @override
+  String get noOrgBody =>
+      'Your account is not linked to any organization. Ask your studio\'s administrator for an invitation.';
+
+  @override
+  String get loadingError => 'Unable to load your workspace.';
+
+  @override
+  String get adminTitle => 'Super-admin console';
+
+  @override
+  String get adminNewAtelier => 'New studio';
+
+  @override
+  String get adminEmpty =>
+      'No organizations yet. Create the first pilot studio.';
+
+  @override
+  String get adminOrgName => 'Studio name';
+
+  @override
+  String get adminAdminEmail => 'Admin email';
+
+  @override
+  String get adminCreate => 'Create and invite';
+
+  @override
+  String adminCreated(String email) {
+    return 'Studio created. Invitation sent to $email.';
+  }
+
+  @override
+  String adminInvitePending(String email, String date) {
+    return 'Pending invitation: $email · expires $date';
+  }
+
+  @override
+  String adminInviteExpired(String email) {
+    return 'Expired invitation: $email';
+  }
+
+  @override
+  String adminMembers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count members',
+      one: '1 member',
+      zero: 'No members',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get adminReinvite => 'Resend invitation';
+
+  @override
+  String adminReinvited(String email) {
+    return 'Invitation resent to $email.';
+  }
+
+  @override
+  String get orgKindAtelier => 'Studio';
+
+  @override
+  String get orgKindSupplier => 'Supplier';
+
+  @override
+  String get missingConfig =>
+      'Supabase configuration missing. Copy env.example.json to env.json, fill it in, then run: flutter run --dart-define-from-file=env.json';
+}

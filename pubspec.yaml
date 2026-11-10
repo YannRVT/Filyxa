@@ -1,0 +1,34 @@
+name: filyxa
+description: "Filyxa — Textile Intelligence Platform."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  cupertino_icons: ^2.0.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^3.5.0
+  flutter_svg: ^2.3.2
+  go_router: ^18.1.4
+  google_fonts: ^9.0.0
+  intl: ^0.20.3
+  material_ui: ^1.11.0
+  supabase_flutter: ^2.18.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/brand/filyxa-logo.png
+    - assets/brand/filyxa-logo-light.png
+    - assets/brand/filyxa-symbol.svg
