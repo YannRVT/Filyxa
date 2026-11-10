@@ -12,6 +12,9 @@ import '../../session/domain/user_space.dart';
 import '../domain/material.dart';
 
 const _bucket = 'material-photos';
+
+/// Taille des pages de chargement (limite du serveur : 1 000 lignes).
+const kMaterialsPageSize = 1000;
 const _select = 'id, org_id, name, supplier_name, supplier_code, color_name, color_hex, '
     'photo_path, atelier_stock_m, notes, updated_at, '
     'textile_specs(composition, weight_gsm, width_cm, weave, care, certifications, uses)';
@@ -29,13 +32,21 @@ class MaterialsRepository {
     }
   }
 
+  /// Toutes les matières de l'atelier. Le serveur renvoie au plus 1 000 lignes
+  /// par requête : on charge par pages jusqu'à la dernière.
   Future<List<MaterialItem>> list(String orgId) => _guard(() async {
-        final rows = await _client
-            .from('materials')
-            .select(_select)
-            .eq('org_id', orgId)
-            .order('updated_at', ascending: false);
-        return rows.map(MaterialItem.fromJson).toList();
+        final all = <MaterialItem>[];
+        for (var from = 0;; from += kMaterialsPageSize) {
+          final rows = await _client
+              .from('materials')
+              .select(_select)
+              .eq('org_id', orgId)
+              .order('updated_at', ascending: false)
+              .order('id')
+              .range(from, from + kMaterialsPageSize - 1);
+          all.addAll(rows.map(MaterialItem.fromJson));
+          if (rows.length < kMaterialsPageSize) return all;
+        }
       });
 
   Future<MaterialItem?> get(String id) => _guard(() async {

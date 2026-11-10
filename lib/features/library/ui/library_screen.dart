@@ -8,6 +8,7 @@ import '../../../shared/widgets/auth_widgets.dart';
 import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
+import 'library_filters.dart';
 import 'material_widgets.dart';
 
 enum LibraryView { gallery, table }
@@ -102,11 +103,216 @@ class LibraryScreen extends ConsumerWidget {
         ),
         data: (items) {
           if (items.isEmpty) return _EmptyLibrary(canEdit: canEdit);
-          return RefreshIndicator(
-            onRefresh: () => ref.refresh(materialsProvider.future),
-            child: view == LibraryView.gallery ? _Gallery(items: items) : _MaterialTable(items: items),
-          );
+          return _FilteredLibrary(items: items, view: view);
         },
+      ),
+    );
+  }
+}
+
+/// Recherche, filtres (panneau latéral sur grand écran, feuille sur téléphone)
+/// et résultats.
+class _FilteredLibrary extends ConsumerStatefulWidget {
+  const _FilteredLibrary({required this.items, required this.view});
+
+  final List<MaterialItem> items;
+  final LibraryView view;
+
+  @override
+  ConsumerState<_FilteredLibrary> createState() => _FilteredLibraryState();
+}
+
+class _FilteredLibraryState extends ConsumerState<_FilteredLibrary> {
+  late final _search = TextEditingController(text: ref.read(libraryFilterProvider).query);
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
+
+  void _openFilters(BuildContext context) {
+    final l10n = context.l10n;
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheetContext) => DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.85,
+        maxChildSize: 0.95,
+        builder: (_, controller) => Column(
+          children: [
+            Expanded(
+              child: ListView(
+                controller: controller,
+                padding: const EdgeInsets.fromLTRB(FxSpace.md, 0, FxSpace.md, FxSpace.md),
+                children: const [FilterPanel()],
+              ),
+            ),
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.all(FxSpace.md),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    onPressed: () => Navigator.of(sheetContext).pop(),
+                    child: Text(l10n.showResults),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final lang = langOf(context);
+    final filter = ref.watch(libraryFilterProvider);
+    final ctrl = ref.read(libraryFilterProvider.notifier);
+    final results = filter.apply(widget.items, lang: lang);
+    final chips = activeFilters(filter, l10n, lang);
+
+    return LayoutBuilder(builder: (context, constraints) {
+      final sidePanel = constraints.maxWidth >= 1000;
+
+      final searchRow = Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _search,
+              onChanged: ctrl.setQuery,
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                hintText: l10n.searchHint,
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: filter.query.isEmpty
+                    ? null
+                    : IconButton(
+                        tooltip: l10n.clearSearch,
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          _search.clear();
+                          ctrl.setQuery('');
+                        },
+                      ),
+              ),
+            ),
+          ),
+          if (!sidePanel) ...[
+            const SizedBox(width: FxSpace.sm),
+            Badge(
+              isLabelVisible: filter.activeCount > 0,
+              label: Text('${filter.activeCount}'),
+              backgroundColor: FxColors.emeraldInk,
+              child: OutlinedButton.icon(
+                onPressed: () => _openFilters(context),
+                icon: const Icon(Icons.tune, size: 18),
+                label: Text(l10n.filtersButton),
+              ),
+            ),
+          ],
+        ],
+      );
+
+      final header = Padding(
+        padding: const EdgeInsets.fromLTRB(FxSpace.md, FxSpace.sm, FxSpace.md, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            searchRow,
+            if (chips.isNotEmpty) ...[
+              const SizedBox(height: FxSpace.sm),
+              Wrap(
+                spacing: FxSpace.xs + 2,
+                runSpacing: FxSpace.xs + 2,
+                children: [
+                  for (final chip in chips)
+                    InputChip(
+                      label: Text(chip.label),
+                      deleteButtonTooltipMessage: l10n.removeFilter(chip.label),
+                      onDeleted: () => ctrl.update(chip.remove),
+                    ),
+                  TextButton(onPressed: ctrl.clearFilters, child: Text(l10n.clearFilters)),
+                ],
+              ),
+            ],
+            if (!filter.isEmpty) ...[
+              const SizedBox(height: FxSpace.xs),
+              Semantics(
+                liveRegion: true,
+                child: Text(
+                  l10n.resultCount(results.length),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: FxColors.inkSoft),
+                ),
+              ),
+            ],
+          ],
+        ),
+      );
+
+      final Widget body = results.isEmpty
+          ? _NoResults(onClear: () {
+              _search.clear();
+              ctrl.clearAll();
+            })
+          : RefreshIndicator(
+              onRefresh: () => ref.refresh(materialsProvider.future),
+              child: widget.view == LibraryView.gallery ? _Gallery(items: results) : _MaterialTable(items: results),
+            );
+
+      final main = Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [header, Expanded(child: body)],
+      );
+      if (!sidePanel) return main;
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 300,
+            decoration: const BoxDecoration(border: Border(right: BorderSide(color: FxColors.line))),
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(FxSpace.md, 0, FxSpace.md, FxSpace.lg),
+              children: const [FilterPanel()],
+            ),
+          ),
+          Expanded(child: main),
+        ],
+      );
+    });
+  }
+}
+
+class _NoResults extends StatelessWidget {
+  const _NoResults({required this.onClear});
+
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(FxSpace.lg),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.search_off, size: 36, color: FxColors.inkSoft),
+            const SizedBox(height: FxSpace.sm),
+            Text(l10n.noResultsTitle, style: text.titleMedium),
+            const SizedBox(height: FxSpace.xs),
+            Text(l10n.noResultsBody, textAlign: TextAlign.center, style: text.bodyMedium?.copyWith(color: FxColors.inkSoft)),
+            const SizedBox(height: FxSpace.md),
+            OutlinedButton(onPressed: onClear, child: Text(l10n.clearFilters)),
+          ],
+        ),
       ),
     );
   }

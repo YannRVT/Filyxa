@@ -14,6 +14,10 @@ import '../features/library/ui/library_screen.dart';
 import '../features/library/ui/material_detail_screen.dart';
 import '../features/library/ui/material_form_screen.dart';
 import '../features/members/ui/members_screen.dart';
+import '../features/supplier/ui/catalog_import_screen.dart';
+import '../features/supplier/ui/catalog_screen.dart';
+import '../features/supplier/ui/reference_screen.dart';
+import '../features/supplier/ui/supplier_settings_screen.dart';
 import '../features/session/data/user_space_repository.dart';
 import '../features/session/domain/user_space.dart';
 import '../features/session/ui/session_screens.dart';
@@ -48,6 +52,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         loggedIn: auth.currentSession != null,
         status: spaceStatusOf(space),
         isSuperadmin: space.value?.profile.isSuperadmin ?? false,
+        isSupplier: space.value?.membership?.organization.kind == OrgKind.supplier,
       ));
     },
     routes: [
@@ -61,7 +66,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/no-organization', builder: (_, _) => const NoOrganizationScreen()),
       GoRoute(path: '/admin', builder: (_, _) => const AdminScreen()),
       StatefulShellRoute.indexedStack(
-        builder: (_, _, shell) => AppShell(navigationShell: shell),
+        builder: (_, _, shell) => AppShell(
+          navigationShell: shell,
+          supplier: ref.read(userSpaceProvider).value?.membership?.organization.kind == OrgKind.supplier,
+        ),
         branches: [
           StatefulShellBranch(routes: [
             GoRoute(
@@ -112,6 +120,20 @@ final routerProvider = Provider<GoRouter>((ref) {
               builder: (_, _) => const AccountScreen(),
               routes: [
                 GoRoute(path: 'members', builder: (_, _) => const MembersScreen()),
+              ],
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: '/catalog',
+              builder: (_, _) => const CatalogScreen(),
+              routes: [
+                GoRoute(path: 'import', builder: (_, _) => const CatalogImportScreen()),
+                GoRoute(path: 'settings', builder: (_, _) => const SupplierSettingsScreen()),
+                GoRoute(
+                  path: ':id',
+                  builder: (_, state) => ReferenceScreen(referenceId: state.pathParameters['id']!),
+                ),
               ],
             ),
           ]),

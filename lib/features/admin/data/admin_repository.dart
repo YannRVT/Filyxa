@@ -76,14 +76,18 @@ class AdminRepository {
     return (response.data as Map).cast<String, dynamic>();
   }
 
-  /// Crée l'atelier puis invite son premier admin. Si l'invitation échoue,
+  /// Crée l'organisation (atelier ou fournisseur) puis invite son premier admin. Si l'invitation échoue,
   /// l'atelier existe : l'invitation peut être renvoyée depuis la console.
-  Future<void> createAtelierWithAdmin({required String name, required String adminEmail}) =>
+  Future<void> createOrganizationWithAdmin({
+    required String name,
+    required String adminEmail,
+    OrgKind kind = OrgKind.atelier,
+  }) =>
       _guard(() async {
         final created = await _call({
           'action': 'create_organization',
           'name': name,
-          'kind': OrgKind.atelier.name,
+          'kind': kind.name,
         });
         final orgId = (created['organization'] as Map)['id'] as String;
         await _call({

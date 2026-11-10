@@ -41,6 +41,11 @@ if [[ $RESET -eq 1 ]]; then
   # Après un reset, la passerelle locale ne sert plus les modèles d'e-mail
   # (les codes à 6 chiffres disparaissent) : on la redémarre.
   docker restart supabase_kong_filyxa >/dev/null
+  # Attend que les modèles d'e-mail soient de nouveau servis (60 s maximum).
+  for _ in $(seq 1 30); do
+    docker exec supabase_auth_filyxa wget -qO- http://supabase_kong_filyxa:8088/email/invite.html >/dev/null 2>&1 && break
+    sleep 2
+  done
 fi
 
 eval "$(supabase status -o env 2>/dev/null | grep -E '^(API_URL|PUBLISHABLE_KEY|INBUCKET_URL)=')"

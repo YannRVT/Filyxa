@@ -599,4 +599,345 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get errorEditorsOnly =>
       'Ação reservada aos editores e administradores do ateliê.';
+
+  @override
+  String get searchHint => 'Pesquisar: nome, código, fornecedor, cor, fibra…';
+
+  @override
+  String get clearSearch => 'Limpar a pesquisa';
+
+  @override
+  String get filtersButton => 'Filtros';
+
+  @override
+  String get clearFilters => 'Limpar os filtros';
+
+  @override
+  String get showResults => 'Ver os resultados';
+
+  @override
+  String get noResultsTitle => 'Sem resultados';
+
+  @override
+  String get noResultsBody =>
+      'Nenhum material corresponde à sua pesquisa ou aos seus filtros.';
+
+  @override
+  String resultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count resultados',
+      one: '1 resultado',
+      zero: 'Sem resultados',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get filterFiber => 'Fibra';
+
+  @override
+  String get filterFiberAny => 'Todas as fibras';
+
+  @override
+  String filterFiberMin(int pct) {
+    return 'Pelo menos $pct %';
+  }
+
+  @override
+  String get filterWeight => 'Gramagem';
+
+  @override
+  String get filterColor => 'Cor';
+
+  @override
+  String get filterInStock => 'Em stock no ateliê';
+
+  @override
+  String removeFilter(String label) {
+    return 'Remover o filtro $label';
+  }
+
+  @override
+  String chipFiberMin(String fiber, int pct) {
+    return '$fiber ≥ $pct %';
+  }
+
+  @override
+  String chipWeightRange(int min, int max) {
+    return '$min–$max g/m²';
+  }
+
+  @override
+  String chipWeightMin(int min) {
+    return '≥ $min g/m²';
+  }
+
+  @override
+  String chipWeightMax(int max) {
+    return '≤ $max g/m²';
+  }
+
+  @override
+  String get navCatalog => 'Catálogo';
+
+  @override
+  String get catalogEmptyTitle => 'O seu catálogo está vazio';
+
+  @override
+  String get catalogEmptyBody =>
+      'Importe o seu catálogo a partir de um ficheiro Excel ou CSV exportado do seu software de gestão.';
+
+  @override
+  String get catalogImport => 'Importar um ficheiro';
+
+  @override
+  String get catalogSettings => 'Disponibilidade';
+
+  @override
+  String referenceCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count referências',
+      one: '1 referência',
+      zero: 'Nenhuma referência',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get showRetired => 'Mostrar as referências retiradas';
+
+  @override
+  String get retiredBadge => 'Retirada';
+
+  @override
+  String get colStatus => 'Disponibilidade';
+
+  @override
+  String get colLeadTime => 'Prazo';
+
+  @override
+  String get statusAvailable => 'Disponível';
+
+  @override
+  String get statusLow => 'Stock baixo';
+
+  @override
+  String get statusOnOrder => 'Por encomenda';
+
+  @override
+  String statusOnOrderWeeks(int weeks) {
+    return 'Por encomenda · $weeks sem.';
+  }
+
+  @override
+  String get statusOutOfStock => 'Esgotado';
+
+  @override
+  String get statusHidden => 'Oculta';
+
+  @override
+  String get modeExact => 'Quantidade exata';
+
+  @override
+  String get modeTiers => 'Escalões';
+
+  @override
+  String get modeHidden => 'Oculta';
+
+  @override
+  String get modeExactHelp => 'Os ateliês veem os metros exatos em stock.';
+
+  @override
+  String get modeTiersHelp =>
+      'Os ateliês só veem: disponível, stock baixo, por encomenda ou esgotado.';
+
+  @override
+  String get modeHiddenHelp => 'Os ateliês não veem a disponibilidade.';
+
+  @override
+  String modeDefault(String mode) {
+    return 'Definição geral ($mode)';
+  }
+
+  @override
+  String get thresholdLabel => 'Limite de stock baixo (m)';
+
+  @override
+  String get thresholdHelp =>
+      'Abaixo destes metros, a referência aparece como «stock baixo».';
+
+  @override
+  String get leadTimeLabel => 'Prazo de reposição (semanas)';
+
+  @override
+  String get leadTimeHelp => 'Mostrado quando a referência está por encomenda.';
+
+  @override
+  String get availabilitySettingsTitle => 'Apresentação da disponibilidade';
+
+  @override
+  String get availabilitySettingsIntro =>
+      'Escolha o que os ateliês veem do seu stock. Pode ajustar cada referência na respetiva ficha.';
+
+  @override
+  String get settingsSaved => 'Definições guardadas.';
+
+  @override
+  String get referenceRetire => 'Retirar do catálogo';
+
+  @override
+  String get referenceRestore => 'Repor no catálogo';
+
+  @override
+  String get referenceRetired => 'Referência retirada do catálogo publicado.';
+
+  @override
+  String get referenceRestored => 'Referência reposta no catálogo.';
+
+  @override
+  String retireConfirmTitle(String code) {
+    return 'Retirar «$code»?';
+  }
+
+  @override
+  String get retireConfirmBody =>
+      'Os ateliês deixarão de a ver. Quem a utiliza mantém a última ficha. Poderá repô-la mais tarde.';
+
+  @override
+  String get referenceAvailabilityTitle => 'Disponibilidade desta referência';
+
+  @override
+  String get stockLabel => 'Stock';
+
+  @override
+  String whatAteliersSee(String value) {
+    return 'O que os ateliês veem: $value';
+  }
+
+  @override
+  String get importTitle => 'Importar o catálogo';
+
+  @override
+  String get importPickFile => 'Escolher um ficheiro Excel ou CSV';
+
+  @override
+  String get importPickHelp =>
+      'Ficheiro .xlsx ou .csv, uma linha por referência e uma linha de cabeçalhos. Máximo de 5000 linhas. Uma referência já conhecida é atualizada pelo código.';
+
+  @override
+  String get importUnreadable =>
+      'Não foi possível ler este ficheiro. Guarde-o em formato .xlsx ou .csv e tente novamente.';
+
+  @override
+  String importTooMany(int count) {
+    return 'Este ficheiro contém $count linhas: máximo de 5000 por importação.';
+  }
+
+  @override
+  String get importMappingTitle => 'Associe as suas colunas';
+
+  @override
+  String get importMappingIntro =>
+      'As colunas reconhecidas já estão associadas. O código e a designação são obrigatórios.';
+
+  @override
+  String get importColumnNone => '— Ignorar —';
+
+  @override
+  String get importFieldName => 'Designação';
+
+  @override
+  String get importFieldStock => 'Stock (m)';
+
+  @override
+  String importSummary(int valid, int invalid) {
+    return '$valid linhas prontas · $invalid com erros';
+  }
+
+  @override
+  String get importErrorsTitle => 'Linhas com erros (não importadas)';
+
+  @override
+  String importLine(int line) {
+    return 'Linha $line';
+  }
+
+  @override
+  String importRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importar $count referências',
+      one: 'Importar 1 referência',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String importRunning(int done, int total) {
+    return 'A importar… $done/$total';
+  }
+
+  @override
+  String get importDoneTitle => 'Importação concluída';
+
+  @override
+  String importDone(int inserted, int updated) {
+    return '$inserted criadas · $updated atualizadas';
+  }
+
+  @override
+  String importServerRejected(String message) {
+    return 'Recusada pelo servidor: $message';
+  }
+
+  @override
+  String get importAgain => 'Importar outro ficheiro';
+
+  @override
+  String get backToCatalog => 'Voltar ao catálogo';
+
+  @override
+  String importFileName(String name) {
+    return 'Ficheiro: $name';
+  }
+
+  @override
+  String get issueMissingCode => 'Código em falta';
+
+  @override
+  String get issueMissingName => 'Designação em falta';
+
+  @override
+  String issueComposition(String value) {
+    return 'Composição ilegível ou diferente de 100 %: «$value»';
+  }
+
+  @override
+  String issueNumber(String field, String value) {
+    return '$field: valor inválido «$value»';
+  }
+
+  @override
+  String issueColor(String value) {
+    return 'Cor inválida «$value» (formato #RRGGBB)';
+  }
+
+  @override
+  String issueDuplicate(String value) {
+    return 'Código «$value» presente várias vezes no ficheiro';
+  }
+
+  @override
+  String get adminOrgKind => 'Tipo de organização';
+
+  @override
+  String get adminNewOrg => 'Nova organização';
+
+  @override
+  String get adminOrgNameGeneric => 'Nome da organização';
 }
