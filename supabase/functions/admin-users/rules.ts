@@ -28,9 +28,22 @@ export function isOrgKind(value: unknown): value is OrgKind {
   return typeof value === "string" && (ORG_KINDS as readonly string[]).includes(value);
 }
 
-/** Qui peut inviter dans une organisation : le super-admin ou un admin de cette organisation. */
-export function canInvite(caller: { isSuperadmin: boolean; roleInOrg: Role | null }): boolean {
+/** Qui gère les membres d'une organisation (inviter, changer un rôle, retirer) :
+ * le super-admin ou un admin de cette organisation. */
+export function canManageMembers(caller: { isSuperadmin: boolean; roleInOrg: Role | null }): boolean {
   return caller.isSuperadmin || caller.roleInOrg === "admin";
+}
+
+/**
+ * Vrai si le changement retirerait le dernier admin de l'organisation.
+ * `newRole` vaut `null` quand le membre est retiré.
+ */
+export function wouldLeaveNoAdmin(change: {
+  adminCount: number;
+  currentRole: Role;
+  newRole: Role | null;
+}): boolean {
+  return change.currentRole === "admin" && change.newRole !== "admin" && change.adminCount <= 1;
 }
 
 /** Supabase signale un compte déjà existant par un message, pas par un code stable. */

@@ -294,4 +294,313 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get missingConfig =>
       'Configurația Supabase lipsește. Copiază env.example.json în env.json, completează-l, apoi rulează: flutter run --dart-define-from-file=env.json';
+
+  @override
+  String get membersEntry => 'Membrii atelierului';
+
+  @override
+  String get membersTitle => 'Membri';
+
+  @override
+  String get membersInvite => 'Invită';
+
+  @override
+  String get inviteDialogTitle => 'Invită un membru';
+
+  @override
+  String get inviteSend => 'Trimite invitația';
+
+  @override
+  String get roleAdminHelp => 'Gestionează membrii și setările atelierului';
+
+  @override
+  String get roleEditorHelp =>
+      'Creează, modifică, scanează, importă și partajează';
+
+  @override
+  String get roleViewerHelp => 'Consultă și exportă, fără a modifica nimic';
+
+  @override
+  String get youSuffix => 'tu';
+
+  @override
+  String get pendingInvitations => 'Invitații în așteptare';
+
+  @override
+  String invitationExpiresOn(String date) {
+    return 'Expiră pe $date';
+  }
+
+  @override
+  String get invitationExpiredShort => 'Expirată';
+
+  @override
+  String get resendInvitation => 'Retrimite';
+
+  @override
+  String get cancelInvitation => 'Anulează invitația';
+
+  @override
+  String invitationSent(String email) {
+    return 'Invitație trimisă către $email.';
+  }
+
+  @override
+  String get invitationCanceled => 'Invitație anulată.';
+
+  @override
+  String get changeRole => 'Schimbă rolul';
+
+  @override
+  String get roleChanged => 'Rol actualizat.';
+
+  @override
+  String get removeMember => 'Elimină din atelier';
+
+  @override
+  String removeConfirmTitle(String name) {
+    return 'Elimini pe $name?';
+  }
+
+  @override
+  String get removeConfirmBody =>
+      'Această persoană va pierde imediat accesul la datele atelierului. O poți invita din nou.';
+
+  @override
+  String get removeConfirm => 'Elimină';
+
+  @override
+  String get memberRemoved => 'Membru eliminat.';
+
+  @override
+  String get errorLastAdmin =>
+      'Atelierul trebuie să păstreze cel puțin un admin. Numește mai întâi un alt admin.';
+
+  @override
+  String get lastAdminHint => 'Singurul admin al atelierului';
+
+  @override
+  String memberActions(String name) {
+    return 'Acțiuni pentru $name';
+  }
+
+  @override
+  String get libraryNew => 'Material nou';
+
+  @override
+  String get viewGallery => 'Galerie';
+
+  @override
+  String get viewTable => 'Tabel';
+
+  @override
+  String get libraryEmptyTitle => 'TissuTech-ul tău este gol';
+
+  @override
+  String get libraryEmptyBody =>
+      'Adaugă primele materiale: scanează eticheta unei mostre, importă fișierul Excel sau introdu-le manual.';
+
+  @override
+  String get libraryEmptyViewer =>
+      'Niciun material deocamdată. Editorii atelierului tău pot adăuga.';
+
+  @override
+  String get actionScanSample => 'Scanează o mostră';
+
+  @override
+  String get actionImportExcel => 'Importă un fișier Excel';
+
+  @override
+  String get actionCreateManual => 'Introdu manual';
+
+  @override
+  String materialCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count de materiale',
+      few: '$count materiale',
+      one: '1 material',
+      zero: 'Niciun material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get colMaterial => 'Material';
+
+  @override
+  String get colReference => 'Referință';
+
+  @override
+  String get colComposition => 'Compoziție';
+
+  @override
+  String get colWeight => 'g/m²';
+
+  @override
+  String get colWidth => 'Lățime';
+
+  @override
+  String get colStock => 'Stoc atelier';
+
+  @override
+  String get fieldName => 'Numele materialului';
+
+  @override
+  String get fieldSupplier => 'Furnizor';
+
+  @override
+  String get fieldSupplierCode => 'Cod articol';
+
+  @override
+  String get fieldColorName => 'Culoare';
+
+  @override
+  String get fieldColorHex => 'Culoare (#RRGGBB)';
+
+  @override
+  String get photoAdd => 'Adaugă o fotografie';
+
+  @override
+  String get photoChange => 'Schimbă fotografia';
+
+  @override
+  String get photoRemove => 'Elimină fotografia';
+
+  @override
+  String get sectionIdentity => 'Identitate';
+
+  @override
+  String get sectionColor => 'Culoare și fotografie';
+
+  @override
+  String get sectionComposition => 'Compoziție';
+
+  @override
+  String get sectionTechnical => 'Caracteristici';
+
+  @override
+  String get sectionCare => 'Întreținere';
+
+  @override
+  String get sectionUses => 'Utilizări și certificări';
+
+  @override
+  String get sectionStock => 'Stoc atelier';
+
+  @override
+  String get sectionNotes => 'Note';
+
+  @override
+  String get addFiber => 'Adaugă o fibră';
+
+  @override
+  String get removeFiber => 'Elimină această fibră';
+
+  @override
+  String get fiberLabel => 'Fibră';
+
+  @override
+  String compositionTotal(String total) {
+    return 'Total: $total %';
+  }
+
+  @override
+  String get compositionMustBe100 =>
+      'Totalul trebuie să fie 100 %, fără fibre duplicate';
+
+  @override
+  String get fieldWeight => 'Gramaj (g/m²)';
+
+  @override
+  String get fieldWidth => 'Lățime (cm)';
+
+  @override
+  String get fieldWeave => 'Legătură';
+
+  @override
+  String get noneOption => 'Nespecificat';
+
+  @override
+  String get fieldCertifications => 'Certificări';
+
+  @override
+  String get fieldUses => 'Utilizări';
+
+  @override
+  String get fieldStock => 'Metri în stoc (m)';
+
+  @override
+  String get errorRequired => 'Câmp obligatoriu';
+
+  @override
+  String errorNumberRange(int min, int max) {
+    return 'Număr între $min și $max';
+  }
+
+  @override
+  String get errorHex => 'Format așteptat #RRGGBB (ex. #2F4A6B)';
+
+  @override
+  String get save => 'Salvează';
+
+  @override
+  String get materialSaved => 'Material salvat.';
+
+  @override
+  String get edit => 'Modifică';
+
+  @override
+  String get delete => 'Șterge';
+
+  @override
+  String deleteMaterialTitle(String name) {
+    return 'Ștergi „$name”?';
+  }
+
+  @override
+  String get deleteMaterialBody =>
+      'Materialul și fotografia sa vor fi șterse definitiv.';
+
+  @override
+  String get materialDeleted => 'Material șters.';
+
+  @override
+  String get editStock => 'Modifică stocul';
+
+  @override
+  String get stockUpdated => 'Stoc actualizat.';
+
+  @override
+  String stockMeters(String value) {
+    return '$value m';
+  }
+
+  @override
+  String get materialNotFound =>
+      'Acest material nu mai există sau nu este accesibil.';
+
+  @override
+  String get newMaterialTitle => 'Material nou';
+
+  @override
+  String get editMaterialTitle => 'Modifică materialul';
+
+  @override
+  String get detailWeight => 'Gramaj';
+
+  @override
+  String get detailWidth => 'Lățime';
+
+  @override
+  String get photoUploadFailed =>
+      'Fotografia nu a putut fi încărcată. Încearcă din nou.';
+
+  @override
+  String get viewerReadOnly => 'Doar citire';
+
+  @override
+  String get errorEditorsOnly =>
+      'Acțiune rezervată editorilor și administratorilor atelierului.';
 }

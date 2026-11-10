@@ -25,6 +25,7 @@ extension AuthFieldErrorText on AppLocalizations {
         AuthFailure.invitationExpired => invitationExpiredBody,
         AuthFailure.invitationNotFound => invitationNotFound,
         AuthFailure.alreadyMember => alreadyMember,
+        AuthFailure.lastAdmin => errorLastAdmin,
         AuthFailure.forbidden => errorForbidden,
         AuthFailure.emailNotSent => errorEmailNotSent,
         AuthFailure.tooManyRequests => errorTooManyRequests,
@@ -36,6 +37,12 @@ extension AuthFieldErrorText on AppLocalizations {
         MemberRole.admin => roleAdmin,
         MemberRole.editor => roleEditor,
         MemberRole.viewer => roleViewer,
+      };
+
+  String roleHelp(MemberRole role) => switch (role) {
+        MemberRole.admin => roleAdminHelp,
+        MemberRole.editor => roleEditorHelp,
+        MemberRole.viewer => roleViewerHelp,
       };
 
   String orgKind(OrgKind kind) => switch (kind) {

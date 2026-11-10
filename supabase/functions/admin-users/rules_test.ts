@@ -1,6 +1,7 @@
 import { assertEquals } from "jsr:@std/assert@1";
 import {
-  canInvite,
+  canManageMembers,
+  wouldLeaveNoAdmin,
   isAlreadyRegistered,
   isOrgKind,
   isRole,
@@ -28,14 +29,27 @@ Deno.test("isRole et isOrgKind n'acceptent que les valeurs connues", () => {
   assertEquals(isOrgKind("client"), false);
 });
 
-Deno.test("canInvite : super-admin ou admin de l'organisation uniquement", () => {
-  assertEquals(canInvite({ isSuperadmin: true, roleInOrg: null }), true);
-  assertEquals(canInvite({ isSuperadmin: false, roleInOrg: "admin" }), true);
-  assertEquals(canInvite({ isSuperadmin: false, roleInOrg: "editor" }), false);
-  assertEquals(canInvite({ isSuperadmin: false, roleInOrg: null }), false);
+Deno.test("canManageMembers : super-admin ou admin de l'organisation uniquement", () => {
+  assertEquals(canManageMembers({ isSuperadmin: true, roleInOrg: null }), true);
+  assertEquals(canManageMembers({ isSuperadmin: false, roleInOrg: "admin" }), true);
+  assertEquals(canManageMembers({ isSuperadmin: false, roleInOrg: "editor" }), false);
+  assertEquals(canManageMembers({ isSuperadmin: false, roleInOrg: null }), false);
 });
 
 Deno.test("isAlreadyRegistered reconnaît les messages Supabase", () => {
   assertEquals(isAlreadyRegistered("A user with this email address has already been registered"), true);
   assertEquals(isAlreadyRegistered("Rate limit exceeded"), false);
+});
+
+Deno.test("canManageMembers : même règle que l'invitation", () => {
+  assertEquals(canManageMembers({ isSuperadmin: false, roleInOrg: "admin" }), true);
+  assertEquals(canManageMembers({ isSuperadmin: false, roleInOrg: "viewer" }), false);
+});
+
+Deno.test("wouldLeaveNoAdmin protège le dernier admin", () => {
+  assertEquals(wouldLeaveNoAdmin({ adminCount: 1, currentRole: "admin", newRole: "editor" }), true);
+  assertEquals(wouldLeaveNoAdmin({ adminCount: 1, currentRole: "admin", newRole: null }), true);
+  assertEquals(wouldLeaveNoAdmin({ adminCount: 2, currentRole: "admin", newRole: null }), false);
+  assertEquals(wouldLeaveNoAdmin({ adminCount: 1, currentRole: "admin", newRole: "admin" }), false);
+  assertEquals(wouldLeaveNoAdmin({ adminCount: 1, currentRole: "editor", newRole: null }), false);
 });

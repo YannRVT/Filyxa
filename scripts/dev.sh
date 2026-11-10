@@ -38,6 +38,9 @@ fi
 if [[ $RESET -eq 1 ]]; then
   echo "▸ Base remise à zéro avec les comptes de démonstration…"
   supabase db reset >/dev/null
+  # Après un reset, la passerelle locale ne sert plus les modèles d'e-mail
+  # (les codes à 6 chiffres disparaissent) : on la redémarre.
+  docker restart supabase_kong_filyxa >/dev/null
 fi
 
 eval "$(supabase status -o env 2>/dev/null | grep -E '^(API_URL|PUBLISHABLE_KEY|INBUCKET_URL)=')"
