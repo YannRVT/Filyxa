@@ -1263,6 +1263,420 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'≤ {max} g/m²'**
   String chipWeightMax(int max);
+
+  /// No description provided for @navCatalog.
+  ///
+  /// In fr, this message translates to:
+  /// **'Catalogue'**
+  String get navCatalog;
+
+  /// No description provided for @catalogEmptyTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre catalogue est vide'**
+  String get catalogEmptyTitle;
+
+  /// No description provided for @catalogEmptyBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importez votre catalogue depuis un fichier Excel ou CSV exporté de votre logiciel de gestion.'**
+  String get catalogEmptyBody;
+
+  /// No description provided for @catalogImport.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer un fichier'**
+  String get catalogImport;
+
+  /// No description provided for @catalogSettings.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponibilité'**
+  String get catalogSettings;
+
+  /// No description provided for @referenceCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucune référence} =1{1 référence} other{{count} références}}'**
+  String referenceCount(int count);
+
+  /// No description provided for @showRetired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Afficher les références retirées'**
+  String get showRetired;
+
+  /// No description provided for @retiredBadge.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirée'**
+  String get retiredBadge;
+
+  /// No description provided for @colStatus.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponibilité'**
+  String get colStatus;
+
+  /// No description provided for @colLeadTime.
+  ///
+  /// In fr, this message translates to:
+  /// **'Délai'**
+  String get colLeadTime;
+
+  /// No description provided for @statusAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible'**
+  String get statusAvailable;
+
+  /// No description provided for @statusLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock faible'**
+  String get statusLow;
+
+  /// No description provided for @statusOnOrder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sur commande'**
+  String get statusOnOrder;
+
+  /// No description provided for @statusOnOrderWeeks.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sur commande · {weeks} sem.'**
+  String statusOnOrderWeeks(int weeks);
+
+  /// No description provided for @statusOutOfStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rupture'**
+  String get statusOutOfStock;
+
+  /// No description provided for @statusHidden.
+  ///
+  /// In fr, this message translates to:
+  /// **'Masquée'**
+  String get statusHidden;
+
+  /// No description provided for @modeExact.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité exacte'**
+  String get modeExact;
+
+  /// No description provided for @modeTiers.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paliers'**
+  String get modeTiers;
+
+  /// No description provided for @modeHidden.
+  ///
+  /// In fr, this message translates to:
+  /// **'Masquée'**
+  String get modeHidden;
+
+  /// No description provided for @modeExactHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les ateliers voient votre métrage exact.'**
+  String get modeExactHelp;
+
+  /// No description provided for @modeTiersHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les ateliers voient seulement : disponible, stock faible, sur commande ou rupture.'**
+  String get modeTiersHelp;
+
+  /// No description provided for @modeHiddenHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les ateliers ne voient pas la disponibilité.'**
+  String get modeHiddenHelp;
+
+  /// No description provided for @modeDefault.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réglage général ({mode})'**
+  String modeDefault(String mode);
+
+  /// No description provided for @thresholdLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seuil de stock faible (m)'**
+  String get thresholdLabel;
+
+  /// No description provided for @thresholdHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'En dessous de ce métrage, la référence apparaît en « stock faible ».'**
+  String get thresholdHelp;
+
+  /// No description provided for @leadTimeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Délai de réassort (semaines)'**
+  String get leadTimeLabel;
+
+  /// No description provided for @leadTimeHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Affiché quand la référence est sur commande.'**
+  String get leadTimeHelp;
+
+  /// No description provided for @availabilitySettingsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Affichage de la disponibilité'**
+  String get availabilitySettingsTitle;
+
+  /// No description provided for @availabilitySettingsIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisissez ce que les ateliers voient de votre stock. Vous pouvez ajuster chaque référence depuis sa fiche.'**
+  String get availabilitySettingsIntro;
+
+  /// No description provided for @settingsSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réglages enregistrés.'**
+  String get settingsSaved;
+
+  /// No description provided for @referenceRetire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer du catalogue'**
+  String get referenceRetire;
+
+  /// No description provided for @referenceRestore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remettre au catalogue'**
+  String get referenceRestore;
+
+  /// No description provided for @referenceRetired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence retirée du catalogue publié.'**
+  String get referenceRetired;
+
+  /// No description provided for @referenceRestored.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence remise au catalogue.'**
+  String get referenceRestored;
+
+  /// No description provided for @retireConfirmTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer « {code} » ?'**
+  String retireConfirmTitle(String code);
+
+  /// No description provided for @retireConfirmBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Elle ne sera plus visible par les ateliers. Ceux qui l\'utilisent garderont sa dernière fiche. Vous pourrez la remettre au catalogue.'**
+  String get retireConfirmBody;
+
+  /// No description provided for @referenceAvailabilityTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponibilité de cette référence'**
+  String get referenceAvailabilityTitle;
+
+  /// No description provided for @stockLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock'**
+  String get stockLabel;
+
+  /// No description provided for @whatAteliersSee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce que voient les ateliers : {value}'**
+  String whatAteliersSee(String value);
+
+  /// No description provided for @importTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer le catalogue'**
+  String get importTitle;
+
+  /// No description provided for @importPickFile.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir un fichier Excel ou CSV'**
+  String get importPickFile;
+
+  /// No description provided for @importPickHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier .xlsx ou .csv, une ligne par référence et une ligne d\'intitulés. 5 000 lignes au maximum. Une référence déjà connue est mise à jour par son code.'**
+  String get importPickHelp;
+
+  /// No description provided for @importUnreadable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce fichier n\'a pas pu être lu. Enregistrez-le au format .xlsx ou .csv puis réessayez.'**
+  String get importUnreadable;
+
+  /// No description provided for @importTooMany.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce fichier contient {count} lignes : 5 000 au maximum par import.'**
+  String importTooMany(int count);
+
+  /// No description provided for @importMappingTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Associez vos colonnes'**
+  String get importMappingTitle;
+
+  /// No description provided for @importMappingIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les colonnes reconnues sont déjà associées. Le code article et la désignation sont obligatoires.'**
+  String get importMappingIntro;
+
+  /// No description provided for @importColumnNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'— Ignorer —'**
+  String get importColumnNone;
+
+  /// No description provided for @importFieldName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désignation'**
+  String get importFieldName;
+
+  /// No description provided for @importFieldStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock (m)'**
+  String get importFieldStock;
+
+  /// No description provided for @importSummary.
+  ///
+  /// In fr, this message translates to:
+  /// **'{valid} lignes prêtes · {invalid} en erreur'**
+  String importSummary(int valid, int invalid);
+
+  /// No description provided for @importErrorsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lignes en erreur (non importées)'**
+  String get importErrorsTitle;
+
+  /// No description provided for @importLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ligne {line}'**
+  String importLine(int line);
+
+  /// No description provided for @importRun.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{Importer 1 référence} other{Importer {count} références}}'**
+  String importRun(int count);
+
+  /// No description provided for @importRunning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Import en cours… {done}/{total}'**
+  String importRunning(int done, int total);
+
+  /// No description provided for @importDoneTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Import terminé'**
+  String get importDoneTitle;
+
+  /// No description provided for @importDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'{inserted} créées · {updated} mises à jour'**
+  String importDone(int inserted, int updated);
+
+  /// No description provided for @importServerRejected.
+  ///
+  /// In fr, this message translates to:
+  /// **'Refusée par le serveur : {message}'**
+  String importServerRejected(String message);
+
+  /// No description provided for @importAgain.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer un autre fichier'**
+  String get importAgain;
+
+  /// No description provided for @backToCatalog.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retour au catalogue'**
+  String get backToCatalog;
+
+  /// No description provided for @importFileName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier : {name}'**
+  String importFileName(String name);
+
+  /// No description provided for @issueMissingCode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code article manquant'**
+  String get issueMissingCode;
+
+  /// No description provided for @issueMissingName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désignation manquante'**
+  String get issueMissingName;
+
+  /// No description provided for @issueComposition.
+  ///
+  /// In fr, this message translates to:
+  /// **'Composition illisible ou différente de 100 % : « {value} »'**
+  String issueComposition(String value);
+
+  /// No description provided for @issueNumber.
+  ///
+  /// In fr, this message translates to:
+  /// **'{field} : valeur invalide « {value} »'**
+  String issueNumber(String field, String value);
+
+  /// No description provided for @issueColor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur invalide « {value} » (format #RRGGBB)'**
+  String issueColor(String value);
+
+  /// No description provided for @issueDuplicate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code « {value} » présent plusieurs fois dans le fichier'**
+  String issueDuplicate(String value);
+
+  /// No description provided for @adminOrgKind.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type d\'organisation'**
+  String get adminOrgKind;
+
+  /// No description provided for @adminNewOrg.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle organisation'**
+  String get adminNewOrg;
+
+  /// No description provided for @adminOrgNameGeneric.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de l\'organisation'**
+  String get adminOrgNameGeneric;
 }
 
 class _AppLocalizationsDelegate

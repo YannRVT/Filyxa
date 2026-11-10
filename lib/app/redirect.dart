@@ -16,13 +16,20 @@ class RedirectInput {
     required this.loggedIn,
     required this.status,
     this.isSuperadmin = false,
+    this.isSupplier = false,
   });
 
   final String location;
   final bool loggedIn;
   final SpaceStatus status;
   final bool isSuperadmin;
+
+  /// Organisation fournisseur : Catalogue et Compte uniquement.
+  final bool isSupplier;
 }
+
+/// Écrans réservés aux ateliers.
+const atelierRoots = ['/library', '/studio', '/scan', '/suppliers'];
 
 String? decideRedirect(RedirectInput input) {
   final location = input.location;
@@ -43,10 +50,12 @@ String? decideRedirect(RedirectInput input) {
       }
       return location == '/no-organization' ? null : '/no-organization';
     case SpaceStatus.ready:
-      if (location.startsWith('/admin') && !input.isSuperadmin) return '/library';
-      if (const {'/login', '/splash', '/no-organization', '/'}.contains(location)) {
-        return '/library';
-      }
+      final home = input.isSupplier ? '/catalog' : '/library';
+      if (location.startsWith('/admin') && !input.isSuperadmin) return home;
+      if (const {'/login', '/splash', '/no-organization', '/'}.contains(location)) return home;
+      bool under(String root) => location == root || location.startsWith('$root/');
+      if (input.isSupplier && atelierRoots.any(under)) return home;
+      if (!input.isSupplier && under('/catalog')) return home;
       return null;
   }
 }

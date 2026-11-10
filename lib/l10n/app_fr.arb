@@ -372,5 +372,205 @@
         "type": "int"
       }
     }
-  }
+  },
+  "navCatalog": "Catalogue",
+  "catalogEmptyTitle": "Votre catalogue est vide",
+  "catalogEmptyBody": "Importez votre catalogue depuis un fichier Excel ou CSV exporté de votre logiciel de gestion.",
+  "catalogImport": "Importer un fichier",
+  "catalogSettings": "Disponibilité",
+  "referenceCount": "{count, plural, =0{Aucune référence} =1{1 référence} other{{count} références}}",
+  "@referenceCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "showRetired": "Afficher les références retirées",
+  "retiredBadge": "Retirée",
+  "colStatus": "Disponibilité",
+  "colLeadTime": "Délai",
+  "statusAvailable": "Disponible",
+  "statusLow": "Stock faible",
+  "statusOnOrder": "Sur commande",
+  "statusOnOrderWeeks": "Sur commande · {weeks} sem.",
+  "@statusOnOrderWeeks": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "statusOutOfStock": "Rupture",
+  "statusHidden": "Masquée",
+  "modeExact": "Quantité exacte",
+  "modeTiers": "Paliers",
+  "modeHidden": "Masquée",
+  "modeExactHelp": "Les ateliers voient votre métrage exact.",
+  "modeTiersHelp": "Les ateliers voient seulement : disponible, stock faible, sur commande ou rupture.",
+  "modeHiddenHelp": "Les ateliers ne voient pas la disponibilité.",
+  "modeDefault": "Réglage général ({mode})",
+  "@modeDefault": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "thresholdLabel": "Seuil de stock faible (m)",
+  "thresholdHelp": "En dessous de ce métrage, la référence apparaît en « stock faible ».",
+  "leadTimeLabel": "Délai de réassort (semaines)",
+  "leadTimeHelp": "Affiché quand la référence est sur commande.",
+  "availabilitySettingsTitle": "Affichage de la disponibilité",
+  "availabilitySettingsIntro": "Choisissez ce que les ateliers voient de votre stock. Vous pouvez ajuster chaque référence depuis sa fiche.",
+  "settingsSaved": "Réglages enregistrés.",
+  "referenceRetire": "Retirer du catalogue",
+  "referenceRestore": "Remettre au catalogue",
+  "referenceRetired": "Référence retirée du catalogue publié.",
+  "referenceRestored": "Référence remise au catalogue.",
+  "retireConfirmTitle": "Retirer « {code} » ?",
+  "@retireConfirmTitle": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "retireConfirmBody": "Elle ne sera plus visible par les ateliers. Ceux qui l'utilisent garderont sa dernière fiche. Vous pourrez la remettre au catalogue.",
+  "referenceAvailabilityTitle": "Disponibilité de cette référence",
+  "stockLabel": "Stock",
+  "whatAteliersSee": "Ce que voient les ateliers : {value}",
+  "@whatAteliersSee": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "importTitle": "Importer le catalogue",
+  "importPickFile": "Choisir un fichier Excel ou CSV",
+  "importPickHelp": "Fichier .xlsx ou .csv, une ligne par référence et une ligne d'intitulés. 5 000 lignes au maximum. Une référence déjà connue est mise à jour par son code.",
+  "importUnreadable": "Ce fichier n'a pas pu être lu. Enregistrez-le au format .xlsx ou .csv puis réessayez.",
+  "importTooMany": "Ce fichier contient {count} lignes : 5 000 au maximum par import.",
+  "@importTooMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importMappingTitle": "Associez vos colonnes",
+  "importMappingIntro": "Les colonnes reconnues sont déjà associées. Le code article et la désignation sont obligatoires.",
+  "importColumnNone": "— Ignorer —",
+  "importFieldName": "Désignation",
+  "importFieldStock": "Stock (m)",
+  "importSummary": "{valid} lignes prêtes · {invalid} en erreur",
+  "@importSummary": {
+    "placeholders": {
+      "valid": {
+        "type": "int"
+      },
+      "invalid": {
+        "type": "int"
+      }
+    }
+  },
+  "importErrorsTitle": "Lignes en erreur (non importées)",
+  "importLine": "Ligne {line}",
+  "@importLine": {
+    "placeholders": {
+      "line": {
+        "type": "int"
+      }
+    }
+  },
+  "importRun": "{count, plural, =1{Importer 1 référence} other{Importer {count} références}}",
+  "@importRun": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importRunning": "Import en cours… {done}/{total}",
+  "@importRunning": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "importDoneTitle": "Import terminé",
+  "importDone": "{inserted} créées · {updated} mises à jour",
+  "@importDone": {
+    "placeholders": {
+      "inserted": {
+        "type": "int"
+      },
+      "updated": {
+        "type": "int"
+      }
+    }
+  },
+  "importServerRejected": "Refusée par le serveur : {message}",
+  "@importServerRejected": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "importAgain": "Importer un autre fichier",
+  "backToCatalog": "Retour au catalogue",
+  "importFileName": "Fichier : {name}",
+  "@importFileName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "issueMissingCode": "Code article manquant",
+  "issueMissingName": "Désignation manquante",
+  "issueComposition": "Composition illisible ou différente de 100 % : « {value} »",
+  "@issueComposition": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "issueNumber": "{field} : valeur invalide « {value} »",
+  "@issueNumber": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "issueColor": "Couleur invalide « {value} » (format #RRGGBB)",
+  "@issueColor": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "issueDuplicate": "Code « {value} » présent plusieurs fois dans le fichier",
+  "@issueDuplicate": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "adminOrgKind": "Type d'organisation",
+  "adminNewOrg": "Nouvelle organisation",
+  "adminOrgNameGeneric": "Nom de l'organisation"
 }
