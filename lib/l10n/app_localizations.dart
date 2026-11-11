@@ -2007,6 +2007,240 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Traiter'**
   String get reviewOpen;
+
+  /// No description provided for @reportAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler une erreur'**
+  String get reportAction;
+
+  /// No description provided for @reportTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler une erreur au fournisseur'**
+  String get reportTitle;
+
+  /// No description provided for @reportIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le fournisseur corrigera sa fiche pour tous les ateliers. Il ne voit pas le nom de votre atelier, sauf si vous choisissez de le partager.'**
+  String get reportIntro;
+
+  /// No description provided for @reportField.
+  ///
+  /// In fr, this message translates to:
+  /// **'Champ concerné'**
+  String get reportField;
+
+  /// No description provided for @reportObserved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valeur constatée'**
+  String get reportObserved;
+
+  /// No description provided for @reportObservedHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. 300 g/m² mesurés sur l\'échantillon'**
+  String get reportObservedHint;
+
+  /// No description provided for @reportComment.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commentaire (facultatif)'**
+  String get reportComment;
+
+  /// No description provided for @reportShareIdentity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager le nom de mon atelier avec le fournisseur'**
+  String get reportShareIdentity;
+
+  /// No description provided for @reportSend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer'**
+  String get reportSend;
+
+  /// No description provided for @reportSent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signalement envoyé au fournisseur.'**
+  String get reportSent;
+
+  /// No description provided for @reportFieldAvailability.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponibilité'**
+  String get reportFieldAvailability;
+
+  /// No description provided for @reportFieldOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get reportFieldOther;
+
+  /// No description provided for @reportsSection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signalements'**
+  String get reportsSection;
+
+  /// No description provided for @reportStatusOpen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvert'**
+  String get reportStatusOpen;
+
+  /// No description provided for @reportStatusFixed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Corrigé'**
+  String get reportStatusFixed;
+
+  /// No description provided for @reportStatusRejected.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejeté'**
+  String get reportStatusRejected;
+
+  /// No description provided for @reportObservedLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Constaté : {value}'**
+  String reportObservedLine(String value);
+
+  /// No description provided for @reportReasonLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Motif : {reason}'**
+  String reportReasonLine(String reason);
+
+  /// No description provided for @reportResponseLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réponse : {response}'**
+  String reportResponseLine(String response);
+
+  /// No description provided for @supplierReportsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signalements des ateliers'**
+  String get supplierReportsTitle;
+
+  /// No description provided for @supplierReportsButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Signalements} =1{1 signalement ouvert} other{{count} signalements ouverts}}'**
+  String supplierReportsButton(int count);
+
+  /// No description provided for @supplierReportsEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun signalement pour le moment.'**
+  String get supplierReportsEmpty;
+
+  /// No description provided for @reportAnonymous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Atelier anonyme'**
+  String get reportAnonymous;
+
+  /// No description provided for @reportMarkFixed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marquer corrigé'**
+  String get reportMarkFixed;
+
+  /// No description provided for @reportReject.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejeter'**
+  String get reportReject;
+
+  /// No description provided for @reportRejectTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejeter le signalement'**
+  String get reportRejectTitle;
+
+  /// No description provided for @reportRejectReason.
+  ///
+  /// In fr, this message translates to:
+  /// **'Motif du rejet'**
+  String get reportRejectReason;
+
+  /// No description provided for @reportFixTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marquer comme corrigé'**
+  String get reportFixTitle;
+
+  /// No description provided for @reportFixHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pensez à corriger la référence dans votre catalogue : les ateliers liés la verront aussitôt.'**
+  String get reportFixHelp;
+
+  /// No description provided for @reportFixMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Message à l\'atelier (facultatif)'**
+  String get reportFixMessage;
+
+  /// No description provided for @reportEditReference.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrir la référence'**
+  String get reportEditReference;
+
+  /// No description provided for @reportFilterOpen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouverts'**
+  String get reportFilterOpen;
+
+  /// No description provided for @reportFilterAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous'**
+  String get reportFilterAll;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune notification.'**
+  String get notificationsEmpty;
+
+  /// No description provided for @notificationsTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Notifications} =1{Notifications (1 non lue)} other{Notifications ({count} non lues)}}'**
+  String notificationsTooltip(int count);
+
+  /// No description provided for @notifReportNew.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau signalement sur {code} · {field}'**
+  String notifReportNew(String code, String field);
+
+  /// No description provided for @notifReportFixed.
+  ///
+  /// In fr, this message translates to:
+  /// **'{name} : le fournisseur a corrigé « {field} »'**
+  String notifReportFixed(String name, String field);
+
+  /// No description provided for @notifReportRejected.
+  ///
+  /// In fr, this message translates to:
+  /// **'{name} : signalement sur « {field} » rejeté'**
+  String notifReportRejected(String name, String field);
 }
 
 class _AppLocalizationsDelegate

@@ -1160,4 +1160,154 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewOpen => 'Review';
+
+  @override
+  String get reportAction => 'Report an error';
+
+  @override
+  String get reportTitle => 'Report an error to the supplier';
+
+  @override
+  String get reportIntro =>
+      'The supplier will fix the record for every workshop. They don\'t see your workshop\'s name unless you choose to share it.';
+
+  @override
+  String get reportField => 'Field';
+
+  @override
+  String get reportObserved => 'Observed value';
+
+  @override
+  String get reportObservedHint => 'E.g. 300 g/m² measured on the swatch';
+
+  @override
+  String get reportComment => 'Comment (optional)';
+
+  @override
+  String get reportShareIdentity =>
+      'Share my workshop\'s name with the supplier';
+
+  @override
+  String get reportSend => 'Send';
+
+  @override
+  String get reportSent => 'Report sent to the supplier.';
+
+  @override
+  String get reportFieldAvailability => 'Availability';
+
+  @override
+  String get reportFieldOther => 'Other';
+
+  @override
+  String get reportsSection => 'Reports';
+
+  @override
+  String get reportStatusOpen => 'Open';
+
+  @override
+  String get reportStatusFixed => 'Fixed';
+
+  @override
+  String get reportStatusRejected => 'Rejected';
+
+  @override
+  String reportObservedLine(String value) {
+    return 'Observed: $value';
+  }
+
+  @override
+  String reportReasonLine(String reason) {
+    return 'Reason: $reason';
+  }
+
+  @override
+  String reportResponseLine(String response) {
+    return 'Reply: $response';
+  }
+
+  @override
+  String get supplierReportsTitle => 'Reports from workshops';
+
+  @override
+  String supplierReportsButton(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count open reports',
+      one: '1 open report',
+      zero: 'Reports',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierReportsEmpty => 'No reports yet.';
+
+  @override
+  String get reportAnonymous => 'Anonymous workshop';
+
+  @override
+  String get reportMarkFixed => 'Mark as fixed';
+
+  @override
+  String get reportReject => 'Reject';
+
+  @override
+  String get reportRejectTitle => 'Reject the report';
+
+  @override
+  String get reportRejectReason => 'Reason for rejecting';
+
+  @override
+  String get reportFixTitle => 'Mark as fixed';
+
+  @override
+  String get reportFixHelp =>
+      'Remember to fix the reference in your catalogue: linked workshops will see it right away.';
+
+  @override
+  String get reportFixMessage => 'Message to the workshop (optional)';
+
+  @override
+  String get reportEditReference => 'Open the reference';
+
+  @override
+  String get reportFilterOpen => 'Open';
+
+  @override
+  String get reportFilterAll => 'All';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsEmpty => 'No notifications.';
+
+  @override
+  String notificationsTooltip(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notifications ($count unread)',
+      one: 'Notifications (1 unread)',
+      zero: 'Notifications',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String notifReportNew(String code, String field) {
+    return 'New report on $code · $field';
+  }
+
+  @override
+  String notifReportFixed(String name, String field) {
+    return '$name: the supplier fixed \"$field\"';
+  }
+
+  @override
+  String notifReportRejected(String name, String field) {
+    return '$name: report on \"$field\" rejected';
+  }
 }
