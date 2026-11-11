@@ -171,6 +171,7 @@ void main() {
       expect(find.text('Total : 60 %'), findsOneWidget);
 
       await tester.ensureVisible(find.text('Enregistrer'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Enregistrer'));
       await tester.pumpAndSettle();
       expect(find.text('Champ obligatoire'), findsOneWidget);
@@ -184,6 +185,7 @@ void main() {
       await tester.enterText(find.widgetWithText(TextFormField, 'Couleur (#RRGGBB)'), '#12');
       await tester.enterText(find.widgetWithText(TextFormField, 'Grammage (g/m²)'), '5000');
       await tester.ensureVisible(find.text('Enregistrer'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Enregistrer'));
       await tester.pumpAndSettle();
       expect(find.textContaining('Format #RRGGBB'), findsOneWidget);
