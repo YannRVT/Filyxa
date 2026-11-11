@@ -10,7 +10,9 @@ import '../../auth/data/auth_repository.dart';
 import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
+import '../../supplier/ui/supplier_texts.dart';
 import 'material_widgets.dart';
+import 'reference_widgets.dart';
 
 class MaterialDetailScreen extends ConsumerWidget {
   const MaterialDetailScreen({super.key, required this.materialId});
@@ -105,7 +107,7 @@ class _DetailBody extends StatelessWidget {
     final wide = MediaQuery.sizeOf(context).width >= 900;
     final visual = AspectRatio(aspectRatio: 4 / 3, child: MaterialVisual(material: material, radius: FxRadius.lg, iconSize: 48));
     final stock = _StockCard(material: material, canEdit: canEdit);
-    final info = _InfoColumn(material: material);
+    final info = _InfoColumn(material: material, canEdit: canEdit);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(FxSpace.md),
@@ -131,14 +133,20 @@ class _DetailBody extends StatelessWidget {
   }
 }
 
-class _InfoColumn extends StatelessWidget {
-  const _InfoColumn({required this.material});
+class _InfoColumn extends ConsumerWidget {
+  const _InfoColumn({required this.material, required this.canEdit});
 
   final MaterialItem material;
+  final bool canEdit;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final linked = ref.watch(linkedReferencesProvider);
+    final refs = linked.value;
+    final reference = material.isLinked && refs != null ? refs[material.supplierReferenceId] : null;
+    // Liée mais absente du catalogue publié (une fois chargé) = retirée par le fournisseur.
+    final retired = material.isLinked && linked.hasValue && reference == null;
     final lang = langOf(context);
     final text = Theme.of(context).textTheme;
     final specs = material.specs;
@@ -170,6 +178,43 @@ class _InfoColumn extends StatelessWidget {
         if (supplier != null) ...[
           const SizedBox(height: FxSpace.xs),
           TechText(supplier, size: 14, color: FxColors.inkSoft),
+        ],
+        if (material.isLinked) ...[
+          const SizedBox(height: FxSpace.sm),
+          Wrap(
+            spacing: FxSpace.sm,
+            runSpacing: FxSpace.xs,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.link, size: 16, color: FxColors.emeraldInk),
+                  const SizedBox(width: 4),
+                  Text(l10n.supplierData, style: text.labelMedium?.copyWith(color: FxColors.emeraldInk)),
+                ],
+              ),
+              if (reference != null)
+                AvailabilityPill(
+                  status: reference.status,
+                  leadTimeWeeks: reference.leadTimeWeeks,
+                  stockM: reference.stockM == null
+                      ? null
+                      : l10n.stockMeters(formatNumber(reference.stockM!, lang, decimals: 2)),
+                ),
+            ],
+          ),
+          if (retired) ...[
+            const SizedBox(height: FxSpace.sm),
+            MessageBanner.warning(l10n.referenceRetiredBanner),
+          ],
+        ] else if (canEdit) ...[
+          const SizedBox(height: FxSpace.sm),
+          OutlinedButton.icon(
+            onPressed: () => _link(context, ref),
+            icon: const Icon(Icons.link, size: 18),
+            label: Text(l10n.linkToSupplier),
+          ),
         ],
         if (specs.composition.isNotEmpty)
           section(
@@ -237,10 +282,52 @@ class _InfoColumn extends StatelessWidget {
               ],
             ),
           ),
+        if (material.pricePerM != null || material.tags.isNotEmpty)
+          section(
+            l10n.privateLayer,
+            Wrap(
+              spacing: FxSpace.sm,
+              runSpacing: FxSpace.sm,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                if (material.pricePerM != null)
+                  TechText(l10n.priceValue(formatNumber(material.pricePerM!, lang, decimals: 2)), size: 15),
+                for (final t in material.tags) TagChip(t),
+              ],
+            ),
+          ),
         if (material.notes != null && material.notes!.trim().isNotEmpty)
           section(l10n.sectionNotes, Text(material.notes!, style: text.bodyMedium)),
       ],
     );
+  }
+
+  /// Lien après coup : recherche dans les catalogues publiés, puis confirmation.
+  Future<void> _link(BuildContext context, WidgetRef ref) async {
+    final l10n = context.l10n;
+    final reference = await showLinkDialog(context);
+    if (reference == null || !context.mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final m = material;
+    try {
+      await ref.read(materialsRepositoryProvider).save(MaterialDraft(
+            id: m.id,
+            orgId: m.orgId,
+            name: m.name,
+            photoPath: m.photoPath,
+            atelierStockM: m.atelierStockM,
+            notes: m.notes,
+            pricePerM: m.pricePerM,
+            tags: m.tags,
+            supplierReferenceId: reference.id,
+          ));
+      ref.invalidate(materialProvider(m.id));
+      ref.invalidate(materialsProvider);
+      ref.invalidate(linkedReferencesProvider);
+      messenger.showSnackBar(SnackBar(content: Text(l10n.linkedDone)));
+    } on AuthError catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.failure(e.failure))));
+    }
   }
 }
 

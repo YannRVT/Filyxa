@@ -1007,4 +1007,77 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get duplicateOpen => 'Abrir la ficha existente';
+
+  @override
+  String get matchTitle => '¿Es esta la referencia?';
+
+  @override
+  String matchIntro(String supplier) {
+    return 'Encontrada en el catálogo de $supplier. Confirma para vincular tu ficha a sus datos y a su disponibilidad.';
+  }
+
+  @override
+  String get matchConfirm => 'Sí, vincular esta referencia';
+
+  @override
+  String get matchOthers => 'Otras referencias cercanas';
+
+  @override
+  String get matchNone => 'Ninguna de estas referencias';
+
+  @override
+  String get supplierData => 'Datos del proveedor';
+
+  @override
+  String get supplierDataHelp =>
+      'Actualizados por el proveedor, no editables aquí.';
+
+  @override
+  String get referenceRetiredBanner =>
+      'Referencia retirada por el proveedor. Se conservan los últimos valores conocidos.';
+
+  @override
+  String get linkToSupplier => 'Vincular a una referencia del proveedor';
+
+  @override
+  String get linkSearchHint => 'Código, denominación o proveedor';
+
+  @override
+  String get linkSearchEmpty => 'Ninguna referencia publicada coincide.';
+
+  @override
+  String get linkConfirm => 'Vincular';
+
+  @override
+  String get unlink => 'Desvincular la referencia';
+
+  @override
+  String get unlinkConfirmBody =>
+      'La ficha conserva sus valores actuales y vuelve a ser editable. Ya no seguirá las actualizaciones del proveedor.';
+
+  @override
+  String get linkedDone => 'Ficha vinculada al proveedor.';
+
+  @override
+  String get unlinkedDone => 'Ficha desvinculada del proveedor.';
+
+  @override
+  String get privateLayer => 'Información del taller';
+
+  @override
+  String get privateLayerHelp => 'Visibles solo para tu taller.';
+
+  @override
+  String get fieldPrice => 'Precio negociado (€/m)';
+
+  @override
+  String get fieldTags => 'Etiquetas';
+
+  @override
+  String get fieldTagsHint => 'Separadas por comas (p. ej. OI27, por validar)';
+
+  @override
+  String priceValue(String value) {
+    return '$value €/m';
+  }
 }

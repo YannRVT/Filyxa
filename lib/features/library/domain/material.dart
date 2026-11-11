@@ -79,6 +79,10 @@ class MaterialItem {
     this.notes,
     this.specs = const TextileSpecs(),
     this.updatedAt,
+    this.supplierReferenceId,
+    this.linkedAt,
+    this.pricePerM,
+    this.tags = const [],
   });
 
   factory MaterialItem.fromJson(Map<String, dynamic> json) {
@@ -98,6 +102,10 @@ class MaterialItem {
         rawSpecs is List ? (rawSpecs.isEmpty ? null : rawSpecs.first as Map<String, dynamic>) : rawSpecs as Map<String, dynamic>?,
       ),
       updatedAt: json['updated_at'] == null ? null : DateTime.parse(json['updated_at'] as String).toLocal(),
+      supplierReferenceId: json['supplier_reference_id'] as String?,
+      linkedAt: json['linked_at'] == null ? null : DateTime.parse(json['linked_at'] as String).toLocal(),
+      pricePerM: (json['price_per_m'] as num?)?.toDouble(),
+      tags: (json['tags'] as List<dynamic>? ?? const []).cast<String>(),
     );
   }
 
@@ -113,6 +121,16 @@ class MaterialItem {
   final String? notes;
   final TextileSpecs specs;
   final DateTime? updatedAt;
+
+  /// Référence fournisseur liée : données techniques en lecture seule, tenues à jour.
+  final String? supplierReferenceId;
+  final DateTime? linkedAt;
+
+  /// Couche privée de l'atelier.
+  final double? pricePerM;
+  final List<String> tags;
+
+  bool get isLinked => supplierReferenceId != null;
 }
 
 /// Données saisies dans le formulaire, envoyées à `save_textile_material`.
@@ -129,6 +147,9 @@ class MaterialDraft {
     this.atelierStockM,
     this.notes,
     this.specs = const TextileSpecs(),
+    this.supplierReferenceId,
+    this.pricePerM,
+    this.tags = const [],
   });
 
   final String? id;
@@ -142,6 +163,9 @@ class MaterialDraft {
   final double? atelierStockM;
   final String? notes;
   final TextileSpecs specs;
+  final String? supplierReferenceId;
+  final double? pricePerM;
+  final List<String> tags;
 
   Map<String, dynamic> toPayload() => {
         if (id != null) 'id': id,
@@ -155,6 +179,9 @@ class MaterialDraft {
         'atelier_stock_m': atelierStockM,
         'notes': notes,
         'specs': specs.toJson(),
+        'supplier_reference_id': supplierReferenceId,
+        'price_per_m': pricePerM,
+        'tags': tags,
       };
 }
 

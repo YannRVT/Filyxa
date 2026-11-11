@@ -1004,4 +1004,77 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get duplicateOpen => 'Abrir a ficha existente';
+
+  @override
+  String get matchTitle => 'É esta a referência?';
+
+  @override
+  String matchIntro(String supplier) {
+    return 'Encontrada no catálogo de $supplier. Confirme para ligar a sua ficha aos dados e à disponibilidade.';
+  }
+
+  @override
+  String get matchConfirm => 'Sim, ligar esta referência';
+
+  @override
+  String get matchOthers => 'Outras referências próximas';
+
+  @override
+  String get matchNone => 'Nenhuma destas referências';
+
+  @override
+  String get supplierData => 'Dados do fornecedor';
+
+  @override
+  String get supplierDataHelp =>
+      'Atualizados pelo fornecedor, não editáveis aqui.';
+
+  @override
+  String get referenceRetiredBanner =>
+      'Referência retirada pelo fornecedor. Os últimos valores conhecidos são mantidos.';
+
+  @override
+  String get linkToSupplier => 'Ligar a uma referência do fornecedor';
+
+  @override
+  String get linkSearchHint => 'Código, designação ou fornecedor';
+
+  @override
+  String get linkSearchEmpty => 'Nenhuma referência publicada corresponde.';
+
+  @override
+  String get linkConfirm => 'Ligar';
+
+  @override
+  String get unlink => 'Desligar a referência';
+
+  @override
+  String get unlinkConfirmBody =>
+      'A ficha mantém os valores atuais e volta a ser editável. Deixará de seguir as atualizações do fornecedor.';
+
+  @override
+  String get linkedDone => 'Ficha ligada ao fornecedor.';
+
+  @override
+  String get unlinkedDone => 'Ficha desligada do fornecedor.';
+
+  @override
+  String get privateLayer => 'Informações do ateliê';
+
+  @override
+  String get privateLayerHelp => 'Visíveis apenas para o seu ateliê.';
+
+  @override
+  String get fieldPrice => 'Preço negociado (€/m)';
+
+  @override
+  String get fieldTags => 'Etiquetas';
+
+  @override
+  String get fieldTagsHint => 'Separadas por vírgulas (ex. OI27, a validar)';
+
+  @override
+  String priceValue(String value) {
+    return '$value €/m';
+  }
 }

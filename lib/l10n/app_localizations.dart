@@ -1779,6 +1779,138 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Ouvrir la fiche existante'**
   String get duplicateOpen;
+
+  /// No description provided for @matchTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est bien cette référence ?'**
+  String get matchTitle;
+
+  /// No description provided for @matchIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trouvée dans le catalogue de {supplier}. Confirmez pour relier votre fiche à ses données et à sa disponibilité.'**
+  String matchIntro(String supplier);
+
+  /// No description provided for @matchConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui, lier cette référence'**
+  String get matchConfirm;
+
+  /// No description provided for @matchOthers.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autres références proches'**
+  String get matchOthers;
+
+  /// No description provided for @matchNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune de ces références'**
+  String get matchNone;
+
+  /// No description provided for @supplierData.
+  ///
+  /// In fr, this message translates to:
+  /// **'Données fournisseur'**
+  String get supplierData;
+
+  /// No description provided for @supplierDataHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tenues à jour par le fournisseur, non modifiables ici.'**
+  String get supplierDataHelp;
+
+  /// No description provided for @referenceRetiredBanner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence retirée par le fournisseur. Les dernières valeurs connues sont conservées.'**
+  String get referenceRetiredBanner;
+
+  /// No description provided for @linkToSupplier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lier à une référence fournisseur'**
+  String get linkToSupplier;
+
+  /// No description provided for @linkSearchHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code article, désignation ou fournisseur'**
+  String get linkSearchHint;
+
+  /// No description provided for @linkSearchEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune référence publiée ne correspond.'**
+  String get linkSearchEmpty;
+
+  /// No description provided for @linkConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lier'**
+  String get linkConfirm;
+
+  /// No description provided for @unlink.
+  ///
+  /// In fr, this message translates to:
+  /// **'Délier la référence'**
+  String get unlink;
+
+  /// No description provided for @unlinkConfirmBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'La fiche garde ses valeurs actuelles et redevient modifiable. Elle ne suivra plus les mises à jour du fournisseur.'**
+  String get unlinkConfirmBody;
+
+  /// No description provided for @linkedDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche liée au fournisseur.'**
+  String get linkedDone;
+
+  /// No description provided for @unlinkedDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche déliée du fournisseur.'**
+  String get unlinkedDone;
+
+  /// No description provided for @privateLayer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Informations de l\'atelier'**
+  String get privateLayer;
+
+  /// No description provided for @privateLayerHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Visibles par votre atelier seulement.'**
+  String get privateLayerHelp;
+
+  /// No description provided for @fieldPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix négocié (€/m)'**
+  String get fieldPrice;
+
+  /// No description provided for @fieldTags.
+  ///
+  /// In fr, this message translates to:
+  /// **'Étiquettes'**
+  String get fieldTags;
+
+  /// No description provided for @fieldTagsHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Séparées par des virgules (ex. AH27, à valider)'**
+  String get fieldTagsHint;
+
+  /// No description provided for @priceValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'{value} €/m'**
+  String priceValue(String value);
 }
 
 class _AppLocalizationsDelegate

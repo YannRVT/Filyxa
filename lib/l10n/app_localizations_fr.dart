@@ -1008,4 +1008,77 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get duplicateOpen => 'Ouvrir la fiche existante';
+
+  @override
+  String get matchTitle => 'C\'est bien cette référence ?';
+
+  @override
+  String matchIntro(String supplier) {
+    return 'Trouvée dans le catalogue de $supplier. Confirmez pour relier votre fiche à ses données et à sa disponibilité.';
+  }
+
+  @override
+  String get matchConfirm => 'Oui, lier cette référence';
+
+  @override
+  String get matchOthers => 'Autres références proches';
+
+  @override
+  String get matchNone => 'Aucune de ces références';
+
+  @override
+  String get supplierData => 'Données fournisseur';
+
+  @override
+  String get supplierDataHelp =>
+      'Tenues à jour par le fournisseur, non modifiables ici.';
+
+  @override
+  String get referenceRetiredBanner =>
+      'Référence retirée par le fournisseur. Les dernières valeurs connues sont conservées.';
+
+  @override
+  String get linkToSupplier => 'Lier à une référence fournisseur';
+
+  @override
+  String get linkSearchHint => 'Code article, désignation ou fournisseur';
+
+  @override
+  String get linkSearchEmpty => 'Aucune référence publiée ne correspond.';
+
+  @override
+  String get linkConfirm => 'Lier';
+
+  @override
+  String get unlink => 'Délier la référence';
+
+  @override
+  String get unlinkConfirmBody =>
+      'La fiche garde ses valeurs actuelles et redevient modifiable. Elle ne suivra plus les mises à jour du fournisseur.';
+
+  @override
+  String get linkedDone => 'Fiche liée au fournisseur.';
+
+  @override
+  String get unlinkedDone => 'Fiche déliée du fournisseur.';
+
+  @override
+  String get privateLayer => 'Informations de l\'atelier';
+
+  @override
+  String get privateLayerHelp => 'Visibles par votre atelier seulement.';
+
+  @override
+  String get fieldPrice => 'Prix négocié (€/m)';
+
+  @override
+  String get fieldTags => 'Étiquettes';
+
+  @override
+  String get fieldTagsHint => 'Séparées par des virgules (ex. AH27, à valider)';
+
+  @override
+  String priceValue(String value) {
+    return '$value €/m';
+  }
 }

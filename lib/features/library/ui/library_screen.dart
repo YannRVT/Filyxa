@@ -8,6 +8,7 @@ import '../../../shared/widgets/auth_widgets.dart';
 import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
+import '../../supplier/ui/supplier_texts.dart';
 import 'library_filters.dart';
 import 'material_widgets.dart';
 
@@ -403,13 +404,15 @@ class _Gallery extends StatelessWidget {
   }
 }
 
-class _MaterialCard extends StatelessWidget {
+class _MaterialCard extends ConsumerWidget {
   const _MaterialCard({required this.material});
 
   final MaterialItem material;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final refs = ref.watch(linkedReferencesProvider).value;
+    final reference = material.isLinked && refs != null ? refs[material.supplierReferenceId] : null;
     final lang = langOf(context);
     final text = Theme.of(context).textTheme;
     final supplier = supplierLine(material);
@@ -421,7 +424,25 @@ class _MaterialCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 150, child: MaterialVisual(material: material, radius: 0)),
+            SizedBox(
+              height: 150,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  MaterialVisual(material: material, radius: 0),
+                  if (reference != null)
+                    Positioned(
+                      left: 8,
+                      bottom: 8,
+                      right: 8,
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: AvailabilityPill(status: reference.status, leadTimeWeeks: reference.leadTimeWeeks),
+                      ),
+                    ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(12),
               child: Column(

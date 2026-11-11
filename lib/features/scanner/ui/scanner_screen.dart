@@ -10,6 +10,8 @@ import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../library/data/materials_repository.dart';
+import '../../library/domain/catalog_reference.dart';
+import '../../library/ui/reference_widgets.dart';
 import '../../members/data/members_repository.dart';
 import '../../session/domain/user_space.dart';
 import '../data/scanner_repository.dart';
@@ -55,8 +57,21 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
       final outcome = await ref.read(scannerRepositoryProvider).analyze(bytes, _lastType);
       ref.invalidate(scanUsageProvider);
       ref.invalidate(materialsProvider);
+      var prefill = outcome.prefill;
+      // Rapprochement avec les catalogues publiés : rien n'est lié sans confirmation.
+      final matches = await ref
+          .read(materialsRepositoryProvider)
+          .match(prefill.material.supplierCode, prefill.material.supplierName)
+          .catchError((_) => <ReferenceMatch>[]);
       if (!mounted) return;
-      context.go('/library/new', extra: outcome.prefill);
+      if (matches.isNotEmpty) {
+        setState(() => _busy = false);
+        final choice = await showMatchSheet(context, matches);
+        if (!mounted || choice == null) return;
+        if (choice.reference != null) prefill = prefill.linkedTo(choice.reference!);
+      }
+      if (!mounted) return;
+      context.go('/library/new', extra: prefill);
     } on ScanException catch (e) {
       ref.invalidate(scanUsageProvider);
       if (mounted) setState(() => _failure = e.failure);
