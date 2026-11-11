@@ -1390,5 +1390,73 @@
   "sharedRevokedBody": "L'atelier l'a désactivé. Demandez-lui un nouveau lien si besoin.",
   "sharedNotFoundTitle": "Lien introuvable",
   "sharedNotFoundBody": "Vérifiez l'adresse ou demandez un nouveau lien à l'atelier.",
-  "sharedError": "Impossible de charger la page. Vérifiez votre connexion puis réessayez."
+  "sharedError": "Impossible de charger la page. Vérifiez votre connexion puis réessayez.",
+  "adminPlan": "Offre",
+  "plan_pilot": "Pilote",
+  "plan_essential": "Essentiel",
+  "plan_pro": "Pro",
+  "plan_custom": "Sur mesure",
+  "adminQuota": "Quota de scans par mois",
+  "adminQuotaHint": "Vide : quota de l'offre",
+  "adminScans": "{scans} / {quota} scans",
+  "@adminScans": {
+    "placeholders": {
+      "scans": {
+        "type": "int"
+      },
+      "quota": {
+        "type": "int"
+      }
+    }
+  },
+  "adminItemsAtelier": "{count, plural, =0{aucune matière} =1{1 matière} other{{count} matières}}",
+  "@adminItemsAtelier": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adminItemsSupplier": "{count, plural, =0{aucune référence} =1{1 référence} other{{count} références}}",
+  "@adminItemsSupplier": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adminTokens": "Jetons : {input} en entrée · {output} en sortie",
+  "@adminTokens": {
+    "placeholders": {
+      "input": {
+        "type": "String"
+      },
+      "output": {
+        "type": "String"
+      }
+    }
+  },
+  "adminCost": "Coût IA estimé : {cost}",
+  "@adminCost": {
+    "placeholders": {
+      "cost": {
+        "type": "String"
+      }
+    }
+  },
+  "adminTotalCost": "Coût IA du mois, toutes organisations : {cost}",
+  "@adminTotalCost": {
+    "placeholders": {
+      "cost": {
+        "type": "String"
+      }
+    }
+  },
+  "adminEditPlan": "Modifier l'offre",
+  "adminPlanSaved": "Offre mise à jour : le nouveau quota s'applique dès maintenant au scanner.",
+  "adminPricingTitle": "Tarif du modèle d'IA (en $ par million de jetons)",
+  "adminPricingInput": "Entrée",
+  "adminPricingOutput": "Sortie",
+  "adminPreviousMonth": "Mois précédent",
+  "adminNextMonth": "Mois suivant"
 }
