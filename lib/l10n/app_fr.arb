@@ -1333,5 +1333,62 @@
   "pdfMaterial": "Matière",
   "pdfConsumption": "Conso./pièce",
   "pdfNeed": "Besoin",
-  "pdfGenerationError": "Le PDF n'a pas pu être généré. Réessayez."
+  "pdfGenerationError": "Le PDF n'a pas pu être généré. Réessayez.",
+  "shareAction": "Partager",
+  "shareTitle": "Partager en lecture seule",
+  "shareIntro": "Le destinataire ouvre le lien sans compte et voit des fiches toujours à jour, sans prix, notes ni stock de l'atelier.",
+  "shareLanguage": "Langue de la page",
+  "shareValidity": "Validité (jours)",
+  "shareCreate": "Créer le lien",
+  "shareCopy": "Copier le lien",
+  "shareCopied": "Lien copié.",
+  "shareExpires": "Expire le {date}",
+  "@shareExpires": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "shareRevoke": "Révoquer",
+  "shareRevokeConfirm": "Révoquer ce lien ? Il cessera aussitôt de fonctionner.",
+  "shareRevoked": "Lien révoqué.",
+  "shareExtend": "Modifier l'expiration",
+  "shareActiveLinks": "Liens actifs",
+  "shareNone": "Aucun lien actif.",
+  "shareLinksTitle": "Liens partagés",
+  "shareScopeMaterial": "Fiche matière",
+  "shareScopeModel": "Modèle",
+  "shareScopeCollection": "Collection",
+  "shareUnknownTarget": "Élément supprimé",
+  "sharedFrom": "Partagé par {org}",
+  "@sharedFrom": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "sharedReadOnly": "Lecture seule · données à jour · lien valable jusqu'au {date}",
+  "@sharedReadOnly": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sharedExpiredTitle": "Ce lien a expiré",
+  "sharedExpiredBody": "Il n'est plus valable depuis le {date}. Demandez un nouveau lien à l'atelier qui vous l'a envoyé.",
+  "@sharedExpiredBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sharedRevokedTitle": "Ce lien a été révoqué",
+  "sharedRevokedBody": "L'atelier l'a désactivé. Demandez-lui un nouveau lien si besoin.",
+  "sharedNotFoundTitle": "Lien introuvable",
+  "sharedNotFoundBody": "Vérifiez l'adresse ou demandez un nouveau lien à l'atelier.",
+  "sharedError": "Impossible de charger la page. Vérifiez votre connexion puis réessayez."
 }

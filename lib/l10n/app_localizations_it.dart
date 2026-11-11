@@ -1864,4 +1864,104 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get pdfGenerationError =>
       'Non è stato possibile generare il PDF. Riprova.';
+
+  @override
+  String get shareAction => 'Condividi';
+
+  @override
+  String get shareTitle => 'Condividi in sola lettura';
+
+  @override
+  String get shareIntro =>
+      'Il destinatario apre il link senza account e vede schede sempre aggiornate, senza prezzi, note né stock del laboratorio.';
+
+  @override
+  String get shareLanguage => 'Lingua della pagina';
+
+  @override
+  String get shareValidity => 'Validità (giorni)';
+
+  @override
+  String get shareCreate => 'Crea il link';
+
+  @override
+  String get shareCopy => 'Copia il link';
+
+  @override
+  String get shareCopied => 'Link copiato.';
+
+  @override
+  String shareExpires(String date) {
+    return 'Scade il $date';
+  }
+
+  @override
+  String get shareRevoke => 'Revoca';
+
+  @override
+  String get shareRevokeConfirm =>
+      'Revocare questo link? Smetterà subito di funzionare.';
+
+  @override
+  String get shareRevoked => 'Link revocato.';
+
+  @override
+  String get shareExtend => 'Modifica la scadenza';
+
+  @override
+  String get shareActiveLinks => 'Link attivi';
+
+  @override
+  String get shareNone => 'Nessun link attivo.';
+
+  @override
+  String get shareLinksTitle => 'Link condivisi';
+
+  @override
+  String get shareScopeMaterial => 'Materiale';
+
+  @override
+  String get shareScopeModel => 'Modello';
+
+  @override
+  String get shareScopeCollection => 'Collezione';
+
+  @override
+  String get shareUnknownTarget => 'Elemento eliminato';
+
+  @override
+  String sharedFrom(String org) {
+    return 'Condiviso da $org';
+  }
+
+  @override
+  String sharedReadOnly(String date) {
+    return 'Sola lettura · dati aggiornati · link valido fino al $date';
+  }
+
+  @override
+  String get sharedExpiredTitle => 'Questo link è scaduto';
+
+  @override
+  String sharedExpiredBody(String date) {
+    return 'Non è più valido dal $date. Chiedi un nuovo link al laboratorio che te l\'ha inviato.';
+  }
+
+  @override
+  String get sharedRevokedTitle => 'Questo link è stato revocato';
+
+  @override
+  String get sharedRevokedBody =>
+      'Il laboratorio l\'ha disattivato. Chiedigli un nuovo link se necessario.';
+
+  @override
+  String get sharedNotFoundTitle => 'Link non trovato';
+
+  @override
+  String get sharedNotFoundBody =>
+      'Verifica l\'indirizzo o chiedi un nuovo link al laboratorio.';
+
+  @override
+  String get sharedError =>
+      'Impossibile caricare la pagina. Verifica la connessione e riprova.';
 }

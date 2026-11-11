@@ -1862,4 +1862,104 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get pdfGenerationError =>
       'No se pudo generar el PDF. Inténtelo de nuevo.';
+
+  @override
+  String get shareAction => 'Compartir';
+
+  @override
+  String get shareTitle => 'Compartir en solo lectura';
+
+  @override
+  String get shareIntro =>
+      'El destinatario abre el enlace sin cuenta y ve fichas siempre actualizadas, sin precios, notas ni stock del taller.';
+
+  @override
+  String get shareLanguage => 'Idioma de la página';
+
+  @override
+  String get shareValidity => 'Validez (días)';
+
+  @override
+  String get shareCreate => 'Crear el enlace';
+
+  @override
+  String get shareCopy => 'Copiar el enlace';
+
+  @override
+  String get shareCopied => 'Enlace copiado.';
+
+  @override
+  String shareExpires(String date) {
+    return 'Caduca el $date';
+  }
+
+  @override
+  String get shareRevoke => 'Revocar';
+
+  @override
+  String get shareRevokeConfirm =>
+      '¿Revocar este enlace? Dejará de funcionar de inmediato.';
+
+  @override
+  String get shareRevoked => 'Enlace revocado.';
+
+  @override
+  String get shareExtend => 'Cambiar la caducidad';
+
+  @override
+  String get shareActiveLinks => 'Enlaces activos';
+
+  @override
+  String get shareNone => 'Ningún enlace activo.';
+
+  @override
+  String get shareLinksTitle => 'Enlaces compartidos';
+
+  @override
+  String get shareScopeMaterial => 'Material';
+
+  @override
+  String get shareScopeModel => 'Modelo';
+
+  @override
+  String get shareScopeCollection => 'Colección';
+
+  @override
+  String get shareUnknownTarget => 'Elemento eliminado';
+
+  @override
+  String sharedFrom(String org) {
+    return 'Compartido por $org';
+  }
+
+  @override
+  String sharedReadOnly(String date) {
+    return 'Solo lectura · datos actualizados · enlace válido hasta el $date';
+  }
+
+  @override
+  String get sharedExpiredTitle => 'Este enlace ha caducado';
+
+  @override
+  String sharedExpiredBody(String date) {
+    return 'Ya no es válido desde el $date. Pida un nuevo enlace al taller que se lo envió.';
+  }
+
+  @override
+  String get sharedRevokedTitle => 'Este enlace ha sido revocado';
+
+  @override
+  String get sharedRevokedBody =>
+      'El taller lo ha desactivado. Pídale un nuevo enlace si lo necesita.';
+
+  @override
+  String get sharedNotFoundTitle => 'Enlace no encontrado';
+
+  @override
+  String get sharedNotFoundBody =>
+      'Compruebe la dirección o pida un nuevo enlace al taller.';
+
+  @override
+  String get sharedError =>
+      'No se pudo cargar la página. Compruebe su conexión e inténtelo de nuevo.';
 }

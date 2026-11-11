@@ -1856,4 +1856,104 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pdfGenerationError =>
       'The PDF couldn\'t be generated. Please try again.';
+
+  @override
+  String get shareAction => 'Share';
+
+  @override
+  String get shareTitle => 'Share read-only';
+
+  @override
+  String get shareIntro =>
+      'The recipient opens the link without an account and sees always up-to-date records, without prices, notes or workshop stock.';
+
+  @override
+  String get shareLanguage => 'Page language';
+
+  @override
+  String get shareValidity => 'Valid for (days)';
+
+  @override
+  String get shareCreate => 'Create link';
+
+  @override
+  String get shareCopy => 'Copy link';
+
+  @override
+  String get shareCopied => 'Link copied.';
+
+  @override
+  String shareExpires(String date) {
+    return 'Expires on $date';
+  }
+
+  @override
+  String get shareRevoke => 'Revoke';
+
+  @override
+  String get shareRevokeConfirm =>
+      'Revoke this link? It will stop working immediately.';
+
+  @override
+  String get shareRevoked => 'Link revoked.';
+
+  @override
+  String get shareExtend => 'Change expiry';
+
+  @override
+  String get shareActiveLinks => 'Active links';
+
+  @override
+  String get shareNone => 'No active links.';
+
+  @override
+  String get shareLinksTitle => 'Shared links';
+
+  @override
+  String get shareScopeMaterial => 'Material';
+
+  @override
+  String get shareScopeModel => 'Style';
+
+  @override
+  String get shareScopeCollection => 'Collection';
+
+  @override
+  String get shareUnknownTarget => 'Deleted item';
+
+  @override
+  String sharedFrom(String org) {
+    return 'Shared by $org';
+  }
+
+  @override
+  String sharedReadOnly(String date) {
+    return 'Read-only · up-to-date data · link valid until $date';
+  }
+
+  @override
+  String get sharedExpiredTitle => 'This link has expired';
+
+  @override
+  String sharedExpiredBody(String date) {
+    return 'It has not been valid since $date. Ask the workshop that sent it for a new link.';
+  }
+
+  @override
+  String get sharedRevokedTitle => 'This link has been revoked';
+
+  @override
+  String get sharedRevokedBody =>
+      'The workshop has disabled it. Ask them for a new link if needed.';
+
+  @override
+  String get sharedNotFoundTitle => 'Link not found';
+
+  @override
+  String get sharedNotFoundBody =>
+      'Check the address or ask the workshop for a new link.';
+
+  @override
+  String get sharedError =>
+      'The page couldn\'t be loaded. Check your connection and try again.';
 }

@@ -1865,4 +1865,104 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get pdfGenerationError =>
       'PDF-ul nu a putut fi generat. Încercați din nou.';
+
+  @override
+  String get shareAction => 'Partajează';
+
+  @override
+  String get shareTitle => 'Partajează doar pentru citire';
+
+  @override
+  String get shareIntro =>
+      'Destinatarul deschide linkul fără cont și vede fișe mereu actualizate, fără prețuri, note sau stocul atelierului.';
+
+  @override
+  String get shareLanguage => 'Limba paginii';
+
+  @override
+  String get shareValidity => 'Valabilitate (zile)';
+
+  @override
+  String get shareCreate => 'Creează linkul';
+
+  @override
+  String get shareCopy => 'Copiază linkul';
+
+  @override
+  String get shareCopied => 'Link copiat.';
+
+  @override
+  String shareExpires(String date) {
+    return 'Expiră la $date';
+  }
+
+  @override
+  String get shareRevoke => 'Revocă';
+
+  @override
+  String get shareRevokeConfirm =>
+      'Revocați acest link? Nu va mai funcționa imediat.';
+
+  @override
+  String get shareRevoked => 'Link revocat.';
+
+  @override
+  String get shareExtend => 'Modifică expirarea';
+
+  @override
+  String get shareActiveLinks => 'Linkuri active';
+
+  @override
+  String get shareNone => 'Niciun link activ.';
+
+  @override
+  String get shareLinksTitle => 'Linkuri partajate';
+
+  @override
+  String get shareScopeMaterial => 'Material';
+
+  @override
+  String get shareScopeModel => 'Model';
+
+  @override
+  String get shareScopeCollection => 'Colecție';
+
+  @override
+  String get shareUnknownTarget => 'Element șters';
+
+  @override
+  String sharedFrom(String org) {
+    return 'Partajat de $org';
+  }
+
+  @override
+  String sharedReadOnly(String date) {
+    return 'Doar citire · date actualizate · link valabil până la $date';
+  }
+
+  @override
+  String get sharedExpiredTitle => 'Acest link a expirat';
+
+  @override
+  String sharedExpiredBody(String date) {
+    return 'Nu mai este valabil din $date. Cereți un link nou atelierului care vi l-a trimis.';
+  }
+
+  @override
+  String get sharedRevokedTitle => 'Acest link a fost revocat';
+
+  @override
+  String get sharedRevokedBody =>
+      'Atelierul l-a dezactivat. Cereți-i un link nou dacă este nevoie.';
+
+  @override
+  String get sharedNotFoundTitle => 'Link negăsit';
+
+  @override
+  String get sharedNotFoundBody =>
+      'Verificați adresa sau cereți un link nou atelierului.';
+
+  @override
+  String get sharedError =>
+      'Pagina nu a putut fi încărcată. Verificați conexiunea și încercați din nou.';
 }

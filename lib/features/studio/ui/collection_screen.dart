@@ -7,6 +7,8 @@ import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../export/export_screen.dart';
+import '../../share/data/share_repository.dart';
+import '../../share/ui/share_widgets.dart';
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import '../domain/alerts.dart';
@@ -90,11 +92,13 @@ class CollectionScreen extends ConsumerWidget {
                     icon: const Icon(Icons.add, size: 18),
                     label: Text(l10n.studioNewModel),
                   ),
+          if (collection != null) ShareButton(scope: ShareScope.collection, targetId: collection.id),
           if (hasAny && collection != null)
             IconButton(
               tooltip: l10n.exportDossier,
               icon: const Icon(Icons.picture_as_pdf_outlined),
-              onPressed: () => openCollectionExport(context, ref, collection),
+              onPressed: () => openCollectionExport(context, ref, collection,
+                  shareUrl: ref.read(targetLinksProvider((ShareScope.collection, collection.id))).firstOrNull?.url),
             ),
           if (canEdit && collection != null)
             PopupMenuButton<String>(

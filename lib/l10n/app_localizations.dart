@@ -3083,6 +3083,180 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Le PDF n\'a pas pu être généré. Réessayez.'**
   String get pdfGenerationError;
+
+  /// No description provided for @shareAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager'**
+  String get shareAction;
+
+  /// No description provided for @shareTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager en lecture seule'**
+  String get shareTitle;
+
+  /// No description provided for @shareIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le destinataire ouvre le lien sans compte et voit des fiches toujours à jour, sans prix, notes ni stock de l\'atelier.'**
+  String get shareIntro;
+
+  /// No description provided for @shareLanguage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue de la page'**
+  String get shareLanguage;
+
+  /// No description provided for @shareValidity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Validité (jours)'**
+  String get shareValidity;
+
+  /// No description provided for @shareCreate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer le lien'**
+  String get shareCreate;
+
+  /// No description provided for @shareCopy.
+  ///
+  /// In fr, this message translates to:
+  /// **'Copier le lien'**
+  String get shareCopy;
+
+  /// No description provided for @shareCopied.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien copié.'**
+  String get shareCopied;
+
+  /// No description provided for @shareExpires.
+  ///
+  /// In fr, this message translates to:
+  /// **'Expire le {date}'**
+  String shareExpires(String date);
+
+  /// No description provided for @shareRevoke.
+  ///
+  /// In fr, this message translates to:
+  /// **'Révoquer'**
+  String get shareRevoke;
+
+  /// No description provided for @shareRevokeConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Révoquer ce lien ? Il cessera aussitôt de fonctionner.'**
+  String get shareRevokeConfirm;
+
+  /// No description provided for @shareRevoked.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien révoqué.'**
+  String get shareRevoked;
+
+  /// No description provided for @shareExtend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier l\'expiration'**
+  String get shareExtend;
+
+  /// No description provided for @shareActiveLinks.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liens actifs'**
+  String get shareActiveLinks;
+
+  /// No description provided for @shareNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun lien actif.'**
+  String get shareNone;
+
+  /// No description provided for @shareLinksTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liens partagés'**
+  String get shareLinksTitle;
+
+  /// No description provided for @shareScopeMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche matière'**
+  String get shareScopeMaterial;
+
+  /// No description provided for @shareScopeModel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modèle'**
+  String get shareScopeModel;
+
+  /// No description provided for @shareScopeCollection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Collection'**
+  String get shareScopeCollection;
+
+  /// No description provided for @shareUnknownTarget.
+  ///
+  /// In fr, this message translates to:
+  /// **'Élément supprimé'**
+  String get shareUnknownTarget;
+
+  /// No description provided for @sharedFrom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partagé par {org}'**
+  String sharedFrom(String org);
+
+  /// No description provided for @sharedReadOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lecture seule · données à jour · lien valable jusqu\'au {date}'**
+  String sharedReadOnly(String date);
+
+  /// No description provided for @sharedExpiredTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce lien a expiré'**
+  String get sharedExpiredTitle;
+
+  /// No description provided for @sharedExpiredBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il n\'est plus valable depuis le {date}. Demandez un nouveau lien à l\'atelier qui vous l\'a envoyé.'**
+  String sharedExpiredBody(String date);
+
+  /// No description provided for @sharedRevokedTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce lien a été révoqué'**
+  String get sharedRevokedTitle;
+
+  /// No description provided for @sharedRevokedBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'atelier l\'a désactivé. Demandez-lui un nouveau lien si besoin.'**
+  String get sharedRevokedBody;
+
+  /// No description provided for @sharedNotFoundTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien introuvable'**
+  String get sharedNotFoundTitle;
+
+  /// No description provided for @sharedNotFoundBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifiez l\'adresse ou demandez un nouveau lien à l\'atelier.'**
+  String get sharedNotFoundBody;
+
+  /// No description provided for @sharedError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible de charger la page. Vérifiez votre connexion puis réessayez.'**
+  String get sharedError;
 }
 
 class _AppLocalizationsDelegate
