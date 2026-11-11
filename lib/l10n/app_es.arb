@@ -475,5 +475,21 @@
   "notifStockOut": "{name}: agotado en el proveedor ({code})",
   "notifReferenceUpdated": "{name}: ficha modificada por el proveedor ({code})",
   "notifReferenceRetired": "{name}: referencia retirada por el proveedor ({code})",
-  "notifUsedIn": "Usado en: {models}"
+  "notifUsedIn": "Usado en: {models}",
+  "exportPdf": "Exportar en PDF",
+  "exportDossier": "Exportar el dossier PDF",
+  "pdfLanguage": "Idioma del PDF",
+  "pdfMaterialSheet": "Ficha de material",
+  "pdfModelDossier": "Dossier de materiales",
+  "pdfCollectionDossier": "Dossier de materiales de la colección",
+  "pdfEditedOn": "Emitido el {date}",
+  "pdfNotSet": "No indicado",
+  "pdfCompositionNote": "Composición expresada según el Reglamento (UE) n.º 1007/2011. Características orientativas, a validar con muestra.",
+  "pdfSupplierData": "Datos del proveedor",
+  "pdfPage": "Página {page} / {total}",
+  "pdfContents": "Índice",
+  "pdfMaterial": "Material",
+  "pdfConsumption": "Consumo/pieza",
+  "pdfNeed": "Necesidad",
+  "pdfGenerationError": "No se pudo generar el PDF. Inténtelo de nuevo."
 }

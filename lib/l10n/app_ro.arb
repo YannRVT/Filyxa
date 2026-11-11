@@ -475,5 +475,21 @@
   "notifStockOut": "{name}: stoc epuizat la furnizor ({code})",
   "notifReferenceUpdated": "{name}: fișă modificată de furnizor ({code})",
   "notifReferenceRetired": "{name}: referință retrasă de furnizor ({code})",
-  "notifUsedIn": "Folosit în: {models}"
+  "notifUsedIn": "Folosit în: {models}",
+  "exportPdf": "Exportă în PDF",
+  "exportDossier": "Exportă dosarul PDF",
+  "pdfLanguage": "Limba PDF",
+  "pdfMaterialSheet": "Fișă material",
+  "pdfModelDossier": "Dosar materiale",
+  "pdfCollectionDossier": "Dosarul de materiale al colecției",
+  "pdfEditedOn": "Emis la {date}",
+  "pdfNotSet": "Necompletat",
+  "pdfCompositionNote": "Compoziție exprimată conform Regulamentului (UE) nr. 1007/2011. Caracteristici orientative, de validat pe mostră.",
+  "pdfSupplierData": "Date furnizor",
+  "pdfPage": "Pagina {page} / {total}",
+  "pdfContents": "Cuprins",
+  "pdfMaterial": "Material",
+  "pdfConsumption": "Consum/buc.",
+  "pdfNeed": "Necesar",
+  "pdfGenerationError": "PDF-ul nu a putut fi generat. Încercați din nou."
 }

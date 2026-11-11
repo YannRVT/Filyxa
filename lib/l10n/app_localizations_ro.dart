@@ -1811,4 +1811,58 @@ class AppLocalizationsRo extends AppLocalizations {
   String notifUsedIn(String models) {
     return 'Folosit în: $models';
   }
+
+  @override
+  String get exportPdf => 'Exportă în PDF';
+
+  @override
+  String get exportDossier => 'Exportă dosarul PDF';
+
+  @override
+  String get pdfLanguage => 'Limba PDF';
+
+  @override
+  String get pdfMaterialSheet => 'Fișă material';
+
+  @override
+  String get pdfModelDossier => 'Dosar materiale';
+
+  @override
+  String get pdfCollectionDossier => 'Dosarul de materiale al colecției';
+
+  @override
+  String pdfEditedOn(String date) {
+    return 'Emis la $date';
+  }
+
+  @override
+  String get pdfNotSet => 'Necompletat';
+
+  @override
+  String get pdfCompositionNote =>
+      'Compoziție exprimată conform Regulamentului (UE) nr. 1007/2011. Caracteristici orientative, de validat pe mostră.';
+
+  @override
+  String get pdfSupplierData => 'Date furnizor';
+
+  @override
+  String pdfPage(int page, int total) {
+    return 'Pagina $page / $total';
+  }
+
+  @override
+  String get pdfContents => 'Cuprins';
+
+  @override
+  String get pdfMaterial => 'Material';
+
+  @override
+  String get pdfConsumption => 'Consum/buc.';
+
+  @override
+  String get pdfNeed => 'Necesar';
+
+  @override
+  String get pdfGenerationError =>
+      'PDF-ul nu a putut fi generat. Încercați din nou.';
 }

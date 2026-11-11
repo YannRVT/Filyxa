@@ -1805,4 +1805,58 @@ class AppLocalizationsPt extends AppLocalizations {
   String notifUsedIn(String models) {
     return 'Usado em: $models';
   }
+
+  @override
+  String get exportPdf => 'Exportar em PDF';
+
+  @override
+  String get exportDossier => 'Exportar o dossier PDF';
+
+  @override
+  String get pdfLanguage => 'Idioma do PDF';
+
+  @override
+  String get pdfMaterialSheet => 'Ficha de material';
+
+  @override
+  String get pdfModelDossier => 'Dossier de materiais';
+
+  @override
+  String get pdfCollectionDossier => 'Dossier de materiais da coleção';
+
+  @override
+  String pdfEditedOn(String date) {
+    return 'Emitido em $date';
+  }
+
+  @override
+  String get pdfNotSet => 'Não indicado';
+
+  @override
+  String get pdfCompositionNote =>
+      'Composição expressa segundo o Regulamento (UE) n.º 1007/2011. Características indicativas, a validar em amostra.';
+
+  @override
+  String get pdfSupplierData => 'Dados do fornecedor';
+
+  @override
+  String pdfPage(int page, int total) {
+    return 'Página $page / $total';
+  }
+
+  @override
+  String get pdfContents => 'Índice';
+
+  @override
+  String get pdfMaterial => 'Material';
+
+  @override
+  String get pdfConsumption => 'Consumo/peça';
+
+  @override
+  String get pdfNeed => 'Necessidade';
+
+  @override
+  String get pdfGenerationError =>
+      'Não foi possível gerar o PDF. Tente novamente.';
 }

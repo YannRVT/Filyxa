@@ -9,6 +9,7 @@ import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../export/export_screen.dart';
 import '../../library/data/materials_repository.dart';
 import '../../library/domain/material.dart';
 import '../../library/ui/material_widgets.dart';
@@ -226,6 +227,14 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
         }),
         title: Text(m.name),
         actions: [
+          IconButton(
+            tooltip: l10n.exportDossier,
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            onPressed: () async {
+              await _flush();
+              if (context.mounted) openModelExport(context, ref, _model!);
+            },
+          ),
           if (canEdit)
             PopupMenuButton<String>(
               onSelected: (v) => v == 'rename' ? _rename() : _delete(),
