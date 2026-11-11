@@ -1956,4 +1956,91 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sharedError =>
       'The page couldn\'t be loaded. Check your connection and try again.';
+
+  @override
+  String get adminPlan => 'Plan';
+
+  @override
+  String get plan_pilot => 'Pilot';
+
+  @override
+  String get plan_essential => 'Essential';
+
+  @override
+  String get plan_pro => 'Pro';
+
+  @override
+  String get plan_custom => 'Custom';
+
+  @override
+  String get adminQuota => 'Monthly scan quota';
+
+  @override
+  String get adminQuotaHint => 'Empty: plan\'s quota';
+
+  @override
+  String adminScans(int scans, int quota) {
+    return '$scans / $quota scans';
+  }
+
+  @override
+  String adminItemsAtelier(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materials',
+      one: '1 material',
+      zero: 'no materials',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminItemsSupplier(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count references',
+      one: '1 reference',
+      zero: 'no references',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminTokens(String input, String output) {
+    return 'Tokens: $input input · $output output';
+  }
+
+  @override
+  String adminCost(String cost) {
+    return 'Estimated AI cost: $cost';
+  }
+
+  @override
+  String adminTotalCost(String cost) {
+    return 'AI cost for the month, all organizations: $cost';
+  }
+
+  @override
+  String get adminEditPlan => 'Change plan';
+
+  @override
+  String get adminPlanSaved =>
+      'Plan updated: the new quota applies to the scanner right away.';
+
+  @override
+  String get adminPricingTitle => 'AI model pricing (\$ per million tokens)';
+
+  @override
+  String get adminPricingInput => 'Input';
+
+  @override
+  String get adminPricingOutput => 'Output';
+
+  @override
+  String get adminPreviousMonth => 'Previous month';
+
+  @override
+  String get adminNextMonth => 'Next month';
 }

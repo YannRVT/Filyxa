@@ -101,15 +101,20 @@ class AdminScreen extends ConsumerWidget {
                 ),
               )
             : RefreshIndicator(
-                onRefresh: () => ref.refresh(adminOrganizationsProvider.future),
+                onRefresh: () {
+                  ref.invalidate(adminUsageProvider);
+                  return ref.refresh(adminOrganizationsProvider.future);
+                },
                 child: ListView.separated(
                   padding: const EdgeInsets.fromLTRB(FxSpace.md, FxSpace.md, FxSpace.md, 96),
-                  itemCount: orgs.length,
+                  itemCount: orgs.length + 1,
                   separatorBuilder: (_, _) => const SizedBox(height: FxSpace.sm),
-                  itemBuilder: (context, i) => _OrganizationTile(
-                    org: orgs[i],
-                    onReinvite: () => _reinvite(context, ref, orgs[i]),
-                  ),
+                  itemBuilder: (context, i) => i == 0
+                      ? const _UsageHeader()
+                      : _OrganizationTile(
+                          org: orgs[i - 1],
+                          onReinvite: () => _reinvite(context, ref, orgs[i - 1]),
+                        ),
                 ),
               ),
       ),
@@ -117,17 +122,18 @@ class AdminScreen extends ConsumerWidget {
   }
 }
 
-class _OrganizationTile extends StatelessWidget {
+class _OrganizationTile extends ConsumerWidget {
   const _OrganizationTile({required this.org, required this.onReinvite});
 
   final AdminOrganization org;
   final VoidCallback onReinvite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
     final invitation = org.pendingInvitation;
+    final usage = ref.watch(adminUsageProvider).value?[org.organization.id];
     final dateFormat = DateFormat.yMMMd(Localizations.localeOf(context).toLanguageTag()).add_Hm();
 
     return Center(
@@ -142,9 +148,22 @@ class _OrganizationTile extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(child: Text(org.organization.name, style: text.titleMedium)),
+                    if (usage != null) ...[_Pill(l10n.planLabel(usage.plan)), const SizedBox(width: FxSpace.xs)],
                     _Pill(l10n.orgKind(org.organization.kind)),
                   ],
                 ),
+                if (usage != null) ...[
+                  const SizedBox(height: FxSpace.sm),
+                  _UsageLine(usage: usage, kind: org.organization.kind),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton.icon(
+                      onPressed: () => showDialog<void>(context: context, builder: (_) => _PlanDialog(orgId: org.organization.id, usage: usage)),
+                      icon: const Icon(Icons.tune, size: 18),
+                      label: Text(l10n.adminEditPlan),
+                    ),
+                  ),
+                ],
                 const SizedBox(height: FxSpace.xs),
                 Text(
                   l10n.adminMembers(org.memberCount),
@@ -180,6 +199,288 @@ class _OrganizationTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+extension _PlanTexts on AppLocalizations {
+  String planLabel(String plan) => switch (plan) {
+        'pilot' => plan_pilot,
+        'essential' => plan_essential,
+        'pro' => plan_pro,
+        'custom' => plan_custom,
+        _ => plan,
+      };
+}
+
+String _usd(BuildContext context, double v) =>
+    NumberFormat.simpleCurrency(locale: Localizations.localeOf(context).toLanguageTag(), name: 'USD').format(v);
+String _count(BuildContext context, int v) => NumberFormat.decimalPattern(Localizations.localeOf(context).toLanguageTag()).format(v);
+
+/// Mois affiché, coût total et tarif du modèle.
+class _UsageHeader extends ConsumerWidget {
+  const _UsageHeader();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final month = ref.watch(adminMonthProvider);
+    final usage = ref.watch(adminUsageProvider);
+    final pricing = ref.watch(aiPricingProvider).value;
+    final total = (usage.value?.values ?? const <OrgUsage>[]).fold<double>(0, (s, u) => s + u.costUsd);
+    final now = DateTime.now();
+    final isCurrent = month.year == now.year && month.month == now.month;
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 960),
+        child: Card(
+          color: FxColors.mintPale,
+          child: Padding(
+            padding: const EdgeInsets.all(FxSpace.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      tooltip: l10n.adminPreviousMonth,
+                      onPressed: () => ref.read(adminMonthProvider.notifier).shift(-1),
+                      icon: const Icon(Icons.chevron_left),
+                    ),
+                    Text(
+                      DateFormat.yMMMM(Localizations.localeOf(context).toLanguageTag()).format(month),
+                      style: text.titleMedium,
+                    ),
+                    IconButton(
+                      tooltip: l10n.adminNextMonth,
+                      onPressed: isCurrent ? null : () => ref.read(adminMonthProvider.notifier).shift(1),
+                      icon: const Icon(Icons.chevron_right),
+                    ),
+                  ],
+                ),
+                if (usage.hasError) MessageBanner.error(l10n.failure(AuthError.from(usage.error!).failure)),
+                Text(l10n.adminTotalCost(_usd(context, total)), style: text.titleSmall),
+                if (pricing != null)
+                  TextButton.icon(
+                    onPressed: () => showDialog<void>(context: context, builder: (_) => _PricingDialog(pricing: pricing)),
+                    icon: const Icon(Icons.price_change_outlined, size: 18),
+                    label: Text(
+                      '${l10n.adminPricingTitle} : ${_usd(context, pricing.inputPerMtok)} / ${_usd(context, pricing.outputPerMtok)}',
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Scans du mois face au quota, membres, contenu, jetons et coût.
+class _UsageLine extends StatelessWidget {
+  const _UsageLine({required this.usage, required this.kind});
+
+  final OrgUsage usage;
+  final OrgKind kind;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final u = usage;
+    final ratio = u.scanQuota == 0 ? (u.scans > 0 ? 1.0 : 0.0) : (u.scans / u.scanQuota).clamp(0.0, 1.0);
+    final color = ratio >= 1 ? FxColors.error : (ratio >= 0.8 ? FxColors.warning : FxColors.emerald);
+    final muted = text.bodySmall?.copyWith(color: FxColors.inkSoft);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (kind == OrgKind.atelier) ...[
+          Text(l10n.adminScans(u.scans, u.scanQuota), style: text.bodyMedium),
+          const SizedBox(height: 4),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(value: ratio, minHeight: 6, color: color, backgroundColor: FxColors.line),
+          ),
+          const SizedBox(height: 4),
+        ],
+        Text(
+          [
+            l10n.adminMembers(u.members),
+            kind == OrgKind.atelier ? l10n.adminItemsAtelier(u.items) : l10n.adminItemsSupplier(u.items),
+          ].join(' · '),
+          style: muted,
+        ),
+        if (kind == OrgKind.atelier) ...[
+          Text(l10n.adminTokens(_count(context, u.inputTokens), _count(context, u.outputTokens)), style: muted),
+          Text(l10n.adminCost(_usd(context, u.costUsd)), style: text.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+        ],
+      ],
+    );
+  }
+}
+
+class _PlanDialog extends ConsumerStatefulWidget {
+  const _PlanDialog({required this.orgId, required this.usage});
+
+  final String orgId;
+  final OrgUsage usage;
+
+  @override
+  ConsumerState<_PlanDialog> createState() => _PlanDialogState();
+}
+
+class _PlanDialogState extends ConsumerState<_PlanDialog> {
+  late String _plan = adminPlans.containsKey(widget.usage.plan) ? widget.usage.plan : 'pilot';
+  late final _quota = TextEditingController(text: '${widget.usage.scanQuota}');
+  bool _busy = false;
+  String? _error;
+
+  @override
+  void dispose() {
+    _quota.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    final l10n = context.l10n;
+    final text = _quota.text.trim();
+    final quota = text.isEmpty ? null : int.tryParse(text);
+    if ((text.isNotEmpty && (quota == null || quota < 0)) || (quota == null && adminPlans[_plan] == null)) {
+      setState(() => _error = l10n.errorNumberRange(0, 1000000));
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    try {
+      await ref.read(adminRepositoryProvider).setPlan(widget.orgId, _plan, quota);
+      ref.invalidate(adminUsageProvider);
+      if (!mounted) return;
+      final messenger = ScaffoldMessenger.of(context);
+      Navigator.of(context).pop();
+      messenger.showSnackBar(SnackBar(content: Text(l10n.adminPlanSaved)));
+    } on AuthError catch (e) {
+      if (mounted) setState(() => _error = l10n.failure(e.failure));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.adminEditPlan),
+      content: SizedBox(
+        width: 400,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DropdownButtonFormField<String>(
+              initialValue: _plan,
+              decoration: InputDecoration(labelText: l10n.adminPlan),
+              items: [
+                for (final e in adminPlans.entries)
+                  DropdownMenuItem(
+                    value: e.key,
+                    child: Text(e.value == null ? l10n.planLabel(e.key) : '${l10n.planLabel(e.key)} · ${e.value}'),
+                  ),
+              ],
+              onChanged: (v) => setState(() {
+                _plan = v ?? _plan;
+                // Offre standard : on propose son quota par défaut.
+                if (adminPlans[_plan] != null) _quota.text = '${adminPlans[_plan]}';
+              }),
+            ),
+            const SizedBox(height: FxSpace.sm),
+            TextField(
+              controller: _quota,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: l10n.adminQuota, helperText: l10n.adminQuotaHint),
+            ),
+            if (_error != null) ...[const SizedBox(height: FxSpace.sm), MessageBanner.error(_error!)],
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(onPressed: _busy ? null : () => Navigator.of(context).pop(), child: Text(l10n.cancel)),
+        FilledButton(onPressed: _busy ? null : _save, child: Text(l10n.save)),
+      ],
+    );
+  }
+}
+
+class _PricingDialog extends ConsumerStatefulWidget {
+  const _PricingDialog({required this.pricing});
+
+  final AiPricing pricing;
+
+  @override
+  ConsumerState<_PricingDialog> createState() => _PricingDialogState();
+}
+
+class _PricingDialogState extends ConsumerState<_PricingDialog> {
+  late final _input = TextEditingController(text: '${widget.pricing.inputPerMtok}');
+  late final _output = TextEditingController(text: '${widget.pricing.outputPerMtok}');
+  String? _error;
+
+  @override
+  void dispose() {
+    _input.dispose();
+    _output.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    final l10n = context.l10n;
+    final input = double.tryParse(_input.text.trim().replaceAll(',', '.'));
+    final output = double.tryParse(_output.text.trim().replaceAll(',', '.'));
+    if (input == null || output == null || input < 0 || output < 0) {
+      setState(() => _error = l10n.errorNumberRange(0, 1000));
+      return;
+    }
+    try {
+      await ref.read(adminRepositoryProvider).setPricing(AiPricing(inputPerMtok: input, outputPerMtok: output));
+      ref.invalidate(aiPricingProvider);
+      ref.invalidate(adminUsageProvider);
+      if (mounted) Navigator.of(context).pop();
+    } on AuthError catch (e) {
+      if (mounted) setState(() => _error = l10n.failure(e.failure));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.adminPricingTitle),
+      content: SizedBox(
+        width: 360,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _input,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              decoration: InputDecoration(labelText: l10n.adminPricingInput, prefixText: r'$ '),
+            ),
+            TextField(
+              controller: _output,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              decoration: InputDecoration(labelText: l10n.adminPricingOutput, prefixText: r'$ '),
+            ),
+            if (_error != null) ...[const SizedBox(height: FxSpace.sm), MessageBanner.error(_error!)],
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.cancel)),
+        FilledButton(onPressed: _save, child: Text(l10n.save)),
+      ],
     );
   }
 }

@@ -1962,4 +1962,92 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get sharedError =>
       'No se pudo cargar la página. Compruebe su conexión e inténtelo de nuevo.';
+
+  @override
+  String get adminPlan => 'Plan';
+
+  @override
+  String get plan_pilot => 'Piloto';
+
+  @override
+  String get plan_essential => 'Esencial';
+
+  @override
+  String get plan_pro => 'Pro';
+
+  @override
+  String get plan_custom => 'A medida';
+
+  @override
+  String get adminQuota => 'Cuota de escaneos al mes';
+
+  @override
+  String get adminQuotaHint => 'Vacío: cuota del plan';
+
+  @override
+  String adminScans(int scans, int quota) {
+    return '$scans / $quota escaneos';
+  }
+
+  @override
+  String adminItemsAtelier(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiales',
+      one: '1 material',
+      zero: 'ningún material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminItemsSupplier(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count referencias',
+      one: '1 referencia',
+      zero: 'ninguna referencia',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminTokens(String input, String output) {
+    return 'Tokens: $input de entrada · $output de salida';
+  }
+
+  @override
+  String adminCost(String cost) {
+    return 'Coste de IA estimado: $cost';
+  }
+
+  @override
+  String adminTotalCost(String cost) {
+    return 'Coste de IA del mes, todas las organizaciones: $cost';
+  }
+
+  @override
+  String get adminEditPlan => 'Cambiar el plan';
+
+  @override
+  String get adminPlanSaved =>
+      'Plan actualizado: la nueva cuota se aplica al escáner de inmediato.';
+
+  @override
+  String get adminPricingTitle =>
+      'Tarifa del modelo de IA (\$ por millón de tokens)';
+
+  @override
+  String get adminPricingInput => 'Entrada';
+
+  @override
+  String get adminPricingOutput => 'Salida';
+
+  @override
+  String get adminPreviousMonth => 'Mes anterior';
+
+  @override
+  String get adminNextMonth => 'Mes siguiente';
 }

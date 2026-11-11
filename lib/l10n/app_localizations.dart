@@ -3257,6 +3257,126 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Impossible de charger la page. Vérifiez votre connexion puis réessayez.'**
   String get sharedError;
+
+  /// No description provided for @adminPlan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offre'**
+  String get adminPlan;
+
+  /// No description provided for @plan_pilot.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pilote'**
+  String get plan_pilot;
+
+  /// No description provided for @plan_essential.
+  ///
+  /// In fr, this message translates to:
+  /// **'Essentiel'**
+  String get plan_essential;
+
+  /// No description provided for @plan_pro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pro'**
+  String get plan_pro;
+
+  /// No description provided for @plan_custom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sur mesure'**
+  String get plan_custom;
+
+  /// No description provided for @adminQuota.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quota de scans par mois'**
+  String get adminQuota;
+
+  /// No description provided for @adminQuotaHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vide : quota de l\'offre'**
+  String get adminQuotaHint;
+
+  /// No description provided for @adminScans.
+  ///
+  /// In fr, this message translates to:
+  /// **'{scans} / {quota} scans'**
+  String adminScans(int scans, int quota);
+
+  /// No description provided for @adminItemsAtelier.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{aucune matière} =1{1 matière} other{{count} matières}}'**
+  String adminItemsAtelier(int count);
+
+  /// No description provided for @adminItemsSupplier.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{aucune référence} =1{1 référence} other{{count} références}}'**
+  String adminItemsSupplier(int count);
+
+  /// No description provided for @adminTokens.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jetons : {input} en entrée · {output} en sortie'**
+  String adminTokens(String input, String output);
+
+  /// No description provided for @adminCost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût IA estimé : {cost}'**
+  String adminCost(String cost);
+
+  /// No description provided for @adminTotalCost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût IA du mois, toutes organisations : {cost}'**
+  String adminTotalCost(String cost);
+
+  /// No description provided for @adminEditPlan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier l\'offre'**
+  String get adminEditPlan;
+
+  /// No description provided for @adminPlanSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offre mise à jour : le nouveau quota s\'applique dès maintenant au scanner.'**
+  String get adminPlanSaved;
+
+  /// No description provided for @adminPricingTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tarif du modèle d\'IA (en \$ par million de jetons)'**
+  String get adminPricingTitle;
+
+  /// No description provided for @adminPricingInput.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrée'**
+  String get adminPricingInput;
+
+  /// No description provided for @adminPricingOutput.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sortie'**
+  String get adminPricingOutput;
+
+  /// No description provided for @adminPreviousMonth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mois précédent'**
+  String get adminPreviousMonth;
+
+  /// No description provided for @adminNextMonth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mois suivant'**
+  String get adminNextMonth;
 }
 
 class _AppLocalizationsDelegate

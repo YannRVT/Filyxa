@@ -1965,4 +1965,92 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get sharedError =>
       'Pagina nu a putut fi încărcată. Verificați conexiunea și încercați din nou.';
+
+  @override
+  String get adminPlan => 'Plan';
+
+  @override
+  String get plan_pilot => 'Pilot';
+
+  @override
+  String get plan_essential => 'Esențial';
+
+  @override
+  String get plan_pro => 'Pro';
+
+  @override
+  String get plan_custom => 'Personalizat';
+
+  @override
+  String get adminQuota => 'Cotă lunară de scanări';
+
+  @override
+  String get adminQuotaHint => 'Gol: cota planului';
+
+  @override
+  String adminScans(int scans, int quota) {
+    return '$scans / $quota scanări';
+  }
+
+  @override
+  String adminItemsAtelier(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiale',
+      one: '1 material',
+      zero: 'niciun material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminItemsSupplier(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count referințe',
+      one: '1 referință',
+      zero: 'nicio referință',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminTokens(String input, String output) {
+    return 'Tokeni: $input intrare · $output ieșire';
+  }
+
+  @override
+  String adminCost(String cost) {
+    return 'Cost IA estimat: $cost';
+  }
+
+  @override
+  String adminTotalCost(String cost) {
+    return 'Cost IA al lunii, toate organizațiile: $cost';
+  }
+
+  @override
+  String get adminEditPlan => 'Modifică planul';
+
+  @override
+  String get adminPlanSaved =>
+      'Plan actualizat: noua cotă se aplică imediat scanerului.';
+
+  @override
+  String get adminPricingTitle =>
+      'Tariful modelului IA (\$ pe milion de tokeni)';
+
+  @override
+  String get adminPricingInput => 'Intrare';
+
+  @override
+  String get adminPricingOutput => 'Ieșire';
+
+  @override
+  String get adminPreviousMonth => 'Luna anterioară';
+
+  @override
+  String get adminNextMonth => 'Luna următoare';
 }
