@@ -65,6 +65,7 @@ Créez le projet dans une région UE (Paris ou Francfort), puis :
 supabase link --project-ref <ref-du-projet>
 supabase db push
 supabase functions deploy admin-users
+supabase functions deploy analyze-tag
 ```
 
 Dans le tableau de bord, rubrique **Authentication** :
@@ -78,6 +79,29 @@ Dans le tableau de bord, rubrique **Authentication** :
    `{{ .Token }}`, sans lien à ouvrir.
 5. **Emails › SMTP** : configurez un serveur SMTP de production (le service intégré de Supabase est
    limité à quelques e-mails par heure).
+
+### Scanner (IA)
+
+L'Edge Function `analyze-tag` lit les étiquettes avec Claude Opus 5.5 (effort `low`, sortie JSON
+structurée, repli serveur en cas de refus). La clé ne quitte jamais le serveur :
+
+```sh
+supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+supabase secrets set CLAUDE_FAST=true          # facultatif : mode rapide (facturé le double)
+supabase functions deploy analyze-tag
+```
+
+En local, placez `ANTHROPIC_API_KEY=...` dans `supabase/functions/.env` (non versionné). Sans clé,
+`./scripts/dev.sh` lance le scanner en **mode démonstration** (`ANALYZE_TAG_MOCK=true`) : réponse
+fixe, aucun appel ni coût. Chaque scan est compté sur le quota mensuel de l'atelier
+(`organizations.scan_quota`, 300 par défaut).
+
+**Banc d'essai** (critères : 9 scans sur 10 en moins de 7 s, au moins 90 % des champs justes) :
+
+```sh
+deno run -A tools/label-eval/eval.ts --init ~/etiquettes   # puis compléter les .truth.json
+ANTHROPIC_API_KEY=sk-ant-... deno run -A tools/label-eval/eval.ts ~/etiquettes
+```
 
 ### 3. Premier super-admin
 

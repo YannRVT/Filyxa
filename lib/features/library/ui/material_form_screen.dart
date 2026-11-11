@@ -13,13 +13,17 @@ import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
 import 'material_detail_screen.dart' show validateStock;
+import '../../scanner/domain/scan.dart';
 import 'material_widgets.dart';
 
 /// Création (materialId == null) ou modification d'une matière textile.
 class MaterialFormScreen extends ConsumerWidget {
-  const MaterialFormScreen({super.key, this.materialId});
+  const MaterialFormScreen({super.key, this.materialId, this.prefill});
 
   final String? materialId;
+
+  /// Fiche pré-remplie par un scan (création uniquement).
+  final ScanPrefill? prefill;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +41,7 @@ class MaterialFormScreen extends ConsumerWidget {
         )),
       );
     }
-    if (materialId == null) return _MaterialForm(title: title, back: back);
+    if (materialId == null) return _MaterialForm(title: title, back: back, prefill: prefill);
 
     final existing = ref.watch(materialProvider(materialId!));
     return existing.when(
@@ -58,11 +62,12 @@ class _FiberRow {
 }
 
 class _MaterialForm extends ConsumerStatefulWidget {
-  const _MaterialForm({required this.title, required this.back, this.initial});
+  const _MaterialForm({required this.title, required this.back, this.initial, this.prefill});
 
   final String title;
   final String back;
   final MaterialItem? initial;
+  final ScanPrefill? prefill;
 
   @override
   ConsumerState<_MaterialForm> createState() => _MaterialFormState();
@@ -71,19 +76,22 @@ class _MaterialForm extends ConsumerStatefulWidget {
 class _MaterialFormState extends ConsumerState<_MaterialForm> {
   final _formKey = GlobalKey<FormState>();
   late final MaterialItem? _m = widget.initial;
-  late final _name = TextEditingController(text: _m?.name);
-  late final _supplier = TextEditingController(text: _m?.supplierName);
-  late final _code = TextEditingController(text: _m?.supplierCode);
-  late final _colorName = TextEditingController(text: _m?.colorName);
-  late final _colorHex = TextEditingController(text: _m?.colorHex);
-  late final _weight = TextEditingController(text: _m?.specs.weightGsm?.toString());
-  late final _width = TextEditingController(text: _m?.specs.widthCm?.toString());
+  // Valeurs de départ : la matière modifiée ou la fiche pré-remplie par un scan.
+  late final MaterialItem? _seed = widget.initial ?? widget.prefill?.material;
+  late final Set<String> _uncertain = {...?widget.prefill?.uncertain};
+  late final _name = TextEditingController(text: _seed?.name);
+  late final _supplier = TextEditingController(text: _seed?.supplierName);
+  late final _code = TextEditingController(text: _seed?.supplierCode);
+  late final _colorName = TextEditingController(text: _seed?.colorName);
+  late final _colorHex = TextEditingController(text: _seed?.colorHex);
+  late final _weight = TextEditingController(text: _seed?.specs.weightGsm?.toString());
+  late final _width = TextEditingController(text: _seed?.specs.widthCm?.toString());
   late final _stock = TextEditingController();
-  late final _notes = TextEditingController(text: _m?.notes);
-  late String? _weave = _m?.specs.weave;
-  late final Set<String> _care = {...?_m?.specs.care};
-  late final Set<String> _certifications = {...?_m?.specs.certifications};
-  late final Set<String> _uses = {...?_m?.specs.uses};
+  late final _notes = TextEditingController(text: _seed?.notes);
+  late String? _weave = _seed?.specs.weave;
+  late final Set<String> _care = {...?_seed?.specs.care};
+  late final Set<String> _certifications = {...?_seed?.specs.certifications};
+  late final Set<String> _uses = {...?_seed?.specs.uses};
   late final List<_FiberRow> _fibers = [];
 
   // Photo : existante (chemin), nouvelle (octets) ou retirée.
@@ -100,10 +108,10 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
     super.didChangeDependencies();
     if (_fibers.isEmpty) {
       final lang = langOf(context);
-      final stock = _m?.atelierStockM;
+      final stock = _seed?.atelierStockM;
       if (stock != null) _stock.text = formatNumber(stock, lang, decimals: 2);
       _fibers.addAll([
-        for (final f in _m?.specs.composition ?? const <FiberShare>[])
+        for (final f in _seed?.specs.composition ?? const <FiberShare>[])
           _FiberRow(fiber: f.fiber, pct: formatNumber(f.pct, lang)),
       ]);
       if (_fibers.isEmpty) _fibers.add(_FiberRow());
@@ -208,6 +216,28 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
     }
   }
 
+  /// Décoration d'un champ, surligné tant qu'il est incertain et non modifié.
+  InputDecoration _dec(String label, String field, {Widget? prefixIcon}) {
+    if (!_uncertain.contains(field)) return InputDecoration(labelText: label, prefixIcon: prefixIcon);
+    final warn = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(FxRadius.sm),
+      borderSide: const BorderSide(color: FxColors.warning, width: 1.5),
+    );
+    return InputDecoration(
+      labelText: label,
+      prefixIcon: prefixIcon,
+      helperText: context.l10n.fieldUncertain,
+      helperStyle: const TextStyle(color: FxColors.warning),
+      enabledBorder: warn,
+      suffixIcon: const Icon(Icons.help_outline, color: FxColors.warning, size: 20),
+    );
+  }
+
+  /// Un champ corrigé à la main n'est plus signalé.
+  void _confirm(String field) {
+    if (_uncertain.remove(field)) setState(() {});
+  }
+
   // Validateurs -----------------------------------------------------------------
   String? _intRange(String? v, int min, int max) {
     if ((v ?? '').trim().isEmpty) return null;
@@ -248,6 +278,11 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
         );
 
     final total = compositionTotal(_composition);
+    final duplicate = findDuplicate(
+      ref.watch(materialsProvider).value ?? const [],
+      supplierCode: _code.text,
+      exceptId: _m?.id,
+    );
     final previewColor = colorFromHex(_colorHex.text);
 
     return Scaffold(
@@ -266,24 +301,52 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    if (widget.prefill != null) ...[
+                      MessageBanner.info(l10n.prefillBanner),
+                      const SizedBox(height: FxSpace.md),
+                    ],
+                    if (duplicate != null) ...[
+                      MessageBanner.warning(l10n.duplicateFound(duplicate.name)),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () => context.go('/library/${duplicate.id}'),
+                          child: Text(l10n.duplicateOpen),
+                        ),
+                      ),
+                      const SizedBox(height: FxSpace.sm),
+                    ],
                     section(l10n.sectionIdentity, [
                       TextFormField(
                         controller: _name,
-                        decoration: InputDecoration(labelText: '${l10n.fieldName} *'),
+                        decoration: _dec('${l10n.fieldName} *', 'name'),
                         textInputAction: TextInputAction.next,
+                        onChanged: (_) => _confirm('name'),
                         validator: (v) => (v ?? '').trim().isEmpty ? l10n.errorRequired : null,
                       ),
                       gap,
                       pair(
-                        TextFormField(controller: _supplier, decoration: InputDecoration(labelText: l10n.fieldSupplier)),
+                        TextFormField(
+                          controller: _supplier,
+                          decoration: _dec(l10n.fieldSupplier, 'supplier_name'),
+                          onChanged: (_) => _confirm('supplier_name'),
+                        ),
                         TextFormField(
                           controller: _code,
                           style: FxTheme.mono(size: 15),
-                          decoration: InputDecoration(labelText: l10n.fieldSupplierCode),
+                          decoration: _dec(l10n.fieldSupplierCode, 'supplier_code'),
+                          onChanged: (_) {
+                            _confirm('supplier_code');
+                            setState(() {});
+                          },
                         ),
                       ),
                     ]),
                     section(l10n.sectionComposition, [
+                      if (_uncertain.contains('composition')) ...[
+                        MessageBanner.warning(l10n.sectionUncertain),
+                        const SizedBox(height: FxSpace.md),
+                      ],
                       for (final (i, row) in _fibers.indexed) ...[
                         Row(
                           children: [
@@ -297,7 +360,10 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                                   for (final f in fibers)
                                     DropdownMenuItem(value: f.code, child: Text('${f.label(lang)} (${f.code})')),
                                 ],
-                                onChanged: (v) => setState(() => row.fiber = v),
+                                onChanged: (v) => setState(() {
+                                  row.fiber = v;
+                                  _uncertain.remove('composition');
+                                }),
                               ),
                             ),
                             const SizedBox(width: FxSpace.sm),
@@ -350,14 +416,16 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                           controller: _weight,
                           keyboardType: TextInputType.number,
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                          decoration: InputDecoration(labelText: l10n.fieldWeight),
+                          decoration: _dec(l10n.fieldWeight, 'weight_gsm'),
+                          onChanged: (_) => _confirm('weight_gsm'),
                           validator: (v) => _intRange(v, 1, 2000),
                         ),
                         TextFormField(
                           controller: _width,
                           keyboardType: TextInputType.number,
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                          decoration: InputDecoration(labelText: l10n.fieldWidth),
+                          decoration: _dec(l10n.fieldWidth, 'width_cm'),
+                          onChanged: (_) => _confirm('width_cm'),
                           validator: (v) => _intRange(v, 1, 600),
                         ),
                       ),
@@ -365,17 +433,24 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                       DropdownButtonFormField<String?>(
                         initialValue: _weave,
                         isExpanded: true,
-                        decoration: InputDecoration(labelText: l10n.fieldWeave),
+                        decoration: _dec(l10n.fieldWeave, 'weave'),
                         items: [
                           DropdownMenuItem(value: null, child: Text(l10n.noneOption)),
                           for (final w in weaves) DropdownMenuItem(value: w.code, child: Text(w.label(lang))),
                         ],
-                        onChanged: (v) => setState(() => _weave = v),
+                        onChanged: (v) => setState(() {
+                          _weave = v;
+                          _uncertain.remove('weave');
+                        }),
                       ),
                     ]),
                     section(l10n.sectionColor, [
                       pair(
-                        TextFormField(controller: _colorName, decoration: InputDecoration(labelText: l10n.fieldColorName)),
+                        TextFormField(
+                          controller: _colorName,
+                          decoration: _dec(l10n.fieldColorName, 'color_name'),
+                          onChanged: (_) => _confirm('color_name'),
+                        ),
                         TextFormField(
                           controller: _colorHex,
                           style: FxTheme.mono(size: 15),
@@ -383,8 +458,9 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                             FilteringTextInputFormatter.allow(RegExp(r'[#0-9a-fA-F]')),
                             LengthLimitingTextInputFormatter(7),
                           ],
-                          decoration: InputDecoration(
-                            labelText: l10n.fieldColorHex,
+                          decoration: _dec(
+                            l10n.fieldColorHex,
+                            'color_hex',
                             prefixIcon: Padding(
                               padding: const EdgeInsets.all(10),
                               child: Container(
@@ -398,7 +474,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                               ),
                             ),
                           ),
-                          onChanged: (_) => setState(() {}),
+                          onChanged: (_) => setState(() => _uncertain.remove('color_hex')),
                           validator: (v) =>
                               (v ?? '').trim().isEmpty || normalizeHex(v) != null ? null : l10n.errorHex,
                         ),
@@ -417,6 +493,10 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                       ),
                     ]),
                     section(l10n.sectionCare, [
+                      if (_uncertain.contains('care')) ...[
+                        MessageBanner.warning(l10n.sectionUncertain),
+                        const SizedBox(height: FxSpace.md),
+                      ],
                       for (final family in CareFamily.values) ...[
                         DropdownButtonFormField<String?>(
                           initialValue: _care.where((c) => careCode(c)?.family == family).firstOrNull,
@@ -438,6 +518,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                           ],
                           // Une seule valeur par famille.
                           onChanged: (v) => setState(() {
+                            _uncertain.remove('care');
                             _care.removeWhere((x) => careCode(x)?.family == family);
                             if (v != null) _care.add(v);
                           }),

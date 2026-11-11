@@ -218,6 +218,10 @@ class MessageBanner extends StatelessWidget {
       : color = FxColors.info,
         background = FxColors.infoBg;
 
+  const MessageBanner.warning(this.message, {super.key})
+      : color = FxColors.warning,
+        background = FxColors.warningBg;
+
   const MessageBanner.success(this.message, {super.key})
       : color = FxColors.success,
         background = FxColors.successBg;

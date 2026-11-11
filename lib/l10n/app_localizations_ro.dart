@@ -946,4 +946,68 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get adminOrgNameGeneric => 'Numele organizației';
+
+  @override
+  String get scanTitle => 'Scanează o mostră';
+
+  @override
+  String get scanIntro =>
+      'Fotografiază eticheta mostrei, dreaptă și clară. Filyxa citește compoziția, gramajul, lățimea, întreținerea și codul articolului; tu verifici înainte de salvare.';
+
+  @override
+  String get scanTakePhoto => 'Fă o fotografie';
+
+  @override
+  String get scanImportPhoto => 'Importă o fotografie';
+
+  @override
+  String get scanReading => 'Se citește eticheta…';
+
+  @override
+  String scanUsage(int scans, int quota) {
+    return '$scans / $quota scanări luna aceasta';
+  }
+
+  @override
+  String scanQuotaWarning(int percent) {
+    return 'S-a folosit $percent % din cota lunară de scanări.';
+  }
+
+  @override
+  String get scanQuotaExhausted =>
+      'Cota lunară de scanări a fost atinsă. Introducerea manuală rămâne posibilă.';
+
+  @override
+  String get scanFailureNotLabel =>
+      'Nicio etichetă textilă lizibilă în această fotografie. Refă-o mai de aproape, dreaptă, fără reflexii.';
+
+  @override
+  String get scanFailureRefused =>
+      'Analiza acestei imagini a fost refuzată. Încearcă o altă fotografie.';
+
+  @override
+  String get scanFailureAi =>
+      'Serviciul de citire este momentan indisponibil. Încearcă din nou în câteva clipe.';
+
+  @override
+  String get scanFailureImage =>
+      'Această imagine nu este acceptată (JPEG, PNG sau WebP, maximum 5 MB).';
+
+  @override
+  String get prefillBanner =>
+      'Fișă precompletată de scanare. Verifică câmpurile semnalate înainte de salvare.';
+
+  @override
+  String get fieldUncertain => 'Citit cu puțină certitudine: de verificat';
+
+  @override
+  String get sectionUncertain => 'Citire incertă: verifică această secțiune.';
+
+  @override
+  String duplicateFound(String name) {
+    return 'Există deja un material cu acest cod de articol: „$name”.';
+  }
+
+  @override
+  String get duplicateOpen => 'Deschide fișa existentă';
 }

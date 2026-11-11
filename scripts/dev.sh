@@ -59,13 +59,21 @@ cat > env.json <<JSON
 }
 JSON
 
+# Fonctions serveur (admin-users, analyze-tag). Sans clé Claude dans
+# supabase/functions/.env, le scanner tourne en mode démonstration (aucun appel à l'IA).
+ENV_FILE="supabase/functions/.env"
+if ! grep -q '^ANTHROPIC_API_KEY=.' "$ENV_FILE" 2>/dev/null; then
+  ENV_FILE="$(mktemp -t filyxa-env)"
+  echo "ANALYZE_TAG_MOCK=true" >"$ENV_FILE"
+  echo "▸ Scanner en mode démonstration (aucune clé ANTHROPIC_API_KEY dans supabase/functions/.env)"
+fi
 LOG="$(mktemp -t filyxa-functions)"
-supabase functions serve admin-users >"$LOG" 2>&1 &
+supabase functions serve --env-file "$ENV_FILE" >"$LOG" 2>&1 &
 FUNCTIONS_PID=$!
 trap 'kill $FUNCTIONS_PID 2>/dev/null || true' EXIT
 
 echo "▸ API      ${API_URL}"
 echo "▸ E-mails  ${INBUCKET_URL}"
-echo "▸ Logs de la fonction admin-users : ${LOG}"
+echo "▸ Logs des fonctions : ${LOG}"
 echo "▸ Lancement de l'app (${DEVICE})… « r » recharge, « R » redémarre, « q » quitte."
 "$FLUTTER" run -d "$DEVICE" --dart-define-from-file=env.json

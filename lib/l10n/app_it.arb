@@ -261,5 +261,22 @@
   "issueDuplicate": "Codice «{value}» presente più volte nel file",
   "adminOrgKind": "Tipo di organizzazione",
   "adminNewOrg": "Nuova organizzazione",
-  "adminOrgNameGeneric": "Nome dell'organizzazione"
+  "adminOrgNameGeneric": "Nome dell'organizzazione",
+  "scanTitle": "Scansiona un campione",
+  "scanIntro": "Fotografa l'etichetta del campione, ben piatta e a fuoco. Filyxa legge composizione, grammatura, altezza, manutenzione e codice articolo; tu verifichi prima di salvare.",
+  "scanTakePhoto": "Scatta una foto",
+  "scanImportPhoto": "Importa una foto",
+  "scanReading": "Lettura dell'etichetta…",
+  "scanUsage": "{scans} / {quota} scansioni questo mese",
+  "scanQuotaWarning": "È stato utilizzato il {percent}% della quota mensile di scansioni.",
+  "scanQuotaExhausted": "Quota mensile di scansioni raggiunta. L'inserimento manuale resta possibile.",
+  "scanFailureNotLabel": "Nessuna etichetta tessile leggibile in questa foto. Riprendila più da vicino, ben piatta, senza riflessi.",
+  "scanFailureRefused": "L'analisi di questa immagine è stata rifiutata. Prova un'altra foto.",
+  "scanFailureAi": "Il servizio di lettura è momentaneamente non disponibile. Riprova tra poco.",
+  "scanFailureImage": "Questa immagine non è supportata (JPEG, PNG o WebP, massimo 5 MB).",
+  "prefillBanner": "Scheda precompilata dalla scansione. Verifica i campi segnalati prima di salvare.",
+  "fieldUncertain": "Letto con poca certezza: da verificare",
+  "sectionUncertain": "Lettura incerta: verifica questa sezione.",
+  "duplicateFound": "Esiste già un materiale con questo codice articolo: «{name}».",
+  "duplicateOpen": "Apri la scheda esistente"
 }

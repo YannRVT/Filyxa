@@ -943,4 +943,68 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get adminOrgNameGeneric => 'Nombre de la organización';
+
+  @override
+  String get scanTitle => 'Escanear una muestra';
+
+  @override
+  String get scanIntro =>
+      'Fotografía la etiqueta de la muestra, plana y nítida. Filyxa lee la composición, el gramaje, el ancho, el cuidado y el código; tú lo compruebas antes de guardar.';
+
+  @override
+  String get scanTakePhoto => 'Hacer una foto';
+
+  @override
+  String get scanImportPhoto => 'Importar una foto';
+
+  @override
+  String get scanReading => 'Leyendo la etiqueta…';
+
+  @override
+  String scanUsage(int scans, int quota) {
+    return '$scans / $quota escaneos este mes';
+  }
+
+  @override
+  String scanQuotaWarning(int percent) {
+    return 'Se ha usado el $percent % de la cuota mensual de escaneos.';
+  }
+
+  @override
+  String get scanQuotaExhausted =>
+      'Cuota mensual de escaneos alcanzada. Puedes seguir introduciendo materiales a mano.';
+
+  @override
+  String get scanFailureNotLabel =>
+      'No hay ninguna etiqueta textil legible en esta foto. Vuelve a hacerla más cerca, plana y sin reflejos.';
+
+  @override
+  String get scanFailureRefused =>
+      'Se ha rechazado el análisis de esta imagen. Prueba con otra foto.';
+
+  @override
+  String get scanFailureAi =>
+      'El servicio de lectura no está disponible en este momento. Inténtalo de nuevo en un instante.';
+
+  @override
+  String get scanFailureImage =>
+      'Esta imagen no es compatible (JPEG, PNG o WebP, 5 MB como máximo).';
+
+  @override
+  String get prefillBanner =>
+      'Ficha rellenada por el escaneo. Comprueba los campos señalados antes de guardar.';
+
+  @override
+  String get fieldUncertain => 'Leído con poca certeza: compruébalo';
+
+  @override
+  String get sectionUncertain => 'Lectura incierta: comprueba esta sección.';
+
+  @override
+  String duplicateFound(String name) {
+    return 'Ya existe un material con este código: «$name».';
+  }
+
+  @override
+  String get duplicateOpen => 'Abrir la ficha existente';
 }

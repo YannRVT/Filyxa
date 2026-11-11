@@ -940,4 +940,68 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get adminOrgNameGeneric => 'Nome da organização';
+
+  @override
+  String get scanTitle => 'Digitalizar uma amostra';
+
+  @override
+  String get scanIntro =>
+      'Fotografe a etiqueta da amostra, plana e nítida. O Filyxa lê a composição, a gramagem, a largura, os cuidados e o código; verifica antes de guardar.';
+
+  @override
+  String get scanTakePhoto => 'Tirar uma fotografia';
+
+  @override
+  String get scanImportPhoto => 'Importar uma fotografia';
+
+  @override
+  String get scanReading => 'A ler a etiqueta…';
+
+  @override
+  String scanUsage(int scans, int quota) {
+    return '$scans / $quota digitalizações este mês';
+  }
+
+  @override
+  String scanQuotaWarning(int percent) {
+    return 'Foi utilizado $percent % da quota mensal de digitalizações.';
+  }
+
+  @override
+  String get scanQuotaExhausted =>
+      'Quota mensal de digitalizações atingida. A introdução manual continua possível.';
+
+  @override
+  String get scanFailureNotLabel =>
+      'Não há nenhuma etiqueta têxtil legível nesta fotografia. Tire-a de novo mais de perto, plana e sem reflexos.';
+
+  @override
+  String get scanFailureRefused =>
+      'A análise desta imagem foi recusada. Experimente outra fotografia.';
+
+  @override
+  String get scanFailureAi =>
+      'O serviço de leitura está temporariamente indisponível. Tente novamente dentro de instantes.';
+
+  @override
+  String get scanFailureImage =>
+      'Esta imagem não é suportada (JPEG, PNG ou WebP, máximo 5 MB).';
+
+  @override
+  String get prefillBanner =>
+      'Ficha pré-preenchida pela digitalização. Verifique os campos assinalados antes de guardar.';
+
+  @override
+  String get fieldUncertain => 'Lido com pouca certeza: verifique';
+
+  @override
+  String get sectionUncertain => 'Leitura incerta: verifique esta secção.';
+
+  @override
+  String duplicateFound(String name) {
+    return 'Já existe um material com este código: «$name».';
+  }
+
+  @override
+  String get duplicateOpen => 'Abrir a ficha existente';
 }
