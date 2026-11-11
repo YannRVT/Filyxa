@@ -826,5 +826,137 @@
         "type": "String"
       }
     }
-  }
+  },
+  "studioNewCollection": "Nouvelle collection",
+  "studioCollectionName": "Nom de la collection",
+  "studioCollectionHint": "Ex. AH27",
+  "studioEmptyTitle": "Aucune collection pour le moment",
+  "studioEmptyEditor": "Créez une collection pour regrouper les modèles d'une saison, par exemple « AH27 ».",
+  "studioEmptyViewer": "Les éditeurs de votre atelier n'ont pas encore créé de collection.",
+  "studioModelCount": "{count, plural, =0{Aucun modèle} =1{1 modèle} other{{count} modèles}}",
+  "@studioModelCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "collectionEmptyTitle": "Cette collection est vide",
+  "collectionEmptyEditor": "Ajoutez un premier modèle : vêtement, chaussure, maroquinerie ou accessoire.",
+  "collectionEmptyViewer": "Aucun modèle dans cette collection pour le moment.",
+  "studioNewModel": "Nouveau modèle",
+  "modelName": "Nom du modèle",
+  "modelReference": "Référence (facultatif)",
+  "modelType": "Type de produit",
+  "productGarment": "Vêtement",
+  "productFootwear": "Chaussure",
+  "productLeatherGoods": "Maroquinerie",
+  "productAccessory": "Accessoire",
+  "colorwayCount": "{count, plural, =1{1 coloris} other{{count} coloris}}",
+  "@colorwayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bomLineCount": "{count, plural, =0{aucune matière} =1{1 matière} other{{count} matières}}",
+  "@bomLineCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "rename": "Renommer",
+  "create": "Créer",
+  "add": "Ajouter",
+  "deleteCollectionTitle": "Supprimer la collection « {name} » ?",
+  "@deleteCollectionTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteCollectionBody": "Ses modèles, coloris et quantités seront définitivement supprimés. Les matières de TissuTech sont conservées.",
+  "deleteModelTitle": "Supprimer le modèle « {name} » ?",
+  "@deleteModelTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteModelBody": "Ses coloris et sa nomenclature seront définitivement supprimés. Les matières de TissuTech sont conservées.",
+  "wasteLabel": "Marge de perte (%)",
+  "quantityLabel": "Quantité prévue (pièces)",
+  "addColorway": "Ajouter un coloris",
+  "declineColorways": "Décliner en coloris",
+  "colorwayCurrent": "Coloris actuel",
+  "colorwayNew": "Nouveau coloris",
+  "colorwayNameHint": "Ex. Noir",
+  "colorwayDefault": "Coloris {index}",
+  "@colorwayDefault": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "colorwayCopyHelp": "Le nouveau coloris reprend les matières de « {name} » : vous n'aurez qu'à changer celles qui diffèrent.",
+  "@colorwayCopyHelp": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteColorway": "Supprimer ce coloris",
+  "addMaterial": "Ajouter une matière",
+  "modelEmptyTitle": "Aucune matière dans ce modèle",
+  "modelEmptyEditor": "Ajoutez les matières du modèle et leur consommation par pièce pour calculer le besoin.",
+  "modelEmptyViewer": "Aucune matière n'a encore été associée à ce modèle.",
+  "bomRoleLabel": "Rôle",
+  "roleOther": "Autre rôle…",
+  "roleCustom": "Nom du rôle",
+  "role_main": "Tissu principal",
+  "role_lining": "Doublure",
+  "role_interfacing": "Entoilage",
+  "role_contrast": "Tissu contrasté",
+  "role_pocketing": "Fond de poche",
+  "role_rib": "Bord-côte",
+  "role_upper": "Tige",
+  "role_sock_lining": "Première de propreté",
+  "role_insole": "Première de montage",
+  "role_outsole": "Semelle",
+  "role_reinforcement": "Renfort",
+  "role_exterior": "Extérieur",
+  "role_gusset": "Soufflet",
+  "role_strap": "Anse ou bandoulière",
+  "role_trim": "Garniture",
+  "consumptionLabel": "Consommation (m/pièce)",
+  "requirementLine": "Besoin : {value} m",
+  "@requirementLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "requirementTitle": "Besoin total par matière",
+  "requirementFormula": "Consommation × quantité × (1 + marge de {waste} %)",
+  "@requirementFormula": {
+    "placeholders": {
+      "waste": {
+        "type": "String"
+      }
+    }
+  },
+  "pickMaterial": "Choisir une matière",
+  "pickMaterialSearch": "Rechercher dans TissuTech",
+  "pickMaterialEmpty": "Aucune matière ne correspond.",
+  "pickMaterialLibraryEmpty": "Ajoutez d'abord des matières dans TissuTech.",
+  "removeLine": "Retirer cette matière",
+  "materialMissing": "Matière supprimée de TissuTech"
 }

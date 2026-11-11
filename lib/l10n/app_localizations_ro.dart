@@ -1315,4 +1315,258 @@ class AppLocalizationsRo extends AppLocalizations {
   String notifReportRejected(String name, String field) {
     return '$name: semnalarea pentru „$field” a fost respinsă';
   }
+
+  @override
+  String get studioNewCollection => 'Colecție nouă';
+
+  @override
+  String get studioCollectionName => 'Numele colecției';
+
+  @override
+  String get studioCollectionHint => 'Ex. TI27';
+
+  @override
+  String get studioEmptyTitle => 'Nicio colecție deocamdată';
+
+  @override
+  String get studioEmptyEditor =>
+      'Creați o colecție pentru a grupa modelele unui sezon, de exemplu „TI27”.';
+
+  @override
+  String get studioEmptyViewer =>
+      'Editorii atelierului dvs. nu au creat încă nicio colecție.';
+
+  @override
+  String studioModelCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count modele',
+      one: '1 model',
+      zero: 'Niciun model',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get collectionEmptyTitle => 'Această colecție este goală';
+
+  @override
+  String get collectionEmptyEditor =>
+      'Adăugați un prim model: îmbrăcăminte, încălțăminte, marochinărie sau accesoriu.';
+
+  @override
+  String get collectionEmptyViewer =>
+      'Niciun model în această colecție deocamdată.';
+
+  @override
+  String get studioNewModel => 'Model nou';
+
+  @override
+  String get modelName => 'Numele modelului';
+
+  @override
+  String get modelReference => 'Referință (opțional)';
+
+  @override
+  String get modelType => 'Tip de produs';
+
+  @override
+  String get productGarment => 'Îmbrăcăminte';
+
+  @override
+  String get productFootwear => 'Încălțăminte';
+
+  @override
+  String get productLeatherGoods => 'Marochinărie';
+
+  @override
+  String get productAccessory => 'Accesoriu';
+
+  @override
+  String colorwayCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count culori',
+      one: '1 culoare',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String bomLineCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiale',
+      one: '1 material',
+      zero: 'niciun material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get rename => 'Redenumește';
+
+  @override
+  String get create => 'Creează';
+
+  @override
+  String get add => 'Adaugă';
+
+  @override
+  String deleteCollectionTitle(String name) {
+    return 'Ștergeți colecția „$name”?';
+  }
+
+  @override
+  String get deleteCollectionBody =>
+      'Modelele, culorile și cantitățile sale vor fi șterse definitiv. Materialele din TissuTech sunt păstrate.';
+
+  @override
+  String deleteModelTitle(String name) {
+    return 'Ștergeți modelul „$name”?';
+  }
+
+  @override
+  String get deleteModelBody =>
+      'Culorile și lista de materiale vor fi șterse definitiv. Materialele din TissuTech sunt păstrate.';
+
+  @override
+  String get wasteLabel => 'Marjă de pierdere (%)';
+
+  @override
+  String get quantityLabel => 'Cantitate planificată (bucăți)';
+
+  @override
+  String get addColorway => 'Adaugă o culoare';
+
+  @override
+  String get declineColorways => 'Declină în culori';
+
+  @override
+  String get colorwayCurrent => 'Culoarea actuală';
+
+  @override
+  String get colorwayNew => 'Culoare nouă';
+
+  @override
+  String get colorwayNameHint => 'Ex. Negru';
+
+  @override
+  String colorwayDefault(int index) {
+    return 'Culoarea $index';
+  }
+
+  @override
+  String colorwayCopyHelp(String name) {
+    return 'Noua culoare preia materialele din „$name”: schimbați doar ce diferă.';
+  }
+
+  @override
+  String get deleteColorway => 'Șterge această culoare';
+
+  @override
+  String get addMaterial => 'Adaugă un material';
+
+  @override
+  String get modelEmptyTitle => 'Niciun material în acest model';
+
+  @override
+  String get modelEmptyEditor =>
+      'Adăugați materialele modelului și consumul pe bucată pentru a calcula necesarul.';
+
+  @override
+  String get modelEmptyViewer =>
+      'Niciun material nu a fost încă asociat acestui model.';
+
+  @override
+  String get bomRoleLabel => 'Rol';
+
+  @override
+  String get roleOther => 'Alt rol…';
+
+  @override
+  String get roleCustom => 'Numele rolului';
+
+  @override
+  String get role_main => 'Material principal';
+
+  @override
+  String get role_lining => 'Căptușeală';
+
+  @override
+  String get role_interfacing => 'Întăritură';
+
+  @override
+  String get role_contrast => 'Material de contrast';
+
+  @override
+  String get role_pocketing => 'Buzunare';
+
+  @override
+  String get role_rib => 'Bord-coastă';
+
+  @override
+  String get role_upper => 'Fețe';
+
+  @override
+  String get role_sock_lining => 'Branț de curățenie';
+
+  @override
+  String get role_insole => 'Branț de montaj';
+
+  @override
+  String get role_outsole => 'Talpă';
+
+  @override
+  String get role_reinforcement => 'Ranforsare';
+
+  @override
+  String get role_exterior => 'Exterior';
+
+  @override
+  String get role_gusset => 'Burduf';
+
+  @override
+  String get role_strap => 'Mâner sau curea';
+
+  @override
+  String get role_trim => 'Garnitură';
+
+  @override
+  String get consumptionLabel => 'Consum (m/bucată)';
+
+  @override
+  String requirementLine(String value) {
+    return 'Necesar: $value m';
+  }
+
+  @override
+  String get requirementTitle => 'Necesar total pe material';
+
+  @override
+  String requirementFormula(String waste) {
+    return 'Consum × cantitate × (1 + pierdere de $waste %)';
+  }
+
+  @override
+  String get pickMaterial => 'Alegeți un material';
+
+  @override
+  String get pickMaterialSearch => 'Căutați în TissuTech';
+
+  @override
+  String get pickMaterialEmpty => 'Niciun material nu corespunde.';
+
+  @override
+  String get pickMaterialLibraryEmpty =>
+      'Adăugați mai întâi materiale în TissuTech.';
+
+  @override
+  String get removeLine => 'Elimină acest material';
+
+  @override
+  String get materialMissing => 'Material șters din TissuTech';
 }
