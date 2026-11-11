@@ -2241,6 +2241,420 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'{name} : signalement sur « {field} » rejeté'**
   String notifReportRejected(String name, String field);
+
+  /// No description provided for @studioNewCollection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle collection'**
+  String get studioNewCollection;
+
+  /// No description provided for @studioCollectionName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la collection'**
+  String get studioCollectionName;
+
+  /// No description provided for @studioCollectionHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. AH27'**
+  String get studioCollectionHint;
+
+  /// No description provided for @studioEmptyTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune collection pour le moment'**
+  String get studioEmptyTitle;
+
+  /// No description provided for @studioEmptyEditor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créez une collection pour regrouper les modèles d\'une saison, par exemple « AH27 ».'**
+  String get studioEmptyEditor;
+
+  /// No description provided for @studioEmptyViewer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les éditeurs de votre atelier n\'ont pas encore créé de collection.'**
+  String get studioEmptyViewer;
+
+  /// No description provided for @studioModelCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucun modèle} =1{1 modèle} other{{count} modèles}}'**
+  String studioModelCount(int count);
+
+  /// No description provided for @collectionEmptyTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette collection est vide'**
+  String get collectionEmptyTitle;
+
+  /// No description provided for @collectionEmptyEditor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez un premier modèle : vêtement, chaussure, maroquinerie ou accessoire.'**
+  String get collectionEmptyEditor;
+
+  /// No description provided for @collectionEmptyViewer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun modèle dans cette collection pour le moment.'**
+  String get collectionEmptyViewer;
+
+  /// No description provided for @studioNewModel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau modèle'**
+  String get studioNewModel;
+
+  /// No description provided for @modelName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom du modèle'**
+  String get modelName;
+
+  /// No description provided for @modelReference.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence (facultatif)'**
+  String get modelReference;
+
+  /// No description provided for @modelType.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type de produit'**
+  String get modelType;
+
+  /// No description provided for @productGarment.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vêtement'**
+  String get productGarment;
+
+  /// No description provided for @productFootwear.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chaussure'**
+  String get productFootwear;
+
+  /// No description provided for @productLeatherGoods.
+  ///
+  /// In fr, this message translates to:
+  /// **'Maroquinerie'**
+  String get productLeatherGoods;
+
+  /// No description provided for @productAccessory.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accessoire'**
+  String get productAccessory;
+
+  /// No description provided for @colorwayCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 coloris} other{{count} coloris}}'**
+  String colorwayCount(int count);
+
+  /// No description provided for @bomLineCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{aucune matière} =1{1 matière} other{{count} matières}}'**
+  String bomLineCount(int count);
+
+  /// No description provided for @rename.
+  ///
+  /// In fr, this message translates to:
+  /// **'Renommer'**
+  String get rename;
+
+  /// No description provided for @create.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer'**
+  String get create;
+
+  /// No description provided for @add.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter'**
+  String get add;
+
+  /// No description provided for @deleteCollectionTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer la collection « {name} » ?'**
+  String deleteCollectionTitle(String name);
+
+  /// No description provided for @deleteCollectionBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ses modèles, coloris et quantités seront définitivement supprimés. Les matières de TissuTech sont conservées.'**
+  String get deleteCollectionBody;
+
+  /// No description provided for @deleteModelTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer le modèle « {name} » ?'**
+  String deleteModelTitle(String name);
+
+  /// No description provided for @deleteModelBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ses coloris et sa nomenclature seront définitivement supprimés. Les matières de TissuTech sont conservées.'**
+  String get deleteModelBody;
+
+  /// No description provided for @wasteLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marge de perte (%)'**
+  String get wasteLabel;
+
+  /// No description provided for @quantityLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité prévue (pièces)'**
+  String get quantityLabel;
+
+  /// No description provided for @addColorway.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un coloris'**
+  String get addColorway;
+
+  /// No description provided for @declineColorways.
+  ///
+  /// In fr, this message translates to:
+  /// **'Décliner en coloris'**
+  String get declineColorways;
+
+  /// No description provided for @colorwayCurrent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coloris actuel'**
+  String get colorwayCurrent;
+
+  /// No description provided for @colorwayNew.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau coloris'**
+  String get colorwayNew;
+
+  /// No description provided for @colorwayNameHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. Noir'**
+  String get colorwayNameHint;
+
+  /// No description provided for @colorwayDefault.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coloris {index}'**
+  String colorwayDefault(int index);
+
+  /// No description provided for @colorwayCopyHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le nouveau coloris reprend les matières de « {name} » : vous n\'aurez qu\'à changer celles qui diffèrent.'**
+  String colorwayCopyHelp(String name);
+
+  /// No description provided for @deleteColorway.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer ce coloris'**
+  String get deleteColorway;
+
+  /// No description provided for @addMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une matière'**
+  String get addMaterial;
+
+  /// No description provided for @modelEmptyTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière dans ce modèle'**
+  String get modelEmptyTitle;
+
+  /// No description provided for @modelEmptyEditor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez les matières du modèle et leur consommation par pièce pour calculer le besoin.'**
+  String get modelEmptyEditor;
+
+  /// No description provided for @modelEmptyViewer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière n\'a encore été associée à ce modèle.'**
+  String get modelEmptyViewer;
+
+  /// No description provided for @bomRoleLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rôle'**
+  String get bomRoleLabel;
+
+  /// No description provided for @roleOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre rôle…'**
+  String get roleOther;
+
+  /// No description provided for @roleCustom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom du rôle'**
+  String get roleCustom;
+
+  /// No description provided for @role_main.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tissu principal'**
+  String get role_main;
+
+  /// No description provided for @role_lining.
+  ///
+  /// In fr, this message translates to:
+  /// **'Doublure'**
+  String get role_lining;
+
+  /// No description provided for @role_interfacing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entoilage'**
+  String get role_interfacing;
+
+  /// No description provided for @role_contrast.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tissu contrasté'**
+  String get role_contrast;
+
+  /// No description provided for @role_pocketing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fond de poche'**
+  String get role_pocketing;
+
+  /// No description provided for @role_rib.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bord-côte'**
+  String get role_rib;
+
+  /// No description provided for @role_upper.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tige'**
+  String get role_upper;
+
+  /// No description provided for @role_sock_lining.
+  ///
+  /// In fr, this message translates to:
+  /// **'Première de propreté'**
+  String get role_sock_lining;
+
+  /// No description provided for @role_insole.
+  ///
+  /// In fr, this message translates to:
+  /// **'Première de montage'**
+  String get role_insole;
+
+  /// No description provided for @role_outsole.
+  ///
+  /// In fr, this message translates to:
+  /// **'Semelle'**
+  String get role_outsole;
+
+  /// No description provided for @role_reinforcement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Renfort'**
+  String get role_reinforcement;
+
+  /// No description provided for @role_exterior.
+  ///
+  /// In fr, this message translates to:
+  /// **'Extérieur'**
+  String get role_exterior;
+
+  /// No description provided for @role_gusset.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soufflet'**
+  String get role_gusset;
+
+  /// No description provided for @role_strap.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anse ou bandoulière'**
+  String get role_strap;
+
+  /// No description provided for @role_trim.
+  ///
+  /// In fr, this message translates to:
+  /// **'Garniture'**
+  String get role_trim;
+
+  /// No description provided for @consumptionLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommation (m/pièce)'**
+  String get consumptionLabel;
+
+  /// No description provided for @requirementLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Besoin : {value} m'**
+  String requirementLine(String value);
+
+  /// No description provided for @requirementTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Besoin total par matière'**
+  String get requirementTitle;
+
+  /// No description provided for @requirementFormula.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommation × quantité × (1 + marge de {waste} %)'**
+  String requirementFormula(String waste);
+
+  /// No description provided for @pickMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir une matière'**
+  String get pickMaterial;
+
+  /// No description provided for @pickMaterialSearch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rechercher dans TissuTech'**
+  String get pickMaterialSearch;
+
+  /// No description provided for @pickMaterialEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière ne correspond.'**
+  String get pickMaterialEmpty;
+
+  /// No description provided for @pickMaterialLibraryEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez d\'abord des matières dans TissuTech.'**
+  String get pickMaterialLibraryEmpty;
+
+  /// No description provided for @removeLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer cette matière'**
+  String get removeLine;
+
+  /// No description provided for @materialMissing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matière supprimée de TissuTech'**
+  String get materialMissing;
 }
 
 class _AppLocalizationsDelegate

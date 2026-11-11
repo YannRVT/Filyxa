@@ -1314,4 +1314,258 @@ class AppLocalizationsIt extends AppLocalizations {
   String notifReportRejected(String name, String field) {
     return '$name: segnalazione su «$field» respinta';
   }
+
+  @override
+  String get studioNewCollection => 'Nuova collezione';
+
+  @override
+  String get studioCollectionName => 'Nome della collezione';
+
+  @override
+  String get studioCollectionHint => 'Es. AI27';
+
+  @override
+  String get studioEmptyTitle => 'Ancora nessuna collezione';
+
+  @override
+  String get studioEmptyEditor =>
+      'Crea una collezione per raggruppare i modelli di una stagione, ad esempio «AI27».';
+
+  @override
+  String get studioEmptyViewer =>
+      'Gli editor del tuo laboratorio non hanno ancora creato collezioni.';
+
+  @override
+  String studioModelCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count modelli',
+      one: '1 modello',
+      zero: 'Nessun modello',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get collectionEmptyTitle => 'Questa collezione è vuota';
+
+  @override
+  String get collectionEmptyEditor =>
+      'Aggiungi un primo modello: abbigliamento, calzatura, pelletteria o accessorio.';
+
+  @override
+  String get collectionEmptyViewer =>
+      'Ancora nessun modello in questa collezione.';
+
+  @override
+  String get studioNewModel => 'Nuovo modello';
+
+  @override
+  String get modelName => 'Nome del modello';
+
+  @override
+  String get modelReference => 'Riferimento (facoltativo)';
+
+  @override
+  String get modelType => 'Tipo di prodotto';
+
+  @override
+  String get productGarment => 'Abbigliamento';
+
+  @override
+  String get productFootwear => 'Calzatura';
+
+  @override
+  String get productLeatherGoods => 'Pelletteria';
+
+  @override
+  String get productAccessory => 'Accessorio';
+
+  @override
+  String colorwayCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count varianti colore',
+      one: '1 variante colore',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String bomLineCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiali',
+      one: '1 materiale',
+      zero: 'nessun materiale',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get rename => 'Rinomina';
+
+  @override
+  String get create => 'Crea';
+
+  @override
+  String get add => 'Aggiungi';
+
+  @override
+  String deleteCollectionTitle(String name) {
+    return 'Eliminare la collezione «$name»?';
+  }
+
+  @override
+  String get deleteCollectionBody =>
+      'I suoi modelli, varianti e quantità saranno eliminati definitivamente. I materiali di TissuTech sono conservati.';
+
+  @override
+  String deleteModelTitle(String name) {
+    return 'Eliminare il modello «$name»?';
+  }
+
+  @override
+  String get deleteModelBody =>
+      'Le sue varianti e la distinta materiali saranno eliminate definitivamente. I materiali di TissuTech sono conservati.';
+
+  @override
+  String get wasteLabel => 'Margine di scarto (%)';
+
+  @override
+  String get quantityLabel => 'Quantità prevista (pezzi)';
+
+  @override
+  String get addColorway => 'Aggiungi una variante';
+
+  @override
+  String get declineColorways => 'Declina in varianti colore';
+
+  @override
+  String get colorwayCurrent => 'Variante attuale';
+
+  @override
+  String get colorwayNew => 'Nuova variante';
+
+  @override
+  String get colorwayNameHint => 'Es. Nero';
+
+  @override
+  String colorwayDefault(int index) {
+    return 'Variante $index';
+  }
+
+  @override
+  String colorwayCopyHelp(String name) {
+    return 'La nuova variante riprende i materiali di «$name»: basterà cambiare quelli diversi.';
+  }
+
+  @override
+  String get deleteColorway => 'Elimina questa variante';
+
+  @override
+  String get addMaterial => 'Aggiungi un materiale';
+
+  @override
+  String get modelEmptyTitle => 'Nessun materiale in questo modello';
+
+  @override
+  String get modelEmptyEditor =>
+      'Aggiungi i materiali del modello e il consumo per pezzo per calcolare il fabbisogno.';
+
+  @override
+  String get modelEmptyViewer =>
+      'Nessun materiale è ancora associato a questo modello.';
+
+  @override
+  String get bomRoleLabel => 'Ruolo';
+
+  @override
+  String get roleOther => 'Altro ruolo…';
+
+  @override
+  String get roleCustom => 'Nome del ruolo';
+
+  @override
+  String get role_main => 'Tessuto principale';
+
+  @override
+  String get role_lining => 'Fodera';
+
+  @override
+  String get role_interfacing => 'Teletta';
+
+  @override
+  String get role_contrast => 'Tessuto a contrasto';
+
+  @override
+  String get role_pocketing => 'Tasche';
+
+  @override
+  String get role_rib => 'Costina';
+
+  @override
+  String get role_upper => 'Tomaia';
+
+  @override
+  String get role_sock_lining => 'Sottopiede';
+
+  @override
+  String get role_insole => 'Soletta di montaggio';
+
+  @override
+  String get role_outsole => 'Suola';
+
+  @override
+  String get role_reinforcement => 'Rinforzo';
+
+  @override
+  String get role_exterior => 'Esterno';
+
+  @override
+  String get role_gusset => 'Soffietto';
+
+  @override
+  String get role_strap => 'Manico o tracolla';
+
+  @override
+  String get role_trim => 'Guarnizione';
+
+  @override
+  String get consumptionLabel => 'Consumo (m/pezzo)';
+
+  @override
+  String requirementLine(String value) {
+    return 'Fabbisogno: $value m';
+  }
+
+  @override
+  String get requirementTitle => 'Fabbisogno totale per materiale';
+
+  @override
+  String requirementFormula(String waste) {
+    return 'Consumo × quantità × (1 + scarto del $waste %)';
+  }
+
+  @override
+  String get pickMaterial => 'Scegli un materiale';
+
+  @override
+  String get pickMaterialSearch => 'Cerca in TissuTech';
+
+  @override
+  String get pickMaterialEmpty => 'Nessun materiale corrispondente.';
+
+  @override
+  String get pickMaterialLibraryEmpty =>
+      'Aggiungi prima dei materiali in TissuTech.';
+
+  @override
+  String get removeLine => 'Rimuovi questo materiale';
+
+  @override
+  String get materialMissing => 'Materiale eliminato da TissuTech';
 }

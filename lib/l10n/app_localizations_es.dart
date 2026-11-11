@@ -1313,4 +1313,257 @@ class AppLocalizationsEs extends AppLocalizations {
   String notifReportRejected(String name, String field) {
     return '$name: señalamiento sobre «$field» rechazado';
   }
+
+  @override
+  String get studioNewCollection => 'Nueva colección';
+
+  @override
+  String get studioCollectionName => 'Nombre de la colección';
+
+  @override
+  String get studioCollectionHint => 'Ej. OI27';
+
+  @override
+  String get studioEmptyTitle => 'Aún no hay colecciones';
+
+  @override
+  String get studioEmptyEditor =>
+      'Cree una colección para agrupar los modelos de una temporada, por ejemplo «OI27».';
+
+  @override
+  String get studioEmptyViewer =>
+      'Los editores de su taller aún no han creado ninguna colección.';
+
+  @override
+  String studioModelCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count modelos',
+      one: '1 modelo',
+      zero: 'Ningún modelo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get collectionEmptyTitle => 'Esta colección está vacía';
+
+  @override
+  String get collectionEmptyEditor =>
+      'Añada un primer modelo: prenda, calzado, marroquinería o accesorio.';
+
+  @override
+  String get collectionEmptyViewer => 'Aún no hay modelos en esta colección.';
+
+  @override
+  String get studioNewModel => 'Nuevo modelo';
+
+  @override
+  String get modelName => 'Nombre del modelo';
+
+  @override
+  String get modelReference => 'Referencia (opcional)';
+
+  @override
+  String get modelType => 'Tipo de producto';
+
+  @override
+  String get productGarment => 'Prenda';
+
+  @override
+  String get productFootwear => 'Calzado';
+
+  @override
+  String get productLeatherGoods => 'Marroquinería';
+
+  @override
+  String get productAccessory => 'Accesorio';
+
+  @override
+  String colorwayCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count colores',
+      one: '1 color',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String bomLineCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiales',
+      one: '1 material',
+      zero: 'ningún material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get rename => 'Renombrar';
+
+  @override
+  String get create => 'Crear';
+
+  @override
+  String get add => 'Añadir';
+
+  @override
+  String deleteCollectionTitle(String name) {
+    return '¿Eliminar la colección «$name»?';
+  }
+
+  @override
+  String get deleteCollectionBody =>
+      'Sus modelos, colores y cantidades se eliminarán definitivamente. Los materiales de TissuTech se conservan.';
+
+  @override
+  String deleteModelTitle(String name) {
+    return '¿Eliminar el modelo «$name»?';
+  }
+
+  @override
+  String get deleteModelBody =>
+      'Sus colores y su lista de materiales se eliminarán definitivamente. Los materiales de TissuTech se conservan.';
+
+  @override
+  String get wasteLabel => 'Margen de merma (%)';
+
+  @override
+  String get quantityLabel => 'Cantidad prevista (piezas)';
+
+  @override
+  String get addColorway => 'Añadir un color';
+
+  @override
+  String get declineColorways => 'Declinar en colores';
+
+  @override
+  String get colorwayCurrent => 'Color actual';
+
+  @override
+  String get colorwayNew => 'Nuevo color';
+
+  @override
+  String get colorwayNameHint => 'Ej. Negro';
+
+  @override
+  String colorwayDefault(int index) {
+    return 'Color $index';
+  }
+
+  @override
+  String colorwayCopyHelp(String name) {
+    return 'El nuevo color retoma los materiales de «$name»: solo tendrá que cambiar los que difieren.';
+  }
+
+  @override
+  String get deleteColorway => 'Eliminar este color';
+
+  @override
+  String get addMaterial => 'Añadir un material';
+
+  @override
+  String get modelEmptyTitle => 'Ningún material en este modelo';
+
+  @override
+  String get modelEmptyEditor =>
+      'Añada los materiales del modelo y su consumo por pieza para calcular la necesidad.';
+
+  @override
+  String get modelEmptyViewer =>
+      'Aún no se ha asociado ningún material a este modelo.';
+
+  @override
+  String get bomRoleLabel => 'Función';
+
+  @override
+  String get roleOther => 'Otra función…';
+
+  @override
+  String get roleCustom => 'Nombre de la función';
+
+  @override
+  String get role_main => 'Tejido principal';
+
+  @override
+  String get role_lining => 'Forro';
+
+  @override
+  String get role_interfacing => 'Entretela';
+
+  @override
+  String get role_contrast => 'Tejido de contraste';
+
+  @override
+  String get role_pocketing => 'Forro de bolsillo';
+
+  @override
+  String get role_rib => 'Puño elástico';
+
+  @override
+  String get role_upper => 'Corte';
+
+  @override
+  String get role_sock_lining => 'Plantilla';
+
+  @override
+  String get role_insole => 'Plantilla de montado';
+
+  @override
+  String get role_outsole => 'Suela';
+
+  @override
+  String get role_reinforcement => 'Refuerzo';
+
+  @override
+  String get role_exterior => 'Exterior';
+
+  @override
+  String get role_gusset => 'Fuelle';
+
+  @override
+  String get role_strap => 'Asa o bandolera';
+
+  @override
+  String get role_trim => 'Guarnición';
+
+  @override
+  String get consumptionLabel => 'Consumo (m/pieza)';
+
+  @override
+  String requirementLine(String value) {
+    return 'Necesidad: $value m';
+  }
+
+  @override
+  String get requirementTitle => 'Necesidad total por material';
+
+  @override
+  String requirementFormula(String waste) {
+    return 'Consumo × cantidad × (1 + merma del $waste %)';
+  }
+
+  @override
+  String get pickMaterial => 'Elegir un material';
+
+  @override
+  String get pickMaterialSearch => 'Buscar en TissuTech';
+
+  @override
+  String get pickMaterialEmpty => 'Ningún material coincide.';
+
+  @override
+  String get pickMaterialLibraryEmpty =>
+      'Añada primero materiales en TissuTech.';
+
+  @override
+  String get removeLine => 'Quitar este material';
+
+  @override
+  String get materialMissing => 'Material eliminado de TissuTech';
 }

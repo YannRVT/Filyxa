@@ -20,6 +20,9 @@ import '../features/reports/ui/notifications_screen.dart';
 import '../features/reports/ui/supplier_reports_screen.dart';
 import '../features/scanner/domain/scan.dart';
 import '../features/scanner/ui/scanner_screen.dart';
+import '../features/studio/ui/collection_screen.dart';
+import '../features/studio/ui/model_screen.dart';
+import '../features/studio/ui/studio_screen.dart';
 import '../features/supplier/ui/catalog_import_screen.dart';
 import '../features/supplier/ui/catalog_screen.dart';
 import '../features/supplier/ui/reference_screen.dart';
@@ -105,7 +108,17 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(routes: [
             GoRoute(
               path: '/studio',
-              builder: (c, _) => placeholder(c, (l) => l.navStudio, Icons.layers_outlined),
+              builder: (_, _) => const StudioScreen(),
+              routes: [
+                GoRoute(
+                  path: 'collections/:collectionId',
+                  builder: (_, state) => CollectionScreen(collectionId: state.pathParameters['collectionId']!),
+                ),
+                GoRoute(
+                  path: 'models/:modelId',
+                  builder: (_, state) => ModelScreen(modelId: state.pathParameters['modelId']!),
+                ),
+              ],
             ),
           ]),
           StatefulShellBranch(routes: [
