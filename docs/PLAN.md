@@ -172,6 +172,7 @@ Au scan, l'app cherche une correspondance (fournisseur et code normalisé) dans 
 ### Critères d'acceptation
 
 - [ ] Au moins 80 % des échantillons d'un fournisseur pilote trouvent la bonne référence avant confirmation (critère de succès 3).
+  - *Mesure reportée au démarrage du premier fournisseur pilote (aucun pilote à ce jour). En attendant, le parcours est vérifié sur le catalogue de démo « Tissage Démo » (scan en mode démo → `TD-SRG-280` proposée).*
 - [ ] Rien n'est lié sans confirmation. « Aucune de ces références » enregistre une fiche propre à l'atelier.
 - [ ] Sur une matière liée, les champs techniques ne sont pas modifiables et portent la mention « Données fournisseur ». Prix, notes, étiquettes, photos et stock atelier restent modifiables.
 - [ ] Une mise à jour du catalogue du fournisseur apparaît dans la fiche de l'atelier sans action de sa part.

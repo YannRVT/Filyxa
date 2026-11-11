@@ -613,5 +613,41 @@
       }
     }
   },
-  "duplicateOpen": "Ouvrir la fiche existante"
+  "duplicateOpen": "Ouvrir la fiche existante",
+  "matchTitle": "C'est bien cette référence ?",
+  "matchIntro": "Trouvée dans le catalogue de {supplier}. Confirmez pour relier votre fiche à ses données et à sa disponibilité.",
+  "@matchIntro": {
+    "placeholders": {
+      "supplier": {
+        "type": "String"
+      }
+    }
+  },
+  "matchConfirm": "Oui, lier cette référence",
+  "matchOthers": "Autres références proches",
+  "matchNone": "Aucune de ces références",
+  "supplierData": "Données fournisseur",
+  "supplierDataHelp": "Tenues à jour par le fournisseur, non modifiables ici.",
+  "referenceRetiredBanner": "Référence retirée par le fournisseur. Les dernières valeurs connues sont conservées.",
+  "linkToSupplier": "Lier à une référence fournisseur",
+  "linkSearchHint": "Code article, désignation ou fournisseur",
+  "linkSearchEmpty": "Aucune référence publiée ne correspond.",
+  "linkConfirm": "Lier",
+  "unlink": "Délier la référence",
+  "unlinkConfirmBody": "La fiche garde ses valeurs actuelles et redevient modifiable. Elle ne suivra plus les mises à jour du fournisseur.",
+  "linkedDone": "Fiche liée au fournisseur.",
+  "unlinkedDone": "Fiche déliée du fournisseur.",
+  "privateLayer": "Informations de l'atelier",
+  "privateLayerHelp": "Visibles par votre atelier seulement.",
+  "fieldPrice": "Prix négocié (€/m)",
+  "fieldTags": "Étiquettes",
+  "fieldTagsHint": "Séparées par des virgules (ex. AH27, à valider)",
+  "priceValue": "{value} €/m",
+  "@priceValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1010,4 +1010,77 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get duplicateOpen => 'Deschide fișa existentă';
+
+  @override
+  String get matchTitle => 'Aceasta este referința?';
+
+  @override
+  String matchIntro(String supplier) {
+    return 'Găsită în catalogul $supplier. Confirmă pentru a lega fișa de datele și disponibilitatea ei.';
+  }
+
+  @override
+  String get matchConfirm => 'Da, leagă această referință';
+
+  @override
+  String get matchOthers => 'Alte referințe apropiate';
+
+  @override
+  String get matchNone => 'Niciuna dintre aceste referințe';
+
+  @override
+  String get supplierData => 'Datele furnizorului';
+
+  @override
+  String get supplierDataHelp =>
+      'Actualizate de furnizor, nu pot fi modificate aici.';
+
+  @override
+  String get referenceRetiredBanner =>
+      'Referință retrasă de furnizor. Ultimele valori cunoscute sunt păstrate.';
+
+  @override
+  String get linkToSupplier => 'Leagă de o referință a furnizorului';
+
+  @override
+  String get linkSearchHint => 'Cod articol, denumire sau furnizor';
+
+  @override
+  String get linkSearchEmpty => 'Nicio referință publicată nu corespunde.';
+
+  @override
+  String get linkConfirm => 'Leagă';
+
+  @override
+  String get unlink => 'Dezleagă referința';
+
+  @override
+  String get unlinkConfirmBody =>
+      'Fișa își păstrează valorile actuale și devine din nou modificabilă. Nu va mai urma actualizările furnizorului.';
+
+  @override
+  String get linkedDone => 'Fișă legată de furnizor.';
+
+  @override
+  String get unlinkedDone => 'Fișă dezlegată de furnizor.';
+
+  @override
+  String get privateLayer => 'Informațiile atelierului';
+
+  @override
+  String get privateLayerHelp => 'Vizibile doar pentru atelierul tău.';
+
+  @override
+  String get fieldPrice => 'Preț negociat (€/m)';
+
+  @override
+  String get fieldTags => 'Etichete';
+
+  @override
+  String get fieldTagsHint => 'Separate prin virgulă (ex. TI27, de validat)';
+
+  @override
+  String priceValue(String value) {
+    return '$value €/m';
+  }
 }

@@ -1005,4 +1005,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get duplicateOpen => 'Open the existing material';
+
+  @override
+  String get matchTitle => 'Is this the right reference?';
+
+  @override
+  String matchIntro(String supplier) {
+    return 'Found in $supplier\'s catalogue. Confirm to link your material to its data and availability.';
+  }
+
+  @override
+  String get matchConfirm => 'Yes, link this reference';
+
+  @override
+  String get matchOthers => 'Other close references';
+
+  @override
+  String get matchNone => 'None of these references';
+
+  @override
+  String get supplierData => 'Supplier data';
+
+  @override
+  String get supplierDataHelp =>
+      'Kept up to date by the supplier, not editable here.';
+
+  @override
+  String get referenceRetiredBanner =>
+      'Reference retired by the supplier. The last known values are kept.';
+
+  @override
+  String get linkToSupplier => 'Link to a supplier reference';
+
+  @override
+  String get linkSearchHint => 'Article code, name or supplier';
+
+  @override
+  String get linkSearchEmpty => 'No published reference matches.';
+
+  @override
+  String get linkConfirm => 'Link';
+
+  @override
+  String get unlink => 'Unlink the reference';
+
+  @override
+  String get unlinkConfirmBody =>
+      'The material keeps its current values and becomes editable again. It will no longer follow the supplier\'s updates.';
+
+  @override
+  String get linkedDone => 'Material linked to the supplier.';
+
+  @override
+  String get unlinkedDone => 'Material unlinked from the supplier.';
+
+  @override
+  String get privateLayer => 'Studio information';
+
+  @override
+  String get privateLayerHelp => 'Visible to your studio only.';
+
+  @override
+  String get fieldPrice => 'Negotiated price (€/m)';
+
+  @override
+  String get fieldTags => 'Tags';
+
+  @override
+  String get fieldTagsHint => 'Comma-separated (e.g. AW27, to approve)';
+
+  @override
+  String priceValue(String value) {
+    return '€$value/m';
+  }
 }

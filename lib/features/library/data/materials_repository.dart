@@ -9,6 +9,7 @@ import '../../auth/data/auth_repository.dart';
 import '../../members/data/members_repository.dart';
 import '../../session/data/user_space_repository.dart';
 import '../../session/domain/user_space.dart';
+import '../domain/catalog_reference.dart';
 import '../domain/material.dart';
 
 const _bucket = 'material-photos';
@@ -16,7 +17,7 @@ const _bucket = 'material-photos';
 /// Taille des pages de chargement (limite du serveur : 1 000 lignes).
 const kMaterialsPageSize = 1000;
 const _select = 'id, org_id, name, supplier_name, supplier_code, color_name, color_hex, '
-    'photo_path, atelier_stock_m, notes, updated_at, '
+    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, price_per_m, tags, '
     'textile_specs(composition, weight_gsm, width_cm, weave, care, certifications, uses)';
 
 class MaterialsRepository {
@@ -61,6 +62,51 @@ class MaterialsRepository {
           params: {'payload': draft.toPayload()},
         );
         return id;
+      });
+
+  /// Références publiées, par identifiant (celles qui manquent ont été retirées).
+  Future<Map<String, CatalogReference>> catalogReferences(Iterable<String> ids) => _guard(() async {
+        final unique = ids.toSet().toList();
+        final result = <String, CatalogReference>{};
+        for (var i = 0; i < unique.length; i += 200) {
+          final rows = await _client
+              .from('supplier_catalog')
+              .select(CatalogReference.selectColumns)
+              .inFilter('id', unique.sublist(i, (i + 200).clamp(0, unique.length)));
+          for (final r in rows) {
+            final ref = CatalogReference.fromJson(r);
+            result[ref.id] = ref;
+          }
+        }
+        return result;
+      });
+
+  /// Rapprochement d'un code article lu sur une étiquette avec les catalogues publiés.
+  Future<List<ReferenceMatch>> match(String? code, String? supplier) => _guard(() async {
+        if ((code ?? '').trim().isEmpty) return const [];
+        final rows = await _client.rpc<List<dynamic>>(
+          'match_supplier_references',
+          params: {'p_code': code, 'p_supplier': supplier},
+        );
+        final scores = {for (final r in rows.cast<Map<String, dynamic>>()) r['id'] as String: (r['score'] as num).toDouble()};
+        final refs = await catalogReferences(scores.keys);
+        return [
+          for (final id in scores.keys)
+            if (refs[id] != null) ReferenceMatch(refs[id]!, scores[id]!),
+        ];
+      });
+
+  /// Recherche dans les catalogues publiés (code ou désignation), pour lier une fiche après coup.
+  Future<List<CatalogReference>> searchCatalog(String query) => _guard(() async {
+        final q = query.trim().replaceAll(RegExp(r'[%,()]'), ' ');
+        if (q.length < 2) return const [];
+        final rows = await _client
+            .from('supplier_catalog')
+            .select(CatalogReference.selectColumns)
+            .or('code.ilike.%$q%,name.ilike.%$q%,supplier_name.ilike.%$q%')
+            .order('code')
+            .limit(20);
+        return rows.map(CatalogReference.fromJson).toList();
       });
 
   Future<void> updateStock(String id, double? meters) => _guard(
@@ -109,6 +155,15 @@ final materialsProvider = FutureProvider<List<MaterialItem>>((ref) async {
   final orgId = ref.watch(userSpaceProvider).value?.membership?.organization.id;
   if (orgId == null) return const [];
   return ref.watch(materialsRepositoryProvider).list(orgId);
+});
+
+/// Références publiées liées aux matières de l'atelier (disponibilité en direct).
+/// Une matière liée absente de cette table a été retirée par son fournisseur.
+final linkedReferencesProvider = FutureProvider<Map<String, CatalogReference>>((ref) async {
+  final materials = await ref.watch(materialsProvider.future);
+  final ids = [for (final m in materials) if (m.supplierReferenceId != null) m.supplierReferenceId!];
+  if (ids.isEmpty) return const {};
+  return ref.watch(materialsRepositoryProvider).catalogReferences(ids);
 });
 
 final materialProvider = FutureProvider.family<MaterialItem?, String>(

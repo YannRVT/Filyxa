@@ -1,8 +1,13 @@
+import '../../library/domain/catalog_reference.dart';
 import '../../library/domain/material.dart';
 
 /// Fiche pré-remplie par la lecture d'une étiquette, à valider dans le formulaire.
 class ScanPrefill {
-  const ScanPrefill({required this.material, this.uncertain = const {}});
+  const ScanPrefill({required this.material, this.uncertain = const {}, this.reference});
+
+  /// Copie avec la référence fournisseur confirmée par l'utilisateur.
+  ScanPrefill linkedTo(CatalogReference reference) =>
+      ScanPrefill(material: material, uncertain: const {}, reference: reference);
 
   /// Réponse de l'Edge Function analyze-tag (champ « label »).
   factory ScanPrefill.fromLabel(Map<String, dynamic> label) {
@@ -37,6 +42,9 @@ class ScanPrefill {
 
   /// Champs lus avec peu de certitude (noms du formulaire : weight_gsm, color_hex…).
   final Set<String> uncertain;
+
+  /// Référence fournisseur confirmée : la fiche sera liée.
+  final CatalogReference? reference;
 }
 
 /// Usage du mois : scans consommés et quota de l'atelier.

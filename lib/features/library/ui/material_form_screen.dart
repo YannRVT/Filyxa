@@ -14,6 +14,8 @@ import '../domain/catalog.dart';
 import '../domain/material.dart';
 import 'material_detail_screen.dart' show validateStock;
 import '../../scanner/domain/scan.dart';
+import '../domain/catalog_reference.dart';
+import 'reference_widgets.dart';
 import 'material_widgets.dart';
 
 /// Création (materialId == null) ou modification d'une matière textile.
@@ -79,7 +81,16 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
   // Valeurs de départ : la matière modifiée ou la fiche pré-remplie par un scan.
   late final MaterialItem? _seed = widget.initial ?? widget.prefill?.material;
   late final Set<String> _uncertain = {...?widget.prefill?.uncertain};
-  late final _name = TextEditingController(text: _seed?.name);
+  // Lien fournisseur : référence confirmée au scan, ou lien existant de la matière modifiée.
+  late final CatalogReference? _scanReference = widget.prefill?.reference;
+  bool _unlinked = false;
+  bool get _linked => !_unlinked && (_scanReference != null || (_m?.isLinked ?? false));
+  String? get _referenceId => _linked ? (_scanReference?.id ?? _m?.supplierReferenceId) : null;
+  late final _price = TextEditingController();
+  late final _tags = TextEditingController(text: (_m?.tags ?? const []).join(', '));
+  late final _name = TextEditingController(
+    text: (_seed?.name ?? '').trim().isEmpty ? widget.prefill?.reference?.name : _seed?.name,
+  );
   late final _supplier = TextEditingController(text: _seed?.supplierName);
   late final _code = TextEditingController(text: _seed?.supplierCode);
   late final _colorName = TextEditingController(text: _seed?.colorName);
@@ -110,6 +121,8 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
       final lang = langOf(context);
       final stock = _seed?.atelierStockM;
       if (stock != null) _stock.text = formatNumber(stock, lang, decimals: 2);
+      final price = _m?.pricePerM;
+      if (price != null) _price.text = formatNumber(price, lang, decimals: 2);
       _fibers.addAll([
         for (final f in _seed?.specs.composition ?? const <FiberShare>[])
           _FiberRow(fiber: f.fiber, pct: formatNumber(f.pct, lang)),
@@ -120,7 +133,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
 
   @override
   void dispose() {
-    for (final c in [_name, _supplier, _code, _colorName, _colorHex, _weight, _width, _stock, _notes]) {
+    for (final c in [_name, _supplier, _code, _colorName, _colorHex, _weight, _width, _stock, _notes, _price, _tags]) {
       c.dispose();
     }
     for (final f in _fibers) {
@@ -153,7 +166,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
   Future<void> _save() async {
     setState(() => _submitted = true);
     final formOk = _formKey.currentState!.validate();
-    if (!formOk || !_compositionValid) return;
+    if (!formOk || (!_linked && !_compositionValid)) return;
     final orgId = ref.read(userSpaceProvider).value?.membership?.organization.id;
     if (orgId == null) return;
 
@@ -187,6 +200,9 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
         photoPath: photoPath,
         atelierStockM: parseNumber(_stock.text),
         notes: text(_notes),
+        supplierReferenceId: _referenceId,
+        pricePerM: parseNumber(_price.text),
+        tags: _tags.text.split(',').map((t) => t.trim()).where((t) => t.isNotEmpty).toSet().toList(),
         specs: TextileSpecs(
           composition: _composition,
           weightGsm: parseNumber(_weight.text)?.round(),
@@ -203,6 +219,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
       }
       ref.invalidate(materialsProvider);
       ref.invalidate(materialProvider(id));
+      ref.invalidate(linkedReferencesProvider);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.materialSaved)));
       context.go('/library/$id');
@@ -214,6 +231,51 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  /// Données techniques venant du fournisseur, en lecture seule ; « Délier » pour une fiche existante.
+  Widget _supplierDataCard(BuildContext context) {
+    final l10n = context.l10n;
+    final live = _scanReference ?? ref.watch(linkedReferencesProvider).value?[_m?.supplierReferenceId];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (live != null)
+          ReferenceCard(reference: live)
+        else if (_m != null) ...[
+          MessageBanner.warning(l10n.referenceRetiredBanner),
+          const SizedBox(height: FxSpace.sm),
+          SupplierDataSummary(material: _m),
+        ],
+        const SizedBox(height: FxSpace.xs),
+        Text(l10n.supplierDataHelp, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: FxColors.inkSoft)),
+        if (_m?.isLinked ?? false)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: _busy ? null : _confirmUnlink,
+              icon: const Icon(Icons.link_off, size: 18),
+              label: Text(l10n.unlink),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Future<void> _confirmUnlink() async {
+    final l10n = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (d) => AlertDialog(
+        title: Text(l10n.unlink),
+        content: Text(l10n.unlinkConfirmBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(d).pop(false), child: Text(l10n.cancel)),
+          FilledButton(onPressed: () => Navigator.of(d).pop(true), child: Text(l10n.unlink)),
+        ],
+      ),
+    );
+    if (ok == true) setState(() => _unlinked = true);
   }
 
   /// Décoration d'un champ, surligné tant qu'il est incertain et non modifié.
@@ -278,11 +340,11 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
         );
 
     final total = compositionTotal(_composition);
-    final duplicate = findDuplicate(
-      ref.watch(materialsProvider).value ?? const [],
-      supplierCode: _code.text,
-      exceptId: _m?.id,
-    );
+    final existing = ref.watch(materialsProvider).value ?? const <MaterialItem>[];
+    final duplicate = (_referenceId == null
+            ? null
+            : existing.where((x) => x.id != _m?.id && x.supplierReferenceId == _referenceId).firstOrNull) ??
+        findDuplicate(existing, supplierCode: _linked ? _scanReference?.code ?? _m?.supplierCode : _code.text, exceptId: _m?.id);
     final previewColor = colorFromHex(_colorHex.text);
 
     return Scaffold(
@@ -324,6 +386,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                         onChanged: (_) => _confirm('name'),
                         validator: (v) => (v ?? '').trim().isEmpty ? l10n.errorRequired : null,
                       ),
+                      if (!_linked) ...[
                       gap,
                       pair(
                         TextFormField(
@@ -341,8 +404,10 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                           },
                         ),
                       ),
+                      ],
+                      if (_linked) ...[gap, _supplierDataCard(context)],
                     ]),
-                    section(l10n.sectionComposition, [
+                    if (!_linked) section(l10n.sectionComposition, [
                       if (_uncertain.contains('composition')) ...[
                         MessageBanner.warning(l10n.sectionUncertain),
                         const SizedBox(height: FxSpace.md),
@@ -410,7 +475,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                           child: MessageBanner.error(l10n.compositionMustBe100),
                         ),
                     ]),
-                    section(l10n.sectionTechnical, [
+                    if (!_linked) section(l10n.sectionTechnical, [
                       pair(
                         TextFormField(
                           controller: _weight,
@@ -445,7 +510,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                       ),
                     ]),
                     section(l10n.sectionColor, [
-                      pair(
+                      if (!_linked) pair(
                         TextFormField(
                           controller: _colorName,
                           decoration: _dec(l10n.fieldColorName, 'color_name'),
@@ -479,7 +544,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                               (v ?? '').trim().isEmpty || normalizeHex(v) != null ? null : l10n.errorHex,
                         ),
                       ),
-                      gap,
+                      if (!_linked) gap,
                       _PhotoField(
                         existingPath: _photoPath,
                         newPhoto: _newPhoto,
@@ -492,7 +557,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                                 }),
                       ),
                     ]),
-                    section(l10n.sectionCare, [
+                    if (!_linked) section(l10n.sectionCare, [
                       if (_uncertain.contains('care')) ...[
                         MessageBanner.warning(l10n.sectionUncertain),
                         const SizedBox(height: FxSpace.md),
@@ -526,7 +591,7 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                         const SizedBox(height: FxSpace.md),
                       ],
                     ]),
-                    section(l10n.sectionUses, [
+                    if (!_linked) section(l10n.sectionUses, [
                       Text(l10n.fieldUses, style: text.labelLarge),
                       const SizedBox(height: FxSpace.xs),
                       Wrap(
@@ -556,6 +621,27 @@ class _MaterialFormState extends ConsumerState<_MaterialForm> {
                                   setState(() => on ? _certifications.add(c) : _certifications.remove(c)),
                             ),
                         ],
+                      ),
+                    ]),
+                    section(l10n.privateLayer, [
+                      Text(l10n.privateLayerHelp, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
+                      gap,
+                      pair(
+                        TextFormField(
+                          controller: _price,
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]'))],
+                          decoration: InputDecoration(labelText: l10n.fieldPrice),
+                          validator: (v) {
+                            if ((v ?? '').trim().isEmpty) return null;
+                            final n = parseNumber(v);
+                            return n != null && n >= 0 && n <= 100000 ? null : l10n.errorNumberRange(0, 100000);
+                          },
+                        ),
+                        TextFormField(
+                          controller: _tags,
+                          decoration: InputDecoration(labelText: l10n.fieldTags, hintText: l10n.fieldTagsHint),
+                        ),
                       ),
                     ]),
                     section(l10n.sectionStock, [
