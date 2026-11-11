@@ -2655,6 +2655,338 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Matière supprimée de TissuTech'**
   String get materialMissing;
+
+  /// No description provided for @alertsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Alertes'**
+  String get alertsTitle;
+
+  /// No description provided for @alertsNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune alerte : les matières de ce modèle sont compatibles et le stock est suffisant.'**
+  String get alertsNone;
+
+  /// No description provided for @alertsCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 alerte} other{{count} alertes}}'**
+  String alertsCount(int count);
+
+  /// No description provided for @alertFamilyCare.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entretien'**
+  String get alertFamilyCare;
+
+  /// No description provided for @alertFamilyTechnical.
+  ///
+  /// In fr, this message translates to:
+  /// **'Technique'**
+  String get alertFamilyTechnical;
+
+  /// No description provided for @alertFamilyCertification.
+  ///
+  /// In fr, this message translates to:
+  /// **'Certifications'**
+  String get alertFamilyCertification;
+
+  /// No description provided for @alertFamilyStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock'**
+  String get alertFamilyStock;
+
+  /// No description provided for @alertQuoted.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} »'**
+  String alertQuoted(String name);
+
+  /// No description provided for @alertNoIron.
+  ///
+  /// In fr, this message translates to:
+  /// **'aucun repassage'**
+  String get alertNoIron;
+
+  /// No description provided for @alertNoMainTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun tissu principal'**
+  String get alertNoMainTitle;
+
+  /// No description provided for @alertNoMainBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désignez le tissu principal pour activer toutes les vérifications.'**
+  String get alertNoMainBody;
+
+  /// No description provided for @alertLiningHeavierTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Doublure plus lourde que le tissu principal'**
+  String get alertLiningHeavierTitle;
+
+  /// No description provided for @alertLiningHeavierBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{lining} dépasse {main} : la doublure risque de déformer le produit.'**
+  String alertLiningHeavierBody(String lining, String main);
+
+  /// No description provided for @alertStretchTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tissu extensible, doublure rigide'**
+  String get alertStretchTitle;
+
+  /// No description provided for @alertStretchBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{main} contient de l\'élasthanne mais pas {lining} : prévoyez de l\'aisance ou une doublure stretch.'**
+  String alertStretchBody(String main, String lining);
+
+  /// No description provided for @alertInterfacingHeavierTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entoilage trop lourd'**
+  String get alertInterfacingHeavierTitle;
+
+  /// No description provided for @alertInterfacingHeavierBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{interfacing} est plus lourd que {main} : risque de rigidité et de transparence.'**
+  String alertInterfacingHeavierBody(String interfacing, String main);
+
+  /// No description provided for @alertFusingTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Thermocollage risqué'**
+  String get alertFusingTitle;
+
+  /// No description provided for @alertFusingBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{main} supporte au plus {iron} : choisissez un entoilage à coudre ou basse température.'**
+  String alertFusingBody(String main, String iron);
+
+  /// No description provided for @alertConsumptionTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommation non saisie'**
+  String get alertConsumptionTitle;
+
+  /// No description provided for @alertConsumptionBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{materials} : le besoin ne peut pas être calculé.'**
+  String alertConsumptionBody(String materials);
+
+  /// No description provided for @alertCareConflictTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entretiens incompatibles'**
+  String get alertCareConflictTitle;
+
+  /// No description provided for @alertCareConflictBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{details}. L\'étiquette du produit devra imposer l\'entretien le plus restrictif.'**
+  String alertCareConflictBody(String details);
+
+  /// No description provided for @alertWashTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lavage limité à {temp} °C'**
+  String alertWashTitle(int temp);
+
+  /// No description provided for @alertIronTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Repassage limité : {iron}'**
+  String alertIronTitle(String iron);
+
+  /// No description provided for @alertTumbleTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sèche-linge à éviter'**
+  String get alertTumbleTitle;
+
+  /// No description provided for @alertLimitBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{details}. Le produit fini suit la matière la plus fragile.'**
+  String alertLimitBody(String details);
+
+  /// No description provided for @alertCertTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'{cert} non tenue sur tout le produit'**
+  String alertCertTitle(String cert);
+
+  /// No description provided for @alertCertBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{certified} est certifié {cert}, mais pas {missing} : le produit fini ne pourra pas revendiquer {cert}.'**
+  String alertCertBody(String certified, String cert, String missing);
+
+  /// No description provided for @alertRetiredTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence retirée par le fournisseur'**
+  String get alertRetiredTitle;
+
+  /// No description provided for @alertRetiredBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} n\'est plus proposée : besoin {need}, stock atelier {atelier}.'**
+  String alertRetiredBody(String material, String need, String atelier);
+
+  /// No description provided for @alertAtelierShortTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock atelier insuffisant'**
+  String get alertAtelierShortTitle;
+
+  /// No description provided for @alertAtelierShortBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : besoin {need}, stock atelier {atelier}. Il manque {missing}.'**
+  String alertAtelierShortBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  );
+
+  /// No description provided for @alertCoveredTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'À commander chez le fournisseur'**
+  String get alertCoveredTitle;
+
+  /// No description provided for @alertCoveredBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : besoin {need}, stock atelier {atelier}. Le complément ({missing}) est disponible chez le fournisseur.'**
+  String alertCoveredBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  );
+
+  /// No description provided for @alertCoveredBodyExact.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : besoin {need}, stock atelier {atelier}. Le complément ({missing}) est disponible chez le fournisseur ({supplier} en stock).'**
+  String alertCoveredBodyExact(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+    String supplier,
+  );
+
+  /// No description provided for @alertSupplierShortTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock fournisseur insuffisant'**
+  String get alertSupplierShortTitle;
+
+  /// No description provided for @alertSupplierShortBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : il manque {missing} après le stock atelier ({atelier}), et le fournisseur n\'en a que {supplier}.'**
+  String alertSupplierShortBody(
+    String material,
+    String missing,
+    String atelier,
+    String supplier,
+  );
+
+  /// No description provided for @alertSupplierLowTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock faible chez le fournisseur'**
+  String get alertSupplierLowTitle;
+
+  /// No description provided for @alertSupplierLowBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : il manque {missing} après le stock atelier ({atelier}), et le fournisseur est en stock faible.'**
+  String alertSupplierLowBody(String material, String missing, String atelier);
+
+  /// No description provided for @alertOnOrderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sur commande chez le fournisseur'**
+  String get alertOnOrderTitle;
+
+  /// No description provided for @alertOnOrderBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : il manque {missing} après le stock atelier ({atelier}). Délai de réassort : {weeks} semaines.'**
+  String alertOnOrderBody(
+    String material,
+    String missing,
+    String atelier,
+    int weeks,
+  );
+
+  /// No description provided for @alertOutTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rupture chez le fournisseur'**
+  String get alertOutTitle;
+
+  /// No description provided for @alertOutBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : il manque {missing} après le stock atelier ({atelier}), et le fournisseur est en rupture.'**
+  String alertOutBody(String material, String missing, String atelier);
+
+  /// No description provided for @alertHiddenTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponibilité non communiquée'**
+  String get alertHiddenTitle;
+
+  /// No description provided for @alertHiddenBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{material} : il manque {missing} après le stock atelier ({atelier}). Le fournisseur ne publie pas son stock : contactez-le.'**
+  String alertHiddenBody(String material, String missing, String atelier);
+
+  /// No description provided for @notifStockLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'{name} : stock faible chez le fournisseur ({code})'**
+  String notifStockLow(String name, String code);
+
+  /// No description provided for @notifStockOut.
+  ///
+  /// In fr, this message translates to:
+  /// **'{name} : rupture chez le fournisseur ({code})'**
+  String notifStockOut(String name, String code);
+
+  /// No description provided for @notifReferenceUpdated.
+  ///
+  /// In fr, this message translates to:
+  /// **'{name} : fiche modifiée par le fournisseur ({code})'**
+  String notifReferenceUpdated(String name, String code);
+
+  /// No description provided for @notifReferenceRetired.
+  ///
+  /// In fr, this message translates to:
+  /// **'{name} : référence retirée par le fournisseur ({code})'**
+  String notifReferenceRetired(String name, String code);
+
+  /// No description provided for @notifUsedIn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Utilisée dans : {models}'**
+  String notifUsedIn(String models);
 }
 
 class _AppLocalizationsDelegate

@@ -240,6 +240,53 @@ void main() {
     });
   });
 
+  group('alertes', () {
+    testWidgets('le modèle affiche ses alertes, chiffrées, et la collection leur nombre', (tester) async {
+      await _size(tester, const Size(1280, 1600));
+      const laine = MaterialItem(id: 'mat1', orgId: 'org', name: 'Sergé laine', specs: TextileSpecs(weightGsm: 200, care: ['wash_30']));
+      const lourde = MaterialItem(id: 'mat2', orgId: 'org', name: 'Satin lourd', specs: TextileSpecs(weightGsm: 350, care: ['no_wash', 'dryclean_p']));
+      const model = StudioModel(
+        id: 'mod1',
+        collectionId: 'col1',
+        name: 'Veste Arno',
+        productType: ProductType.garment,
+        colorways: [
+          Colorway(id: 'cw1', quantity: 10, lines: [
+            BomLine(id: 'l1', materialId: 'mat1', role: 'main', consumption: 1),
+            BomLine(id: 'l2', materialId: 'mat2', role: 'lining', consumption: 1),
+          ]),
+        ],
+      );
+      Widget app(Widget home) => ProviderScope(
+            overrides: [
+              userSpaceProvider.overrideWith((ref) async => _space(MemberRole.editor)),
+              materialsProvider.overrideWith((ref) async => const [laine, lourde]),
+              modelProvider.overrideWith((ref, id) async => model),
+              collectionProvider.overrideWith((ref, id) async => const StudioCollection(id: 'col1', name: 'AH27')),
+              collectionModelsProvider.overrideWith((ref, id) async => const [model]),
+              studioRepositoryProvider.overrideWithValue(_FakeStudio(model)),
+            ],
+            child: MaterialApp(
+              locale: const Locale('fr'),
+              localizationsDelegates: const [AppLocalizations.delegate, ...GlobalMaterialLocalizations.delegates],
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: home,
+            ),
+          );
+
+      await tester.pumpWidget(app(const ModelScreen(modelId: 'mod1')));
+      await tester.pumpAndSettle();
+      expect(find.text('Doublure plus lourde que le tissu principal'), findsOneWidget);
+      expect(find.textContaining('Doublure « Satin lourd » (350 g/m²) dépasse Tissu principal « Sergé laine » (200 g/m²)'), findsOneWidget);
+      expect(find.text('Entretiens incompatibles'), findsOneWidget);
+      expect(find.text('Stock atelier insuffisant'), findsNWidgets(2), reason: 'aucun stock saisi, besoin 10,8 m chacun');
+
+      await tester.pumpWidget(app(const CollectionScreen(collectionId: 'col1')));
+      await tester.pumpAndSettle();
+      expect(find.text('4 alertes'), findsOneWidget, reason: 'avertissements seulement, sans les informations');
+    });
+  });
+
   group('collections', () {
     testWidgets('Studio vide : créer une collection (Éditeur)', (tester) async {
       await tester.pumpWidget(_app(const StudioScreen()));

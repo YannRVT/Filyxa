@@ -37,6 +37,10 @@ extension ReportTexts on AppLocalizations {
       NotificationKind.reportNew => notifReportNew((n.data['code'] as String?) ?? '', field),
       NotificationKind.reportFixed => notifReportFixed(name, field),
       NotificationKind.reportRejected => notifReportRejected(name, field),
+      NotificationKind.stockLow => notifStockLow(name, (n.data['code'] as String?) ?? ''),
+      NotificationKind.stockOut => notifStockOut(name, (n.data['code'] as String?) ?? ''),
+      NotificationKind.referenceUpdated => notifReferenceUpdated(name, (n.data['code'] as String?) ?? ''),
+      NotificationKind.referenceRetired => notifReferenceRetired(name, (n.data['code'] as String?) ?? ''),
     };
   }
 }
