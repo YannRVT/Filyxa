@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
+import '../../../shared/widgets/import_widgets.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../session/data/user_space_repository.dart';
 import '../data/catalog_repository.dart';
@@ -160,101 +161,29 @@ class _CatalogImportScreenState extends ConsumerState<CatalogImportScreen> {
 
   List<Widget> _mappingAndPreview(AppLocalizations l10n) {
     final table = _table!;
-    final text = Theme.of(context).textTheme;
     final analysis = analyzeRows(table.rows, _mapping);
     final requiredMissing = ImportField.values.any((f) => f.required && !_mapping.containsKey(f));
 
     return [
       const SizedBox(height: FxSpace.md),
-      Card(
-        child: Padding(
-          padding: const EdgeInsets.all(FxSpace.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(l10n.importMappingTitle, style: text.titleMedium),
-              const SizedBox(height: FxSpace.xs),
-              Text(l10n.importMappingIntro, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
-              const SizedBox(height: FxSpace.md),
-              LayoutBuilder(builder: (context, c) {
-                final columns = c.maxWidth >= 600 ? 2 : 1;
-                final width = (c.maxWidth - (columns - 1) * FxSpace.md) / columns;
-                return Wrap(
-                  spacing: FxSpace.md,
-                  runSpacing: FxSpace.sm,
-                  children: [
-                    for (final field in ImportField.values)
-                      SizedBox(
-                        width: width,
-                        child: DropdownButtonFormField<int?>(
-                          key: ValueKey('map-${field.name}-${_mapping[field]}'),
-                          initialValue: _mapping[field],
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            labelText: '${l10n.importField(field)}${field.required ? ' *' : ''}',
-                            errorText: field.required && !_mapping.containsKey(field) ? l10n.errorRequired : null,
-                          ),
-                          items: [
-                            DropdownMenuItem(value: null, child: Text(l10n.importColumnNone)),
-                            for (final (i, h) in table.headers.indexed)
-                              DropdownMenuItem(value: i, child: Text(h.isEmpty ? '#${i + 1}' : h, overflow: TextOverflow.ellipsis)),
-                          ],
-                          onChanged: (v) => setState(() {
-                            _mapping = {..._mapping}..remove(field);
-                            if (v != null) {
-                              _mapping.removeWhere((_, col) => col == v);
-                              _mapping[field] = v;
-                            }
-                          }),
-                        ),
-                      ),
-                  ],
-                );
-              }),
-            ],
-          ),
-        ),
+      ColumnMappingCard<ImportField>(
+        fields: ImportField.values,
+        headers: table.headers,
+        mapping: _mapping,
+        isRequired: (f) => f.required,
+        label: l10n.importField,
+        intro: l10n.importMappingIntro,
+        onChanged: (m) => setState(() => _mapping = m),
       ),
       const SizedBox(height: FxSpace.md),
-      if (!requiredMissing) ...[
-        Semantics(
-          liveRegion: true,
-          child: Text(l10n.importSummary(analysis.valid.length, analysis.invalid.length), style: text.titleMedium),
+      if (!requiredMissing)
+        ImportPreview(
+          analysis: analysis,
+          running: _running,
+          done: _done,
+          runLabel: l10n.importRun(analysis.valid.length),
+          onRun: () => _run(analysis),
         ),
-        if (analysis.invalid.isNotEmpty) ...[
-          const SizedBox(height: FxSpace.sm),
-          Card(
-            child: ExpansionTile(
-              initiallyExpanded: analysis.invalid.length <= 5,
-              title: Text(l10n.importErrorsTitle, style: const TextStyle(color: FxColors.error)),
-              children: [
-                for (final row in analysis.invalid.take(200))
-                  ListTile(
-                    dense: true,
-                    leading: Text(l10n.importLine(row.line), style: text.labelMedium),
-                    title: Text(row.issues.map(l10n.issue).join(' · ')),
-                  ),
-              ],
-            ),
-          ),
-        ],
-        const SizedBox(height: FxSpace.md),
-        if (_running)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              LinearProgressIndicator(value: analysis.valid.isEmpty ? null : _done / analysis.valid.length),
-              const SizedBox(height: FxSpace.sm),
-              Text(l10n.importRunning(_done, analysis.valid.length), textAlign: TextAlign.center),
-            ],
-          )
-        else
-          FilledButton.icon(
-            onPressed: analysis.valid.isEmpty ? null : () => _run(analysis),
-            icon: const Icon(Icons.cloud_upload_outlined),
-            label: Text(l10n.importRun(analysis.valid.length)),
-          ),
-      ],
     ];
   }
 

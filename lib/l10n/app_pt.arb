@@ -300,5 +300,21 @@
   "fieldPrice": "Preço negociado (€/m)",
   "fieldTags": "Etiquetas",
   "fieldTagsHint": "Separadas por vírgulas (ex. OI27, a validar)",
-  "priceValue": "{value} €/m"
+  "priceValue": "{value} €/m",
+  "atelierImportTitle": "Importar a base do ateliê",
+  "atelierImportHelp": "Ficheiro .xlsx ou .csv, uma linha por material e uma linha de cabeçalhos. Máximo de 5 000 linhas. Um material já existente (mesmo fornecedor e código, ou mesmo nome e cor) é atualizado, nunca duplicado.",
+  "atelierImportMappingIntro": "As colunas reconhecidas já estão associadas. Apenas o nome do material é obrigatório.",
+  "atelierImportRun": "{count, plural, =1{Importar 1 material} other{Importar {count} materiais}}",
+  "atelierImportDone": "{imported} importados · {linked} ligados a um fornecedor · {pending} por confirmar · {errors} com erros",
+  "atelierImportDetail": "dos quais {inserted} novos e {updated} atualizados",
+  "backToLibrary": "Voltar ao TissuTech",
+  "reviewLinksAction": "{count, plural, =1{Confirmar 1 correspondência} other{Confirmar {count} correspondências}}",
+  "pendingLinksBanner": "{count, plural, =1{1 material importado parece-se com uma referência de fornecedor.} other{{count} materiais importados parecem-se com referências de fornecedor.}}",
+  "reviewTitle": "Correspondências por confirmar",
+  "reviewProgress": "{index} de {total}",
+  "reviewIntro": "A sua ficha parece-se com uma referência publicada. Confirme para a ligar aos seus dados e disponibilidade.",
+  "reviewSkip": "Mais tarde",
+  "reviewDone": "Todas as correspondências foram tratadas.",
+  "reviewNoCandidate": "Nenhuma referência publicada corresponde já a este material.",
+  "reviewOpen": "Rever"
 }

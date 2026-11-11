@@ -126,23 +126,15 @@ Future<MatchChoice?> showMatchSheet(BuildContext context, List<ReferenceMatch> m
   );
 }
 
-class _MatchSheet extends StatefulWidget {
+class _MatchSheet extends StatelessWidget {
   const _MatchSheet({required this.matches});
 
   final List<ReferenceMatch> matches;
 
   @override
-  State<_MatchSheet> createState() => _MatchSheetState();
-}
-
-class _MatchSheetState extends State<_MatchSheet> {
-  late CatalogReference _selected = widget.matches.first.reference;
-
-  @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
-    final others = widget.matches.skip(1).toList();
     return SafeArea(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.85),
@@ -152,40 +144,82 @@ class _MatchSheetState extends State<_MatchSheet> {
           children: [
             Text(l10n.matchTitle, style: text.titleLarge),
             const SizedBox(height: FxSpace.xs),
-            Text(l10n.matchIntro(_selected.supplierName), style: text.bodyMedium?.copyWith(color: FxColors.inkSoft)),
+            Text(l10n.matchIntro(matches.first.reference.supplierName),
+                style: text.bodyMedium?.copyWith(color: FxColors.inkSoft)),
             const SizedBox(height: FxSpace.md),
-            ReferenceCard(
-              reference: widget.matches.first.reference,
-              selected: _selected.id == widget.matches.first.reference.id,
-              onTap: () => setState(() => _selected = widget.matches.first.reference),
-            ),
-            if (others.isNotEmpty) ...[
-              const SizedBox(height: FxSpace.md),
-              Text(l10n.matchOthers, style: text.labelLarge),
-              const SizedBox(height: FxSpace.sm),
-              for (final m in others) ...[
-                ReferenceCard(
-                  reference: m.reference,
-                  selected: _selected.id == m.reference.id,
-                  onTap: () => setState(() => _selected = m.reference),
-                ),
-                const SizedBox(height: FxSpace.sm),
-              ],
-            ],
-            const SizedBox(height: FxSpace.md),
-            FilledButton.icon(
-              onPressed: () => Navigator.of(context).pop(MatchChoice(_selected)),
-              icon: const Icon(Icons.link),
-              label: Text(l10n.matchConfirm),
-            ),
-            const SizedBox(height: FxSpace.sm),
-            OutlinedButton(
-              onPressed: () => Navigator.of(context).pop(const MatchChoice(null)),
-              child: Text(l10n.matchNone),
+            MatchChooser(
+              matches: matches,
+              onConfirm: (r) => Navigator.of(context).pop(MatchChoice(r)),
+              onNone: () => Navigator.of(context).pop(const MatchChoice(null)),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Meilleure proposition, références proches, puis « Oui, lier » / « Aucune de ces références ».
+class MatchChooser extends StatefulWidget {
+  const MatchChooser({super.key, required this.matches, required this.onConfirm, required this.onNone, this.busy = false});
+
+  final List<ReferenceMatch> matches;
+  final ValueChanged<CatalogReference> onConfirm;
+  final VoidCallback onNone;
+  final bool busy;
+
+  @override
+  State<MatchChooser> createState() => _MatchChooserState();
+}
+
+class _MatchChooserState extends State<MatchChooser> {
+  late CatalogReference _selected = widget.matches.first.reference;
+
+  @override
+  void didUpdateWidget(MatchChooser old) {
+    super.didUpdateWidget(old);
+    if (!widget.matches.any((m) => m.reference.id == _selected.id)) _selected = widget.matches.first.reference;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final best = widget.matches.first.reference;
+    final others = widget.matches.skip(1).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ReferenceCard(
+          reference: best,
+          selected: _selected.id == best.id,
+          onTap: () => setState(() => _selected = best),
+        ),
+        if (others.isNotEmpty) ...[
+          const SizedBox(height: FxSpace.md),
+          Text(l10n.matchOthers, style: text.labelLarge),
+          const SizedBox(height: FxSpace.sm),
+          for (final m in others) ...[
+            ReferenceCard(
+              reference: m.reference,
+              selected: _selected.id == m.reference.id,
+              onTap: () => setState(() => _selected = m.reference),
+            ),
+            const SizedBox(height: FxSpace.sm),
+          ],
+        ],
+        const SizedBox(height: FxSpace.md),
+        FilledButton.icon(
+          onPressed: widget.busy ? null : () => widget.onConfirm(_selected),
+          icon: const Icon(Icons.link),
+          label: Text(l10n.matchConfirm),
+        ),
+        const SizedBox(height: FxSpace.sm),
+        OutlinedButton(
+          onPressed: widget.busy ? null : widget.onNone,
+          child: Text(l10n.matchNone),
+        ),
+      ],
     );
   }
 }

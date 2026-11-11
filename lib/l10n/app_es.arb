@@ -300,5 +300,21 @@
   "fieldPrice": "Precio negociado (€/m)",
   "fieldTags": "Etiquetas",
   "fieldTagsHint": "Separadas por comas (p. ej. OI27, por validar)",
-  "priceValue": "{value} €/m"
+  "priceValue": "{value} €/m",
+  "atelierImportTitle": "Importar la base del taller",
+  "atelierImportHelp": "Archivo .xlsx o .csv, una fila por material y una fila de encabezados. 5.000 filas como máximo. Un material ya existente (mismo proveedor y código, o mismo nombre y color) se actualiza, nunca se duplica.",
+  "atelierImportMappingIntro": "Las columnas reconocidas ya están asociadas. Solo el nombre del material es obligatorio.",
+  "atelierImportRun": "{count, plural, =1{Importar 1 material} other{Importar {count} materiales}}",
+  "atelierImportDone": "{imported} importados · {linked} vinculados a un proveedor · {pending} por confirmar · {errors} con errores",
+  "atelierImportDetail": "de ellos {inserted} nuevos y {updated} actualizados",
+  "backToLibrary": "Volver a TissuTech",
+  "reviewLinksAction": "{count, plural, =1{Confirmar 1 coincidencia} other{Confirmar {count} coincidencias}}",
+  "pendingLinksBanner": "{count, plural, =1{1 material importado se parece a una referencia de proveedor.} other{{count} materiales importados se parecen a referencias de proveedor.}}",
+  "reviewTitle": "Coincidencias por confirmar",
+  "reviewProgress": "{index} de {total}",
+  "reviewIntro": "Su ficha se parece a una referencia publicada. Confirme para vincularla a sus datos y disponibilidad.",
+  "reviewSkip": "Más tarde",
+  "reviewDone": "Se han tratado todas las coincidencias.",
+  "reviewNoCandidate": "Ya ninguna referencia publicada corresponde a este material.",
+  "reviewOpen": "Revisar"
 }

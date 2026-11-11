@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
+import '../../library/domain/atelier_import.dart';
 import '../domain/availability.dart';
 import '../domain/catalog_import.dart';
 
@@ -40,11 +41,35 @@ extension SupplierTexts on AppLocalizations {
         ImportField.leadTime => leadTimeLabel,
       };
 
+  String atelierImportField(AtelierImportField f) => switch (f) {
+        AtelierImportField.name => fieldName,
+        AtelierImportField.supplierName => fieldSupplier,
+        AtelierImportField.supplierCode => fieldSupplierCode,
+        AtelierImportField.colorName => fieldColorName,
+        AtelierImportField.colorHex => fieldColorHex,
+        AtelierImportField.composition => colComposition,
+        AtelierImportField.weight => fieldWeight,
+        AtelierImportField.width => fieldWidth,
+        AtelierImportField.weave => fieldWeave,
+        AtelierImportField.certifications => fieldCertifications,
+        AtelierImportField.uses => fieldUses,
+        AtelierImportField.stock => fieldStock,
+        AtelierImportField.price => fieldPrice,
+        AtelierImportField.tags => fieldTags,
+        AtelierImportField.notes => sectionNotes,
+      };
+
+  String _issueField(Enum? f) => switch (f) {
+        ImportField f => importField(f),
+        AtelierImportField f => atelierImportField(f),
+        _ => '',
+      };
+
   String issue(ImportIssue i) => switch (i.kind) {
         ImportIssueKind.missingCode => issueMissingCode,
         ImportIssueKind.missingName => issueMissingName,
         ImportIssueKind.compositionInvalid => issueComposition(i.value ?? ''),
-        ImportIssueKind.numberInvalid => issueNumber(i.field == null ? '' : importField(i.field!), i.value ?? ''),
+        ImportIssueKind.numberInvalid => issueNumber(_issueField(i.field), i.value ?? ''),
         ImportIssueKind.colorInvalid => issueColor(i.value ?? ''),
         ImportIssueKind.duplicateCode => issueDuplicate(i.value ?? ''),
       };

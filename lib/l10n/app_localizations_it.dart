@@ -1082,4 +1082,86 @@ class AppLocalizationsIt extends AppLocalizations {
   String priceValue(String value) {
     return '$value €/m';
   }
+
+  @override
+  String get atelierImportTitle => 'Importa l\'archivio del laboratorio';
+
+  @override
+  String get atelierImportHelp =>
+      'File .xlsx o .csv, una riga per materiale e una riga di intestazioni. Massimo 5.000 righe. Un materiale già presente (stesso fornitore e codice, o stesso nome e colore) viene aggiornato, mai duplicato.';
+
+  @override
+  String get atelierImportMappingIntro =>
+      'Le colonne riconosciute sono già associate. È obbligatorio solo il nome del materiale.';
+
+  @override
+  String atelierImportRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importa $count materiali',
+      one: 'Importa 1 materiale',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String atelierImportDone(int imported, int linked, int pending, int errors) {
+    return '$imported importati · $linked collegati a un fornitore · $pending da confermare · $errors con errori';
+  }
+
+  @override
+  String atelierImportDetail(int inserted, int updated) {
+    return 'di cui $inserted nuovi e $updated aggiornati';
+  }
+
+  @override
+  String get backToLibrary => 'Torna a TissuTech';
+
+  @override
+  String reviewLinksAction(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Conferma $count corrispondenze',
+      one: 'Conferma 1 corrispondenza',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pendingLinksBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiali importati somigliano a riferimenti fornitore.',
+      one: '1 materiale importato somiglia a un riferimento fornitore.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewTitle => 'Corrispondenze da confermare';
+
+  @override
+  String reviewProgress(int index, int total) {
+    return '$index di $total';
+  }
+
+  @override
+  String get reviewIntro =>
+      'La tua scheda somiglia a un riferimento pubblicato. Conferma per collegarla ai suoi dati e alla disponibilità.';
+
+  @override
+  String get reviewSkip => 'Più tardi';
+
+  @override
+  String get reviewDone => 'Tutte le corrispondenze sono state gestite.';
+
+  @override
+  String get reviewNoCandidate =>
+      'Nessun riferimento pubblicato corrisponde più a questo materiale.';
+
+  @override
+  String get reviewOpen => 'Gestisci';
 }

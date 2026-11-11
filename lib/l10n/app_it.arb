@@ -300,5 +300,21 @@
   "fieldPrice": "Prezzo negoziato (€/m)",
   "fieldTags": "Etichette",
   "fieldTagsHint": "Separate da virgole (es. AI27, da approvare)",
-  "priceValue": "{value} €/m"
+  "priceValue": "{value} €/m",
+  "atelierImportTitle": "Importa l'archivio del laboratorio",
+  "atelierImportHelp": "File .xlsx o .csv, una riga per materiale e una riga di intestazioni. Massimo 5.000 righe. Un materiale già presente (stesso fornitore e codice, o stesso nome e colore) viene aggiornato, mai duplicato.",
+  "atelierImportMappingIntro": "Le colonne riconosciute sono già associate. È obbligatorio solo il nome del materiale.",
+  "atelierImportRun": "{count, plural, =1{Importa 1 materiale} other{Importa {count} materiali}}",
+  "atelierImportDone": "{imported} importati · {linked} collegati a un fornitore · {pending} da confermare · {errors} con errori",
+  "atelierImportDetail": "di cui {inserted} nuovi e {updated} aggiornati",
+  "backToLibrary": "Torna a TissuTech",
+  "reviewLinksAction": "{count, plural, =1{Conferma 1 corrispondenza} other{Conferma {count} corrispondenze}}",
+  "pendingLinksBanner": "{count, plural, =1{1 materiale importato somiglia a un riferimento fornitore.} other{{count} materiali importati somigliano a riferimenti fornitore.}}",
+  "reviewTitle": "Corrispondenze da confermare",
+  "reviewProgress": "{index} di {total}",
+  "reviewIntro": "La tua scheda somiglia a un riferimento pubblicato. Conferma per collegarla ai suoi dati e alla disponibilità.",
+  "reviewSkip": "Più tardi",
+  "reviewDone": "Tutte le corrispondenze sono state gestite.",
+  "reviewNoCandidate": "Nessun riferimento pubblicato corrisponde più a questo materiale.",
+  "reviewOpen": "Gestisci"
 }

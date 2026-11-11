@@ -649,5 +649,78 @@
         "type": "String"
       }
     }
-  }
+  },
+  "atelierImportTitle": "Importer la base de l'atelier",
+  "atelierImportHelp": "Fichier .xlsx ou .csv, une ligne par matière et une ligne d'intitulés. 5 000 lignes au maximum. Une matière déjà présente (même fournisseur et même code, ou même nom et même coloris) est mise à jour, jamais dupliquée.",
+  "atelierImportMappingIntro": "Les colonnes reconnues sont déjà associées. Seul le nom de la matière est obligatoire.",
+  "atelierImportRun": "{count, plural, =1{Importer 1 matière} other{Importer {count} matières}}",
+  "@atelierImportRun": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "atelierImportDone": "{imported} importées · {linked} reliées à un fournisseur · {pending} à confirmer · {errors} en erreur",
+  "@atelierImportDone": {
+    "placeholders": {
+      "imported": {
+        "type": "int"
+      },
+      "linked": {
+        "type": "int"
+      },
+      "pending": {
+        "type": "int"
+      },
+      "errors": {
+        "type": "int"
+      }
+    }
+  },
+  "atelierImportDetail": "dont {inserted} nouvelles et {updated} mises à jour",
+  "@atelierImportDetail": {
+    "placeholders": {
+      "inserted": {
+        "type": "int"
+      },
+      "updated": {
+        "type": "int"
+      }
+    }
+  },
+  "backToLibrary": "Retour à TissuTech",
+  "reviewLinksAction": "{count, plural, =1{Confirmer 1 correspondance} other{Confirmer {count} correspondances}}",
+  "@reviewLinksAction": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pendingLinksBanner": "{count, plural, =1{1 matière importée ressemble à une référence fournisseur.} other{{count} matières importées ressemblent à des références fournisseur.}}",
+  "@pendingLinksBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewTitle": "Correspondances à confirmer",
+  "reviewProgress": "{index} sur {total}",
+  "@reviewProgress": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewIntro": "Votre fiche ressemble à une référence publiée. Confirmez pour la relier à ses données et à sa disponibilité.",
+  "reviewSkip": "Plus tard",
+  "reviewDone": "Toutes les correspondances ont été traitées.",
+  "reviewNoCandidate": "Aucune référence publiée ne correspond plus à cette matière.",
+  "reviewOpen": "Traiter"
 }

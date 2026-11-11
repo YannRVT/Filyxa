@@ -40,12 +40,21 @@ const _synonyms = <ImportField, List<String>>{
 
 /// Association automatique : pour chaque champ, la colonne dont l'intitulé ressemble le plus.
 /// Une colonne mémorisée lors d'un import précédent (même intitulé) est prioritaire.
-Map<ImportField, int> guessMapping(List<String> headers, {Map<String, dynamic> remembered = const {}}) {
+Map<ImportField, int> guessMapping(List<String> headers, {Map<String, dynamic> remembered = const {}}) =>
+    guessColumns(headers, ImportField.values, _synonyms, remembered: remembered);
+
+/// Association automatique générique (catalogue fournisseur, base atelier…).
+Map<F, int> guessColumns<F extends Enum>(
+  List<String> headers,
+  List<F> fields,
+  Map<F, List<String>> synonyms, {
+  Map<String, dynamic> remembered = const {},
+}) {
   final folded = headers.map(foldForSearch).toList();
-  final mapping = <ImportField, int>{};
+  final mapping = <F, int>{};
   final used = <int>{};
 
-  for (final field in ImportField.values) {
+  for (final field in fields) {
     final previous = remembered[field.name];
     if (previous is String) {
       final i = folded.indexOf(foldForSearch(previous));
@@ -57,11 +66,11 @@ Map<ImportField, int> guessMapping(List<String> headers, {Map<String, dynamic> r
   }
   // Correspondance exacte d'abord, puis intitulé qui contient le synonyme.
   for (final exact in [true, false]) {
-    for (final field in ImportField.values) {
+    for (final field in fields) {
       if (mapping.containsKey(field)) continue;
       for (var i = 0; i < folded.length; i++) {
         if (used.contains(i) || folded[i].isEmpty) continue;
-        final hit = _synonyms[field]!.any((s) => exact ? folded[i] == s : ' ${folded[i]} '.contains(' $s '));
+        final hit = (synonyms[field] ?? const []).any((s) => exact ? folded[i] == s : ' ${folded[i]} '.contains(' $s '));
         if (hit) {
           mapping[field] = i;
           used.add(i);
@@ -73,8 +82,11 @@ Map<ImportField, int> guessMapping(List<String> headers, {Map<String, dynamic> r
   return mapping;
 }
 
+/// Intitulés reconnus pour le catalogue fournisseur, réutilisés par l'import atelier.
+Map<ImportField, List<String>> get catalogSynonyms => _synonyms;
+
 /// Mapping à mémoriser : champ → intitulé de colonne.
-Map<String, String> mappingToRemember(Map<ImportField, int> mapping, List<String> headers) => {
+Map<String, String> mappingToRemember(Map<Enum, int> mapping, List<String> headers) => {
       for (final e in mapping.entries)
         if (e.value < headers.length) e.key.name: headers[e.value],
     };
@@ -93,7 +105,9 @@ class ImportIssue {
   const ImportIssue(this.kind, {this.field, this.value});
 
   final ImportIssueKind kind;
-  final ImportField? field;
+
+  /// Champ en cause : [ImportField] (catalogue) ou champ de l'import atelier.
+  final Enum? field;
   final String? value;
 }
 

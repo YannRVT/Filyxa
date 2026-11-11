@@ -300,5 +300,21 @@
   "fieldPrice": "Negotiated price (€/m)",
   "fieldTags": "Tags",
   "fieldTagsHint": "Comma-separated (e.g. AW27, to approve)",
-  "priceValue": "€{value}/m"
+  "priceValue": "€{value}/m",
+  "atelierImportTitle": "Import your workshop library",
+  "atelierImportHelp": "An .xlsx or .csv file with one row per material and a header row. 5,000 rows maximum. A material already in your library (same supplier and code, or same name and colour) is updated, never duplicated.",
+  "atelierImportMappingIntro": "Recognised columns are already matched. Only the material name is required.",
+  "atelierImportRun": "{count, plural, =1{Import 1 material} other{Import {count} materials}}",
+  "atelierImportDone": "{imported} imported · {linked} linked to a supplier · {pending} to confirm · {errors} with errors",
+  "atelierImportDetail": "including {inserted} new and {updated} updated",
+  "backToLibrary": "Back to TissuTech",
+  "reviewLinksAction": "{count, plural, =1{Confirm 1 match} other{Confirm {count} matches}}",
+  "pendingLinksBanner": "{count, plural, =1{1 imported material looks like a supplier reference.} other{{count} imported materials look like supplier references.}}",
+  "reviewTitle": "Matches to confirm",
+  "reviewProgress": "{index} of {total}",
+  "reviewIntro": "Your record looks like a published reference. Confirm to link it to its data and availability.",
+  "reviewSkip": "Later",
+  "reviewDone": "All matches have been handled.",
+  "reviewNoCandidate": "No published reference matches this material any more.",
+  "reviewOpen": "Review"
 }
