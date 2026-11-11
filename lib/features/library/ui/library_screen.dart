@@ -8,6 +8,7 @@ import '../../../shared/widgets/auth_widgets.dart';
 import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
+import '../../reports/ui/notifications_screen.dart';
 import '../../supplier/ui/supplier_texts.dart';
 import 'library_filters.dart';
 import 'material_widgets.dart';
@@ -89,7 +90,8 @@ class LibraryScreen extends ConsumerWidget {
                     label: Text(l10n.libraryNew),
                   ),
           ],
-          const SizedBox(width: FxSpace.md),
+          const NotificationBell(),
+          const SizedBox(width: FxSpace.sm),
         ],
       ),
       body: materials.when(

@@ -722,5 +722,109 @@
   "reviewSkip": "Plus tard",
   "reviewDone": "Toutes les correspondances ont été traitées.",
   "reviewNoCandidate": "Aucune référence publiée ne correspond plus à cette matière.",
-  "reviewOpen": "Traiter"
+  "reviewOpen": "Traiter",
+  "reportAction": "Signaler une erreur",
+  "reportTitle": "Signaler une erreur au fournisseur",
+  "reportIntro": "Le fournisseur corrigera sa fiche pour tous les ateliers. Il ne voit pas le nom de votre atelier, sauf si vous choisissez de le partager.",
+  "reportField": "Champ concerné",
+  "reportObserved": "Valeur constatée",
+  "reportObservedHint": "Ex. 300 g/m² mesurés sur l'échantillon",
+  "reportComment": "Commentaire (facultatif)",
+  "reportShareIdentity": "Partager le nom de mon atelier avec le fournisseur",
+  "reportSend": "Envoyer",
+  "reportSent": "Signalement envoyé au fournisseur.",
+  "reportFieldAvailability": "Disponibilité",
+  "reportFieldOther": "Autre",
+  "reportsSection": "Signalements",
+  "reportStatusOpen": "Ouvert",
+  "reportStatusFixed": "Corrigé",
+  "reportStatusRejected": "Rejeté",
+  "reportObservedLine": "Constaté : {value}",
+  "@reportObservedLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "reportReasonLine": "Motif : {reason}",
+  "@reportReasonLine": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "reportResponseLine": "Réponse : {response}",
+  "@reportResponseLine": {
+    "placeholders": {
+      "response": {
+        "type": "String"
+      }
+    }
+  },
+  "supplierReportsTitle": "Signalements des ateliers",
+  "supplierReportsButton": "{count, plural, =0{Signalements} =1{1 signalement ouvert} other{{count} signalements ouverts}}",
+  "@supplierReportsButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierReportsEmpty": "Aucun signalement pour le moment.",
+  "reportAnonymous": "Atelier anonyme",
+  "reportMarkFixed": "Marquer corrigé",
+  "reportReject": "Rejeter",
+  "reportRejectTitle": "Rejeter le signalement",
+  "reportRejectReason": "Motif du rejet",
+  "reportFixTitle": "Marquer comme corrigé",
+  "reportFixHelp": "Pensez à corriger la référence dans votre catalogue : les ateliers liés la verront aussitôt.",
+  "reportFixMessage": "Message à l'atelier (facultatif)",
+  "reportEditReference": "Ouvrir la référence",
+  "reportFilterOpen": "Ouverts",
+  "reportFilterAll": "Tous",
+  "notificationsTitle": "Notifications",
+  "notificationsEmpty": "Aucune notification.",
+  "notificationsTooltip": "{count, plural, =0{Notifications} =1{Notifications (1 non lue)} other{Notifications ({count} non lues)}}",
+  "@notificationsTooltip": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notifReportNew": "Nouveau signalement sur {code} · {field}",
+  "@notifReportNew": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "notifReportFixed": "{name} : le fournisseur a corrigé « {field} »",
+  "@notifReportFixed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "notifReportRejected": "{name} : signalement sur « {field} » rejeté",
+  "@notifReportRejected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "field": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -10,6 +10,9 @@ import '../../library/domain/material.dart';
 import '../../library/ui/material_widgets.dart';
 import '../../members/data/members_repository.dart';
 import '../../session/domain/user_space.dart';
+import '../../reports/data/reports_repository.dart';
+import '../../reports/domain/error_report.dart';
+import '../../reports/ui/notifications_screen.dart';
 import '../data/catalog_repository.dart';
 import '../domain/availability.dart';
 import '../domain/supplier_reference.dart';
@@ -52,6 +55,7 @@ class _CatalogScreenState extends ConsumerState<CatalogScreen> {
           ],
         ),
         actions: [
+          _ReportsButton(narrow: narrow),
           IconButton(
             tooltip: l10n.catalogSettings,
             icon: const Icon(Icons.tune),
@@ -71,7 +75,8 @@ class _CatalogScreenState extends ConsumerState<CatalogScreen> {
                     label: Text(l10n.catalogImport),
                   ),
           ],
-          const SizedBox(width: FxSpace.md),
+          const NotificationBell(),
+          const SizedBox(width: FxSpace.sm),
         ],
       ),
       body: refs.when(
@@ -231,5 +236,29 @@ class _EmptyCatalog extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// Accès aux signalements des ateliers, avec le nombre de signalements ouverts.
+class _ReportsButton extends ConsumerWidget {
+  const _ReportsButton({required this.narrow});
+
+  final bool narrow;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final open = (ref.watch(supplierReportsProvider).value ?? const [])
+        .where((r) => r.status == ReportStatus.open)
+        .length;
+    final label = l10n.supplierReportsButton(open);
+    final icon = Badge(
+      isLabelVisible: narrow && open > 0,
+      label: Text('$open'),
+      child: const Icon(Icons.flag_outlined),
+    );
+    return narrow
+        ? IconButton(tooltip: label, onPressed: () => context.go('/catalog/reports'), icon: icon)
+        : TextButton.icon(onPressed: () => context.go('/catalog/reports'), icon: icon, label: Text(label));
   }
 }

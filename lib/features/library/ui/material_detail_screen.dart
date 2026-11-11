@@ -10,6 +10,8 @@ import '../../auth/data/auth_repository.dart';
 import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
+import '../../reports/data/reports_repository.dart';
+import '../../reports/ui/report_widgets.dart';
 import '../../supplier/ui/supplier_texts.dart';
 import 'material_widgets.dart';
 import 'reference_widgets.dart';
@@ -298,6 +300,9 @@ class _InfoColumn extends ConsumerWidget {
           ),
         if (material.notes != null && material.notes!.trim().isNotEmpty)
           section(l10n.sectionNotes, Text(material.notes!, style: text.bodyMedium)),
+        // Signalements au fournisseur : seulement sur une référence encore publiée.
+        if (material.isLinked && (canEdit || (ref.watch(materialReportsProvider(material.id)).value?.isNotEmpty ?? false)))
+          section(l10n.reportsSection, MaterialReportsSection(materialId: material.id, canReport: canEdit && reference != null)),
       ],
     );
   }

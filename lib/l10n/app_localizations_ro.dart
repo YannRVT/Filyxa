@@ -1165,4 +1165,154 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get reviewOpen => 'Revizuiește';
+
+  @override
+  String get reportAction => 'Semnalează o eroare';
+
+  @override
+  String get reportTitle => 'Semnalează o eroare furnizorului';
+
+  @override
+  String get reportIntro =>
+      'Furnizorul va corecta fișa pentru toate atelierele. Nu vede numele atelierului dvs., decât dacă alegeți să-l partajați.';
+
+  @override
+  String get reportField => 'Câmp';
+
+  @override
+  String get reportObserved => 'Valoare constatată';
+
+  @override
+  String get reportObservedHint => 'Ex. 300 g/m² măsurate pe mostră';
+
+  @override
+  String get reportComment => 'Comentariu (opțional)';
+
+  @override
+  String get reportShareIdentity =>
+      'Partajează numele atelierului meu cu furnizorul';
+
+  @override
+  String get reportSend => 'Trimite';
+
+  @override
+  String get reportSent => 'Semnalare trimisă furnizorului.';
+
+  @override
+  String get reportFieldAvailability => 'Disponibilitate';
+
+  @override
+  String get reportFieldOther => 'Altul';
+
+  @override
+  String get reportsSection => 'Semnalări';
+
+  @override
+  String get reportStatusOpen => 'Deschisă';
+
+  @override
+  String get reportStatusFixed => 'Corectată';
+
+  @override
+  String get reportStatusRejected => 'Respinsă';
+
+  @override
+  String reportObservedLine(String value) {
+    return 'Constatat: $value';
+  }
+
+  @override
+  String reportReasonLine(String reason) {
+    return 'Motiv: $reason';
+  }
+
+  @override
+  String reportResponseLine(String response) {
+    return 'Răspuns: $response';
+  }
+
+  @override
+  String get supplierReportsTitle => 'Semnalări de la ateliere';
+
+  @override
+  String supplierReportsButton(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count semnalări deschise',
+      one: '1 semnalare deschisă',
+      zero: 'Semnalări',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierReportsEmpty => 'Nicio semnalare deocamdată.';
+
+  @override
+  String get reportAnonymous => 'Atelier anonim';
+
+  @override
+  String get reportMarkFixed => 'Marchează corectată';
+
+  @override
+  String get reportReject => 'Respinge';
+
+  @override
+  String get reportRejectTitle => 'Respinge semnalarea';
+
+  @override
+  String get reportRejectReason => 'Motivul respingerii';
+
+  @override
+  String get reportFixTitle => 'Marchează ca fiind corectată';
+
+  @override
+  String get reportFixHelp =>
+      'Nu uitați să corectați referința în catalog: atelierele legate o vor vedea imediat.';
+
+  @override
+  String get reportFixMessage => 'Mesaj către atelier (opțional)';
+
+  @override
+  String get reportEditReference => 'Deschide referința';
+
+  @override
+  String get reportFilterOpen => 'Deschise';
+
+  @override
+  String get reportFilterAll => 'Toate';
+
+  @override
+  String get notificationsTitle => 'Notificări';
+
+  @override
+  String get notificationsEmpty => 'Nicio notificare.';
+
+  @override
+  String notificationsTooltip(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notificări ($count necitite)',
+      one: 'Notificări (1 necitită)',
+      zero: 'Notificări',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String notifReportNew(String code, String field) {
+    return 'Semnalare nouă pentru $code · $field';
+  }
+
+  @override
+  String notifReportFixed(String name, String field) {
+    return '$name: furnizorul a corectat „$field”';
+  }
+
+  @override
+  String notifReportRejected(String name, String field) {
+    return '$name: semnalarea pentru „$field” a fost respinsă';
+  }
 }

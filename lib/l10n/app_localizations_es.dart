@@ -1163,4 +1163,154 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get reviewOpen => 'Revisar';
+
+  @override
+  String get reportAction => 'Señalar un error';
+
+  @override
+  String get reportTitle => 'Señalar un error al proveedor';
+
+  @override
+  String get reportIntro =>
+      'El proveedor corregirá la ficha para todos los talleres. No ve el nombre de su taller, salvo si decide compartirlo.';
+
+  @override
+  String get reportField => 'Campo';
+
+  @override
+  String get reportObserved => 'Valor constatado';
+
+  @override
+  String get reportObservedHint => 'Ej. 300 g/m² medidos en la muestra';
+
+  @override
+  String get reportComment => 'Comentario (opcional)';
+
+  @override
+  String get reportShareIdentity =>
+      'Compartir el nombre de mi taller con el proveedor';
+
+  @override
+  String get reportSend => 'Enviar';
+
+  @override
+  String get reportSent => 'Señalamiento enviado al proveedor.';
+
+  @override
+  String get reportFieldAvailability => 'Disponibilidad';
+
+  @override
+  String get reportFieldOther => 'Otro';
+
+  @override
+  String get reportsSection => 'Señalamientos';
+
+  @override
+  String get reportStatusOpen => 'Abierto';
+
+  @override
+  String get reportStatusFixed => 'Corregido';
+
+  @override
+  String get reportStatusRejected => 'Rechazado';
+
+  @override
+  String reportObservedLine(String value) {
+    return 'Constatado: $value';
+  }
+
+  @override
+  String reportReasonLine(String reason) {
+    return 'Motivo: $reason';
+  }
+
+  @override
+  String reportResponseLine(String response) {
+    return 'Respuesta: $response';
+  }
+
+  @override
+  String get supplierReportsTitle => 'Señalamientos de los talleres';
+
+  @override
+  String supplierReportsButton(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count señalamientos abiertos',
+      one: '1 señalamiento abierto',
+      zero: 'Señalamientos',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierReportsEmpty => 'Ningún señalamiento por ahora.';
+
+  @override
+  String get reportAnonymous => 'Taller anónimo';
+
+  @override
+  String get reportMarkFixed => 'Marcar como corregido';
+
+  @override
+  String get reportReject => 'Rechazar';
+
+  @override
+  String get reportRejectTitle => 'Rechazar el señalamiento';
+
+  @override
+  String get reportRejectReason => 'Motivo del rechazo';
+
+  @override
+  String get reportFixTitle => 'Marcar como corregido';
+
+  @override
+  String get reportFixHelp =>
+      'Recuerde corregir la referencia en su catálogo: los talleres vinculados la verán de inmediato.';
+
+  @override
+  String get reportFixMessage => 'Mensaje al taller (opcional)';
+
+  @override
+  String get reportEditReference => 'Abrir la referencia';
+
+  @override
+  String get reportFilterOpen => 'Abiertos';
+
+  @override
+  String get reportFilterAll => 'Todos';
+
+  @override
+  String get notificationsTitle => 'Notificaciones';
+
+  @override
+  String get notificationsEmpty => 'Ninguna notificación.';
+
+  @override
+  String notificationsTooltip(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notificaciones ($count sin leer)',
+      one: 'Notificaciones (1 sin leer)',
+      zero: 'Notificaciones',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String notifReportNew(String code, String field) {
+    return 'Nuevo señalamiento sobre $code · $field';
+  }
+
+  @override
+  String notifReportFixed(String name, String field) {
+    return '$name: el proveedor corrigió «$field»';
+  }
+
+  @override
+  String notifReportRejected(String name, String field) {
+    return '$name: señalamiento sobre «$field» rechazado';
+  }
 }

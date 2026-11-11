@@ -16,6 +16,8 @@ import '../features/library/ui/link_review_screen.dart';
 import '../features/library/ui/material_detail_screen.dart';
 import '../features/library/ui/material_form_screen.dart';
 import '../features/members/ui/members_screen.dart';
+import '../features/reports/ui/notifications_screen.dart';
+import '../features/reports/ui/supplier_reports_screen.dart';
 import '../features/scanner/domain/scan.dart';
 import '../features/scanner/ui/scanner_screen.dart';
 import '../features/supplier/ui/catalog_import_screen.dart';
@@ -69,6 +71,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/splash', builder: (_, _) => const SplashScreen()),
       GoRoute(path: '/no-organization', builder: (_, _) => const NoOrganizationScreen()),
       GoRoute(path: '/admin', builder: (_, _) => const AdminScreen()),
+      GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => AppShell(
           navigationShell: shell,
@@ -131,6 +134,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               routes: [
                 GoRoute(path: 'import', builder: (_, _) => const CatalogImportScreen()),
                 GoRoute(path: 'settings', builder: (_, _) => const SupplierSettingsScreen()),
+                GoRoute(path: 'reports', builder: (_, _) => const SupplierReportsScreen()),
                 GoRoute(
                   path: ':id',
                   builder: (_, state) => ReferenceScreen(referenceId: state.pathParameters['id']!),
