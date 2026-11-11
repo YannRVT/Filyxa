@@ -1083,4 +1083,86 @@ class AppLocalizationsRo extends AppLocalizations {
   String priceValue(String value) {
     return '$value €/m';
   }
+
+  @override
+  String get atelierImportTitle => 'Importă baza atelierului';
+
+  @override
+  String get atelierImportHelp =>
+      'Fișier .xlsx sau .csv, un rând pe material și un rând de antet. Maximum 5.000 de rânduri. Un material deja existent (același furnizor și cod, sau același nume și culoare) este actualizat, niciodată dublat.';
+
+  @override
+  String get atelierImportMappingIntro =>
+      'Coloanele recunoscute sunt deja asociate. Doar numele materialului este obligatoriu.';
+
+  @override
+  String atelierImportRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importă $count materiale',
+      one: 'Importă 1 material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String atelierImportDone(int imported, int linked, int pending, int errors) {
+    return '$imported importate · $linked legate de un furnizor · $pending de confirmat · $errors cu erori';
+  }
+
+  @override
+  String atelierImportDetail(int inserted, int updated) {
+    return 'dintre care $inserted noi și $updated actualizate';
+  }
+
+  @override
+  String get backToLibrary => 'Înapoi la TissuTech';
+
+  @override
+  String reviewLinksAction(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Confirmă $count potriviri',
+      one: 'Confirmă 1 potrivire',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pendingLinksBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count materiale importate seamănă cu referințe de furnizor.',
+      one: '1 material importat seamănă cu o referință de furnizor.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewTitle => 'Potriviri de confirmat';
+
+  @override
+  String reviewProgress(int index, int total) {
+    return '$index din $total';
+  }
+
+  @override
+  String get reviewIntro =>
+      'Fișa dvs. seamănă cu o referință publicată. Confirmați pentru a o lega de datele și disponibilitatea ei.';
+
+  @override
+  String get reviewSkip => 'Mai târziu';
+
+  @override
+  String get reviewDone => 'Toate potrivirile au fost tratate.';
+
+  @override
+  String get reviewNoCandidate =>
+      'Nicio referință publicată nu mai corespunde acestui material.';
+
+  @override
+  String get reviewOpen => 'Revizuiește';
 }

@@ -14,10 +14,38 @@ import '../domain/material.dart';
 
 const _bucket = 'material-photos';
 
+/// Lignes envoyées par appel au serveur lors d'un import atelier.
+const kAtelierImportBatchSize = 250;
+
+/// Bilan d'un import atelier.
+class AtelierImportResult {
+  const AtelierImportResult({
+    this.inserted = 0,
+    this.updated = 0,
+    this.linked = 0,
+    this.pending = 0,
+    this.serverErrors = const [],
+  });
+
+  final int inserted;
+  final int updated;
+
+  /// Reliées automatiquement à une référence fournisseur.
+  final int linked;
+
+  /// Correspondances à confirmer.
+  final int pending;
+
+  /// (ligne du fichier, message) des lignes refusées par le serveur.
+  final List<(int, String)> serverErrors;
+
+  int get imported => inserted + updated;
+}
+
 /// Taille des pages de chargement (limite du serveur : 1 000 lignes).
 const kMaterialsPageSize = 1000;
 const _select = 'id, org_id, name, supplier_name, supplier_code, color_name, color_hex, '
-    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, price_per_m, tags, '
+    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, price_per_m, tags, link_review, '
     'textile_specs(composition, weight_gsm, width_cm, weave, care, certifications, uses)';
 
 class MaterialsRepository {
@@ -109,6 +137,43 @@ class MaterialsRepository {
         return rows.map(CatalogReference.fromJson).toList();
       });
 
+  /// Import de la base atelier par lots ; [lines] donne le numéro de ligne du fichier
+  /// de chaque payload, pour rapporter les refus du serveur.
+  Future<AtelierImportResult> importRows(
+    String orgId,
+    List<Map<String, dynamic>> payloads,
+    List<int> lines, {
+    void Function(int done, int total)? onProgress,
+  }) =>
+      _guard(() async {
+        var result = const AtelierImportResult();
+        for (var start = 0; start < payloads.length; start += kAtelierImportBatchSize) {
+          final end = (start + kAtelierImportBatchSize).clamp(0, payloads.length);
+          final r = await _client.rpc<Map<String, dynamic>>(
+            'import_atelier_materials',
+            params: {'p_org': orgId, 'p_rows': payloads.sublist(start, end)},
+          );
+          result = AtelierImportResult(
+            inserted: result.inserted + (r['inserted'] as int),
+            updated: result.updated + (r['updated'] as int),
+            linked: result.linked + (r['linked'] as int),
+            pending: result.pending + (r['pending'] as int),
+            serverErrors: [
+              ...result.serverErrors,
+              for (final e in (r['errors'] as List<dynamic>).cast<Map<String, dynamic>>())
+                (lines[start + (e['row'] as int) - 1], e['error'] as String),
+            ],
+          );
+          onProgress?.call(end, payloads.length);
+        }
+        return result;
+      });
+
+  /// « Aucune de ces références » : la correspondance n'est plus proposée.
+  Future<void> dismissLink(String id) => _guard(
+        () => _client.from('materials').update({'link_review': 'dismissed'}).eq('id', id),
+      );
+
   Future<void> updateStock(String id, double? meters) => _guard(
         () => _client.from('materials').update({'atelier_stock_m': meters}).eq('id', id),
       );
@@ -164,6 +229,19 @@ final linkedReferencesProvider = FutureProvider<Map<String, CatalogReference>>((
   final ids = [for (final m in materials) if (m.supplierReferenceId != null) m.supplierReferenceId!];
   if (ids.isEmpty) return const {};
   return ref.watch(materialsRepositoryProvider).catalogReferences(ids);
+});
+
+/// Matières dont une correspondance fournisseur attend confirmation (après un import).
+final pendingLinksProvider = Provider<List<MaterialItem>>((ref) {
+  final all = ref.watch(materialsProvider).value ?? const <MaterialItem>[];
+  return [for (final m in all) if (m.linkPending && !m.isLinked) m]..sort((a, b) => a.name.compareTo(b.name));
+});
+
+/// Références proposées pour une matière à confirmer (recalculées à l'ouverture).
+final linkCandidatesProvider = FutureProvider.autoDispose.family<List<ReferenceMatch>, String>((ref, id) async {
+  final m = (await ref.watch(materialsProvider.future)).where((x) => x.id == id).firstOrNull;
+  if (m == null) return const [];
+  return ref.watch(materialsRepositoryProvider).match(m.supplierCode, m.supplierName);
 });
 
 final materialProvider = FutureProvider.family<MaterialItem?, String>(

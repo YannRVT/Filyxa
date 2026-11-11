@@ -72,6 +72,11 @@ class LibraryScreen extends ConsumerWidget {
             ),
           if (canEdit && count != null && count > 0) ...[
             const SizedBox(width: FxSpace.sm),
+            IconButton(
+              tooltip: l10n.actionImportExcel,
+              onPressed: () => context.go('/library/import'),
+              icon: const Icon(Icons.upload_file_outlined),
+            ),
             narrow
                 ? IconButton.filled(
                     tooltip: l10n.libraryNew,
@@ -104,8 +109,43 @@ class LibraryScreen extends ConsumerWidget {
         ),
         data: (items) {
           if (items.isEmpty) return _EmptyLibrary(canEdit: canEdit);
-          return _FilteredLibrary(items: items, view: view);
+          final pending = canEdit ? ref.watch(pendingLinksProvider).length : 0;
+          if (pending == 0) return _FilteredLibrary(items: items, view: view);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _PendingLinksBanner(count: pending),
+              Expanded(child: _FilteredLibrary(items: items, view: view)),
+            ],
+          );
         },
+      ),
+    );
+  }
+}
+
+/// Rappel après un import : des correspondances fournisseur attendent confirmation.
+class _PendingLinksBanner extends StatelessWidget {
+  const _PendingLinksBanner({required this.count});
+
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Material(
+      color: FxColors.infoBg,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: FxSpace.md, vertical: FxSpace.sm),
+        child: Row(
+          children: [
+            const Icon(Icons.link, color: FxColors.info, size: 20),
+            const SizedBox(width: FxSpace.sm),
+            Expanded(child: Text(l10n.pendingLinksBanner(count))),
+            const SizedBox(width: FxSpace.sm),
+            TextButton(onPressed: () => context.go('/library/links'), child: Text(l10n.reviewOpen)),
+          ],
+        ),
       ),
     );
   }

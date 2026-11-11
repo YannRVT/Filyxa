@@ -83,6 +83,7 @@ class MaterialItem {
     this.linkedAt,
     this.pricePerM,
     this.tags = const [],
+    this.linkPending = false,
   });
 
   factory MaterialItem.fromJson(Map<String, dynamic> json) {
@@ -106,6 +107,7 @@ class MaterialItem {
       linkedAt: json['linked_at'] == null ? null : DateTime.parse(json['linked_at'] as String).toLocal(),
       pricePerM: (json['price_per_m'] as num?)?.toDouble(),
       tags: (json['tags'] as List<dynamic>? ?? const []).cast<String>(),
+      linkPending: json['link_review'] == 'pending',
     );
   }
 
@@ -129,6 +131,9 @@ class MaterialItem {
   /// Couche privée de l'atelier.
   final double? pricePerM;
   final List<String> tags;
+
+  /// Import : une correspondance avec un catalogue fournisseur attend confirmation.
+  final bool linkPending;
 
   bool get isLinked => supplierReferenceId != null;
 }

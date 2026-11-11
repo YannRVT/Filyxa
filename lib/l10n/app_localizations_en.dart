@@ -1078,4 +1078,86 @@ class AppLocalizationsEn extends AppLocalizations {
   String priceValue(String value) {
     return '€$value/m';
   }
+
+  @override
+  String get atelierImportTitle => 'Import your workshop library';
+
+  @override
+  String get atelierImportHelp =>
+      'An .xlsx or .csv file with one row per material and a header row. 5,000 rows maximum. A material already in your library (same supplier and code, or same name and colour) is updated, never duplicated.';
+
+  @override
+  String get atelierImportMappingIntro =>
+      'Recognised columns are already matched. Only the material name is required.';
+
+  @override
+  String atelierImportRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Import $count materials',
+      one: 'Import 1 material',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String atelierImportDone(int imported, int linked, int pending, int errors) {
+    return '$imported imported · $linked linked to a supplier · $pending to confirm · $errors with errors';
+  }
+
+  @override
+  String atelierImportDetail(int inserted, int updated) {
+    return 'including $inserted new and $updated updated';
+  }
+
+  @override
+  String get backToLibrary => 'Back to TissuTech';
+
+  @override
+  String reviewLinksAction(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Confirm $count matches',
+      one: 'Confirm 1 match',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pendingLinksBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count imported materials look like supplier references.',
+      one: '1 imported material looks like a supplier reference.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewTitle => 'Matches to confirm';
+
+  @override
+  String reviewProgress(int index, int total) {
+    return '$index of $total';
+  }
+
+  @override
+  String get reviewIntro =>
+      'Your record looks like a published reference. Confirm to link it to its data and availability.';
+
+  @override
+  String get reviewSkip => 'Later';
+
+  @override
+  String get reviewDone => 'All matches have been handled.';
+
+  @override
+  String get reviewNoCandidate =>
+      'No published reference matches this material any more.';
+
+  @override
+  String get reviewOpen => 'Review';
 }

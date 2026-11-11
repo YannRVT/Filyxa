@@ -300,5 +300,21 @@
   "fieldPrice": "Preț negociat (€/m)",
   "fieldTags": "Etichete",
   "fieldTagsHint": "Separate prin virgulă (ex. TI27, de validat)",
-  "priceValue": "{value} €/m"
+  "priceValue": "{value} €/m",
+  "atelierImportTitle": "Importă baza atelierului",
+  "atelierImportHelp": "Fișier .xlsx sau .csv, un rând pe material și un rând de antet. Maximum 5.000 de rânduri. Un material deja existent (același furnizor și cod, sau același nume și culoare) este actualizat, niciodată dublat.",
+  "atelierImportMappingIntro": "Coloanele recunoscute sunt deja asociate. Doar numele materialului este obligatoriu.",
+  "atelierImportRun": "{count, plural, =1{Importă 1 material} other{Importă {count} materiale}}",
+  "atelierImportDone": "{imported} importate · {linked} legate de un furnizor · {pending} de confirmat · {errors} cu erori",
+  "atelierImportDetail": "dintre care {inserted} noi și {updated} actualizate",
+  "backToLibrary": "Înapoi la TissuTech",
+  "reviewLinksAction": "{count, plural, =1{Confirmă 1 potrivire} other{Confirmă {count} potriviri}}",
+  "pendingLinksBanner": "{count, plural, =1{1 material importat seamănă cu o referință de furnizor.} other{{count} materiale importate seamănă cu referințe de furnizor.}}",
+  "reviewTitle": "Potriviri de confirmat",
+  "reviewProgress": "{index} din {total}",
+  "reviewIntro": "Fișa dvs. seamănă cu o referință publicată. Confirmați pentru a o lega de datele și disponibilitatea ei.",
+  "reviewSkip": "Mai târziu",
+  "reviewDone": "Toate potrivirile au fost tratate.",
+  "reviewNoCandidate": "Nicio referință publicată nu mai corespunde acestui material.",
+  "reviewOpen": "Revizuiește"
 }

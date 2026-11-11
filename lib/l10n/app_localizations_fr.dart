@@ -1081,4 +1081,87 @@ class AppLocalizationsFr extends AppLocalizations {
   String priceValue(String value) {
     return '$value €/m';
   }
+
+  @override
+  String get atelierImportTitle => 'Importer la base de l\'atelier';
+
+  @override
+  String get atelierImportHelp =>
+      'Fichier .xlsx ou .csv, une ligne par matière et une ligne d\'intitulés. 5 000 lignes au maximum. Une matière déjà présente (même fournisseur et même code, ou même nom et même coloris) est mise à jour, jamais dupliquée.';
+
+  @override
+  String get atelierImportMappingIntro =>
+      'Les colonnes reconnues sont déjà associées. Seul le nom de la matière est obligatoire.';
+
+  @override
+  String atelierImportRun(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Importer $count matières',
+      one: 'Importer 1 matière',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String atelierImportDone(int imported, int linked, int pending, int errors) {
+    return '$imported importées · $linked reliées à un fournisseur · $pending à confirmer · $errors en erreur';
+  }
+
+  @override
+  String atelierImportDetail(int inserted, int updated) {
+    return 'dont $inserted nouvelles et $updated mises à jour';
+  }
+
+  @override
+  String get backToLibrary => 'Retour à TissuTech';
+
+  @override
+  String reviewLinksAction(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Confirmer $count correspondances',
+      one: 'Confirmer 1 correspondance',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pendingLinksBanner(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count matières importées ressemblent à des références fournisseur.',
+      one: '1 matière importée ressemble à une référence fournisseur.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewTitle => 'Correspondances à confirmer';
+
+  @override
+  String reviewProgress(int index, int total) {
+    return '$index sur $total';
+  }
+
+  @override
+  String get reviewIntro =>
+      'Votre fiche ressemble à une référence publiée. Confirmez pour la relier à ses données et à sa disponibilité.';
+
+  @override
+  String get reviewSkip => 'Plus tard';
+
+  @override
+  String get reviewDone => 'Toutes les correspondances ont été traitées.';
+
+  @override
+  String get reviewNoCandidate =>
+      'Aucune référence publiée ne correspond plus à cette matière.';
+
+  @override
+  String get reviewOpen => 'Traiter';
 }

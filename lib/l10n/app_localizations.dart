@@ -1911,6 +1911,102 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'{value} €/m'**
   String priceValue(String value);
+
+  /// No description provided for @atelierImportTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer la base de l\'atelier'**
+  String get atelierImportTitle;
+
+  /// No description provided for @atelierImportHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier .xlsx ou .csv, une ligne par matière et une ligne d\'intitulés. 5 000 lignes au maximum. Une matière déjà présente (même fournisseur et même code, ou même nom et même coloris) est mise à jour, jamais dupliquée.'**
+  String get atelierImportHelp;
+
+  /// No description provided for @atelierImportMappingIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les colonnes reconnues sont déjà associées. Seul le nom de la matière est obligatoire.'**
+  String get atelierImportMappingIntro;
+
+  /// No description provided for @atelierImportRun.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{Importer 1 matière} other{Importer {count} matières}}'**
+  String atelierImportRun(int count);
+
+  /// No description provided for @atelierImportDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'{imported} importées · {linked} reliées à un fournisseur · {pending} à confirmer · {errors} en erreur'**
+  String atelierImportDone(int imported, int linked, int pending, int errors);
+
+  /// No description provided for @atelierImportDetail.
+  ///
+  /// In fr, this message translates to:
+  /// **'dont {inserted} nouvelles et {updated} mises à jour'**
+  String atelierImportDetail(int inserted, int updated);
+
+  /// No description provided for @backToLibrary.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retour à TissuTech'**
+  String get backToLibrary;
+
+  /// No description provided for @reviewLinksAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{Confirmer 1 correspondance} other{Confirmer {count} correspondances}}'**
+  String reviewLinksAction(int count);
+
+  /// No description provided for @pendingLinksBanner.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 matière importée ressemble à une référence fournisseur.} other{{count} matières importées ressemblent à des références fournisseur.}}'**
+  String pendingLinksBanner(int count);
+
+  /// No description provided for @reviewTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Correspondances à confirmer'**
+  String get reviewTitle;
+
+  /// No description provided for @reviewProgress.
+  ///
+  /// In fr, this message translates to:
+  /// **'{index} sur {total}'**
+  String reviewProgress(int index, int total);
+
+  /// No description provided for @reviewIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre fiche ressemble à une référence publiée. Confirmez pour la relier à ses données et à sa disponibilité.'**
+  String get reviewIntro;
+
+  /// No description provided for @reviewSkip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus tard'**
+  String get reviewSkip;
+
+  /// No description provided for @reviewDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes les correspondances ont été traitées.'**
+  String get reviewDone;
+
+  /// No description provided for @reviewNoCandidate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune référence publiée ne correspond plus à cette matière.'**
+  String get reviewNoCandidate;
+
+  /// No description provided for @reviewOpen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Traiter'**
+  String get reviewOpen;
 }
 
 class _AppLocalizationsDelegate
