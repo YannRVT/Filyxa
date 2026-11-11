@@ -13,6 +13,8 @@ import '../../export/export_screen.dart';
 import '../../library/data/materials_repository.dart';
 import '../../library/domain/material.dart';
 import '../../library/ui/material_widgets.dart';
+import '../../share/data/share_repository.dart';
+import '../../share/ui/share_widgets.dart';
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import 'alert_widgets.dart';
@@ -227,12 +229,16 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
         }),
         title: Text(m.name),
         actions: [
+          ShareButton(scope: ShareScope.model, targetId: m.id),
           IconButton(
             tooltip: l10n.exportDossier,
             icon: const Icon(Icons.picture_as_pdf_outlined),
             onPressed: () async {
               await _flush();
-              if (context.mounted) openModelExport(context, ref, _model!);
+              if (context.mounted) {
+                openModelExport(context, ref, _model!,
+                    shareUrl: ref.read(targetLinksProvider((ShareScope.model, m.id))).firstOrNull?.url);
+              }
             },
           ),
           if (canEdit)

@@ -1859,4 +1859,104 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get pdfGenerationError =>
       'Não foi possível gerar o PDF. Tente novamente.';
+
+  @override
+  String get shareAction => 'Partilhar';
+
+  @override
+  String get shareTitle => 'Partilhar só de leitura';
+
+  @override
+  String get shareIntro =>
+      'O destinatário abre a ligação sem conta e vê fichas sempre atualizadas, sem preços, notas nem stock do ateliê.';
+
+  @override
+  String get shareLanguage => 'Idioma da página';
+
+  @override
+  String get shareValidity => 'Validade (dias)';
+
+  @override
+  String get shareCreate => 'Criar a ligação';
+
+  @override
+  String get shareCopy => 'Copiar a ligação';
+
+  @override
+  String get shareCopied => 'Ligação copiada.';
+
+  @override
+  String shareExpires(String date) {
+    return 'Expira em $date';
+  }
+
+  @override
+  String get shareRevoke => 'Revogar';
+
+  @override
+  String get shareRevokeConfirm =>
+      'Revogar esta ligação? Deixará de funcionar de imediato.';
+
+  @override
+  String get shareRevoked => 'Ligação revogada.';
+
+  @override
+  String get shareExtend => 'Alterar a validade';
+
+  @override
+  String get shareActiveLinks => 'Ligações ativas';
+
+  @override
+  String get shareNone => 'Nenhuma ligação ativa.';
+
+  @override
+  String get shareLinksTitle => 'Ligações partilhadas';
+
+  @override
+  String get shareScopeMaterial => 'Material';
+
+  @override
+  String get shareScopeModel => 'Modelo';
+
+  @override
+  String get shareScopeCollection => 'Coleção';
+
+  @override
+  String get shareUnknownTarget => 'Elemento eliminado';
+
+  @override
+  String sharedFrom(String org) {
+    return 'Partilhado por $org';
+  }
+
+  @override
+  String sharedReadOnly(String date) {
+    return 'Só de leitura · dados atualizados · ligação válida até $date';
+  }
+
+  @override
+  String get sharedExpiredTitle => 'Esta ligação expirou';
+
+  @override
+  String sharedExpiredBody(String date) {
+    return 'Já não é válida desde $date. Peça uma nova ligação ao ateliê que a enviou.';
+  }
+
+  @override
+  String get sharedRevokedTitle => 'Esta ligação foi revogada';
+
+  @override
+  String get sharedRevokedBody =>
+      'O ateliê desativou-a. Peça-lhe uma nova ligação se necessário.';
+
+  @override
+  String get sharedNotFoundTitle => 'Ligação não encontrada';
+
+  @override
+  String get sharedNotFoundBody =>
+      'Verifique o endereço ou peça uma nova ligação ao ateliê.';
+
+  @override
+  String get sharedError =>
+      'Não foi possível carregar a página. Verifique a ligação e tente novamente.';
 }

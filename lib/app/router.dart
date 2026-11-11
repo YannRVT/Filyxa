@@ -20,6 +20,8 @@ import '../features/reports/ui/notifications_screen.dart';
 import '../features/reports/ui/supplier_reports_screen.dart';
 import '../features/scanner/domain/scan.dart';
 import '../features/scanner/ui/scanner_screen.dart';
+import '../features/share/ui/share_widgets.dart';
+import '../features/share/ui/shared_view_screen.dart';
 import '../features/studio/ui/collection_screen.dart';
 import '../features/studio/ui/model_screen.dart';
 import '../features/studio/ui/studio_screen.dart';
@@ -75,6 +77,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/no-organization', builder: (_, _) => const NoOrganizationScreen()),
       GoRoute(path: '/admin', builder: (_, _) => const AdminScreen()),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
+      GoRoute(path: '/s/:token', builder: (_, state) => SharedViewScreen(token: state.pathParameters['token']!)),
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => AppShell(
           navigationShell: shell,
@@ -137,6 +140,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               builder: (_, _) => const AccountScreen(),
               routes: [
                 GoRoute(path: 'members', builder: (_, _) => const MembersScreen()),
+                GoRoute(path: 'links', builder: (_, _) => const ShareLinksScreen()),
               ],
             ),
           ]),

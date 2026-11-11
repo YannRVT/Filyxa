@@ -7,6 +7,7 @@ import '../../app/theme.dart';
 import '../../l10n/l10n.dart';
 import '../auth/data/auth_repository.dart';
 import '../session/data/user_space_repository.dart';
+import '../session/domain/user_space.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
@@ -85,6 +86,15 @@ class AccountScreen extends ConsumerWidget {
                             onTap: () => context.go('/account/members'),
                           ),
                           const Divider(),
+                          if (space.membership!.organization.kind == OrgKind.atelier) ...[
+                            ListTile(
+                              leading: const Icon(Icons.ios_share),
+                              title: Text(l10n.shareLinksTitle),
+                              trailing: const Icon(Icons.chevron_right),
+                              onTap: () => context.go('/account/links'),
+                            ),
+                            const Divider(),
+                          ],
                         ],
                         ListTile(
                           leading: const Icon(Icons.translate),

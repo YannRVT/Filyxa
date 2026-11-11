@@ -1863,4 +1863,104 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pdfGenerationError => 'Le PDF n\'a pas pu être généré. Réessayez.';
+
+  @override
+  String get shareAction => 'Partager';
+
+  @override
+  String get shareTitle => 'Partager en lecture seule';
+
+  @override
+  String get shareIntro =>
+      'Le destinataire ouvre le lien sans compte et voit des fiches toujours à jour, sans prix, notes ni stock de l\'atelier.';
+
+  @override
+  String get shareLanguage => 'Langue de la page';
+
+  @override
+  String get shareValidity => 'Validité (jours)';
+
+  @override
+  String get shareCreate => 'Créer le lien';
+
+  @override
+  String get shareCopy => 'Copier le lien';
+
+  @override
+  String get shareCopied => 'Lien copié.';
+
+  @override
+  String shareExpires(String date) {
+    return 'Expire le $date';
+  }
+
+  @override
+  String get shareRevoke => 'Révoquer';
+
+  @override
+  String get shareRevokeConfirm =>
+      'Révoquer ce lien ? Il cessera aussitôt de fonctionner.';
+
+  @override
+  String get shareRevoked => 'Lien révoqué.';
+
+  @override
+  String get shareExtend => 'Modifier l\'expiration';
+
+  @override
+  String get shareActiveLinks => 'Liens actifs';
+
+  @override
+  String get shareNone => 'Aucun lien actif.';
+
+  @override
+  String get shareLinksTitle => 'Liens partagés';
+
+  @override
+  String get shareScopeMaterial => 'Fiche matière';
+
+  @override
+  String get shareScopeModel => 'Modèle';
+
+  @override
+  String get shareScopeCollection => 'Collection';
+
+  @override
+  String get shareUnknownTarget => 'Élément supprimé';
+
+  @override
+  String sharedFrom(String org) {
+    return 'Partagé par $org';
+  }
+
+  @override
+  String sharedReadOnly(String date) {
+    return 'Lecture seule · données à jour · lien valable jusqu\'au $date';
+  }
+
+  @override
+  String get sharedExpiredTitle => 'Ce lien a expiré';
+
+  @override
+  String sharedExpiredBody(String date) {
+    return 'Il n\'est plus valable depuis le $date. Demandez un nouveau lien à l\'atelier qui vous l\'a envoyé.';
+  }
+
+  @override
+  String get sharedRevokedTitle => 'Ce lien a été révoqué';
+
+  @override
+  String get sharedRevokedBody =>
+      'L\'atelier l\'a désactivé. Demandez-lui un nouveau lien si besoin.';
+
+  @override
+  String get sharedNotFoundTitle => 'Lien introuvable';
+
+  @override
+  String get sharedNotFoundBody =>
+      'Vérifiez l\'adresse ou demandez un nouveau lien à l\'atelier.';
+
+  @override
+  String get sharedError =>
+      'Impossible de charger la page. Vérifiez votre connexion puis réessayez.';
 }

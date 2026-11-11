@@ -13,6 +13,8 @@ import '../domain/material.dart';
 import '../../export/export_screen.dart';
 import '../../reports/data/reports_repository.dart';
 import '../../reports/ui/report_widgets.dart';
+import '../../share/data/share_repository.dart';
+import '../../share/ui/share_widgets.dart';
 import '../../supplier/ui/supplier_texts.dart';
 import 'material_widgets.dart';
 import 'reference_widgets.dart';
@@ -35,12 +37,15 @@ class MaterialDetailScreen extends ConsumerWidget {
         title: Text(item?.name ?? l10n.navLibrary, overflow: TextOverflow.ellipsis),
         actions: [
           // Export PDF : ouvert aux Lecteurs aussi.
-          if (item != null)
+          if (item != null) ...[
+            ShareButton(scope: ShareScope.material, targetId: item.id),
             IconButton(
               tooltip: l10n.exportPdf,
               icon: const Icon(Icons.picture_as_pdf_outlined),
-              onPressed: () => openMaterialExport(context, ref, item),
+              onPressed: () => openMaterialExport(context, ref, item,
+                  shareUrl: ref.read(targetLinksProvider((ShareScope.material, item.id))).firstOrNull?.url),
             ),
+          ],
           if (canEdit && item != null) ...[
             IconButton(
               tooltip: l10n.edit,

@@ -34,6 +34,9 @@ const atelierRoots = ['/library', '/studio', '/scan', '/suppliers'];
 String? decideRedirect(RedirectInput input) {
   final location = input.location;
 
+  // Lien partagé : page publique, connecté ou non.
+  if (location.startsWith('/s/')) return null;
+
   if (!input.loggedIn) {
     return publicPaths.contains(location) ? null : '/login';
   }
