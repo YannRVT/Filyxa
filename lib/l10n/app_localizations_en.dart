@@ -1562,4 +1562,244 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get materialMissing => 'Material deleted from TissuTech';
+
+  @override
+  String get alertsTitle => 'Alerts';
+
+  @override
+  String get alertsNone =>
+      'No alerts: this style\'s materials are compatible and stock is sufficient.';
+
+  @override
+  String alertsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count alerts',
+      one: '1 alert',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get alertFamilyCare => 'Care';
+
+  @override
+  String get alertFamilyTechnical => 'Technical';
+
+  @override
+  String get alertFamilyCertification => 'Certifications';
+
+  @override
+  String get alertFamilyStock => 'Stock';
+
+  @override
+  String alertQuoted(String name) {
+    return '\"$name\"';
+  }
+
+  @override
+  String get alertNoIron => 'no ironing';
+
+  @override
+  String get alertNoMainTitle => 'No main fabric';
+
+  @override
+  String get alertNoMainBody => 'Assign the main fabric to enable all checks.';
+
+  @override
+  String get alertLiningHeavierTitle => 'Lining heavier than the main fabric';
+
+  @override
+  String alertLiningHeavierBody(String lining, String main) {
+    return '$lining is heavier than $main: the lining may distort the product.';
+  }
+
+  @override
+  String get alertStretchTitle => 'Stretch fabric, rigid lining';
+
+  @override
+  String alertStretchBody(String main, String lining) {
+    return '$main contains elastane but $lining does not: allow ease or use a stretch lining.';
+  }
+
+  @override
+  String get alertInterfacingHeavierTitle => 'Interfacing too heavy';
+
+  @override
+  String alertInterfacingHeavierBody(String interfacing, String main) {
+    return '$interfacing is heavier than $main: risk of stiffness and show-through.';
+  }
+
+  @override
+  String get alertFusingTitle => 'Fusing is risky';
+
+  @override
+  String alertFusingBody(String main, String iron) {
+    return '$main takes $iron at most: choose a sew-in or low-temperature interfacing.';
+  }
+
+  @override
+  String get alertConsumptionTitle => 'Consumption missing';
+
+  @override
+  String alertConsumptionBody(String materials) {
+    return '$materials: the requirement can\'t be calculated.';
+  }
+
+  @override
+  String get alertCareConflictTitle => 'Incompatible care';
+
+  @override
+  String alertCareConflictBody(String details) {
+    return '$details. The product label must state the most restrictive care.';
+  }
+
+  @override
+  String alertWashTitle(int temp) {
+    return 'Washing limited to $temp °C';
+  }
+
+  @override
+  String alertIronTitle(String iron) {
+    return 'Ironing limited: $iron';
+  }
+
+  @override
+  String get alertTumbleTitle => 'Avoid tumble drying';
+
+  @override
+  String alertLimitBody(String details) {
+    return '$details. The finished product follows the most delicate material.';
+  }
+
+  @override
+  String alertCertTitle(String cert) {
+    return '$cert not met across the whole product';
+  }
+
+  @override
+  String alertCertBody(String certified, String cert, String missing) {
+    return '$certified is $cert certified, but $missing is not: the finished product can\'t claim $cert.';
+  }
+
+  @override
+  String get alertRetiredTitle => 'Reference withdrawn by the supplier';
+
+  @override
+  String alertRetiredBody(String material, String need, String atelier) {
+    return '$material is no longer offered: requirement $need, workshop stock $atelier.';
+  }
+
+  @override
+  String get alertAtelierShortTitle => 'Workshop stock too low';
+
+  @override
+  String alertAtelierShortBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  ) {
+    return '$material: requirement $need, workshop stock $atelier. $missing short.';
+  }
+
+  @override
+  String get alertCoveredTitle => 'To order from the supplier';
+
+  @override
+  String alertCoveredBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  ) {
+    return '$material: requirement $need, workshop stock $atelier. The remaining $missing is available from the supplier.';
+  }
+
+  @override
+  String alertCoveredBodyExact(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+    String supplier,
+  ) {
+    return '$material: requirement $need, workshop stock $atelier. The remaining $missing is available from the supplier ($supplier in stock).';
+  }
+
+  @override
+  String get alertSupplierShortTitle => 'Supplier stock too low';
+
+  @override
+  String alertSupplierShortBody(
+    String material,
+    String missing,
+    String atelier,
+    String supplier,
+  ) {
+    return '$material: $missing short after workshop stock ($atelier), and the supplier only has $supplier.';
+  }
+
+  @override
+  String get alertSupplierLowTitle => 'Low stock at the supplier';
+
+  @override
+  String alertSupplierLowBody(String material, String missing, String atelier) {
+    return '$material: $missing short after workshop stock ($atelier), and the supplier\'s stock is low.';
+  }
+
+  @override
+  String get alertOnOrderTitle => 'Made to order at the supplier';
+
+  @override
+  String alertOnOrderBody(
+    String material,
+    String missing,
+    String atelier,
+    int weeks,
+  ) {
+    return '$material: $missing short after workshop stock ($atelier). Restock lead time: $weeks weeks.';
+  }
+
+  @override
+  String get alertOutTitle => 'Out of stock at the supplier';
+
+  @override
+  String alertOutBody(String material, String missing, String atelier) {
+    return '$material: $missing short after workshop stock ($atelier), and the supplier is out of stock.';
+  }
+
+  @override
+  String get alertHiddenTitle => 'Availability not shared';
+
+  @override
+  String alertHiddenBody(String material, String missing, String atelier) {
+    return '$material: $missing short after workshop stock ($atelier). The supplier doesn\'t publish stock: contact them.';
+  }
+
+  @override
+  String notifStockLow(String name, String code) {
+    return '$name: low stock at the supplier ($code)';
+  }
+
+  @override
+  String notifStockOut(String name, String code) {
+    return '$name: out of stock at the supplier ($code)';
+  }
+
+  @override
+  String notifReferenceUpdated(String name, String code) {
+    return '$name: record updated by the supplier ($code)';
+  }
+
+  @override
+  String notifReferenceRetired(String name, String code) {
+    return '$name: reference withdrawn by the supplier ($code)';
+  }
+
+  @override
+  String notifUsedIn(String models) {
+    return 'Used in: $models';
+  }
 }

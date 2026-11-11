@@ -70,6 +70,18 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         ref.invalidate(materialReportsProvider(n.materialId!));
         ref.invalidate(materialProvider(n.materialId!));
         context.go('/library/${n.materialId}');
+      case NotificationKind.stockLow ||
+            NotificationKind.stockOut ||
+            NotificationKind.referenceUpdated ||
+            NotificationKind.referenceRetired:
+        // Un seul modèle concerné : on l'ouvre ; sinon, la fiche de la matière.
+        ref.invalidate(linkedReferencesProvider);
+        if (n.models.length == 1) {
+          context.go('/studio/models/${n.models.single.id}');
+        } else if (n.materialId != null) {
+          ref.invalidate(materialProvider(n.materialId!));
+          context.go('/library/${n.materialId}');
+        }
     }
   }
 
@@ -101,6 +113,10 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                     NotificationKind.reportNew => (Icons.flag_outlined, FxColors.info),
                     NotificationKind.reportFixed => (Icons.check_circle_outline, FxColors.success),
                     NotificationKind.reportRejected => (Icons.block, FxColors.error),
+                    NotificationKind.stockLow => (Icons.inventory_2_outlined, FxColors.warning),
+                    NotificationKind.stockOut => (Icons.remove_shopping_cart_outlined, FxColors.error),
+                    NotificationKind.referenceUpdated => (Icons.edit_note, FxColors.info),
+                    NotificationKind.referenceRetired => (Icons.link_off, FxColors.error),
                   };
                   final response = n.data['response'] as String?;
                   return Center(
@@ -114,6 +130,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                           style: fresh ? const TextStyle(fontWeight: FontWeight.w600) : null,
                         ),
                         subtitle: Text([
+                          if (n.models.isNotEmpty) l10n.notifUsedIn(n.models.map((m) => m.name).join(', ')),
                           if (response != null)
                             n.kind == NotificationKind.reportRejected
                                 ? l10n.reportReasonLine(response)

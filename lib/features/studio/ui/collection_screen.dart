@@ -8,6 +8,8 @@ import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
+import '../domain/alerts.dart';
+import 'alert_widgets.dart';
 import 'studio_widgets.dart';
 
 /// Collection : ses modèles, et l'ajout d'un modèle.
@@ -135,16 +137,19 @@ class CollectionScreen extends ConsumerWidget {
   }
 }
 
-class _ModelCard extends StatelessWidget {
+class _ModelCard extends ConsumerWidget {
   const _ModelCard({required this.model});
 
   final StudioModel model;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
     final m = model;
+    // Alertes qui demandent une action (critiques et avertissements).
+    final alerts = watchModelAlerts(ref, m).where((e) => e.alert.level != AlertLevel.info).toList();
+    final worst = alerts.isEmpty ? null : alerts.first.alert.level;
     final details = [
       l10n.productTypeLabel(m.productType),
       if ((m.reference ?? '').isNotEmpty) m.reference!,
@@ -175,6 +180,12 @@ class _ModelCard extends StatelessWidget {
                   ],
                 ),
               ),
+              if (worst != null) ...[
+                Icon(alertStyle(worst).$1, color: alertStyle(worst).$2, size: 18),
+                const SizedBox(width: 4),
+                Text(l10n.alertsCount(alerts.length), style: text.labelMedium?.copyWith(color: alertStyle(worst).$2)),
+                const SizedBox(width: FxSpace.sm),
+              ],
               const Icon(Icons.chevron_right, color: FxColors.inkSoft),
             ],
           ),

@@ -112,12 +112,20 @@ class SupplierErrorReport {
 enum NotificationKind {
   reportNew,
   reportFixed,
-  reportRejected;
+  reportRejected,
+  stockLow,
+  stockOut,
+  referenceUpdated,
+  referenceRetired;
 
   static NotificationKind? parse(String? v) => switch (v) {
         'report_new' => reportNew,
         'report_fixed' => reportFixed,
         'report_rejected' => reportRejected,
+        'stock_low' => stockLow,
+        'stock_out' => stockOut,
+        'reference_updated' => referenceUpdated,
+        'reference_retired' => referenceRetired,
         _ => null,
       };
 }
@@ -157,5 +165,11 @@ class AppNotification {
   final DateTime? readAt;
 
   bool get unread => readAt == null;
+
+  /// Modèles du Studio qui utilisent la matière (notifications de stock et de fiche).
+  List<({String id, String name})> get models => [
+        for (final m in (data['models'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
+          (id: m['id'] as String, name: m['name'] as String),
+      ];
   ReportField get field => ReportField.parse(data['field'] as String?);
 }

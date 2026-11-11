@@ -1569,4 +1569,246 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get materialMissing => 'Material șters din TissuTech';
+
+  @override
+  String get alertsTitle => 'Alerte';
+
+  @override
+  String get alertsNone =>
+      'Nicio alertă: materialele modelului sunt compatibile, iar stocul este suficient.';
+
+  @override
+  String alertsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count alerte',
+      one: '1 alertă',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get alertFamilyCare => 'Întreținere';
+
+  @override
+  String get alertFamilyTechnical => 'Tehnic';
+
+  @override
+  String get alertFamilyCertification => 'Certificări';
+
+  @override
+  String get alertFamilyStock => 'Stoc';
+
+  @override
+  String alertQuoted(String name) {
+    return '„$name”';
+  }
+
+  @override
+  String get alertNoIron => 'nicio călcare';
+
+  @override
+  String get alertNoMainTitle => 'Niciun material principal';
+
+  @override
+  String get alertNoMainBody =>
+      'Desemnați materialul principal pentru a activa toate verificările.';
+
+  @override
+  String get alertLiningHeavierTitle =>
+      'Căptușeală mai grea decât materialul principal';
+
+  @override
+  String alertLiningHeavierBody(String lining, String main) {
+    return '$lining depășește $main: căptușeala poate deforma produsul.';
+  }
+
+  @override
+  String get alertStretchTitle => 'Material elastic, căptușeală rigidă';
+
+  @override
+  String alertStretchBody(String main, String lining) {
+    return '$main conține elastan, dar $lining nu: prevedeți lărgime sau o căptușeală elastică.';
+  }
+
+  @override
+  String get alertInterfacingHeavierTitle => 'Întăritură prea grea';
+
+  @override
+  String alertInterfacingHeavierBody(String interfacing, String main) {
+    return '$interfacing este mai grea decât $main: risc de rigiditate și transparență.';
+  }
+
+  @override
+  String get alertFusingTitle => 'Termolipire riscantă';
+
+  @override
+  String alertFusingBody(String main, String iron) {
+    return '$main suportă cel mult $iron: alegeți o întăritură de cusut sau la temperatură joasă.';
+  }
+
+  @override
+  String get alertConsumptionTitle => 'Consum necompletat';
+
+  @override
+  String alertConsumptionBody(String materials) {
+    return '$materials: necesarul nu poate fi calculat.';
+  }
+
+  @override
+  String get alertCareConflictTitle => 'Întreținere incompatibilă';
+
+  @override
+  String alertCareConflictBody(String details) {
+    return '$details. Eticheta produsului va trebui să impună întreținerea cea mai restrictivă.';
+  }
+
+  @override
+  String alertWashTitle(int temp) {
+    return 'Spălare limitată la $temp °C';
+  }
+
+  @override
+  String alertIronTitle(String iron) {
+    return 'Călcare limitată: $iron';
+  }
+
+  @override
+  String get alertTumbleTitle => 'Evitați uscătorul';
+
+  @override
+  String alertLimitBody(String details) {
+    return '$details. Produsul finit urmează materialul cel mai delicat.';
+  }
+
+  @override
+  String alertCertTitle(String cert) {
+    return '$cert nerespectată pe tot produsul';
+  }
+
+  @override
+  String alertCertBody(String certified, String cert, String missing) {
+    return '$certified este certificat $cert, dar $missing nu: produsul finit nu va putea revendica $cert.';
+  }
+
+  @override
+  String get alertRetiredTitle => 'Referință retrasă de furnizor';
+
+  @override
+  String alertRetiredBody(String material, String need, String atelier) {
+    return '$material nu mai este oferit: necesar $need, stoc atelier $atelier.';
+  }
+
+  @override
+  String get alertAtelierShortTitle => 'Stoc atelier insuficient';
+
+  @override
+  String alertAtelierShortBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  ) {
+    return '$material: necesar $need, stoc atelier $atelier. Lipsesc $missing.';
+  }
+
+  @override
+  String get alertCoveredTitle => 'De comandat la furnizor';
+
+  @override
+  String alertCoveredBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  ) {
+    return '$material: necesar $need, stoc atelier $atelier. Restul ($missing) este disponibil la furnizor.';
+  }
+
+  @override
+  String alertCoveredBodyExact(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+    String supplier,
+  ) {
+    return '$material: necesar $need, stoc atelier $atelier. Restul ($missing) este disponibil la furnizor ($supplier în stoc).';
+  }
+
+  @override
+  String get alertSupplierShortTitle => 'Stoc furnizor insuficient';
+
+  @override
+  String alertSupplierShortBody(
+    String material,
+    String missing,
+    String atelier,
+    String supplier,
+  ) {
+    return '$material: lipsesc $missing după stocul atelierului ($atelier), iar furnizorul are doar $supplier.';
+  }
+
+  @override
+  String get alertSupplierLowTitle => 'Stoc redus la furnizor';
+
+  @override
+  String alertSupplierLowBody(String material, String missing, String atelier) {
+    return '$material: lipsesc $missing după stocul atelierului ($atelier), iar furnizorul are stoc redus.';
+  }
+
+  @override
+  String get alertOnOrderTitle => 'La comandă la furnizor';
+
+  @override
+  String alertOnOrderBody(
+    String material,
+    String missing,
+    String atelier,
+    int weeks,
+  ) {
+    return '$material: lipsesc $missing după stocul atelierului ($atelier). Termen de reaprovizionare: $weeks săptămâni.';
+  }
+
+  @override
+  String get alertOutTitle => 'Stoc epuizat la furnizor';
+
+  @override
+  String alertOutBody(String material, String missing, String atelier) {
+    return '$material: lipsesc $missing după stocul atelierului ($atelier), iar furnizorul nu mai are stoc.';
+  }
+
+  @override
+  String get alertHiddenTitle => 'Disponibilitate necomunicată';
+
+  @override
+  String alertHiddenBody(String material, String missing, String atelier) {
+    return '$material: lipsesc $missing după stocul atelierului ($atelier). Furnizorul nu își publică stocul: contactați-l.';
+  }
+
+  @override
+  String notifStockLow(String name, String code) {
+    return '$name: stoc redus la furnizor ($code)';
+  }
+
+  @override
+  String notifStockOut(String name, String code) {
+    return '$name: stoc epuizat la furnizor ($code)';
+  }
+
+  @override
+  String notifReferenceUpdated(String name, String code) {
+    return '$name: fișă modificată de furnizor ($code)';
+  }
+
+  @override
+  String notifReferenceRetired(String name, String code) {
+    return '$name: referință retrasă de furnizor ($code)';
+  }
+
+  @override
+  String notifUsedIn(String models) {
+    return 'Folosit în: $models';
+  }
 }

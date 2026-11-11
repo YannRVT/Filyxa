@@ -14,6 +14,7 @@ import '../../library/domain/material.dart';
 import '../../library/ui/material_widgets.dart';
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
+import 'alert_widgets.dart';
 import 'studio_widgets.dart';
 
 /// Délai avant l'enregistrement d'une saisie (le calcul, lui, est immédiat).
@@ -247,6 +248,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                 children: [
                   _header(m, canEdit),
                   if (_error != null) ...[const SizedBox(height: FxSpace.md), MessageBanner.error(_error!)],
+                  const SizedBox(height: FxSpace.md),
+                  AlertsPanel(alerts: watchModelAlerts(ref, m)),
                   const SizedBox(height: FxSpace.md),
                   _colorwayBar(m, canEdit),
                   const SizedBox(height: FxSpace.md),

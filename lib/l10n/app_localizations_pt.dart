@@ -1563,4 +1563,246 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get materialMissing => 'Material eliminado do TissuTech';
+
+  @override
+  String get alertsTitle => 'Alertas';
+
+  @override
+  String get alertsNone =>
+      'Nenhum alerta: os materiais do modelo são compatíveis e o stock é suficiente.';
+
+  @override
+  String alertsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count alertas',
+      one: '1 alerta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get alertFamilyCare => 'Conservação';
+
+  @override
+  String get alertFamilyTechnical => 'Técnica';
+
+  @override
+  String get alertFamilyCertification => 'Certificações';
+
+  @override
+  String get alertFamilyStock => 'Stock';
+
+  @override
+  String alertQuoted(String name) {
+    return '«$name»';
+  }
+
+  @override
+  String get alertNoIron => 'nenhuma engomagem';
+
+  @override
+  String get alertNoMainTitle => 'Nenhum tecido principal';
+
+  @override
+  String get alertNoMainBody =>
+      'Indique o tecido principal para ativar todas as verificações.';
+
+  @override
+  String get alertLiningHeavierTitle =>
+      'Forro mais pesado do que o tecido principal';
+
+  @override
+  String alertLiningHeavierBody(String lining, String main) {
+    return '$lining excede $main: o forro pode deformar o produto.';
+  }
+
+  @override
+  String get alertStretchTitle => 'Tecido elástico, forro rígido';
+
+  @override
+  String alertStretchBody(String main, String lining) {
+    return '$main contém elastano mas $lining não: preveja folga ou um forro elástico.';
+  }
+
+  @override
+  String get alertInterfacingHeavierTitle => 'Entretela demasiado pesada';
+
+  @override
+  String alertInterfacingHeavierBody(String interfacing, String main) {
+    return '$interfacing é mais pesada do que $main: risco de rigidez e transparência.';
+  }
+
+  @override
+  String get alertFusingTitle => 'Termocolagem arriscada';
+
+  @override
+  String alertFusingBody(String main, String iron) {
+    return '$main suporta no máximo $iron: escolha uma entretela para coser ou de baixa temperatura.';
+  }
+
+  @override
+  String get alertConsumptionTitle => 'Consumo não indicado';
+
+  @override
+  String alertConsumptionBody(String materials) {
+    return '$materials: não é possível calcular a necessidade.';
+  }
+
+  @override
+  String get alertCareConflictTitle => 'Conservação incompatível';
+
+  @override
+  String alertCareConflictBody(String details) {
+    return '$details. A etiqueta do produto deverá indicar a conservação mais restritiva.';
+  }
+
+  @override
+  String alertWashTitle(int temp) {
+    return 'Lavagem limitada a $temp °C';
+  }
+
+  @override
+  String alertIronTitle(String iron) {
+    return 'Engomagem limitada: $iron';
+  }
+
+  @override
+  String get alertTumbleTitle => 'Evitar a máquina de secar';
+
+  @override
+  String alertLimitBody(String details) {
+    return '$details. O produto final segue o material mais delicado.';
+  }
+
+  @override
+  String alertCertTitle(String cert) {
+    return '$cert não cumprida em todo o produto';
+  }
+
+  @override
+  String alertCertBody(String certified, String cert, String missing) {
+    return '$certified é certificado $cert, mas $missing não: o produto final não poderá reivindicar $cert.';
+  }
+
+  @override
+  String get alertRetiredTitle => 'Referência retirada pelo fornecedor';
+
+  @override
+  String alertRetiredBody(String material, String need, String atelier) {
+    return '$material já não é proposto: necessidade $need, stock do ateliê $atelier.';
+  }
+
+  @override
+  String get alertAtelierShortTitle => 'Stock do ateliê insuficiente';
+
+  @override
+  String alertAtelierShortBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  ) {
+    return '$material: necessidade $need, stock do ateliê $atelier. Faltam $missing.';
+  }
+
+  @override
+  String get alertCoveredTitle => 'A encomendar ao fornecedor';
+
+  @override
+  String alertCoveredBody(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+  ) {
+    return '$material: necessidade $need, stock do ateliê $atelier. O restante ($missing) está disponível no fornecedor.';
+  }
+
+  @override
+  String alertCoveredBodyExact(
+    String material,
+    String need,
+    String atelier,
+    String missing,
+    String supplier,
+  ) {
+    return '$material: necessidade $need, stock do ateliê $atelier. O restante ($missing) está disponível no fornecedor ($supplier em stock).';
+  }
+
+  @override
+  String get alertSupplierShortTitle => 'Stock do fornecedor insuficiente';
+
+  @override
+  String alertSupplierShortBody(
+    String material,
+    String missing,
+    String atelier,
+    String supplier,
+  ) {
+    return '$material: faltam $missing após o stock do ateliê ($atelier) e o fornecedor só tem $supplier.';
+  }
+
+  @override
+  String get alertSupplierLowTitle => 'Stock baixo no fornecedor';
+
+  @override
+  String alertSupplierLowBody(String material, String missing, String atelier) {
+    return '$material: faltam $missing após o stock do ateliê ($atelier) e o fornecedor tem stock baixo.';
+  }
+
+  @override
+  String get alertOnOrderTitle => 'Por encomenda no fornecedor';
+
+  @override
+  String alertOnOrderBody(
+    String material,
+    String missing,
+    String atelier,
+    int weeks,
+  ) {
+    return '$material: faltam $missing após o stock do ateliê ($atelier). Prazo de reposição: $weeks semanas.';
+  }
+
+  @override
+  String get alertOutTitle => 'Esgotado no fornecedor';
+
+  @override
+  String alertOutBody(String material, String missing, String atelier) {
+    return '$material: faltam $missing após o stock do ateliê ($atelier) e o fornecedor está esgotado.';
+  }
+
+  @override
+  String get alertHiddenTitle => 'Disponibilidade não comunicada';
+
+  @override
+  String alertHiddenBody(String material, String missing, String atelier) {
+    return '$material: faltam $missing após o stock do ateliê ($atelier). O fornecedor não publica o stock: contacte-o.';
+  }
+
+  @override
+  String notifStockLow(String name, String code) {
+    return '$name: stock baixo no fornecedor ($code)';
+  }
+
+  @override
+  String notifStockOut(String name, String code) {
+    return '$name: esgotado no fornecedor ($code)';
+  }
+
+  @override
+  String notifReferenceUpdated(String name, String code) {
+    return '$name: ficha alterada pelo fornecedor ($code)';
+  }
+
+  @override
+  String notifReferenceRetired(String name, String code) {
+    return '$name: referência retirada pelo fornecedor ($code)';
+  }
+
+  @override
+  String notifUsedIn(String models) {
+    return 'Usado em: $models';
+  }
 }

@@ -958,5 +958,347 @@
   "pickMaterialEmpty": "Aucune matière ne correspond.",
   "pickMaterialLibraryEmpty": "Ajoutez d'abord des matières dans TissuTech.",
   "removeLine": "Retirer cette matière",
-  "materialMissing": "Matière supprimée de TissuTech"
+  "materialMissing": "Matière supprimée de TissuTech",
+  "alertsTitle": "Alertes",
+  "alertsNone": "Aucune alerte : les matières de ce modèle sont compatibles et le stock est suffisant.",
+  "alertsCount": "{count, plural, =1{1 alerte} other{{count} alertes}}",
+  "@alertsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "alertFamilyCare": "Entretien",
+  "alertFamilyTechnical": "Technique",
+  "alertFamilyCertification": "Certifications",
+  "alertFamilyStock": "Stock",
+  "alertQuoted": "« {name} »",
+  "@alertQuoted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "alertNoIron": "aucun repassage",
+  "alertNoMainTitle": "Aucun tissu principal",
+  "alertNoMainBody": "Désignez le tissu principal pour activer toutes les vérifications.",
+  "alertLiningHeavierTitle": "Doublure plus lourde que le tissu principal",
+  "alertLiningHeavierBody": "{lining} dépasse {main} : la doublure risque de déformer le produit.",
+  "@alertLiningHeavierBody": {
+    "placeholders": {
+      "lining": {
+        "type": "String"
+      },
+      "main": {
+        "type": "String"
+      }
+    }
+  },
+  "alertStretchTitle": "Tissu extensible, doublure rigide",
+  "alertStretchBody": "{main} contient de l'élasthanne mais pas {lining} : prévoyez de l'aisance ou une doublure stretch.",
+  "@alertStretchBody": {
+    "placeholders": {
+      "main": {
+        "type": "String"
+      },
+      "lining": {
+        "type": "String"
+      }
+    }
+  },
+  "alertInterfacingHeavierTitle": "Entoilage trop lourd",
+  "alertInterfacingHeavierBody": "{interfacing} est plus lourd que {main} : risque de rigidité et de transparence.",
+  "@alertInterfacingHeavierBody": {
+    "placeholders": {
+      "interfacing": {
+        "type": "String"
+      },
+      "main": {
+        "type": "String"
+      }
+    }
+  },
+  "alertFusingTitle": "Thermocollage risqué",
+  "alertFusingBody": "{main} supporte au plus {iron} : choisissez un entoilage à coudre ou basse température.",
+  "@alertFusingBody": {
+    "placeholders": {
+      "main": {
+        "type": "String"
+      },
+      "iron": {
+        "type": "String"
+      }
+    }
+  },
+  "alertConsumptionTitle": "Consommation non saisie",
+  "alertConsumptionBody": "{materials} : le besoin ne peut pas être calculé.",
+  "@alertConsumptionBody": {
+    "placeholders": {
+      "materials": {
+        "type": "String"
+      }
+    }
+  },
+  "alertCareConflictTitle": "Entretiens incompatibles",
+  "alertCareConflictBody": "{details}. L'étiquette du produit devra imposer l'entretien le plus restrictif.",
+  "@alertCareConflictBody": {
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "alertWashTitle": "Lavage limité à {temp} °C",
+  "@alertWashTitle": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      }
+    }
+  },
+  "alertIronTitle": "Repassage limité : {iron}",
+  "@alertIronTitle": {
+    "placeholders": {
+      "iron": {
+        "type": "String"
+      }
+    }
+  },
+  "alertTumbleTitle": "Sèche-linge à éviter",
+  "alertLimitBody": "{details}. Le produit fini suit la matière la plus fragile.",
+  "@alertLimitBody": {
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "alertCertTitle": "{cert} non tenue sur tout le produit",
+  "@alertCertTitle": {
+    "placeholders": {
+      "cert": {
+        "type": "String"
+      }
+    }
+  },
+  "alertCertBody": "{certified} est certifié {cert}, mais pas {missing} : le produit fini ne pourra pas revendiquer {cert}.",
+  "@alertCertBody": {
+    "placeholders": {
+      "certified": {
+        "type": "String"
+      },
+      "cert": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
+  "alertRetiredTitle": "Référence retirée par le fournisseur",
+  "alertRetiredBody": "{material} n'est plus proposée : besoin {need}, stock atelier {atelier}.",
+  "@alertRetiredBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "need": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      }
+    }
+  },
+  "alertAtelierShortTitle": "Stock atelier insuffisant",
+  "alertAtelierShortBody": "{material} : besoin {need}, stock atelier {atelier}. Il manque {missing}.",
+  "@alertAtelierShortBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "need": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
+  "alertCoveredTitle": "À commander chez le fournisseur",
+  "alertCoveredBody": "{material} : besoin {need}, stock atelier {atelier}. Le complément ({missing}) est disponible chez le fournisseur.",
+  "@alertCoveredBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "need": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
+  "alertCoveredBodyExact": "{material} : besoin {need}, stock atelier {atelier}. Le complément ({missing}) est disponible chez le fournisseur ({supplier} en stock).",
+  "@alertCoveredBodyExact": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "need": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      },
+      "supplier": {
+        "type": "String"
+      }
+    }
+  },
+  "alertSupplierShortTitle": "Stock fournisseur insuffisant",
+  "alertSupplierShortBody": "{material} : il manque {missing} après le stock atelier ({atelier}), et le fournisseur n'en a que {supplier}.",
+  "@alertSupplierShortBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      },
+      "supplier": {
+        "type": "String"
+      }
+    }
+  },
+  "alertSupplierLowTitle": "Stock faible chez le fournisseur",
+  "alertSupplierLowBody": "{material} : il manque {missing} après le stock atelier ({atelier}), et le fournisseur est en stock faible.",
+  "@alertSupplierLowBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      }
+    }
+  },
+  "alertOnOrderTitle": "Sur commande chez le fournisseur",
+  "alertOnOrderBody": "{material} : il manque {missing} après le stock atelier ({atelier}). Délai de réassort : {weeks} semaines.",
+  "@alertOnOrderBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      },
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "alertOutTitle": "Rupture chez le fournisseur",
+  "alertOutBody": "{material} : il manque {missing} après le stock atelier ({atelier}), et le fournisseur est en rupture.",
+  "@alertOutBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      }
+    }
+  },
+  "alertHiddenTitle": "Disponibilité non communiquée",
+  "alertHiddenBody": "{material} : il manque {missing} après le stock atelier ({atelier}). Le fournisseur ne publie pas son stock : contactez-le.",
+  "@alertHiddenBody": {
+    "placeholders": {
+      "material": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      },
+      "atelier": {
+        "type": "String"
+      }
+    }
+  },
+  "notifStockLow": "{name} : stock faible chez le fournisseur ({code})",
+  "@notifStockLow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "notifStockOut": "{name} : rupture chez le fournisseur ({code})",
+  "@notifStockOut": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "notifReferenceUpdated": "{name} : fiche modifiée par le fournisseur ({code})",
+  "@notifReferenceUpdated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "notifReferenceRetired": "{name} : référence retirée par le fournisseur ({code})",
+  "@notifReferenceRetired": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "notifUsedIn": "Utilisée dans : {models}",
+  "@notifUsedIn": {
+    "placeholders": {
+      "models": {
+        "type": "String"
+      }
+    }
+  }
 }

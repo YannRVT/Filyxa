@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -91,11 +93,18 @@ final supplierReportsProvider = FutureProvider<List<SupplierErrorReport>>((ref) 
   return ref.watch(reportsRepositoryProvider).forSupplier(orgId);
 });
 
+/// Intervalle de relecture des notifications tant que l'app est ouverte.
+const kNotificationsRefresh = Duration(minutes: 5);
+
 final notificationsProvider = FutureProvider<List<AppNotification>>((ref) async {
-  // Rechargées à chaque changement d'espace (connexion, organisation).
+  // Rechargées à chaque changement d'espace (connexion, organisation)…
   final space = ref.watch(userSpaceProvider).value;
   if (space?.membership == null) return const [];
-  return ref.watch(reportsRepositoryProvider).notifications();
+  final list = await ref.watch(reportsRepositoryProvider).notifications();
+  // … puis régulièrement : une rupture apparaît dans la cloche sans recharger l'app.
+  final timer = Timer(kNotificationsRefresh, ref.invalidateSelf);
+  ref.onDispose(timer.cancel);
+  return list;
 });
 
 final unreadNotificationsProvider = Provider<int>(
