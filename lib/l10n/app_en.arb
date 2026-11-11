@@ -475,5 +475,21 @@
   "notifStockOut": "{name}: out of stock at the supplier ({code})",
   "notifReferenceUpdated": "{name}: record updated by the supplier ({code})",
   "notifReferenceRetired": "{name}: reference withdrawn by the supplier ({code})",
-  "notifUsedIn": "Used in: {models}"
+  "notifUsedIn": "Used in: {models}",
+  "exportPdf": "Export as PDF",
+  "exportDossier": "Export the PDF pack",
+  "pdfLanguage": "PDF language",
+  "pdfMaterialSheet": "Material sheet",
+  "pdfModelDossier": "Materials pack",
+  "pdfCollectionDossier": "Collection materials pack",
+  "pdfEditedOn": "Issued on {date}",
+  "pdfNotSet": "Not specified",
+  "pdfCompositionNote": "Composition stated under Regulation (EU) No 1007/2011. Indicative characteristics, to be confirmed on a sample.",
+  "pdfSupplierData": "Supplier data",
+  "pdfPage": "Page {page} / {total}",
+  "pdfContents": "Contents",
+  "pdfMaterial": "Material",
+  "pdfConsumption": "Use/piece",
+  "pdfNeed": "Requirement",
+  "pdfGenerationError": "The PDF couldn't be generated. Please try again."
 }

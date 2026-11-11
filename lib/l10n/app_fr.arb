@@ -1300,5 +1300,38 @@
         "type": "String"
       }
     }
-  }
+  },
+  "exportPdf": "Exporter en PDF",
+  "exportDossier": "Exporter le dossier PDF",
+  "pdfLanguage": "Langue du PDF",
+  "pdfMaterialSheet": "Fiche matière",
+  "pdfModelDossier": "Dossier matières",
+  "pdfCollectionDossier": "Dossier matières de la collection",
+  "pdfEditedOn": "Édité le {date}",
+  "@pdfEditedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "pdfNotSet": "Non renseigné",
+  "pdfCompositionNote": "Composition exprimée selon le règlement (UE) n° 1007/2011. Caractéristiques indicatives, à valider sur échantillon.",
+  "pdfSupplierData": "Données fournisseur",
+  "pdfPage": "Page {page} / {total}",
+  "@pdfPage": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfContents": "Sommaire",
+  "pdfMaterial": "Matière",
+  "pdfConsumption": "Conso./pièce",
+  "pdfNeed": "Besoin",
+  "pdfGenerationError": "Le PDF n'a pas pu être généré. Réessayez."
 }

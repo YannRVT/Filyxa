@@ -202,6 +202,9 @@ class MaterialsRepository {
       _guard(() => _client.storage.from(_bucket).remove([path]));
 
   /// Lien temporaire (1 h) vers une photo du bucket privé.
+  /// Photo d'une matière (export PDF).
+  Future<Uint8List> downloadPhoto(String path) => _guard(() => _client.storage.from(_bucket).download(path));
+
   Future<String> photoUrl(String path) =>
       _guard(() => _client.storage.from(_bucket).createSignedUrl(path, 3600));
 }

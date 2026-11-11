@@ -2987,6 +2987,102 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Utilisée dans : {models}'**
   String notifUsedIn(String models);
+
+  /// No description provided for @exportPdf.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exporter en PDF'**
+  String get exportPdf;
+
+  /// No description provided for @exportDossier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exporter le dossier PDF'**
+  String get exportDossier;
+
+  /// No description provided for @pdfLanguage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue du PDF'**
+  String get pdfLanguage;
+
+  /// No description provided for @pdfMaterialSheet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche matière'**
+  String get pdfMaterialSheet;
+
+  /// No description provided for @pdfModelDossier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dossier matières'**
+  String get pdfModelDossier;
+
+  /// No description provided for @pdfCollectionDossier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dossier matières de la collection'**
+  String get pdfCollectionDossier;
+
+  /// No description provided for @pdfEditedOn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Édité le {date}'**
+  String pdfEditedOn(String date);
+
+  /// No description provided for @pdfNotSet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Non renseigné'**
+  String get pdfNotSet;
+
+  /// No description provided for @pdfCompositionNote.
+  ///
+  /// In fr, this message translates to:
+  /// **'Composition exprimée selon le règlement (UE) n° 1007/2011. Caractéristiques indicatives, à valider sur échantillon.'**
+  String get pdfCompositionNote;
+
+  /// No description provided for @pdfSupplierData.
+  ///
+  /// In fr, this message translates to:
+  /// **'Données fournisseur'**
+  String get pdfSupplierData;
+
+  /// No description provided for @pdfPage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Page {page} / {total}'**
+  String pdfPage(int page, int total);
+
+  /// No description provided for @pdfContents.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sommaire'**
+  String get pdfContents;
+
+  /// No description provided for @pdfMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matière'**
+  String get pdfMaterial;
+
+  /// No description provided for @pdfConsumption.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conso./pièce'**
+  String get pdfConsumption;
+
+  /// No description provided for @pdfNeed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Besoin'**
+  String get pdfNeed;
+
+  /// No description provided for @pdfGenerationError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le PDF n\'a pas pu être généré. Réessayez.'**
+  String get pdfGenerationError;
 }
 
 class _AppLocalizationsDelegate

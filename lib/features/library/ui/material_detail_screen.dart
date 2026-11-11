@@ -10,6 +10,7 @@ import '../../auth/data/auth_repository.dart';
 import '../data/materials_repository.dart';
 import '../domain/catalog.dart';
 import '../domain/material.dart';
+import '../../export/export_screen.dart';
 import '../../reports/data/reports_repository.dart';
 import '../../reports/ui/report_widgets.dart';
 import '../../supplier/ui/supplier_texts.dart';
@@ -33,6 +34,13 @@ class MaterialDetailScreen extends ConsumerWidget {
         leading: BackButton(onPressed: () => context.go('/library')),
         title: Text(item?.name ?? l10n.navLibrary, overflow: TextOverflow.ellipsis),
         actions: [
+          // Export PDF : ouvert aux Lecteurs aussi.
+          if (item != null)
+            IconButton(
+              tooltip: l10n.exportPdf,
+              icon: const Icon(Icons.picture_as_pdf_outlined),
+              onPressed: () => openMaterialExport(context, ref, item),
+            ),
           if (canEdit && item != null) ...[
             IconButton(
               tooltip: l10n.edit,

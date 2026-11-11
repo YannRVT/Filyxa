@@ -6,6 +6,7 @@ import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../export/export_screen.dart';
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import '../domain/alerts.dart';
@@ -89,6 +90,12 @@ class CollectionScreen extends ConsumerWidget {
                     icon: const Icon(Icons.add, size: 18),
                     label: Text(l10n.studioNewModel),
                   ),
+          if (hasAny && collection != null)
+            IconButton(
+              tooltip: l10n.exportDossier,
+              icon: const Icon(Icons.picture_as_pdf_outlined),
+              onPressed: () => openCollectionExport(context, ref, collection),
+            ),
           if (canEdit && collection != null)
             PopupMenuButton<String>(
               onSelected: (v) => v == 'rename' ? _rename(context, ref, collection) : _delete(context, ref, collection),
