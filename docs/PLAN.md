@@ -598,8 +598,9 @@ La cloche se met à jour dès qu'une notification est créée pour l'utilisateur
 ### Critères d'acceptation
 
 - [ ] Une notification apparaît dans la cloche moins de 5 s après l'événement (critère de succès V2 n° 5).
-- [ ] Un utilisateur ne reçoit que les notifications de sa propre organisation (test).
-- [ ] Après une coupure réseau, le compteur se remet à jour dès le retour de la connexion.
+  - *Abonnement en temps réel en place et testé ; le délai reste à mesurer sur un environnement hébergé.*
+- [x] Un utilisateur ne reçoit que les notifications de sa propre organisation (test).
+- [x] Après une coupure réseau, le compteur se remet à jour dès le retour de la connexion.
 
 ## Bloquée par
 
