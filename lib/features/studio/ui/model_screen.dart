@@ -271,6 +271,11 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     _schedule('proto-loss-${line.id}', () => _repo.updateLine(line.id, protoLossPct: pct));
   }
 
+  void _setTargetPrice(double? price) {
+    setState(() => _model = _model!.copyWith(targetPrice: price, clearTargetPrice: price == null));
+    _schedule('target-price', () => _repo.setTargetPrice(widget.modelId, price));
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -386,6 +391,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                       onAdd: (c) => _structural(() => _repo.addCost(m.id, c)),
                       onUpdate: (c) => _structural(() => _repo.updateCost(c)),
                       onDelete: (c) => _structural(() => _repo.deleteCost(c.id)),
+                      onTargetPrice: _setTargetPrice,
                     ),
                   ],
                   const SizedBox(height: FxSpace.xxl),

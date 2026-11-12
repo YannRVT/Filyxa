@@ -636,5 +636,14 @@
   "costIncomplete": "Coste incompleto: sin precio para {materials}.",
   "costIncompleteShort": "Coste incompleto: hay materiales sin precio.",
   "collectionCost": "Coste de la colección: {amount}",
-  "collectionCostPrototyping": "Prototipado, aparte: {amount}"
+  "collectionCostPrototyping": "Prototipado, aparte: {amount}",
+  "costTargetPrice": "Precio de venta objetivo",
+  "coefficientValue": "Coeficiente: {value}",
+  "coefficientLow": "Coeficiente {value} < {min}",
+  "coefficientNeedPrice": "Introduce un precio de venta objetivo para calcular el coeficiente.",
+  "coefficientIncomplete": "Coeficiente no disponible: coste incompleto.",
+  "workspaceTitle": "Ajustes del taller",
+  "minCoefficientLabel": "Coeficiente mínimo",
+  "minCoefficientHelp": "Un modelo cuyo coeficiente (precio de venta ÷ coste por prenda) quede por debajo se señala en el Studio.",
+  "workspaceSaved": "Ajuste guardado."
 }

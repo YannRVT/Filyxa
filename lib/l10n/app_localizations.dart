@@ -3953,6 +3953,60 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Dont prototypage, à part : {amount}'**
   String collectionCostPrototyping(String amount);
+
+  /// No description provided for @costTargetPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix de vente visé'**
+  String get costTargetPrice;
+
+  /// No description provided for @coefficientValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient : {value}'**
+  String coefficientValue(String value);
+
+  /// No description provided for @coefficientLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient {value} < {min}'**
+  String coefficientLow(String value, String min);
+
+  /// No description provided for @coefficientNeedPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saisissez un prix de vente visé pour calculer le coefficient.'**
+  String get coefficientNeedPrice;
+
+  /// No description provided for @coefficientIncomplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient indisponible : le coût est incomplet.'**
+  String get coefficientIncomplete;
+
+  /// No description provided for @workspaceTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réglages de l\'atelier'**
+  String get workspaceTitle;
+
+  /// No description provided for @minCoefficientLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient minimal'**
+  String get minCoefficientLabel;
+
+  /// No description provided for @minCoefficientHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un modèle dont le coefficient (prix de vente ÷ coût par pièce) passe en dessous est signalé dans le Studio.'**
+  String get minCoefficientHelp;
+
+  /// No description provided for @workspaceSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réglage enregistré.'**
+  String get workspaceSaved;
 }
 
 class _AppLocalizationsDelegate

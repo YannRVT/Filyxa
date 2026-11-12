@@ -2388,4 +2388,38 @@ class AppLocalizationsRo extends AppLocalizations {
   String collectionCostPrototyping(String amount) {
     return 'Prototipare, separat: $amount';
   }
+
+  @override
+  String get costTargetPrice => 'Preț de vânzare țintă';
+
+  @override
+  String coefficientValue(String value) {
+    return 'Coeficient: $value';
+  }
+
+  @override
+  String coefficientLow(String value, String min) {
+    return 'Coeficient $value < $min';
+  }
+
+  @override
+  String get coefficientNeedPrice =>
+      'Introdu un preț de vânzare țintă pentru a calcula coeficientul.';
+
+  @override
+  String get coefficientIncomplete =>
+      'Coeficient indisponibil: cost incomplet.';
+
+  @override
+  String get workspaceTitle => 'Setările atelierului';
+
+  @override
+  String get minCoefficientLabel => 'Coeficient minim';
+
+  @override
+  String get minCoefficientHelp =>
+      'Un model al cărui coeficient (preț de vânzare ÷ cost pe bucată) scade sub această valoare este semnalat în Studio.';
+
+  @override
+  String get workspaceSaved => 'Setare salvată.';
 }

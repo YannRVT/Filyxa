@@ -556,10 +556,10 @@ L'Éditeur saisit un prix de vente visé, et Filyxa affiche le coefficient obten
 
 ### Critères d'acceptation
 
-- [ ] Le coefficient se met à jour instantanément quand le prix de vente ou un coût change.
-- [ ] Sous le coefficient minimal, une alerte cite le coefficient obtenu et le minimum, par exemple « Coefficient 2,1 < 2,5 ».
-- [ ] Seul l'Admin modifie le coefficient minimal.
-- [ ] Sans prix de vente ou avec un coût incomplet, aucun coefficient n'est affiché, et un message dit ce qui manque.
+- [x] Le coefficient se met à jour instantanément quand le prix de vente ou un coût change.
+- [x] Sous le coefficient minimal, une alerte cite le coefficient obtenu et le minimum, par exemple « Coefficient 2,1 < 2,5 ».
+- [x] Seul l'Admin modifie le coefficient minimal.
+- [x] Sans prix de vente ou avec un coût incomplet, aucun coefficient n'est affiché, et un message dit ce qui manque.
 
 ## Bloquée par
 

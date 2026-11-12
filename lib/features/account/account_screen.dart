@@ -101,6 +101,15 @@ class AccountScreen extends ConsumerWidget {
                               onTap: () => context.go('/account/sizes'),
                             ),
                             const Divider(),
+                            if (space.membership!.role == MemberRole.admin) ...[
+                              ListTile(
+                                leading: const Icon(Icons.tune),
+                                title: Text(l10n.workspaceTitle),
+                                trailing: const Icon(Icons.chevron_right),
+                                onTap: () => context.go('/account/workspace'),
+                              ),
+                              const Divider(),
+                            ],
                           ],
                         ],
                         ListTile(

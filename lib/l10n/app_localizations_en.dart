@@ -2378,4 +2378,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String collectionCostPrototyping(String amount) {
     return 'Prototyping, on top: $amount';
   }
+
+  @override
+  String get costTargetPrice => 'Target selling price';
+
+  @override
+  String coefficientValue(String value) {
+    return 'Markup: $value';
+  }
+
+  @override
+  String coefficientLow(String value, String min) {
+    return 'Markup $value < $min';
+  }
+
+  @override
+  String get coefficientNeedPrice =>
+      'Enter a target selling price to compute the markup.';
+
+  @override
+  String get coefficientIncomplete =>
+      'Markup unavailable: the cost is incomplete.';
+
+  @override
+  String get workspaceTitle => 'Workshop settings';
+
+  @override
+  String get minCoefficientLabel => 'Minimum markup';
+
+  @override
+  String get minCoefficientHelp =>
+      'A style whose markup (selling price ÷ cost per piece) falls below this is flagged in the Studio.';
+
+  @override
+  String get workspaceSaved => 'Setting saved.';
 }

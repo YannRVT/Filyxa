@@ -7,6 +7,7 @@ import '../../../l10n/l10n.dart';
 import '../../reports/ui/report_widgets.dart' show formatShortDate;
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
+import 'cost_widgets.dart' show lowCoefficientText;
 import 'studio_widgets.dart';
 
 /// Date du jour, remplaçable dans les tests.
@@ -180,7 +181,7 @@ class CollectionPlanning extends ConsumerWidget {
                       child: ModelStatusChip(status: status),
                     ),
                     for (final m in models.where((m) => m.status == status).toList()..sort(byNext))
-                      _PlanningRow(model: m, today: today),
+                      _PlanningRow(model: m, today: today, lowCoefficient: lowCoefficientText(context, ref, m)),
                   ],
               ],
             ),
@@ -192,10 +193,13 @@ class CollectionPlanning extends ConsumerWidget {
 }
 
 class _PlanningRow extends StatelessWidget {
-  const _PlanningRow({required this.model, required this.today});
+  const _PlanningRow({required this.model, required this.today, this.lowCoefficient});
 
   final StudioModel model;
   final DateTime today;
+
+  /// Alerte « coefficient sous le minimum » (Admins et Éditeurs).
+  final String? lowCoefficient;
 
   @override
   Widget build(BuildContext context) {
@@ -210,10 +214,13 @@ class _PlanningRow extends StatelessWidget {
         dense: true,
         title: Text(model.name, style: text.titleSmall),
         subtitle: Text(
-          next == null
-              ? l10n.planningNoDeadline
-              : l10n.planningNext(l10n.modelStatusText(next.stage), formatShortDate(context, next.date)),
-          style: text.bodySmall?.copyWith(color: color),
+          [
+            next == null
+                ? l10n.planningNoDeadline
+                : l10n.planningNext(l10n.modelStatusText(next.stage), formatShortDate(context, next.date)),
+            ?lowCoefficient,
+          ].join('\n'),
+          style: text.bodySmall?.copyWith(color: lowCoefficient != null ? FxColors.error : color),
         ),
         trailing: overdue
             ? Text(l10n.deadlineOverdueTag, style: text.labelMedium?.copyWith(color: FxColors.error))

@@ -2387,4 +2387,38 @@ class AppLocalizationsIt extends AppLocalizations {
   String collectionCostPrototyping(String amount) {
     return 'Prototipazione, a parte: $amount';
   }
+
+  @override
+  String get costTargetPrice => 'Prezzo di vendita previsto';
+
+  @override
+  String coefficientValue(String value) {
+    return 'Coefficiente: $value';
+  }
+
+  @override
+  String coefficientLow(String value, String min) {
+    return 'Coefficiente $value < $min';
+  }
+
+  @override
+  String get coefficientNeedPrice =>
+      'Inserisci un prezzo di vendita previsto per calcolare il coefficiente.';
+
+  @override
+  String get coefficientIncomplete =>
+      'Coefficiente non disponibile: costo incompleto.';
+
+  @override
+  String get workspaceTitle => 'Impostazioni del laboratorio';
+
+  @override
+  String get minCoefficientLabel => 'Coefficiente minimo';
+
+  @override
+  String get minCoefficientHelp =>
+      'Un modello con coefficiente (prezzo di vendita ÷ costo per capo) inferiore viene segnalato nello Studio.';
+
+  @override
+  String get workspaceSaved => 'Impostazione salvata.';
 }

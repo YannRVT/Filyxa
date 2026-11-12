@@ -1695,5 +1695,31 @@
         "type": "String"
       }
     }
-  }
+  },
+  "costTargetPrice": "Prix de vente visé",
+  "coefficientValue": "Coefficient : {value}",
+  "@coefficientValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "coefficientLow": "Coefficient {value} < {min}",
+  "@coefficientLow": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "coefficientNeedPrice": "Saisissez un prix de vente visé pour calculer le coefficient.",
+  "coefficientIncomplete": "Coefficient indisponible : le coût est incomplet.",
+  "workspaceTitle": "Réglages de l'atelier",
+  "minCoefficientLabel": "Coefficient minimal",
+  "minCoefficientHelp": "Un modèle dont le coefficient (prix de vente ÷ coût par pièce) passe en dessous est signalé dans le Studio.",
+  "workspaceSaved": "Réglage enregistré."
 }

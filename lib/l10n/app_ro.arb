@@ -636,5 +636,14 @@
   "costIncomplete": "Cost incomplet: fără preț pentru {materials}.",
   "costIncompleteShort": "Cost incomplet: unele materiale nu au preț.",
   "collectionCost": "Costul colecției: {amount}",
-  "collectionCostPrototyping": "Prototipare, separat: {amount}"
+  "collectionCostPrototyping": "Prototipare, separat: {amount}",
+  "costTargetPrice": "Preț de vânzare țintă",
+  "coefficientValue": "Coeficient: {value}",
+  "coefficientLow": "Coeficient {value} < {min}",
+  "coefficientNeedPrice": "Introdu un preț de vânzare țintă pentru a calcula coeficientul.",
+  "coefficientIncomplete": "Coeficient indisponibil: cost incomplet.",
+  "workspaceTitle": "Setările atelierului",
+  "minCoefficientLabel": "Coeficient minim",
+  "minCoefficientHelp": "Un model al cărui coeficient (preț de vânzare ÷ cost pe bucată) scade sub această valoare este semnalat în Studio.",
+  "workspaceSaved": "Setare salvată."
 }

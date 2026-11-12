@@ -39,6 +39,7 @@ class ModelCostCard extends ConsumerWidget {
     required this.onAdd,
     required this.onUpdate,
     required this.onDelete,
+    this.onTargetPrice,
   });
 
   final StudioModel model;
@@ -46,6 +47,9 @@ class ModelCostCard extends ConsumerWidget {
   final ValueChanged<CostLine> onAdd;
   final ValueChanged<CostLine> onUpdate;
   final ValueChanged<CostLine> onDelete;
+
+  /// Prix de vente visé ; null : effacé.
+  final ValueChanged<double?>? onTargetPrice;
 
   Future<void> _edit(BuildContext context, [CostLine? line]) async {
     final result = await showDialog<CostLine>(
@@ -111,6 +115,13 @@ class ModelCostCard extends ConsumerWidget {
                 if (cost.byColorway[c.id] != null)
                   _row(context, l10n.colorwayName(c, i), l10n.costPerPieceShort(eur(cost.byColorway[c.id]!))),
             _row(context, l10n.costPrototyping, eur(cost.prototyping)),
+            const Divider(),
+            if (pro)
+              _TargetPriceField(price: model.targetPrice, onChanged: (v) => onTargetPrice?.call(v))
+            else if (model.targetPrice != null)
+              _row(context, l10n.costTargetPrice, eur(model.targetPrice!)),
+            const SizedBox(height: FxSpace.sm),
+            CoefficientLine(cost: cost, targetPrice: model.targetPrice),
           ],
         ),
       ),
@@ -277,6 +288,86 @@ class CollectionCostSummary extends ConsumerWidget {
             Text(l10n.collectionCostPrototyping(formatEuro(context, proto)), style: text.bodySmall),
             if (!complete) Text(l10n.costIncompleteShort, style: text.bodySmall?.copyWith(color: FxColors.error)),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Coefficient obtenu, comparé au minimum de l'atelier ; sinon ce qui manque pour le calculer.
+class CoefficientLine extends ConsumerWidget {
+  const CoefficientLine({super.key, required this.cost, required this.targetPrice});
+
+  final ModelCost cost;
+  final double? targetPrice;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final lang = langOf(context);
+    final text = Theme.of(context).textTheme;
+    final min = ref.watch(minCoefficientProvider).value ?? kDefaultMinCoefficient;
+    final coef = coefficient(cost, targetPrice);
+    if (coef == null) {
+      return Text(
+        targetPrice == null || targetPrice! <= 0 ? l10n.coefficientNeedPrice : l10n.coefficientIncomplete,
+        style: text.bodySmall?.copyWith(color: FxColors.inkSoft),
+      );
+    }
+    final value = formatNumber(coef, lang, decimals: 2);
+    if (coef < min) return MessageBanner.error(l10n.coefficientLow(value, formatNumber(min, lang, decimals: 2)));
+    return Text(l10n.coefficientValue(value), style: text.titleSmall?.copyWith(color: FxColors.success));
+  }
+}
+
+/// Coefficient sous le minimum : texte de l'alerte, ou null (Lecteurs exclus).
+String? lowCoefficientText(BuildContext context, WidgetRef ref, StudioModel model) {
+  if (!ref.watch(canEditStudioProvider)) return null;
+  final min = ref.watch(minCoefficientProvider).value ?? kDefaultMinCoefficient;
+  final coef = coefficient(modelCost(model, watchPrices(ref)), model.targetPrice);
+  if (coef == null || coef >= min) return null;
+  final lang = langOf(context);
+  return context.l10n.coefficientLow(formatNumber(coef, lang, decimals: 2), formatNumber(min, lang, decimals: 2));
+}
+
+class _TargetPriceField extends StatefulWidget {
+  const _TargetPriceField({required this.price, required this.onChanged});
+
+  final double? price;
+  final ValueChanged<double?> onChanged;
+
+  @override
+  State<_TargetPriceField> createState() => _TargetPriceFieldState();
+}
+
+class _TargetPriceFieldState extends State<_TargetPriceField> {
+  TextEditingController? _controller;
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final lang = langOf(context);
+    _controller ??= TextEditingController(text: widget.price == null ? '' : formatNumber(widget.price!, lang, decimals: 2));
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: SizedBox(
+        width: 220,
+        child: TextField(
+          key: const ValueKey('target-price'),
+          controller: _controller,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]'))],
+          decoration: InputDecoration(labelText: context.l10n.costTargetPrice, suffixText: '€', isDense: true),
+          onChanged: (v) {
+            if (v.trim().isEmpty) return widget.onChanged(null);
+            final x = parseNumber(v);
+            if (x != null && x >= 0) widget.onChanged(x);
+          },
         ),
       ),
     );

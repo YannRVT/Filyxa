@@ -170,6 +170,23 @@ class StudioRepository {
 
   Future<void> deleteCost(String id) => _guard(() => _client.from('model_costs').delete().eq('id', id));
 
+  /// Prix de vente visé ; null : effacé.
+  Future<void> setTargetPrice(String modelId, double? price) => _guard(() async {
+        if (price == null) {
+          await _client.from('model_prices').delete().eq('model_id', modelId);
+        } else {
+          await _client.from('model_prices').upsert({'model_id': modelId, 'target_price': price}, onConflict: 'model_id');
+        }
+      });
+
+  Future<double> minCoefficient(String orgId) => _guard(() async {
+        final row = await _client.from('organizations').select('min_coefficient').eq('id', orgId).maybeSingle();
+        return (row?['min_coefficient'] as num?)?.toDouble() ?? kDefaultMinCoefficient;
+      });
+
+  Future<void> setMinCoefficient(String orgId, double value) =>
+      _guard(() => _client.rpc<void>('set_min_coefficient', params: {'p_org': orgId, 'p_value': value}));
+
   // Réservations ---------------------------------------------------------------------------------
 
   List<Map<String, dynamic>> _lines(Map<String, double> meters) => [
@@ -293,6 +310,13 @@ final customRolesProvider = FutureProvider<List<String>>((ref) async {
 final materialReservationsProvider = FutureProvider.autoDispose.family<List<StockReservation>, String>(
   (ref, materialId) => ref.watch(studioRepositoryProvider).reservations(materialIds: [materialId]),
 );
+
+/// Coefficient minimal de l'atelier.
+final minCoefficientProvider = FutureProvider.autoDispose<double>((ref) async {
+  final orgId = _orgId(ref);
+  if (orgId == null) return kDefaultMinCoefficient;
+  return ref.watch(studioRepositoryProvider).minCoefficient(orgId);
+});
 
 final sizeChartsProvider = FutureProvider<List<SizeChart>>((ref) {
   ref.watch(userSpaceProvider);

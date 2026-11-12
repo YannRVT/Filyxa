@@ -636,5 +636,14 @@
   "costIncomplete": "Incomplete cost: no price for {materials}.",
   "costIncompleteShort": "Incomplete cost: some materials have no price.",
   "collectionCost": "Collection cost: {amount}",
-  "collectionCostPrototyping": "Prototyping, on top: {amount}"
+  "collectionCostPrototyping": "Prototyping, on top: {amount}",
+  "costTargetPrice": "Target selling price",
+  "coefficientValue": "Markup: {value}",
+  "coefficientLow": "Markup {value} < {min}",
+  "coefficientNeedPrice": "Enter a target selling price to compute the markup.",
+  "coefficientIncomplete": "Markup unavailable: the cost is incomplete.",
+  "workspaceTitle": "Workshop settings",
+  "minCoefficientLabel": "Minimum markup",
+  "minCoefficientHelp": "A style whose markup (selling price ÷ cost per piece) falls below this is flagged in the Studio.",
+  "workspaceSaved": "Setting saved."
 }

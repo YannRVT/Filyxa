@@ -222,6 +222,7 @@ class StudioModel {
     this.sizeGrades = const {},
     this.prototypeCount = 1,
     this.costs = const [],
+    this.targetPrice,
     this.colorways = const [],
   });
 
@@ -237,6 +238,7 @@ class StudioModel {
         sizes: ((json['size_charts'] as Map<String, dynamic>?)?['sizes'] as List<dynamic>? ?? const []).cast<String>(),
         baseSize: json['base_size'] as String?,
         prototypeCount: json['prototype_count'] as int? ?? 1,
+        targetPrice: _targetPrice(json['model_prices']),
         costs: [
           for (final c in (json['model_costs'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>()) CostLine.fromJson(c),
         ]..sort((a, b) => a.position.compareTo(b.position)),
@@ -255,7 +257,7 @@ class StudioModel {
       );
 
   static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, prototype_count, model_deadlines(stage, due_date), '
-      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_costs(id, kind, label, unit_price, quantity, per, position), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position, proto_loss_pct))';
+      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_costs(id, kind, label, unit_price, quantity, per, position), model_prices(target_price), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position, proto_loss_pct))';
 
   final String id;
   final String collectionId;
@@ -290,6 +292,9 @@ class StudioModel {
 
   /// Fournitures, façon et frais annexes (vides pour un Lecteur).
   final List<CostLine> costs;
+
+  /// Prix de vente visé par pièce (Admins et Éditeurs).
+  final double? targetPrice;
   final List<Colorway> colorways;
 
   /// Pièces prévues, tous coloris confondus.
@@ -346,6 +351,8 @@ class StudioModel {
     Map<String, double>? sizeGrades,
     int? prototypeCount,
     List<CostLine>? costs,
+    double? targetPrice,
+    bool clearTargetPrice = false,
     List<Colorway>? colorways,
   }) =>
       StudioModel(
@@ -364,6 +371,7 @@ class StudioModel {
         sizeGrades: sizeGrades ?? this.sizeGrades,
         prototypeCount: prototypeCount ?? this.prototypeCount,
         costs: costs ?? this.costs,
+        targetPrice: clearTargetPrice ? null : (targetPrice ?? this.targetPrice),
         colorways: colorways ?? this.colorways,
       );
 }
@@ -576,4 +584,19 @@ ModelCost modelCost(StudioModel model, Map<String, double?> prices) {
     prototyping: prototyping,
     missingPrices: missing,
   );
+}
+
+double? _targetPrice(Object? embedded) {
+  final row = embedded is List ? (embedded.isEmpty ? null : embedded.first) : embedded;
+  return row is Map ? (row['target_price'] as num?)?.toDouble() : null;
+}
+
+/// Coefficient minimal par défaut d'un atelier.
+const kDefaultMinCoefficient = 2.5;
+
+/// Coefficient = prix de vente visé ÷ coût par pièce ; null sans prix de vente ou avec un coût incomplet.
+double? coefficient(ModelCost cost, double? targetPrice) {
+  final perPiece = cost.perPiece;
+  if (targetPrice == null || targetPrice <= 0 || !cost.complete || perPiece == null || perPiece <= 0) return null;
+  return targetPrice / perPiece;
 }
