@@ -207,6 +207,16 @@ class MaterialsRepository {
 
   Future<String> photoUrl(String path) =>
       _guard(() => _client.storage.from(_bucket).createSignedUrl(path, 3600));
+
+  /// Association des colonnes du dernier import atelier (champ → intitulé de colonne).
+  Future<Map<String, dynamic>> atelierImportMapping(String orgId) => _guard(() async {
+        final row = await _client.from('atelier_settings').select('import_mapping').eq('org_id', orgId).maybeSingle();
+        return (row?['import_mapping'] as Map<String, dynamic>?) ?? const {};
+      });
+
+  Future<void> saveAtelierImportMapping(String orgId, Map<String, String> mapping) => _guard(() => _client
+      .from('atelier_settings')
+      .upsert({'org_id': orgId, 'import_mapping': mapping}, onConflict: 'org_id'));
 }
 
 final materialsRepositoryProvider = Provider<MaterialsRepository>(
@@ -254,3 +264,10 @@ final materialProvider = FutureProvider.family<MaterialItem?, String>(
 final photoUrlProvider = FutureProvider.family<String, String>(
   (ref, path) => ref.watch(materialsRepositoryProvider).photoUrl(path),
 );
+
+/// Association des colonnes mémorisée pour l'import atelier.
+final atelierImportMappingProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  final orgId = ref.watch(userSpaceProvider).value?.membership?.organization.id;
+  if (orgId == null) return const {};
+  return ref.watch(materialsRepositoryProvider).atelierImportMapping(orgId);
+});

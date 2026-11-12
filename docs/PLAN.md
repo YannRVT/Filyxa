@@ -17,7 +17,7 @@ Limites connues, à reprendre en V2 :
 - La cloche se relit toutes les 5 min, pas en temps réel.
 - Les offres sont attribuées à la main par le super-admin.
 
-La V2 (Studio avancé, offre Pro) est planifiée en fin de document, phases 15 à 25.
+**V2 (Studio avancé, offre Pro) livrée** : phases 15 à 25, PR #17 à #27, à fusionner dans l'ordre. Elle corrige les limites ci-dessus, sauf l'attribution manuelle des offres (prévue en V4). Restent ouverts : les mesures en conditions réelles (délai de la cloche en temps réel, critère 8 avec un atelier Pro pilote).
 
 ## Décisions architecturales
 
@@ -618,9 +618,9 @@ L'association des colonnes de l'import atelier est enregistrée pour l'atelier. 
 
 ### Critères d'acceptation
 
-- [ ] Un deuxième import pré-remplit l'association des colonnes du précédent (critère de succès V2 n° 6).
-- [ ] Une colonne absente du nouveau fichier est ignorée sans erreur. Les colonnes nouvelles sont devinées comme en V1.
-- [ ] L'association est partagée par tous les Éditeurs de l'atelier.
+- [x] Un deuxième import pré-remplit l'association des colonnes du précédent (critère de succès V2 n° 6).
+- [x] Une colonne absente du nouveau fichier est ignorée sans erreur. Les colonnes nouvelles sont devinées comme en V1.
+- [x] L'association est partagée par tous les Éditeurs de l'atelier.
 
 ## Bloquée par
 
