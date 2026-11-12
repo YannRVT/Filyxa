@@ -104,11 +104,13 @@ class StudioRepository {
 
   // Tailles ------------------------------------------------------------------------------------
 
-  /// Grilles fournies par Filyxa puis grilles de l'atelier.
-  Future<List<SizeChart>> sizeCharts() => _guard(() async {
+  /// Grilles fournies par Filyxa puis grilles de l'atelier [orgId] (pas celles
+  /// des autres organisations dont l'utilisateur est membre).
+  Future<List<SizeChart>> sizeCharts(String? orgId) => _guard(() async {
         final rows = await _client
             .from('size_charts')
             .select(SizeChart.selectColumns)
+            .or(orgId == null ? 'org_id.is.null' : 'org_id.is.null,org_id.eq.$orgId')
             .order('org_id', nullsFirst: true)
             .order('position')
             .order('created_at');
@@ -320,8 +322,7 @@ final minCoefficientProvider = FutureProvider.autoDispose<double>((ref) async {
 });
 
 final sizeChartsProvider = FutureProvider<List<SizeChart>>((ref) {
-  ref.watch(userSpaceProvider);
-  return ref.watch(studioRepositoryProvider).sizeCharts();
+  return ref.watch(studioRepositoryProvider).sizeCharts(_orgId(ref));
 });
 
 /// Accès aux fonctionnalités Pro : relu à chaque ouverture d'écran, pour qu'un

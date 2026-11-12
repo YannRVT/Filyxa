@@ -98,6 +98,39 @@ void main() {
     expect(result, {'serge': 104.5});
   });
 
+  testWidgets('livraison : champ vidé = 0 m ; saisie illisible bloque la livraison', (tester) async {
+    Map<String, double>? result;
+    await tester.pumpWidget(MaterialApp(
+      locale: const Locale('fr'),
+      localizationsDelegates: const [AppLocalizations.delegate, ...GlobalMaterialLocalizations.delegates],
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Builder(
+        builder: (context) => Scaffold(
+          body: TextButton(
+            onPressed: () async => result = await showProductionDialog(context,
+                step: ProductionStep.deliver,
+                model: _model,
+                meters: const {'serge': 12.5},
+                materials: _materials,
+                reservations: const []),
+            child: const Text('ouvrir'),
+          ),
+        ),
+      ),
+    ));
+    await tester.tap(find.text('ouvrir'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const ValueKey('deliver-serge')), '1,2,3');
+    await tester.pump();
+    final button = find.widgetWithText(FilledButton, 'Déduire et livrer');
+    expect(tester.widget<FilledButton>(button).onPressed, isNull);
+    await tester.enterText(find.byKey(const ValueKey('deliver-serge')), '');
+    await tester.pump();
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+    expect(result, {'serge': 0.0});
+  });
+
   testWidgets('fiche matière : réservé, disponible, modèles', (tester) async {
     await tester.pumpWidget(const MaterialApp(
       locale: Locale('fr'),

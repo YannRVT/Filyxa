@@ -1,7 +1,7 @@
 -- Tests de la réservation et de la déduction du stock (phase 20).
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(14);
+select plan(19);
 
 insert into auth.users (id, email) values
   ('00000000-0000-0000-0000-000000000a12', 'claire@resa.test'),
@@ -62,6 +62,17 @@ select results_eq($$select name, atelier_stock_m from public.materials where org
 select results_eq($$select status::text, (select count(*)::int from public.stock_reservations where model_id = m.id)
   from public.models m where id = 'a5400000-0000-0000-0000-000000000001'$$,
   $$values ('delivered'::text, 0)$$, 'livré, réservation disparue');
+select throws_ok($$select public.deliver_model('a5400000-0000-0000-0000-000000000001',
+  '[{"material_id":"a5100000-0000-0000-0000-000000000001","meters":115.5}]')$$, '22023', 'invalid_status_transition',
+  'une deuxième livraison est refusée');
+select is((select atelier_stock_m from public.materials where id = 'a5100000-0000-0000-0000-000000000001'), 184.50::numeric,
+  'le stock n''est déduit qu''une fois');
+select throws_ok($$update public.models set status = 'delivered' where id = 'a5400000-0000-0000-0000-000000000002'$$,
+  '22023', 'invalid_status_transition', '« Livré » sans déduction confirmée est refusé');
+select throws_ok($$select public.start_production('a5400000-0000-0000-0000-000000000002',
+  '[{"material_id":"a5100000-0000-0000-0000-000000000001"}]')$$, '22023', 'invalid_lines', 'une ligne sans mètres est refusée');
+select throws_ok($$select public.start_production('a5400000-0000-0000-0000-000000000002',
+  '[{"material_id":"a5100000-0000-0000-0000-000000000001","meters":null}]')$$, '22023', 'invalid_lines', 'des mètres vides sont refusés');
 
 -- Abandon ou retour en arrière : la réservation est libérée.
 select lives_ok($$select public.start_production('a5400000-0000-0000-0000-000000000002',

@@ -2173,6 +2173,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Se borrarán las cantidades de las tallas que no estén en la nueva tabla.';
 
   @override
+  String get sizeChartFromColorwaysBody =>
+      'Las cantidades introducidas por color se sustituirán por cantidades por talla, que se introducen en la tabla.';
+
+  @override
   String get sizeChartChange => 'Cambiar';
 
   @override

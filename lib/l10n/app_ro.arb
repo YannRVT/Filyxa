@@ -579,6 +579,7 @@
   "sizeChartSizes": "Mărimi, în ordine, separate prin virgule",
   "sizeChartChangeTitle": "Schimbi grila?",
   "sizeChartChangeBody": "Cantitățile mărimilor absente din noua grilă vor fi șterse.",
+  "sizeChartFromColorwaysBody": "Cantitățile introduse pe culoare vor fi înlocuite cu cantitățile pe mărime, de introdus în grilă.",
   "sizeChartChange": "Schimbă",
   "totalLabel": "Total",
   "sizeErrorInUse": "O mărime cu cantități pe un model nu poate fi eliminată.",

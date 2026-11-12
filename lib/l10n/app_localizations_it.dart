@@ -2175,6 +2175,10 @@ class AppLocalizationsIt extends AppLocalizations {
       'Le quantità delle taglie assenti dalla nuova tabella saranno cancellate.';
 
   @override
+  String get sizeChartFromColorwaysBody =>
+      'Le quantità inserite per colore saranno sostituite dalle quantità per taglia, da inserire nella tabella.';
+
+  @override
   String get sizeChartChange => 'Cambia';
 
   @override

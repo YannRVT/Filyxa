@@ -1520,6 +1520,7 @@
   "sizeChartSizes": "Tailles, dans l'ordre, séparées par des virgules",
   "sizeChartChangeTitle": "Changer de grille ?",
   "sizeChartChangeBody": "Les quantités des tailles absentes de la nouvelle grille seront effacées.",
+  "sizeChartFromColorwaysBody": "Les quantités saisies par coloris seront remplacées par les quantités par taille, à saisir dans la grille.",
   "sizeChartChange": "Changer",
   "totalLabel": "Total",
   "sizeErrorInUse": "Une taille qui a des quantités sur un modèle ne peut pas être retirée.",

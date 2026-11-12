@@ -2175,6 +2175,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Les quantités des tailles absentes de la nouvelle grille seront effacées.';
 
   @override
+  String get sizeChartFromColorwaysBody =>
+      'Les quantités saisies par coloris seront remplacées par les quantités par taille, à saisir dans la grille.';
+
+  @override
   String get sizeChartChange => 'Changer';
 
   @override

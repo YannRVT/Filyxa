@@ -579,6 +579,7 @@
   "sizeChartSizes": "Sizes, in order, separated by commas",
   "sizeChartChangeTitle": "Change size chart?",
   "sizeChartChangeBody": "Quantities for sizes missing from the new chart will be cleared.",
+  "sizeChartFromColorwaysBody": "Quantities entered per colourway will be replaced by quantities per size, to be entered in the chart.",
   "sizeChartChange": "Change",
   "totalLabel": "Total",
   "sizeErrorInUse": "A size with quantities on a style cannot be removed.",

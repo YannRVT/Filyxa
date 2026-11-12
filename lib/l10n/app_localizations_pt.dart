@@ -2170,6 +2170,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'As quantidades dos tamanhos ausentes da nova tabela serão apagadas.';
 
   @override
+  String get sizeChartFromColorwaysBody =>
+      'As quantidades introduzidas por cor serão substituídas pelas quantidades por tamanho, a introduzir na tabela.';
+
+  @override
   String get sizeChartChange => 'Mudar';
 
   @override

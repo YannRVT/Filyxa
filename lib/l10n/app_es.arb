@@ -579,6 +579,7 @@
   "sizeChartSizes": "Tallas, en orden, separadas por comas",
   "sizeChartChangeTitle": "¿Cambiar de tabla?",
   "sizeChartChangeBody": "Se borrarán las cantidades de las tallas que no estén en la nueva tabla.",
+  "sizeChartFromColorwaysBody": "Las cantidades introducidas por color se sustituirán por cantidades por talla, que se introducen en la tabla.",
   "sizeChartChange": "Cambiar",
   "totalLabel": "Total",
   "sizeErrorInUse": "No se puede quitar una talla con cantidades en un modelo.",

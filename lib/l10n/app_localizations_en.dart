@@ -2166,6 +2166,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Quantities for sizes missing from the new chart will be cleared.';
 
   @override
+  String get sizeChartFromColorwaysBody =>
+      'Quantities entered per colourway will be replaced by quantities per size, to be entered in the chart.';
+
+  @override
   String get sizeChartChange => 'Change';
 
   @override

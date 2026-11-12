@@ -47,6 +47,7 @@ class _ProductionDialog extends StatefulWidget {
 class _ProductionDialogState extends State<_ProductionDialog> {
   late final Map<String, double> _meters = {...widget.meters};
   final _controllers = <String, TextEditingController>{};
+  final _invalid = <String>{};
 
   @override
   void dispose() {
@@ -106,10 +107,23 @@ class _ProductionDialogState extends State<_ProductionDialog> {
                   controller: _controllers.putIfAbsent(id, () => TextEditingController(text: formatNumber(need, lang, decimals: 2))),
                   keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]'))],
-                  decoration: InputDecoration(suffixText: 'm', isDense: true, labelText: l10n.productionUsed),
+                  decoration: InputDecoration(
+                    suffixText: 'm',
+                    isDense: true,
+                    labelText: l10n.productionUsed,
+                    errorText: _invalid.contains(id) ? '' : null,
+                  ),
+                  // Champ vidé : 0 m consommé. Saisie illisible : livraison bloquée.
                   onChanged: (v) {
-                    final x = parseNumber(v);
-                    if (x != null && x >= 0) _meters[id] = x;
+                    final x = v.trim().isEmpty ? 0.0 : parseNumber(v);
+                    setState(() {
+                      if (x != null && x >= 0) {
+                        _meters[id] = x;
+                        _invalid.remove(id);
+                      } else {
+                        _invalid.add(id);
+                      }
+                    });
                   },
                 ),
               ),
@@ -140,7 +154,7 @@ class _ProductionDialogState extends State<_ProductionDialog> {
       actions: [
         TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.cancel)),
         FilledButton(
-          onPressed: () => Navigator.of(context).pop(_meters),
+          onPressed: _invalid.isEmpty ? () => Navigator.of(context).pop(_meters) : null,
           child: Text(reserve
               ? (anyShortage ? l10n.productionLaunchAnyway : l10n.productionLaunch)
               : l10n.productionDeliver),

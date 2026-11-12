@@ -185,9 +185,10 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
   Future<void> _setStatus(ModelStatus status) async {
     final m = _model!;
     // Lancement en production : réservation confirmée ; livraison : déduction confirmée.
+    // « Livré » passe toujours par la déduction confirmée, quel que soit le statut de départ.
     final step = status == ModelStatus.inProduction && m.status != ModelStatus.inProduction
         ? ProductionStep.reserve
-        : status == ModelStatus.delivered && m.status == ModelStatus.inProduction
+        : status == ModelStatus.delivered && m.status != ModelStatus.delivered
             ? ProductionStep.deliver
             : null;
     if (step != null) {
@@ -195,15 +196,19 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
       final materials = {for (final x in ref.read(materialsProvider).value ?? const <MaterialItem>[]) x.id: x};
       final List<StockReservation> reservations;
       try {
-        reservations = await _repo.reservations(materialIds: m.materialIds);
+        // Livraison : toutes les réservations du modèle, y compris celles d'une
+        // matière retirée de la nomenclature depuis le lancement.
+        reservations = step == ProductionStep.reserve
+            ? await _repo.reservations(materialIds: m.materialIds)
+            : await _repo.reservations(modelId: m.id);
       } on AuthError catch (e) {
         if (mounted) setState(() => _error = context.l10n.failure(e.failure));
         return;
       }
       if (!mounted) return;
-      final need = step == ProductionStep.reserve
+      final need = step == ProductionStep.reserve || m.status != ModelStatus.inProduction
           ? productionNeed(m)
-          : {for (final r in reservations.where((r) => r.modelId == m.id)) r.materialId: r.meters};
+          : {for (final r in reservations) r.materialId: r.meters};
       final confirmed = await showProductionDialog(
         context,
         step: step,

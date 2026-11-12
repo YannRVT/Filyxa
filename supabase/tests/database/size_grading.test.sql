@@ -1,7 +1,7 @@
 -- Tests de la gradation (phase 18).
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(8);
+select plan(10);
 
 insert into auth.users (id, email) values
   ('00000000-0000-0000-0000-0000000000f2', 'claire@grade.test'),
@@ -39,6 +39,22 @@ update public.models set size_chart_id = (select id from public.size_charts wher
 select results_eq($$select base_size, (select count(*)::int from public.model_size_grades where model_id = m.id)
   from public.models m where id = 'b4000000-0000-0000-0000-000000000001'$$,
   $$values (null::text, 0)$$, 'nouvelle grille : base et écarts propres effacés');
+
+-- Retirer une taille d'une grille de l'atelier : base et écart propre qui y renvoyaient disparaissent.
+reset role;
+insert into public.size_charts (id, org_id, name, sizes) values
+  ('b5000000-0000-0000-0000-000000000001', 'b2000000-0000-0000-0000-00000000000a', 'Maison', array['S', 'M', 'L']);
+update public.models set size_chart_id = 'b5000000-0000-0000-0000-000000000001', base_size = 'M'
+  where id = 'b4000000-0000-0000-0000-000000000001';
+insert into public.model_size_grades (model_id, size, grade_pct) values ('b4000000-0000-0000-0000-000000000001', 'M', 2);
+update public.size_charts set sizes = array['S', 'L'] where id = 'b5000000-0000-0000-0000-000000000001';
+select results_eq($$select base_size, (select count(*)::int from public.model_size_grades where model_id = m.id)
+  from public.models m where id = 'b4000000-0000-0000-0000-000000000001'$$,
+  $$values (null::text, 0)$$, 'taille retirée de la grille : base et écart propre effacés');
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000f2","role":"authenticated"}', true);
+select lives_ok($$update public.models set grade_pct = 5 where id = 'b4000000-0000-0000-0000-000000000001'$$,
+  'la gradation reste modifiable après le retrait d''une taille');
 
 -- Hors Pro : refusé.
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000f5","role":"authenticated"}', true);

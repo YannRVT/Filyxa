@@ -3606,6 +3606,12 @@ abstract class AppLocalizations {
   /// **'Les quantités des tailles absentes de la nouvelle grille seront effacées.'**
   String get sizeChartChangeBody;
 
+  /// No description provided for @sizeChartFromColorwaysBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les quantités saisies par coloris seront remplacées par les quantités par taille, à saisir dans la grille.'**
+  String get sizeChartFromColorwaysBody;
+
   /// No description provided for @sizeChartChange.
   ///
   /// In fr, this message translates to:

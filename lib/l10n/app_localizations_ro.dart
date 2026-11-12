@@ -2176,6 +2176,10 @@ class AppLocalizationsRo extends AppLocalizations {
       'Cantitățile mărimilor absente din noua grilă vor fi șterse.';
 
   @override
+  String get sizeChartFromColorwaysBody =>
+      'Cantitățile introduse pe culoare vor fi înlocuite cu cantitățile pe mărime, de introdus în grilă.';
+
+  @override
   String get sizeChartChange => 'Schimbă';
 
   @override

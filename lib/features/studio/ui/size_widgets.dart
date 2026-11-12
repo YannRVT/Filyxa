@@ -249,12 +249,14 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
     final m = widget.model;
     if (chartId == m.sizeChartId) return;
     final hasQuantities = m.colorways.any((c) => c.sizeQuantities.values.any((q) => q > 0));
-    if (hasQuantities) {
+    // Sans grille, les quantités par coloris (V1) seront remplacées par la somme des tailles.
+    final hasColorwayQuantities = m.sizeChartId == null && chartId != null && m.colorways.any((c) => c.quantity > 0);
+    if (hasQuantities || hasColorwayQuantities) {
       final ok = await showDialog<bool>(
         context: context,
         builder: (d) => AlertDialog(
           title: Text(l10n.sizeChartChangeTitle),
-          content: Text(l10n.sizeChartChangeBody),
+          content: Text(hasColorwayQuantities ? l10n.sizeChartFromColorwaysBody : l10n.sizeChartChangeBody),
           actions: [
             TextButton(onPressed: () => Navigator.of(d).pop(false), child: Text(l10n.cancel)),
             FilledButton(onPressed: () => Navigator.of(d).pop(true), child: Text(l10n.sizeChartChange)),
@@ -263,10 +265,16 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
       );
       if (ok != true) return;
     }
-    for (final c in _controllers.values) {
-      c.dispose();
-    }
-    _controllers.clear();
+    if (!mounted) return;
+    // Les champs encore affichés utilisent ces contrôleurs : on les libère après la
+    // reconstruction, une fois remplacés.
+    final old = _controllers.values.toList();
+    setState(_controllers.clear);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      for (final c in old) {
+        c.dispose();
+      }
+    });
     widget.onChartChanged(chartId);
   }
 

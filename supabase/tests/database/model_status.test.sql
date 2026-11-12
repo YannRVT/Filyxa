@@ -1,7 +1,7 @@
 -- Tests des statuts du modèle et du verrou Pro (phase 15).
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(13);
+select plan(15);
 
 insert into auth.users (id, email) values
   ('00000000-0000-0000-0000-0000000000c1', 'marco@statut.test'),
@@ -57,6 +57,9 @@ select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000
 select public.admin_set_plan('e0000000-0000-0000-0000-00000000000a', 'pro');
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000c2","role":"authenticated"}', true);
 select is(public.has_pro('e0000000-0000-0000-0000-00000000000a'), true, 'Pro : accès ouvert sans reconnexion');
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000c1","role":"authenticated"}', true);
+select is(public.has_pro('e0000000-0000-0000-0000-00000000000a'), false, 'has_pro ne renseigne pas sur une autre organisation');
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000c2","role":"authenticated"}', true);
 
 -- Pro : un modèle en Idée ne notifie plus ; en Prototype, si.
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000c1","role":"authenticated"}', true);
@@ -84,7 +87,9 @@ set local role authenticated;
 
 -- Retour en arrière permis, sauf depuis Livré.
 select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-0000000000c2","role":"authenticated"}', true);
-update public.models set status = 'delivered' where id = 'e4000000-0000-0000-0000-000000000001';
+select throws_ok($$update public.models set status = 'delivered' where id = 'e4000000-0000-0000-0000-000000000001'$$,
+  '22023', 'invalid_status_transition', '« Livré » ne s''atteint que par la livraison confirmée');
+select public.deliver_model('e4000000-0000-0000-0000-000000000001', '[]');
 select throws_ok($$update public.models set status = 'in_production' where id = 'e4000000-0000-0000-0000-000000000001'$$,
   '22023', 'invalid_status_transition', 'un modèle livré ne change plus de statut');
 
