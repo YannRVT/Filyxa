@@ -2080,4 +2080,43 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get modelStatusFinal => 'Un modelo entregado ya no cambia de estado.';
+
+  @override
+  String get deadlinesTitle => 'Plazos';
+
+  @override
+  String get deadlineHelp =>
+      'Fecha en la que el modelo debe haber alcanzado cada etapa.';
+
+  @override
+  String get deadlineNone => 'Sin plazo';
+
+  @override
+  String get deadlineClear => 'Borrar el plazo';
+
+  @override
+  String get deadlineOverdueTag => 'Con retraso';
+
+  @override
+  String get tabModels => 'Modelos';
+
+  @override
+  String get tabPlanning => 'Planificación';
+
+  @override
+  String get planningEmpty =>
+      'No hay plazos en esta colección. Fíjalos desde cada modelo.';
+
+  @override
+  String get planningNoDeadline => 'Sin plazo';
+
+  @override
+  String planningNext(String stage, String date) {
+    return '$stage previsto el $date';
+  }
+
+  @override
+  String notifDeadlineOverdue(String name, String stage, String date) {
+    return 'Plazo vencido: $name — $stage previsto el $date';
+  }
 }

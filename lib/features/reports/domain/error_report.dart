@@ -116,7 +116,8 @@ enum NotificationKind {
   stockLow,
   stockOut,
   referenceUpdated,
-  referenceRetired;
+  referenceRetired,
+  deadlineOverdue;
 
   static NotificationKind? parse(String? v) => switch (v) {
         'report_new' => reportNew,
@@ -126,6 +127,7 @@ enum NotificationKind {
         'stock_out' => stockOut,
         'reference_updated' => referenceUpdated,
         'reference_retired' => referenceRetired,
+        'deadline_overdue' => deadlineOverdue,
         _ => null,
       };
 }

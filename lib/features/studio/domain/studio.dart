@@ -121,6 +121,19 @@ enum ModelStatus {
   /// Prototype, Validé et En production déclenchent les alertes de stock et de fiche fournisseur.
   bool get isActive => this == prototype || this == validated || this == inProduction;
 
+  /// Rang d'avancement ; Abandonné est hors échelle.
+  int? get rank => switch (this) {
+        idea => 0,
+        prototype => 1,
+        validated => 2,
+        inProduction => 3,
+        delivered => 4,
+        abandoned => null,
+      };
+
+  /// Étapes qui reçoivent une échéance (date à laquelle le modèle doit les atteindre).
+  static const stages = [prototype, validated, inProduction, delivered];
+
   /// Statuts vers lesquels on peut passer depuis celui-ci.
   List<ModelStatus> get nextChoices =>
       this == delivered ? const [] : [for (final s in ModelStatus.values) if (s != this) s];
@@ -135,6 +148,7 @@ class StudioModel {
     this.reference,
     this.wastePct = kDefaultWastePct,
     this.status = ModelStatus.idea,
+    this.deadlines = const {},
     this.colorways = const [],
   });
 
@@ -146,12 +160,16 @@ class StudioModel {
         productType: ProductType.parse(json['product_type'] as String?),
         wastePct: (json['waste_pct'] as num?)?.toDouble() ?? kDefaultWastePct,
         status: ModelStatus.parse(json['status'] as String?),
+        deadlines: {
+          for (final d in (json['model_deadlines'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
+            ModelStatus.parse(d['stage'] as String?): DateTime.parse(d['due_date'] as String),
+        },
         colorways: [
           for (final c in (json['colorways'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>()) Colorway.fromJson(c),
         ]..sort((a, b) => a.position != b.position ? a.position.compareTo(b.position) : a.id.compareTo(b.id)),
       );
 
-  static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, '
+  static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, model_deadlines(stage, due_date), '
       'colorways(id, name, color_hex, quantity, position, model_materials(id, material_id, role, consumption, position))';
 
   final String id;
@@ -163,7 +181,30 @@ class StudioModel {
   /// Marge de perte en %.
   final double wastePct;
   final ModelStatus status;
+
+  /// Échéance de chaque étape (date, sans heure).
+  final Map<ModelStatus, DateTime> deadlines;
   final List<Colorway> colorways;
+
+  /// Étape déjà atteinte (ou dépassée) par le modèle.
+  bool reached(ModelStatus stage) => status == ModelStatus.delivered || (status.rank ?? -1) >= (stage.rank ?? 99);
+
+  /// Échéance dépassée : date passée, étape non atteinte, modèle ni livré ni abandonné.
+  bool isOverdue(ModelStatus stage, DateTime today) {
+    final due = deadlines[stage];
+    if (due == null || status == ModelStatus.abandoned || reached(stage)) return false;
+    return due.isBefore(DateTime(today.year, today.month, today.day));
+  }
+
+  /// Prochaine échéance à tenir : la première étape non atteinte qui a une date.
+  ({ModelStatus stage, DateTime date})? get nextDeadline {
+    if (status == ModelStatus.abandoned || status == ModelStatus.delivered) return null;
+    for (final stage in ModelStatus.stages) {
+      final due = deadlines[stage];
+      if (due != null && !reached(stage)) return (stage: stage, date: due);
+    }
+    return null;
+  }
 
   /// Un seul coloris : pas de déclinaisons affichées.
   bool get hasVariants => colorways.length > 1;
@@ -171,7 +212,8 @@ class StudioModel {
   /// Matières distinctes utilisées, tous coloris confondus.
   Set<String> get materialIds => {for (final c in colorways) for (final l in c.lines) l.materialId};
 
-  StudioModel copyWith({double? wastePct, ModelStatus? status, List<Colorway>? colorways}) => StudioModel(
+  StudioModel copyWith({double? wastePct, ModelStatus? status, Map<ModelStatus, DateTime>? deadlines, List<Colorway>? colorways}) =>
+      StudioModel(
         id: id,
         collectionId: collectionId,
         name: name,
@@ -179,6 +221,7 @@ class StudioModel {
         productType: productType,
         wastePct: wastePct ?? this.wastePct,
         status: status ?? this.status,
+        deadlines: deadlines ?? this.deadlines,
         colorways: colorways ?? this.colorways,
       );
 }

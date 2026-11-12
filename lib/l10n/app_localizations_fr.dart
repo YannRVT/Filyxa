@@ -2081,4 +2081,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get modelStatusFinal => 'Un modèle livré ne change plus de statut.';
+
+  @override
+  String get deadlinesTitle => 'Échéances';
+
+  @override
+  String get deadlineHelp =>
+      'Date à laquelle le modèle doit avoir atteint chaque étape.';
+
+  @override
+  String get deadlineNone => 'Aucune échéance';
+
+  @override
+  String get deadlineClear => 'Effacer l\'échéance';
+
+  @override
+  String get deadlineOverdueTag => 'En retard';
+
+  @override
+  String get tabModels => 'Modèles';
+
+  @override
+  String get tabPlanning => 'Planning';
+
+  @override
+  String get planningEmpty =>
+      'Aucune échéance dans cette collection. Fixez-les depuis chaque modèle.';
+
+  @override
+  String get planningNoDeadline => 'Sans échéance';
+
+  @override
+  String planningNext(String stage, String date) {
+    return '$stage prévu le $date';
+  }
+
+  @override
+  String notifDeadlineOverdue(String name, String stage, String date) {
+    return 'Échéance dépassée : $name — $stage prévu le $date';
+  }
 }

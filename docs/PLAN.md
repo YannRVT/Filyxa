@@ -423,11 +423,11 @@ Chaque étape d'un modèle reçoit une échéance facultative. L'onglet Planning
 
 ### Critères d'acceptation
 
-- [ ] Une échéance se fixe, se modifie et s'efface pour chaque étape du modèle.
-- [ ] Le planning trie les modèles par prochaine échéance, les regroupe par statut et affiche en rouge les échéances dépassées.
-- [ ] Une échéance dépassée déclenche une seule notification, le jour même (critère de succès V2 n° 4, test).
-- [ ] Un modèle Livré ou Abandonné ne déclenche plus de notification de retard.
-- [ ] Le Lecteur consulte le planning sans pouvoir le modifier.
+- [x] Une échéance se fixe, se modifie et s'efface pour chaque étape du modèle.
+- [x] Le planning trie les modèles par prochaine échéance, les regroupe par statut et affiche en rouge les échéances dépassées.
+- [x] Une échéance dépassée déclenche une seule notification, le jour même (critère de succès V2 n° 4, test).
+- [x] Un modèle Livré ou Abandonné ne déclenche plus de notification de retard.
+- [x] Le Lecteur consulte le planning sans pouvoir le modifier.
 
 ## Bloquée par
 

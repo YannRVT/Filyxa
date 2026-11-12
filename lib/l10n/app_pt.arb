@@ -550,5 +550,16 @@
   "modelStatusInProduction": "Em produção",
   "modelStatusDelivered": "Entregue",
   "modelStatusAbandoned": "Abandonado",
-  "modelStatusFinal": "Um modelo entregue já não muda de estado."
+  "modelStatusFinal": "Um modelo entregue já não muda de estado.",
+  "deadlinesTitle": "Prazos",
+  "deadlineHelp": "Data até à qual o modelo deve atingir cada etapa.",
+  "deadlineNone": "Sem prazo",
+  "deadlineClear": "Apagar o prazo",
+  "deadlineOverdueTag": "Atrasado",
+  "tabModels": "Modelos",
+  "tabPlanning": "Planeamento",
+  "planningEmpty": "Ainda não há prazos nesta coleção. Defina-os em cada modelo.",
+  "planningNoDeadline": "Sem prazo",
+  "planningNext": "{stage} previsto a {date}",
+  "notifDeadlineOverdue": "Prazo ultrapassado: {name} — {stage} previsto a {date}"
 }

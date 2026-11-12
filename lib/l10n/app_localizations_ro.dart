@@ -2083,4 +2083,43 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get modelStatusFinal => 'Un model livrat nu își mai schimbă starea.';
+
+  @override
+  String get deadlinesTitle => 'Termene';
+
+  @override
+  String get deadlineHelp =>
+      'Data până la care modelul trebuie să atingă fiecare etapă.';
+
+  @override
+  String get deadlineNone => 'Fără termen';
+
+  @override
+  String get deadlineClear => 'Șterge termenul';
+
+  @override
+  String get deadlineOverdueTag => 'Întârziat';
+
+  @override
+  String get tabModels => 'Modele';
+
+  @override
+  String get tabPlanning => 'Planificare';
+
+  @override
+  String get planningEmpty =>
+      'Niciun termen în această colecție. Stabilește-le din fiecare model.';
+
+  @override
+  String get planningNoDeadline => 'Fără termen';
+
+  @override
+  String planningNext(String stage, String date) {
+    return '$stage prevăzut pe $date';
+  }
+
+  @override
+  String notifDeadlineOverdue(String name, String stage, String date) {
+    return 'Termen depășit: $name — $stage prevăzut pe $date';
+  }
 }

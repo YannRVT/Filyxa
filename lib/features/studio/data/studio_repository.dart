@@ -89,6 +89,18 @@ class StudioRepository {
   Future<void> setStatus(String id, ModelStatus status) =>
       _guard(() => _client.from('models').update({'status': status.code}).eq('id', id));
 
+  /// Fixe (ou efface, si [date] est null) l'échéance d'une étape.
+  Future<void> setDeadline(String modelId, ModelStatus stage, DateTime? date) => _guard(() async {
+        if (date == null) {
+          await _client.from('model_deadlines').delete().eq('model_id', modelId).eq('stage', stage.code);
+        } else {
+          final day = '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+          await _client
+              .from('model_deadlines')
+              .upsert({'model_id': modelId, 'stage': stage.code, 'due_date': day}, onConflict: 'model_id,stage');
+        }
+      });
+
   /// Vrai si l'organisation a accès aux fonctionnalités Pro (relu à chaque ouverture d'écran).
   Future<bool> hasPro(String orgId) => _guard(() async {
         final result = await _client.rpc<bool>('has_pro', params: {'p_org': orgId});

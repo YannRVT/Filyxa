@@ -3437,6 +3437,72 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Un modèle livré ne change plus de statut.'**
   String get modelStatusFinal;
+
+  /// No description provided for @deadlinesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéances'**
+  String get deadlinesTitle;
+
+  /// No description provided for @deadlineHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date à laquelle le modèle doit avoir atteint chaque étape.'**
+  String get deadlineHelp;
+
+  /// No description provided for @deadlineNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune échéance'**
+  String get deadlineNone;
+
+  /// No description provided for @deadlineClear.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer l\'échéance'**
+  String get deadlineClear;
+
+  /// No description provided for @deadlineOverdueTag.
+  ///
+  /// In fr, this message translates to:
+  /// **'En retard'**
+  String get deadlineOverdueTag;
+
+  /// No description provided for @tabModels.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modèles'**
+  String get tabModels;
+
+  /// No description provided for @tabPlanning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Planning'**
+  String get tabPlanning;
+
+  /// No description provided for @planningEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune échéance dans cette collection. Fixez-les depuis chaque modèle.'**
+  String get planningEmpty;
+
+  /// No description provided for @planningNoDeadline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans échéance'**
+  String get planningNoDeadline;
+
+  /// No description provided for @planningNext.
+  ///
+  /// In fr, this message translates to:
+  /// **'{stage} prévu le {date}'**
+  String planningNext(String stage, String date);
+
+  /// No description provided for @notifDeadlineOverdue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéance dépassée : {name} — {stage} prévu le {date}'**
+  String notifDeadlineOverdue(String name, String stage, String date);
 }
 
 class _AppLocalizationsDelegate

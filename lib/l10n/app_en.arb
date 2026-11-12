@@ -550,5 +550,16 @@
   "modelStatusInProduction": "In production",
   "modelStatusDelivered": "Delivered",
   "modelStatusAbandoned": "Abandoned",
-  "modelStatusFinal": "A delivered style can no longer change status."
+  "modelStatusFinal": "A delivered style can no longer change status.",
+  "deadlinesTitle": "Deadlines",
+  "deadlineHelp": "Date by which the style must reach each stage.",
+  "deadlineNone": "No deadline",
+  "deadlineClear": "Clear deadline",
+  "deadlineOverdueTag": "Overdue",
+  "tabModels": "Styles",
+  "tabPlanning": "Schedule",
+  "planningEmpty": "No deadlines in this collection yet. Set them from each style.",
+  "planningNoDeadline": "No deadline",
+  "planningNext": "{stage} due {date}",
+  "notifDeadlineOverdue": "Deadline missed: {name} — {stage} due {date}"
 }

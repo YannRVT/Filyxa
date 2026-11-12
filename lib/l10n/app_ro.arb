@@ -550,5 +550,16 @@
   "modelStatusInProduction": "În producție",
   "modelStatusDelivered": "Livrat",
   "modelStatusAbandoned": "Abandonat",
-  "modelStatusFinal": "Un model livrat nu își mai schimbă starea."
+  "modelStatusFinal": "Un model livrat nu își mai schimbă starea.",
+  "deadlinesTitle": "Termene",
+  "deadlineHelp": "Data până la care modelul trebuie să atingă fiecare etapă.",
+  "deadlineNone": "Fără termen",
+  "deadlineClear": "Șterge termenul",
+  "deadlineOverdueTag": "Întârziat",
+  "tabModels": "Modele",
+  "tabPlanning": "Planificare",
+  "planningEmpty": "Niciun termen în această colecție. Stabilește-le din fiecare model.",
+  "planningNoDeadline": "Fără termen",
+  "planningNext": "{stage} prevăzut pe {date}",
+  "notifDeadlineOverdue": "Termen depășit: {name} — {stage} prevăzut pe {date}"
 }

@@ -1468,5 +1468,39 @@
   "modelStatusInProduction": "En production",
   "modelStatusDelivered": "Livré",
   "modelStatusAbandoned": "Abandonné",
-  "modelStatusFinal": "Un modèle livré ne change plus de statut."
+  "modelStatusFinal": "Un modèle livré ne change plus de statut.",
+  "deadlinesTitle": "Échéances",
+  "deadlineHelp": "Date à laquelle le modèle doit avoir atteint chaque étape.",
+  "deadlineNone": "Aucune échéance",
+  "deadlineClear": "Effacer l'échéance",
+  "deadlineOverdueTag": "En retard",
+  "tabModels": "Modèles",
+  "tabPlanning": "Planning",
+  "planningEmpty": "Aucune échéance dans cette collection. Fixez-les depuis chaque modèle.",
+  "planningNoDeadline": "Sans échéance",
+  "planningNext": "{stage} prévu le {date}",
+  "@planningNext": {
+    "placeholders": {
+      "stage": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "notifDeadlineOverdue": "Échéance dépassée : {name} — {stage} prévu le {date}",
+  "@notifDeadlineOverdue": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "stage": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }

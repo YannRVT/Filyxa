@@ -550,5 +550,16 @@
   "modelStatusInProduction": "In produzione",
   "modelStatusDelivered": "Consegnato",
   "modelStatusAbandoned": "Abbandonato",
-  "modelStatusFinal": "Un modello consegnato non cambia più stato."
+  "modelStatusFinal": "Un modello consegnato non cambia più stato.",
+  "deadlinesTitle": "Scadenze",
+  "deadlineHelp": "Data entro cui il modello deve raggiungere ogni fase.",
+  "deadlineNone": "Nessuna scadenza",
+  "deadlineClear": "Cancella la scadenza",
+  "deadlineOverdueTag": "In ritardo",
+  "tabModels": "Modelli",
+  "tabPlanning": "Pianificazione",
+  "planningEmpty": "Nessuna scadenza in questa collezione. Impostale da ogni modello.",
+  "planningNoDeadline": "Senza scadenza",
+  "planningNext": "{stage} previsto il {date}",
+  "notifDeadlineOverdue": "Scadenza superata: {name} — {stage} previsto il {date}"
 }

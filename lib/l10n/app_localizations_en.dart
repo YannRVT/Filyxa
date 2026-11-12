@@ -2074,4 +2074,42 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get modelStatusFinal =>
       'A delivered style can no longer change status.';
+
+  @override
+  String get deadlinesTitle => 'Deadlines';
+
+  @override
+  String get deadlineHelp => 'Date by which the style must reach each stage.';
+
+  @override
+  String get deadlineNone => 'No deadline';
+
+  @override
+  String get deadlineClear => 'Clear deadline';
+
+  @override
+  String get deadlineOverdueTag => 'Overdue';
+
+  @override
+  String get tabModels => 'Styles';
+
+  @override
+  String get tabPlanning => 'Schedule';
+
+  @override
+  String get planningEmpty =>
+      'No deadlines in this collection yet. Set them from each style.';
+
+  @override
+  String get planningNoDeadline => 'No deadline';
+
+  @override
+  String planningNext(String stage, String date) {
+    return '$stage due $date';
+  }
+
+  @override
+  String notifDeadlineOverdue(String name, String stage, String date) {
+    return 'Deadline missed: $name — $stage due $date';
+  }
 }
