@@ -77,6 +77,29 @@ class ReportsRepository {
             .update({'read_at': DateTime.now().toUtc().toIso8601String()})
             .isFilter('read_at', null),
       );
+
+  /// Abonnement en temps réel aux notifications de l'utilisateur. [onChange] est appelé à
+  /// chaque notification créée ou modifiée, et au retour de la connexion après une coupure.
+  /// Renvoie la fonction qui met fin à l'abonnement.
+  void Function() watchNotifications(String userId, {required void Function() onChange}) {
+    var connectedOnce = false;
+    final channel = _client
+        .channel('notifications:$userId')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.all,
+          schema: 'public',
+          table: 'notifications',
+          filter: PostgresChangeFilter(type: PostgresChangeFilterType.eq, column: 'user_id', value: userId),
+          callback: (_) => onChange(),
+        )
+        .subscribe((status, [_]) {
+      if (status != RealtimeSubscribeStatus.subscribed) return;
+      // Reconnexion : des notifications ont pu arriver pendant la coupure.
+      if (connectedOnce) onChange();
+      connectedOnce = true;
+    });
+    return () => _client.removeChannel(channel);
+  }
 }
 
 final reportsRepositoryProvider = Provider<ReportsRepository>(
@@ -96,17 +119,35 @@ final supplierReportsProvider = FutureProvider<List<SupplierErrorReport>>((ref) 
 /// Intervalle de relecture des notifications tant que l'app est ouverte.
 const kNotificationsRefresh = Duration(minutes: 5);
 
+/// Abonnement en temps réel : chaque notification reçue relit la liste de la cloche.
+final notificationsLiveProvider = Provider<void>((ref) {
+  final userId = ref.watch(userSpaceProvider.select((s) => s.value?.profile.id));
+  if (userId == null) return;
+  try {
+    final stop = ref.read(reportsRepositoryProvider).watchNotifications(
+          userId,
+          onChange: () => ref.invalidate(notificationsProvider),
+        );
+    ref.onDispose(stop);
+  } catch (_) {
+    // Temps réel indisponible : la relecture de secours (toutes les 5 minutes) prend le relais.
+  }
+});
+
 final notificationsProvider = FutureProvider<List<AppNotification>>((ref) async {
   // Rechargées à chaque changement d'espace (connexion, organisation)…
   final space = ref.watch(userSpaceProvider).value;
   if (space?.membership == null) return const [];
   final list = await ref.watch(reportsRepositoryProvider).notifications();
-  // … puis régulièrement : une rupture apparaît dans la cloche sans recharger l'app.
+  // … dès qu'une notification arrive (temps réel, voir notificationsLiveProvider)
+  // et, en secours si le temps réel est coupé, toutes les 5 minutes.
   final timer = Timer(kNotificationsRefresh, ref.invalidateSelf);
   ref.onDispose(timer.cancel);
   return list;
 });
 
-final unreadNotificationsProvider = Provider<int>(
-  (ref) => (ref.watch(notificationsProvider).value ?? const []).where((n) => n.unread).length,
-);
+/// Non lues : la cloche garde l'abonnement en temps réel actif.
+final unreadNotificationsProvider = Provider<int>((ref) {
+  ref.watch(notificationsLiveProvider);
+  return (ref.watch(notificationsProvider).value ?? const []).where((n) => n.unread).length;
+});

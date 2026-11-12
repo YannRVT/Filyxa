@@ -24,7 +24,9 @@ import '../features/share/ui/share_widgets.dart';
 import '../features/share/ui/shared_view_screen.dart';
 import '../features/studio/ui/collection_screen.dart';
 import '../features/studio/ui/model_screen.dart';
+import '../features/studio/ui/size_widgets.dart';
 import '../features/studio/ui/studio_screen.dart';
+import '../features/studio/ui/workspace_screen.dart';
 import '../features/supplier/ui/catalog_import_screen.dart';
 import '../features/supplier/ui/catalog_screen.dart';
 import '../features/supplier/ui/reference_screen.dart';
@@ -141,6 +143,8 @@ final routerProvider = Provider<GoRouter>((ref) {
               routes: [
                 GoRoute(path: 'members', builder: (_, _) => const MembersScreen()),
                 GoRoute(path: 'links', builder: (_, _) => const ShareLinksScreen()),
+                GoRoute(path: 'sizes', builder: (_, _) => const SizeChartsScreen()),
+                GoRoute(path: 'workspace', builder: (_, _) => const WorkspaceScreen()),
               ],
             ),
           ]),

@@ -45,7 +45,7 @@ class AtelierImportResult {
 /// Taille des pages de chargement (limite du serveur : 1 000 lignes).
 const kMaterialsPageSize = 1000;
 const _select = 'id, org_id, name, supplier_name, supplier_code, color_name, color_hex, '
-    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, price_per_m, tags, link_review, '
+    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, material_prices(price_per_m), tags, link_review, '
     'textile_specs(composition, weight_gsm, width_cm, weave, care, certifications, uses)';
 
 class MaterialsRepository {
@@ -207,6 +207,16 @@ class MaterialsRepository {
 
   Future<String> photoUrl(String path) =>
       _guard(() => _client.storage.from(_bucket).createSignedUrl(path, 3600));
+
+  /// Association des colonnes du dernier import atelier (champ → intitulé de colonne).
+  Future<Map<String, dynamic>> atelierImportMapping(String orgId) => _guard(() async {
+        final row = await _client.from('atelier_settings').select('import_mapping').eq('org_id', orgId).maybeSingle();
+        return (row?['import_mapping'] as Map<String, dynamic>?) ?? const {};
+      });
+
+  Future<void> saveAtelierImportMapping(String orgId, Map<String, String> mapping) => _guard(() => _client
+      .from('atelier_settings')
+      .upsert({'org_id': orgId, 'import_mapping': mapping}, onConflict: 'org_id'));
 }
 
 final materialsRepositoryProvider = Provider<MaterialsRepository>(
@@ -254,3 +264,10 @@ final materialProvider = FutureProvider.family<MaterialItem?, String>(
 final photoUrlProvider = FutureProvider.family<String, String>(
   (ref, path) => ref.watch(materialsRepositoryProvider).photoUrl(path),
 );
+
+/// Association des colonnes mémorisée pour l'import atelier.
+final atelierImportMappingProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  final orgId = ref.watch(userSpaceProvider).value?.membership?.organization.id;
+  if (orgId == null) return const {};
+  return ref.watch(materialsRepositoryProvider).atelierImportMapping(orgId);
+});

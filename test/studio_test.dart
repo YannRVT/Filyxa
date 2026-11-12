@@ -28,14 +28,15 @@ class _FakeStudio implements StudioRepository {
   Future<StudioModel?> model(String id) async => current;
 
   @override
-  Future<void> updateModel(String id, {String? name, String? reference, double? wastePct}) async =>
+  Future<void> updateModel(String id, {String? name, String? reference, double? wastePct, int? prototypeCount}) async =>
       calls.add('model waste=$wastePct');
 
   @override
-  Future<void> updateColorway(String id, {String? name, int? quantity}) async => calls.add('colorway $id qty=$quantity name=$name');
+  Future<void> updateColorway(String id, {String? name, int? quantity, String? colorHex}) async => calls.add('colorway $id qty=$quantity name=$name');
 
   @override
-  Future<void> updateLine(String id, {double? consumption, String? role}) async => calls.add('line $id cons=$consumption');
+  Future<void> updateLine(String id, {double? consumption, String? role, double? protoLossPct}) async =>
+      calls.add('line $id cons=$consumption');
 
   @override
   Future<String> addColorway(String modelId, String name, {String? copyFrom}) async {
@@ -144,8 +145,9 @@ void main() {
       expect(find.byType(ChoiceChip), findsNothing);
       expect(find.text('Décliner en coloris'), findsOneWidget);
       expect(find.text('Sergé laine'), findsWidgets);
-      expect(find.textContaining('Tissu principal'), findsOneWidget);
-      expect(find.textContaining('Doublure manches'), findsOneWidget, reason: 'rôle libre de l\'atelier');
+      // Nomenclature et carte Prototypage citent chacune le rôle.
+      expect(find.textContaining('Tissu principal'), findsNWidgets(2));
+      expect(find.textContaining('Doublure manches'), findsNWidgets(2), reason: 'rôle libre de l\'atelier');
     });
 
     testWidgets('deux coloris : onglets, chacun ses matières', (tester) async {

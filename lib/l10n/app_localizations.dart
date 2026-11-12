@@ -3377,6 +3377,654 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Mois suivant'**
   String get adminNextMonth;
+
+  /// No description provided for @proRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fonctionnalité réservée à l\'offre Pro.'**
+  String get proRequired;
+
+  /// No description provided for @proLocked.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible avec l\'offre Pro'**
+  String get proLocked;
+
+  /// No description provided for @modelStatusLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Statut'**
+  String get modelStatusLabel;
+
+  /// No description provided for @modelStatusIdea.
+  ///
+  /// In fr, this message translates to:
+  /// **'Idée'**
+  String get modelStatusIdea;
+
+  /// No description provided for @modelStatusPrototype.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prototype'**
+  String get modelStatusPrototype;
+
+  /// No description provided for @modelStatusValidated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Validé'**
+  String get modelStatusValidated;
+
+  /// No description provided for @modelStatusInProduction.
+  ///
+  /// In fr, this message translates to:
+  /// **'En production'**
+  String get modelStatusInProduction;
+
+  /// No description provided for @modelStatusDelivered.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livré'**
+  String get modelStatusDelivered;
+
+  /// No description provided for @modelStatusAbandoned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Abandonné'**
+  String get modelStatusAbandoned;
+
+  /// No description provided for @modelStatusFinal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un modèle livré ne change plus de statut.'**
+  String get modelStatusFinal;
+
+  /// No description provided for @deadlinesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéances'**
+  String get deadlinesTitle;
+
+  /// No description provided for @deadlineHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date à laquelle le modèle doit avoir atteint chaque étape.'**
+  String get deadlineHelp;
+
+  /// No description provided for @deadlineNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune échéance'**
+  String get deadlineNone;
+
+  /// No description provided for @deadlineClear.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer l\'échéance'**
+  String get deadlineClear;
+
+  /// No description provided for @deadlineOverdueTag.
+  ///
+  /// In fr, this message translates to:
+  /// **'En retard'**
+  String get deadlineOverdueTag;
+
+  /// No description provided for @tabModels.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modèles'**
+  String get tabModels;
+
+  /// No description provided for @tabPlanning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Planning'**
+  String get tabPlanning;
+
+  /// No description provided for @planningEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune échéance dans cette collection. Fixez-les depuis chaque modèle.'**
+  String get planningEmpty;
+
+  /// No description provided for @planningNoDeadline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans échéance'**
+  String get planningNoDeadline;
+
+  /// No description provided for @planningNext.
+  ///
+  /// In fr, this message translates to:
+  /// **'{stage} prévu le {date}'**
+  String planningNext(String stage, String date);
+
+  /// No description provided for @notifDeadlineOverdue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéance dépassée : {name} — {stage} prévu le {date}'**
+  String notifDeadlineOverdue(String name, String stage, String date);
+
+  /// No description provided for @sizesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tailles'**
+  String get sizesTitle;
+
+  /// No description provided for @sizeChartLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grille de tailles'**
+  String get sizeChartLabel;
+
+  /// No description provided for @sizeChartNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans grille (quantité par coloris)'**
+  String get sizeChartNone;
+
+  /// No description provided for @sizeChartAlpha.
+  ///
+  /// In fr, this message translates to:
+  /// **'XS–XXL'**
+  String get sizeChartAlpha;
+
+  /// No description provided for @sizeChartEu.
+  ///
+  /// In fr, this message translates to:
+  /// **'34–48'**
+  String get sizeChartEu;
+
+  /// No description provided for @sizeChartShoes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pointures 35–46'**
+  String get sizeChartShoes;
+
+  /// No description provided for @sizeChartOne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille unique'**
+  String get sizeChartOne;
+
+  /// No description provided for @sizeChartsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grilles de tailles'**
+  String get sizeChartsTitle;
+
+  /// No description provided for @sizeChartsBuiltIn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fournies par Filyxa'**
+  String get sizeChartsBuiltIn;
+
+  /// No description provided for @sizeChartsMine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grilles de l\'atelier'**
+  String get sizeChartsMine;
+
+  /// No description provided for @sizeChartsMineEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune grille propre à l\'atelier.'**
+  String get sizeChartsMineEmpty;
+
+  /// No description provided for @sizeChartNew.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle grille'**
+  String get sizeChartNew;
+
+  /// No description provided for @sizeChartEdit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier la grille'**
+  String get sizeChartEdit;
+
+  /// No description provided for @sizeChartName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la grille'**
+  String get sizeChartName;
+
+  /// No description provided for @sizeChartSizes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tailles, dans l\'ordre, séparées par des virgules'**
+  String get sizeChartSizes;
+
+  /// No description provided for @sizeChartChangeTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer de grille ?'**
+  String get sizeChartChangeTitle;
+
+  /// No description provided for @sizeChartChangeBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les quantités des tailles absentes de la nouvelle grille seront effacées.'**
+  String get sizeChartChangeBody;
+
+  /// No description provided for @sizeChartFromColorwaysBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les quantités saisies par coloris seront remplacées par les quantités par taille, à saisir dans la grille.'**
+  String get sizeChartFromColorwaysBody;
+
+  /// No description provided for @sizeChartChange.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer'**
+  String get sizeChartChange;
+
+  /// No description provided for @totalLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total'**
+  String get totalLabel;
+
+  /// No description provided for @sizeErrorInUse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une taille qui a des quantités sur un modèle ne peut pas être retirée.'**
+  String get sizeErrorInUse;
+
+  /// No description provided for @sizeErrorInvalid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les tailles doivent être distinctes et non vides (12 caractères au plus).'**
+  String get sizeErrorInvalid;
+
+  /// No description provided for @sizeChartInUse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette grille est utilisée par un modèle : impossible de la supprimer.'**
+  String get sizeChartInUse;
+
+  /// No description provided for @sizeChartDeleteTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer la grille ?'**
+  String get sizeChartDeleteTitle;
+
+  /// No description provided for @baseSizeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille de base'**
+  String get baseSizeLabel;
+
+  /// No description provided for @gradePctLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart par taille (%)'**
+  String get gradePctLabel;
+
+  /// No description provided for @gradingSummary.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille de base : {base} · écart de {pct} % par taille'**
+  String gradingSummary(String base, String pct);
+
+  /// No description provided for @gradeRowLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart'**
+  String get gradeRowLabel;
+
+  /// No description provided for @baseSizeTag.
+  ///
+  /// In fr, this message translates to:
+  /// **'base'**
+  String get baseSizeTag;
+
+  /// No description provided for @sizeGradeTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart de la taille {size}'**
+  String sizeGradeTitle(String size);
+
+  /// No description provided for @sizeGradeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart par rapport à la base (%)'**
+  String get sizeGradeLabel;
+
+  /// No description provided for @sizeGradeHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par exemple 10 pour +10 %, -5 pour −5 %.'**
+  String get sizeGradeHelp;
+
+  /// No description provided for @sizeGradeReset.
+  ///
+  /// In fr, this message translates to:
+  /// **'Revenir à l\'écart du modèle'**
+  String get sizeGradeReset;
+
+  /// No description provided for @requirementBySize.
+  ///
+  /// In fr, this message translates to:
+  /// **'Détail par taille et par coloris'**
+  String get requirementBySize;
+
+  /// No description provided for @requirementFormulaGraded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommation de la taille de base × (1 + écart de la taille) × quantité × (1 + marge de {waste} %)'**
+  String requirementFormulaGraded(String waste);
+
+  /// No description provided for @prototypingTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prototypage'**
+  String get prototypingTitle;
+
+  /// No description provided for @prototypingHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mètres consommés par les prototypes (tests de colle, tests matière, sublimation avec marge sur les côtés), calculés sur la taille de base du premier coloris.'**
+  String get prototypingHelp;
+
+  /// No description provided for @prototypeCountLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nombre de prototypes'**
+  String get prototypeCountLabel;
+
+  /// No description provided for @protoLossLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Perte proto (%)'**
+  String get protoLossLabel;
+
+  /// No description provided for @requirementSplit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Production {production} · Prototypage {prototype}'**
+  String requirementSplit(String production, String prototype);
+
+  /// No description provided for @productionReserveTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lancer en production'**
+  String get productionReserveTitle;
+
+  /// No description provided for @productionReserveBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le besoin de chaque matière (production et prototypage) sera réservé sur le stock atelier.'**
+  String get productionReserveBody;
+
+  /// No description provided for @productionDeliverTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livrer le modèle'**
+  String get productionDeliverTitle;
+
+  /// No description provided for @productionDeliverBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les mètres consommés seront déduits du stock atelier. Ajustez-les si la consommation réelle a différé.'**
+  String get productionDeliverBody;
+
+  /// No description provided for @productionAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible : {meters}'**
+  String productionAvailable(String meters);
+
+  /// No description provided for @productionStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock atelier : {meters}'**
+  String productionStock(String meters);
+
+  /// No description provided for @productionShortage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Manque : {meters}'**
+  String productionShortage(String meters);
+
+  /// No description provided for @productionShortageNote.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le stock disponible ne couvre pas tout le besoin. Vous pouvez commander le complément ou lancer quand même.'**
+  String get productionShortageNote;
+
+  /// No description provided for @productionLaunch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réserver et lancer'**
+  String get productionLaunch;
+
+  /// No description provided for @productionLaunchAnyway.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lancer quand même'**
+  String get productionLaunchAnyway;
+
+  /// No description provided for @productionDeliver.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déduire et livrer'**
+  String get productionDeliver;
+
+  /// No description provided for @productionUsed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommé'**
+  String get productionUsed;
+
+  /// No description provided for @productionNoMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière dans ce modèle.'**
+  String get productionNoMaterial;
+
+  /// No description provided for @stockReserved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réservé : {meters}'**
+  String stockReserved(String meters);
+
+  /// No description provided for @stockAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible : {meters}'**
+  String stockAvailable(String meters);
+
+  /// No description provided for @costTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût de revient'**
+  String get costTitle;
+
+  /// No description provided for @costPerPiece.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} / pièce'**
+  String costPerPiece(String amount);
+
+  /// No description provided for @costPerPieceShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} / pièce'**
+  String costPerPieceShort(String amount);
+
+  /// No description provided for @costFlat.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} forfait'**
+  String costFlat(String amount);
+
+  /// No description provided for @costMaterials.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matières (pertes incluses)'**
+  String get costMaterials;
+
+  /// No description provided for @costKindSupply.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fourniture'**
+  String get costKindSupply;
+
+  /// No description provided for @costKindLabor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Façon'**
+  String get costKindLabor;
+
+  /// No description provided for @costKindOverhead.
+  ///
+  /// In fr, this message translates to:
+  /// **'Frais'**
+  String get costKindOverhead;
+
+  /// No description provided for @costAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un coût'**
+  String get costAdd;
+
+  /// No description provided for @costEdit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le coût'**
+  String get costEdit;
+
+  /// No description provided for @costLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Libellé'**
+  String get costLabel;
+
+  /// No description provided for @costUnitPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix unitaire'**
+  String get costUnitPrice;
+
+  /// No description provided for @costQuantity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité par pièce'**
+  String get costQuantity;
+
+  /// No description provided for @costQuantityFlat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité pour le modèle'**
+  String get costQuantityFlat;
+
+  /// No description provided for @costPerModelSwitch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Forfait pour tout le modèle'**
+  String get costPerModelSwitch;
+
+  /// No description provided for @costTotal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total production ({pieces} pièces)'**
+  String costTotal(int pieces);
+
+  /// No description provided for @costPrototyping.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prototypage (matières)'**
+  String get costPrototyping;
+
+  /// No description provided for @costIncomplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût incomplet : sans prix pour {materials}.'**
+  String costIncomplete(String materials);
+
+  /// No description provided for @costIncompleteShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût incomplet : des matières n\'ont pas de prix.'**
+  String get costIncompleteShort;
+
+  /// No description provided for @collectionCost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût de la collection : {amount}'**
+  String collectionCost(String amount);
+
+  /// No description provided for @collectionCostPrototyping.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dont prototypage, à part : {amount}'**
+  String collectionCostPrototyping(String amount);
+
+  /// No description provided for @costTargetPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix de vente visé'**
+  String get costTargetPrice;
+
+  /// No description provided for @coefficientValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient : {value}'**
+  String coefficientValue(String value);
+
+  /// No description provided for @coefficientLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient {value} < {min}'**
+  String coefficientLow(String value, String min);
+
+  /// No description provided for @coefficientNeedPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saisissez un prix de vente visé pour calculer le coefficient.'**
+  String get coefficientNeedPrice;
+
+  /// No description provided for @coefficientIncomplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient indisponible : le coût est incomplet.'**
+  String get coefficientIncomplete;
+
+  /// No description provided for @workspaceTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réglages de l\'atelier'**
+  String get workspaceTitle;
+
+  /// No description provided for @minCoefficientLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coefficient minimal'**
+  String get minCoefficientLabel;
+
+  /// No description provided for @minCoefficientHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un modèle dont le coefficient (prix de vente ÷ coût par pièce) passe en dessous est signalé dans le Studio.'**
+  String get minCoefficientHelp;
+
+  /// No description provided for @workspaceSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réglage enregistré.'**
+  String get workspaceSaved;
+
+  /// No description provided for @colorwayColorTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur du coloris'**
+  String get colorwayColorTitle;
+
+  /// No description provided for @colorwayColorHex.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code couleur (#RRGGBB)'**
+  String get colorwayColorHex;
 }
 
 class _AppLocalizationsDelegate

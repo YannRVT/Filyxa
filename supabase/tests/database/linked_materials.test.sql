@@ -42,7 +42,7 @@ select results_eq($$select m.supplier_code, m.supplier_name, s.weight_gsm, s.wea
   $$values ('DR4521-NV'::text, 'Tisseur Lien'::text, 280, 'twill'::text)$$,
   'les données techniques viennent du fournisseur (le payload est ignoré)');
 select set_config('test.material', (select id::text from public.materials where name = 'Mon drap'), false);
-select results_eq($$select price_per_m, tags from public.materials where name = 'Mon drap'$$,
+select results_eq($$select p.price_per_m, m.tags from public.materials m join public.material_prices p on p.material_id = m.id where m.name = 'Mon drap'$$,
   $$values (24.50::numeric, array['AH27']::text[])$$, 'la couche privée de l''atelier est enregistrée');
 select throws_ok($$update public.textile_specs set weight_gsm = 1
   where material_id = (select id from public.materials where name = 'Mon drap')$$,

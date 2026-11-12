@@ -82,6 +82,9 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
           ref.invalidate(materialProvider(n.materialId!));
           context.go('/library/${n.materialId}');
         }
+      case NotificationKind.deadlineOverdue:
+        final modelId = n.data['model_id'] as String?;
+        if (modelId != null) context.go('/studio/models/$modelId');
     }
   }
 
@@ -117,6 +120,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                     NotificationKind.stockOut => (Icons.remove_shopping_cart_outlined, FxColors.error),
                     NotificationKind.referenceUpdated => (Icons.edit_note, FxColors.info),
                     NotificationKind.referenceRetired => (Icons.link_off, FxColors.error),
+                    NotificationKind.deadlineOverdue => (Icons.event_busy_outlined, FxColors.error),
                   };
                   final response = n.data['response'] as String?;
                   return Center(

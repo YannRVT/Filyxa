@@ -6,6 +6,8 @@ import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../studio/domain/studio.dart';
+import '../../studio/ui/studio_widgets.dart' show StudioTexts;
 import '../data/reports_repository.dart';
 import '../domain/error_report.dart';
 
@@ -41,6 +43,11 @@ extension ReportTexts on AppLocalizations {
       NotificationKind.stockOut => notifStockOut(name, (n.data['code'] as String?) ?? ''),
       NotificationKind.referenceUpdated => notifReferenceUpdated(name, (n.data['code'] as String?) ?? ''),
       NotificationKind.referenceRetired => notifReferenceRetired(name, (n.data['code'] as String?) ?? ''),
+      NotificationKind.deadlineOverdue => notifDeadlineOverdue(
+          name,
+          modelStatusText(ModelStatus.parse(n.data['stage'] as String?)),
+          DateFormat.yMMMd(localeName).format(DateTime.tryParse((n.data['due_date'] as String?) ?? '') ?? n.createdAt),
+        ),
     };
   }
 }

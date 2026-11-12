@@ -2053,4 +2053,383 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get adminNextMonth => 'Luna următoare';
+
+  @override
+  String get proRequired => 'Funcție rezervată planului Pro.';
+
+  @override
+  String get proLocked => 'Disponibil cu planul Pro';
+
+  @override
+  String get modelStatusLabel => 'Stare';
+
+  @override
+  String get modelStatusIdea => 'Idee';
+
+  @override
+  String get modelStatusPrototype => 'Prototip';
+
+  @override
+  String get modelStatusValidated => 'Validat';
+
+  @override
+  String get modelStatusInProduction => 'În producție';
+
+  @override
+  String get modelStatusDelivered => 'Livrat';
+
+  @override
+  String get modelStatusAbandoned => 'Abandonat';
+
+  @override
+  String get modelStatusFinal => 'Un model livrat nu își mai schimbă starea.';
+
+  @override
+  String get deadlinesTitle => 'Termene';
+
+  @override
+  String get deadlineHelp =>
+      'Data până la care modelul trebuie să atingă fiecare etapă.';
+
+  @override
+  String get deadlineNone => 'Fără termen';
+
+  @override
+  String get deadlineClear => 'Șterge termenul';
+
+  @override
+  String get deadlineOverdueTag => 'Întârziat';
+
+  @override
+  String get tabModels => 'Modele';
+
+  @override
+  String get tabPlanning => 'Planificare';
+
+  @override
+  String get planningEmpty =>
+      'Niciun termen în această colecție. Stabilește-le din fiecare model.';
+
+  @override
+  String get planningNoDeadline => 'Fără termen';
+
+  @override
+  String planningNext(String stage, String date) {
+    return '$stage prevăzut pe $date';
+  }
+
+  @override
+  String notifDeadlineOverdue(String name, String stage, String date) {
+    return 'Termen depășit: $name — $stage prevăzut pe $date';
+  }
+
+  @override
+  String get sizesTitle => 'Mărimi';
+
+  @override
+  String get sizeChartLabel => 'Grilă de mărimi';
+
+  @override
+  String get sizeChartNone => 'Fără grilă (cantitate pe culoare)';
+
+  @override
+  String get sizeChartAlpha => 'XS–XXL';
+
+  @override
+  String get sizeChartEu => '34–48';
+
+  @override
+  String get sizeChartShoes => 'Numere 35–46';
+
+  @override
+  String get sizeChartOne => 'Mărime unică';
+
+  @override
+  String get sizeChartsTitle => 'Grile de mărimi';
+
+  @override
+  String get sizeChartsBuiltIn => 'Furnizate de Filyxa';
+
+  @override
+  String get sizeChartsMine => 'Grilele atelierului';
+
+  @override
+  String get sizeChartsMineEmpty => 'Nicio grilă proprie.';
+
+  @override
+  String get sizeChartNew => 'Grilă nouă';
+
+  @override
+  String get sizeChartEdit => 'Modifică grila';
+
+  @override
+  String get sizeChartName => 'Numele grilei';
+
+  @override
+  String get sizeChartSizes => 'Mărimi, în ordine, separate prin virgule';
+
+  @override
+  String get sizeChartChangeTitle => 'Schimbi grila?';
+
+  @override
+  String get sizeChartChangeBody =>
+      'Cantitățile mărimilor absente din noua grilă vor fi șterse.';
+
+  @override
+  String get sizeChartFromColorwaysBody =>
+      'Cantitățile introduse pe culoare vor fi înlocuite cu cantitățile pe mărime, de introdus în grilă.';
+
+  @override
+  String get sizeChartChange => 'Schimbă';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sizeErrorInUse =>
+      'O mărime cu cantități pe un model nu poate fi eliminată.';
+
+  @override
+  String get sizeErrorInvalid =>
+      'Mărimile trebuie să fie distincte și nevide (max. 12 caractere).';
+
+  @override
+  String get sizeChartInUse =>
+      'Grila este folosită de un model: nu poate fi ștearsă.';
+
+  @override
+  String get sizeChartDeleteTitle => 'Ștergi grila?';
+
+  @override
+  String get baseSizeLabel => 'Mărime de bază';
+
+  @override
+  String get gradePctLabel => 'Diferență pe mărime (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Mărime de bază: $base · $pct % pe mărime';
+  }
+
+  @override
+  String get gradeRowLabel => 'Diferență';
+
+  @override
+  String get baseSizeTag => 'bază';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Diferența mărimii $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Diferență față de bază (%)';
+
+  @override
+  String get sizeGradeHelp => 'De exemplu 10 pentru +10 %, -5 pentru −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Revino la diferența modelului';
+
+  @override
+  String get requirementBySize => 'Detaliu pe mărime și culoare';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consumul mărimii de bază × (1 + diferența mărimii) × cantitate × (1 + $waste % pierderi)';
+  }
+
+  @override
+  String get prototypingTitle => 'Prototipare';
+
+  @override
+  String get prototypingHelp =>
+      'Metri consumați de prototipuri (teste de lipire, teste de material, sublimare cu margine pe laterale), calculați pe mărimea de bază a primei culori.';
+
+  @override
+  String get prototypeCountLabel => 'Număr de prototipuri';
+
+  @override
+  String get protoLossLabel => 'Pierdere proto (%)';
+
+  @override
+  String requirementSplit(String production, String prototype) {
+    return 'Producție $production · Prototipare $prototype';
+  }
+
+  @override
+  String get productionReserveTitle => 'Lansează în producție';
+
+  @override
+  String get productionReserveBody =>
+      'Necesarul fiecărui material (producție și prototipare) va fi rezervat din stocul atelierului.';
+
+  @override
+  String get productionDeliverTitle => 'Livrează modelul';
+
+  @override
+  String get productionDeliverBody =>
+      'Metrii consumați vor fi scăzuți din stocul atelierului. Ajustează-i dacă consumul real a fost diferit.';
+
+  @override
+  String productionAvailable(String meters) {
+    return 'Disponibil: $meters';
+  }
+
+  @override
+  String productionStock(String meters) {
+    return 'Stoc atelier: $meters';
+  }
+
+  @override
+  String productionShortage(String meters) {
+    return 'Lipsă: $meters';
+  }
+
+  @override
+  String get productionShortageNote =>
+      'Stocul disponibil nu acoperă tot necesarul. Poți comanda diferența sau lansa oricum.';
+
+  @override
+  String get productionLaunch => 'Rezervă și lansează';
+
+  @override
+  String get productionLaunchAnyway => 'Lansează oricum';
+
+  @override
+  String get productionDeliver => 'Scade și livrează';
+
+  @override
+  String get productionUsed => 'Consumat';
+
+  @override
+  String get productionNoMaterial => 'Niciun material în acest model.';
+
+  @override
+  String stockReserved(String meters) {
+    return 'Rezervat: $meters';
+  }
+
+  @override
+  String stockAvailable(String meters) {
+    return 'Disponibil: $meters';
+  }
+
+  @override
+  String get costTitle => 'Cost de producție';
+
+  @override
+  String costPerPiece(String amount) {
+    return '$amount / bucată';
+  }
+
+  @override
+  String costPerPieceShort(String amount) {
+    return '$amount / bucată';
+  }
+
+  @override
+  String costFlat(String amount) {
+    return '$amount forfetar';
+  }
+
+  @override
+  String get costMaterials => 'Materiale (pierderi incluse)';
+
+  @override
+  String get costKindSupply => 'Accesoriu';
+
+  @override
+  String get costKindLabor => 'Confecție';
+
+  @override
+  String get costKindOverhead => 'Cheltuieli';
+
+  @override
+  String get costAdd => 'Adaugă un cost';
+
+  @override
+  String get costEdit => 'Modifică costul';
+
+  @override
+  String get costLabel => 'Denumire';
+
+  @override
+  String get costUnitPrice => 'Preț unitar';
+
+  @override
+  String get costQuantity => 'Cantitate pe bucată';
+
+  @override
+  String get costQuantityFlat => 'Cantitate pentru model';
+
+  @override
+  String get costPerModelSwitch => 'Forfetar pentru tot modelul';
+
+  @override
+  String costTotal(int pieces) {
+    return 'Total producție ($pieces bucăți)';
+  }
+
+  @override
+  String get costPrototyping => 'Prototipare (materiale)';
+
+  @override
+  String costIncomplete(String materials) {
+    return 'Cost incomplet: fără preț pentru $materials.';
+  }
+
+  @override
+  String get costIncompleteShort =>
+      'Cost incomplet: unele materiale nu au preț.';
+
+  @override
+  String collectionCost(String amount) {
+    return 'Costul colecției: $amount';
+  }
+
+  @override
+  String collectionCostPrototyping(String amount) {
+    return 'Prototipare, separat: $amount';
+  }
+
+  @override
+  String get costTargetPrice => 'Preț de vânzare țintă';
+
+  @override
+  String coefficientValue(String value) {
+    return 'Coeficient: $value';
+  }
+
+  @override
+  String coefficientLow(String value, String min) {
+    return 'Coeficient $value < $min';
+  }
+
+  @override
+  String get coefficientNeedPrice =>
+      'Introdu un preț de vânzare țintă pentru a calcula coeficientul.';
+
+  @override
+  String get coefficientIncomplete =>
+      'Coeficient indisponibil: cost incomplet.';
+
+  @override
+  String get workspaceTitle => 'Setările atelierului';
+
+  @override
+  String get minCoefficientLabel => 'Coeficient minim';
+
+  @override
+  String get minCoefficientHelp =>
+      'Un model al cărui coeficient (preț de vânzare ÷ cost pe bucată) scade sub această valoare este semnalat în Studio.';
+
+  @override
+  String get workspaceSaved => 'Setare salvată.';
+
+  @override
+  String get colorwayColorTitle => 'Culoarea variantei';
+
+  @override
+  String get colorwayColorHex => 'Cod de culoare (#RRGGBB)';
 }

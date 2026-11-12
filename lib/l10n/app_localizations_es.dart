@@ -2050,4 +2050,383 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get adminNextMonth => 'Mes siguiente';
+
+  @override
+  String get proRequired => 'Función reservada al plan Pro.';
+
+  @override
+  String get proLocked => 'Disponible con el plan Pro';
+
+  @override
+  String get modelStatusLabel => 'Estado';
+
+  @override
+  String get modelStatusIdea => 'Idea';
+
+  @override
+  String get modelStatusPrototype => 'Prototipo';
+
+  @override
+  String get modelStatusValidated => 'Validado';
+
+  @override
+  String get modelStatusInProduction => 'En producción';
+
+  @override
+  String get modelStatusDelivered => 'Entregado';
+
+  @override
+  String get modelStatusAbandoned => 'Abandonado';
+
+  @override
+  String get modelStatusFinal => 'Un modelo entregado ya no cambia de estado.';
+
+  @override
+  String get deadlinesTitle => 'Plazos';
+
+  @override
+  String get deadlineHelp =>
+      'Fecha en la que el modelo debe haber alcanzado cada etapa.';
+
+  @override
+  String get deadlineNone => 'Sin plazo';
+
+  @override
+  String get deadlineClear => 'Borrar el plazo';
+
+  @override
+  String get deadlineOverdueTag => 'Con retraso';
+
+  @override
+  String get tabModels => 'Modelos';
+
+  @override
+  String get tabPlanning => 'Planificación';
+
+  @override
+  String get planningEmpty =>
+      'No hay plazos en esta colección. Fíjalos desde cada modelo.';
+
+  @override
+  String get planningNoDeadline => 'Sin plazo';
+
+  @override
+  String planningNext(String stage, String date) {
+    return '$stage previsto el $date';
+  }
+
+  @override
+  String notifDeadlineOverdue(String name, String stage, String date) {
+    return 'Plazo vencido: $name — $stage previsto el $date';
+  }
+
+  @override
+  String get sizesTitle => 'Tallas';
+
+  @override
+  String get sizeChartLabel => 'Tabla de tallas';
+
+  @override
+  String get sizeChartNone => 'Sin tabla (cantidad por color)';
+
+  @override
+  String get sizeChartAlpha => 'XS–XXL';
+
+  @override
+  String get sizeChartEu => '34–48';
+
+  @override
+  String get sizeChartShoes => 'Números 35–46';
+
+  @override
+  String get sizeChartOne => 'Talla única';
+
+  @override
+  String get sizeChartsTitle => 'Tablas de tallas';
+
+  @override
+  String get sizeChartsBuiltIn => 'Proporcionadas por Filyxa';
+
+  @override
+  String get sizeChartsMine => 'Tablas del taller';
+
+  @override
+  String get sizeChartsMineEmpty => 'Ninguna tabla propia.';
+
+  @override
+  String get sizeChartNew => 'Nueva tabla';
+
+  @override
+  String get sizeChartEdit => 'Editar tabla';
+
+  @override
+  String get sizeChartName => 'Nombre de la tabla';
+
+  @override
+  String get sizeChartSizes => 'Tallas, en orden, separadas por comas';
+
+  @override
+  String get sizeChartChangeTitle => '¿Cambiar de tabla?';
+
+  @override
+  String get sizeChartChangeBody =>
+      'Se borrarán las cantidades de las tallas que no estén en la nueva tabla.';
+
+  @override
+  String get sizeChartFromColorwaysBody =>
+      'Las cantidades introducidas por color se sustituirán por cantidades por talla, que se introducen en la tabla.';
+
+  @override
+  String get sizeChartChange => 'Cambiar';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sizeErrorInUse =>
+      'No se puede quitar una talla con cantidades en un modelo.';
+
+  @override
+  String get sizeErrorInvalid =>
+      'Las tallas deben ser distintas y no vacías (máx. 12 caracteres).';
+
+  @override
+  String get sizeChartInUse =>
+      'Un modelo usa esta tabla: no se puede eliminar.';
+
+  @override
+  String get sizeChartDeleteTitle => '¿Eliminar la tabla?';
+
+  @override
+  String get baseSizeLabel => 'Talla base';
+
+  @override
+  String get gradePctLabel => 'Diferencia por talla (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Talla base: $base · $pct % por talla';
+  }
+
+  @override
+  String get gradeRowLabel => 'Diferencia';
+
+  @override
+  String get baseSizeTag => 'base';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Diferencia de la talla $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Diferencia respecto a la base (%)';
+
+  @override
+  String get sizeGradeHelp => 'Por ejemplo 10 para +10 %, -5 para −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Volver a la diferencia del modelo';
+
+  @override
+  String get requirementBySize => 'Detalle por talla y color';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consumo de la talla base × (1 + diferencia de la talla) × cantidad × (1 + $waste % de merma)';
+  }
+
+  @override
+  String get prototypingTitle => 'Prototipado';
+
+  @override
+  String get prototypingHelp =>
+      'Metros consumidos por los prototipos (pruebas de cola, pruebas de material, sublimación con margen en los lados), calculados sobre la talla base del primer color.';
+
+  @override
+  String get prototypeCountLabel => 'Número de prototipos';
+
+  @override
+  String get protoLossLabel => 'Pérdida proto (%)';
+
+  @override
+  String requirementSplit(String production, String prototype) {
+    return 'Producción $production · Prototipado $prototype';
+  }
+
+  @override
+  String get productionReserveTitle => 'Lanzar a producción';
+
+  @override
+  String get productionReserveBody =>
+      'La necesidad de cada material (producción y prototipado) se reservará en el stock del taller.';
+
+  @override
+  String get productionDeliverTitle => 'Entregar el modelo';
+
+  @override
+  String get productionDeliverBody =>
+      'Los metros consumidos se descontarán del stock del taller. Ajústalos si el consumo real fue distinto.';
+
+  @override
+  String productionAvailable(String meters) {
+    return 'Disponible: $meters';
+  }
+
+  @override
+  String productionStock(String meters) {
+    return 'Stock del taller: $meters';
+  }
+
+  @override
+  String productionShortage(String meters) {
+    return 'Faltan: $meters';
+  }
+
+  @override
+  String get productionShortageNote =>
+      'El stock disponible no cubre toda la necesidad. Puedes pedir el resto o lanzar de todos modos.';
+
+  @override
+  String get productionLaunch => 'Reservar y lanzar';
+
+  @override
+  String get productionLaunchAnyway => 'Lanzar de todos modos';
+
+  @override
+  String get productionDeliver => 'Descontar y entregar';
+
+  @override
+  String get productionUsed => 'Consumido';
+
+  @override
+  String get productionNoMaterial => 'Ningún material en este modelo.';
+
+  @override
+  String stockReserved(String meters) {
+    return 'Reservado: $meters';
+  }
+
+  @override
+  String stockAvailable(String meters) {
+    return 'Disponible: $meters';
+  }
+
+  @override
+  String get costTitle => 'Coste de producción';
+
+  @override
+  String costPerPiece(String amount) {
+    return '$amount / prenda';
+  }
+
+  @override
+  String costPerPieceShort(String amount) {
+    return '$amount / prenda';
+  }
+
+  @override
+  String costFlat(String amount) {
+    return '$amount a tanto alzado';
+  }
+
+  @override
+  String get costMaterials => 'Materiales (mermas incluidas)';
+
+  @override
+  String get costKindSupply => 'Avío';
+
+  @override
+  String get costKindLabor => 'Confección';
+
+  @override
+  String get costKindOverhead => 'Gastos';
+
+  @override
+  String get costAdd => 'Añadir un coste';
+
+  @override
+  String get costEdit => 'Editar coste';
+
+  @override
+  String get costLabel => 'Concepto';
+
+  @override
+  String get costUnitPrice => 'Precio unitario';
+
+  @override
+  String get costQuantity => 'Cantidad por prenda';
+
+  @override
+  String get costQuantityFlat => 'Cantidad para el modelo';
+
+  @override
+  String get costPerModelSwitch => 'Tanto alzado para todo el modelo';
+
+  @override
+  String costTotal(int pieces) {
+    return 'Total producción ($pieces prendas)';
+  }
+
+  @override
+  String get costPrototyping => 'Prototipado (materiales)';
+
+  @override
+  String costIncomplete(String materials) {
+    return 'Coste incompleto: sin precio para $materials.';
+  }
+
+  @override
+  String get costIncompleteShort =>
+      'Coste incompleto: hay materiales sin precio.';
+
+  @override
+  String collectionCost(String amount) {
+    return 'Coste de la colección: $amount';
+  }
+
+  @override
+  String collectionCostPrototyping(String amount) {
+    return 'Prototipado, aparte: $amount';
+  }
+
+  @override
+  String get costTargetPrice => 'Precio de venta objetivo';
+
+  @override
+  String coefficientValue(String value) {
+    return 'Coeficiente: $value';
+  }
+
+  @override
+  String coefficientLow(String value, String min) {
+    return 'Coeficiente $value < $min';
+  }
+
+  @override
+  String get coefficientNeedPrice =>
+      'Introduce un precio de venta objetivo para calcular el coeficiente.';
+
+  @override
+  String get coefficientIncomplete =>
+      'Coeficiente no disponible: coste incompleto.';
+
+  @override
+  String get workspaceTitle => 'Ajustes del taller';
+
+  @override
+  String get minCoefficientLabel => 'Coeficiente mínimo';
+
+  @override
+  String get minCoefficientHelp =>
+      'Un modelo cuyo coeficiente (precio de venta ÷ coste por prenda) quede por debajo se señala en el Studio.';
+
+  @override
+  String get workspaceSaved => 'Ajuste guardado.';
+
+  @override
+  String get colorwayColorTitle => 'Color de la variante';
+
+  @override
+  String get colorwayColorHex => 'Código de color (#RRGGBB)';
 }

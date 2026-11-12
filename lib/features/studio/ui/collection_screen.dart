@@ -13,6 +13,8 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import '../domain/alerts.dart';
 import 'alert_widgets.dart';
+import 'cost_widgets.dart';
+import 'planning_widgets.dart';
 import 'studio_widgets.dart';
 
 /// Collection : ses modèles, et l'ajout d'un modèle.
@@ -41,8 +43,13 @@ class CollectionScreen extends ConsumerWidget {
   Future<void> _rename(BuildContext context, WidgetRef ref, StudioCollection c) async {
     final l10n = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
-    final name = await showNameDialog(context,
-        title: l10n.rename, label: l10n.studioCollectionName, initial: c.name, confirm: l10n.save);
+    final name = await showNameDialog(
+      context,
+      title: l10n.rename,
+      label: l10n.studioCollectionName,
+      initial: c.name,
+      confirm: l10n.save,
+    );
     if (name == null || name == c.name) return;
     try {
       await ref.read(studioRepositoryProvider).renameCollection(c.id, name);
@@ -75,74 +82,98 @@ class CollectionScreen extends ConsumerWidget {
     final narrow = MediaQuery.sizeOf(context).width < FxBreakpoints.tablet;
     final hasAny = models.value?.isNotEmpty ?? false;
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(onPressed: () => context.go('/studio')),
-        title: Text(collection?.name ?? ''),
-        actions: [
-          if (canEdit && hasAny)
-            narrow
-                ? IconButton.filled(
-                    tooltip: l10n.studioNewModel,
-                    onPressed: () => _newModel(context, ref),
-                    icon: const Icon(Icons.add),
-                  )
-                : FilledButton.icon(
-                    onPressed: () => _newModel(context, ref),
-                    icon: const Icon(Icons.add, size: 18),
-                    label: Text(l10n.studioNewModel),
-                  ),
-          if (collection != null) ShareButton(scope: ShareScope.collection, targetId: collection.id),
-          if (hasAny && collection != null)
-            IconButton(
-              tooltip: l10n.exportDossier,
-              icon: const Icon(Icons.picture_as_pdf_outlined),
-              onPressed: () => openCollectionExport(context, ref, collection,
-                  shareUrl: ref.read(targetLinksProvider((ShareScope.collection, collection.id))).firstOrNull?.url),
-            ),
-          if (canEdit && collection != null)
-            PopupMenuButton<String>(
-              onSelected: (v) => v == 'rename' ? _rename(context, ref, collection) : _delete(context, ref, collection),
-              itemBuilder: (_) => [
-                PopupMenuItem(value: 'rename', child: Text(l10n.rename)),
-                PopupMenuItem(value: 'delete', child: Text(l10n.delete, style: const TextStyle(color: FxColors.error))),
-              ],
-            ),
-          const SizedBox(width: FxSpace.sm),
-        ],
-      ),
-      body: models.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(FxSpace.lg),
-            child: MessageBanner.error(l10n.failure(AuthError.from(e).failure)),
-          ),
-        ),
-        data: (list) => list.isEmpty
-            ? StudioEmptyState(
-                icon: Icons.checkroom_outlined,
-                title: l10n.collectionEmptyTitle,
-                body: canEdit ? l10n.collectionEmptyEditor : l10n.collectionEmptyViewer,
-                action: canEdit
-                    ? FilledButton.icon(
-                        onPressed: () => _newModel(context, ref),
-                        icon: const Icon(Icons.add),
-                        label: Text(l10n.studioNewModel),
-                      )
-                    : null,
-              )
-            : ListView.separated(
-                padding: const EdgeInsets.all(FxSpace.md),
-                itemCount: list.length,
-                separatorBuilder: (_, _) => const SizedBox(height: FxSpace.sm),
-                itemBuilder: (_, i) => Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 820),
-                    child: _ModelCard(model: list[i]),
-                  ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: BackButton(onPressed: () => context.go('/studio')),
+          title: Text(collection?.name ?? ''),
+          bottom: hasAny
+              ? TabBar(
+                  tabs: [
+                    Tab(text: l10n.tabModels),
+                    Tab(text: l10n.tabPlanning),
+                  ],
+                )
+              : null,
+          actions: [
+            if (canEdit && hasAny)
+              narrow
+                  ? IconButton.filled(
+                      tooltip: l10n.studioNewModel,
+                      onPressed: () => _newModel(context, ref),
+                      icon: const Icon(Icons.add),
+                    )
+                  : FilledButton.icon(
+                      onPressed: () => _newModel(context, ref),
+                      icon: const Icon(Icons.add, size: 18),
+                      label: Text(l10n.studioNewModel),
+                    ),
+            if (collection != null) ShareButton(scope: ShareScope.collection, targetId: collection.id),
+            if (hasAny && collection != null)
+              IconButton(
+                tooltip: l10n.exportDossier,
+                icon: const Icon(Icons.picture_as_pdf_outlined),
+                onPressed: () => openCollectionExport(
+                  context,
+                  ref,
+                  collection,
+                  shareUrl: ref.read(targetLinksProvider((ShareScope.collection, collection.id))).firstOrNull?.url,
                 ),
               ),
+            if (canEdit && collection != null)
+              PopupMenuButton<String>(
+                onSelected: (v) => v == 'rename' ? _rename(context, ref, collection) : _delete(context, ref, collection),
+                itemBuilder: (_) => [
+                  PopupMenuItem(value: 'rename', child: Text(l10n.rename)),
+                  PopupMenuItem(
+                    value: 'delete',
+                    child: Text(l10n.delete, style: const TextStyle(color: FxColors.error)),
+                  ),
+                ],
+              ),
+            const SizedBox(width: FxSpace.sm),
+          ],
+        ),
+        body: models.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, _) => Center(
+            child: Padding(
+              padding: const EdgeInsets.all(FxSpace.lg),
+              child: MessageBanner.error(l10n.failure(AuthError.from(e).failure)),
+            ),
+          ),
+          data: (list) => list.isEmpty
+              ? StudioEmptyState(
+                  icon: Icons.checkroom_outlined,
+                  title: l10n.collectionEmptyTitle,
+                  body: canEdit ? l10n.collectionEmptyEditor : l10n.collectionEmptyViewer,
+                  action: canEdit
+                      ? FilledButton.icon(
+                          onPressed: () => _newModel(context, ref),
+                          icon: const Icon(Icons.add),
+                          label: Text(l10n.studioNewModel),
+                        )
+                      : null,
+                )
+              : TabBarView(
+                  children: [
+                    ListView.separated(
+                      padding: const EdgeInsets.all(FxSpace.md),
+                      itemCount: list.length + 1,
+                      separatorBuilder: (_, _) => const SizedBox(height: FxSpace.sm),
+                      itemBuilder: (_, i) => Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 820),
+                          // En tête : coût de la collection (Admins et Éditeurs, offre Pro).
+                          child: i == 0 ? CollectionCostSummary(models: list) : _ModelCard(model: list[i - 1]),
+                        ),
+                      ),
+                    ),
+                    CollectionPlanning(models: list),
+                  ],
+                ),
+        ),
       ),
     );
   }
@@ -161,6 +192,8 @@ class _ModelCard extends ConsumerWidget {
     // Alertes qui demandent une action (critiques et avertissements).
     final alerts = watchModelAlerts(ref, m).where((e) => e.alert.level != AlertLevel.info).toList();
     final worst = alerts.isEmpty ? null : alerts.first.alert.level;
+    // Hors offre Pro, un modèle encore en Idée n'affiche pas de statut.
+    final showStatus = (ref.watch(hasProProvider).value ?? false) || m.status != ModelStatus.idea;
     final details = [
       l10n.productTypeLabel(m.productType),
       if ((m.reference ?? '').isNotEmpty) m.reference!,
@@ -186,7 +219,14 @@ class _ModelCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(m.name, style: text.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(m.name, style: text.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        ),
+                        if (showStatus) ...[const SizedBox(width: FxSpace.sm), ModelStatusChip(status: m.status)],
+                      ],
+                    ),
                     Text(details.join(' · '), style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
                   ],
                 ),

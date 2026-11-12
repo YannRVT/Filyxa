@@ -164,3 +164,148 @@ Filyxa est une plateforme qui relie les ateliers et leurs fournisseurs autour d'
 - **Hébergement** : les données sont hébergées dans l'Union européenne (RGPD).
 - **Repris de l'ancienne application TissuTech** : pictogrammes d'entretien, règles de compatibilité, mise en page PDF, consignes de lecture d'étiquette et banc d'essai de lecture.
 - **Évolutions prévues** : les dix éléments « prévus après la version pilote » du hors périmètre.
+
+---
+
+# V2 — Studio avancé
+
+## Problème
+
+Après la V1, l'atelier a une base de matières fiable. Mais le Studio s'arrête au besoin en mètres. Il ne sait pas où en est chaque modèle et ne connaît pas les échéances. Il ignore aussi combien de mètres sont déjà promis à une production en cours, et combien coûte réellement une pièce. Pour tout ça, l'atelier repart sur Excel : un tableau de suivi de collection, un fichier de gradation, une feuille de coût de revient. Ces fichiers ne sont jamais synchronisés avec les matières, ni avec leurs prix ou leur stock.
+
+Les tailles ne sont pas prises en compte : un XXL consomme plus qu'un XS, et le besoin moyen fausse les commandes. Le prototypage consomme aussi beaucoup de matière : tests de colle, tests matière, sublimation avec marge sur les côtés. Ces mètres-là n'apparaissent nulle part.
+
+Pourquoi maintenant : la V1 a posé les matières, les modèles et les coloris. Sans le suivi jusqu'à la production et sans le coût, l'atelier n'a pas de raison d'ouvrir Filyxa chaque jour. La V2 doit le fidéliser avant que les fournisseurs (V3) et le paiement en libre-service (V4) n'arrivent.
+
+## Solution
+
+Le Studio suit chaque modèle de l'idée à la livraison :
+
+- **Statut et échéances.** Le modèle passe par Idée, Prototype, Validé, En production, Livré ou Abandonné. Chaque étape a une échéance, la collection se lit comme un planning, et un retard est signalé.
+- **Tailles.** Les quantités se saisissent par taille et par coloris. La consommation de la taille de base est déclinée sur les autres tailles par un écart en %, modifiable.
+- **Prototypage.** Le besoin de prototypage est calculé à part, avec une perte propre à chaque matière.
+- **Stock.** Au lancement en production, le besoin est réservé sur le stock atelier, puis déduit à la livraison, avec une confirmation à chaque fois.
+- **Coût de revient.** Il réunit matières, fournitures, façon et frais annexes. Il est calculé par pièce, par coloris et par collection, et comparé au prix de vente visé par un coefficient.
+
+Ces nouveautés sont réservées à l'offre Pro. Les autres offres les voient verrouillées. La V2 corrige aussi des irritants de la V1 :
+
+- le rôle d'une ligne de matière se modifie sur place ;
+- les coloris ont un sélecteur de couleur ;
+- les notifications arrivent en temps réel ;
+- l'import atelier mémorise l'association des colonnes.
+
+## Utilisateur cible
+
+Camille, responsable de collection dans un atelier de 5 à 15 personnes qui produit 2 à 4 collections par an, en petites séries de 50 à 500 pièces par modèle. Elle fait aujourd'hui son suivi de collection et ses coûts de revient sur Excel. Elle passe sa matinée entre la table de coupe et l'ordinateur. Elle doit savoir à tout moment :
+
+- quels modèles sont en retard ;
+- s'il reste assez de matière pour lancer la prochaine production ;
+- si un modèle tient son coefficient avant de le valider.
+
+Elle utilise Filyxa sur ordinateur au bureau et sur tablette à l'atelier.
+
+## User Stories
+
+### Suivi de production
+
+- **US-50** — En tant qu'Éditeur, je veux faire passer un modèle par les statuts Idée, Prototype, Validé, En production, Livré ou Abandonné, afin de savoir où en est chaque modèle de la collection.
+- **US-51** — En tant qu'Éditeur, je veux fixer une échéance pour chaque étape d'un modèle, afin de planifier la collection.
+- **US-52** — En tant que membre de l'atelier, je veux voir la collection sous forme de planning, trié par échéance et regroupé par statut, afin de repérer d'un coup d'œil ce qui est en retard.
+- **US-53** — En tant que membre de l'atelier, je veux recevoir une notification le jour où une échéance est dépassée, afin de réagir avant que le retard ne s'accumule.
+- **US-54** — En tant qu'Éditeur, je veux qu'au passage « En production » Filyxa me montre le besoin à réserver sur le stock atelier et me demande de confirmer, afin que les mètres promis à cette production ne soient pas utilisés ailleurs.
+- **US-55** — En tant qu'Éditeur, je veux être averti, avant de confirmer, quand le stock disponible ne couvre pas le besoin, afin de commander le complément ou de lancer quand même en connaissance de cause.
+- **US-56** — En tant que membre de l'atelier, je veux voir pour chaque matière le stock atelier, le stock réservé et le stock disponible, avec les modèles qui le réservent, afin de savoir ce qui est vraiment libre.
+- **US-57** — En tant qu'Éditeur, je veux qu'au passage « Livré » Filyxa propose de déduire du stock atelier les mètres réservés, en ajustant si la consommation réelle a différé, afin que le stock reste juste.
+- **US-58** — En tant qu'Éditeur, je veux qu'un modèle abandonné ou ramené en arrière libère sa réservation, afin de ne pas bloquer du stock pour rien.
+- **US-59** — En tant que membre de l'atelier, je veux que seuls les modèles en Prototype, Validé ou En production déclenchent les alertes de stock et de fiche fournisseur, afin de ne pas être dérangé par des idées ou des modèles livrés.
+
+### Tailles et gradation
+
+- **US-60** — En tant qu'Éditeur, je veux choisir une grille de tailles pour un modèle (XS–XXL, 34–48, pointures 35–46, ou une grille créée par l'atelier), afin de saisir les quantités dans les tailles que je produis.
+- **US-61** — En tant qu'Admin, je veux créer et modifier les grilles de tailles de l'atelier, afin de coller à mes propres tailles.
+- **US-62** — En tant qu'Éditeur, je veux saisir les quantités par taille et par coloris dans un tableau, avec les totaux par ligne et par colonne, afin de préparer la production.
+- **US-63** — En tant qu'Éditeur, je veux désigner la taille de base et un écart de consommation en % par taille (même écart par défaut d'une taille à l'autre, modifiable taille par taille), afin que le besoin tienne compte de la taille sans saisir chaque consommation.
+- **US-64** — En tant que membre de l'atelier, je veux voir le besoin de chaque matière détaillé par taille et par coloris, afin de commander la bonne quantité.
+- **US-65** — En tant qu'Éditeur, je veux qu'un modèle sans grille de tailles continue de fonctionner comme en V1, avec une quantité par coloris, afin de ne pas être obligé de grader un accessoire en taille unique.
+
+### Prototypage
+
+- **US-66** — En tant qu'Éditeur, je veux indiquer le nombre de prototypes d'un modèle et un % de perte de prototypage par matière (25 % par défaut), afin de compter les mètres consommés par les tests de colle, les tests matière ou la sublimation.
+- **US-67** — En tant que membre de l'atelier, je veux voir le besoin de prototypage à côté du besoin de production, puis leur total, afin de distinguer les mètres de test des mètres de série.
+
+### Coût de revient
+
+- **US-68** — En tant qu'Éditeur, je veux que le coût matières d'un modèle soit calculé à partir des prix de mes matières, de la consommation et des pertes, afin de ne rien ressaisir.
+- **US-69** — En tant qu'Éditeur, je veux ajouter des lignes de fournitures (libellé, prix unitaire, quantité par pièce), un coût de façon par pièce et des frais annexes, afin d'obtenir un coût de revient complet.
+- **US-70** — En tant qu'Éditeur, je veux saisir un prix de vente visé et voir le coefficient obtenu, afin de décider si le modèle est rentable.
+- **US-71** — En tant qu'Admin, je veux fixer un coefficient minimal pour l'atelier, afin qu'une alerte signale tout modèle qui passe en dessous.
+- **US-72** — En tant qu'Éditeur, je veux voir le coût de revient par pièce, par coloris et pour toute la collection, prototypage inclus à part, afin de connaître le budget total.
+- **US-73** — En tant qu'Éditeur, je veux être averti quand une matière du modèle n'a pas de prix, afin de savoir que le coût affiché est incomplet.
+- **US-74** — En tant que Lecteur, je ne veux pas voir les coûts ni les prix, afin que ces données restent réservées à ceux qui décident.
+
+### Offre Pro
+
+- **US-75** — En tant qu'atelier en offre Essentiel, je veux voir les nouveautés du Studio avec la mention « Disponible avec l'offre Pro », afin de savoir ce que l'offre Pro m'apporterait.
+- **US-76** — En tant que super-admin, je veux faire passer un atelier en Pro depuis la console, afin d'ouvrir les nouveautés immédiatement après un accord commercial.
+- **US-77** — En tant qu'atelier qui repasse en Essentiel, je veux garder la lecture de mes données (statuts, tailles, coûts) sans pouvoir les modifier, afin de ne rien perdre.
+
+### Améliorations
+
+- **US-78** — En tant qu'Éditeur, je veux changer le rôle d'une ligne de matière directement dans le modèle, afin de corriger sans supprimer la ligne.
+- **US-79** — En tant qu'Éditeur, je veux choisir la couleur d'un coloris avec un sélecteur, afin de reconnaître les coloris d'un coup d'œil.
+- **US-80** — En tant que membre de l'atelier, je veux que la cloche se mette à jour dès qu'une notification arrive, afin de ne pas attendre plusieurs minutes.
+- **US-81** — En tant qu'Éditeur, je veux qu'un nouvel import atelier reprenne l'association des colonnes du précédent, afin de ne pas la refaire à chaque fois.
+
+## Critères de succès
+
+1. Le coût de revient et le besoin d'un modèle de 10 matières, 6 tailles et 3 coloris se recalculent en moins de 1 s après chaque modification.
+2. Le besoin par taille et le coût de revient correspondent au centimètre et au centime près à un calcul de référence fait à la main sur 5 modèles.
+3. Au passage « En production », le stock disponible de chaque matière baisse du besoin réservé. À la livraison, le stock atelier est déduit.
+4. Une échéance dépassée déclenche une notification le jour même.
+5. Une notification apparaît dans la cloche moins de 5 s après l'événement.
+6. Un deuxième import atelier propose d'office l'association des colonnes du précédent.
+7. Un atelier hors offre Pro voit les nouveautés verrouillées, et le serveur refuse toute utilisation.
+8. Après 2 mois, au moins 1 atelier Pro suit une collection complète, de l'idée à la livraison, dans Filyxa.
+
+## Hors périmètre
+
+### Prévu dans les versions suivantes
+
+1. V3 : envoi du stock par API, synchronisation automatique, statistiques fournisseur, étiquettes QR imprimées par les fournisseurs.
+2. V4 : inscription en libre-service, paiement en ligne et abonnements.
+3. V5 : module de réalité augmentée pour tester les produits.
+
+### Exclu de la V2
+
+4. Placement, patronage et calcul de consommation à partir d'un patron.
+5. Saisie exacte de la consommation pour chaque taille et chaque matière : l'écart en % reste la règle.
+6. Fournitures gérées comme des matières dans TissuTech, avec fiche et stock : en V2, ce sont des lignes libres du coût de revient.
+7. Comptes invités pour les façonniers et partage de fiches techniques.
+8. Commandes, devis et demandes d'échantillons auprès des fournisseurs.
+9. Plusieurs monnaies et conversion de devises.
+10. Export comptable, facturation, prix de vente par canal.
+11. Planning détaillé par tâche ou par personne (diagramme de Gantt, affectation).
+12. Notifications par e-mail ou push.
+13. Avis ou alertes rédigés par l'IA.
+
+## Décisions d'implémentation
+
+- **Statuts** : Idée → Prototype → Validé → En production → Livré, plus Abandonné depuis n'importe quel statut. On peut revenir en arrière, sauf depuis Livré. Chaque statut a une couleur constante.
+- **Échéances** : une date facultative par étape. Le planning de collection trie les modèles par prochaine échéance et marque en rouge celles qui sont dépassées. La notification de retard part une fois, le jour du dépassement.
+- **Réservation** : elle se fait au passage « En production », après confirmation, sur le besoin total (production et prototypage restant). Stock disponible = stock atelier − réservé. Il peut devenir négatif, et il est alors affiché en rouge avec le manque. À la livraison, la déduction proposée est égale à la réservation, modifiable avant confirmation. Abandonner un modèle, ou revenir avant « En production », libère la réservation.
+- **Grilles de tailles fournies** : XS–XXL, 34–48, pointures 35–46 et taille unique. L'Admin crée et modifie les grilles de l'atelier. Une grille déjà utilisée par un modèle ne peut pas perdre une taille qui a des quantités.
+- **Gradation** : l'écart par défaut est de +4 % par taille au-dessus de la taille de base, et −4 % par taille en dessous. Il est modifiable pour le modèle, puis taille par taille. Besoin d'une taille = consommation de base × (1 + écart) × quantité × (1 + marge de perte).
+- **Prototypage** : nombre de prototypes par modèle, 1 par défaut. Perte de prototypage par matière, 25 % par défaut. Le besoin de prototypage est calculé sur la taille de base et affiché à part du besoin de production.
+- **Coût de revient** : matières (prix × besoin, pertes incluses), fournitures en lignes libres, façon par pièce, frais annexes par pièce ou en forfait pour le modèle. Le coût est affiché par pièce, par coloris et par collection. Coefficient = prix de vente visé ÷ coût par pièce. Le coefficient minimal de l'atelier est de 2,5 par défaut, réglable par l'Admin. Un coût dont une matière n'a pas de prix porte la mention « incomplet ».
+- **Monnaie** : l'euro, affiché selon la langue de l'interface.
+- **Droits** : l'Admin et l'Éditeur voient et modifient statuts, tailles et coûts. Le Lecteur voit les statuts, le planning et les besoins, mais ni les prix ni les coûts. L'export PDF et le lien partagé n'incluent jamais les coûts.
+- **Offre Pro** : les statuts et échéances, la réservation, les tailles, le prototypage et le coût de revient sont réservés aux offres Pro et Sur mesure. En Pilote et en Essentiel, ces écrans sont visibles mais verrouillés, avec la mention « Disponible avec l'offre Pro ». Après un retour à une offre inférieure, les données restent consultables sans modification. Les ateliers en offre Pilote passent en Pro le temps du pilote.
+- **Améliorations** : le rôle d'une ligne se change dans un menu sur la ligne. Le sélecteur de couleur propose une palette et une saisie libre. La cloche se met à jour sans rechargement. L'import atelier pré-remplit la dernière association de colonnes, que l'on peut modifier.
+
+## Notes complémentaires
+
+- **Feuille de route** : V3 pour attirer les fournisseurs, V4 pour la monétisation en libre-service, V5 pour la réalité augmentée afin de tester les produits.
+- **Accès et paiements** : ils restent gérés à la main par le super-admin jusqu'à la V4.
+- **Hypothèse** : les ateliers saisissent le prix de leurs matières. Sans prix, le coût de revient reste incomplet.
+- **Risque** : l'écart de gradation par défaut (±4 %) ne convient pas à tous les produits, par exemple les chaussures. Il faudra le valider avec un premier atelier Pro.
+- **Dépendance** : un atelier pilote prêt à suivre une collection complète dans Filyxa (critère 8).

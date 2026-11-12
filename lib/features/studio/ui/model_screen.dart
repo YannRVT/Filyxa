@@ -18,6 +18,11 @@ import '../../share/ui/share_widgets.dart';
 import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import 'alert_widgets.dart';
+import 'planning_widgets.dart';
+import 'cost_widgets.dart';
+import 'production_widgets.dart';
+import 'prototype_widgets.dart';
+import 'size_widgets.dart';
 import 'studio_widgets.dart';
 
 /// Délai avant l'enregistrement d'une saisie (le calcul, lui, est immédiat).
@@ -177,6 +182,140 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     );
   }
 
+  Future<void> _setStatus(ModelStatus status) async {
+    final m = _model!;
+    // Lancement en production : réservation confirmée ; livraison : déduction confirmée.
+    // « Livré » passe toujours par la déduction confirmée, quel que soit le statut de départ.
+    final step = status == ModelStatus.inProduction && m.status != ModelStatus.inProduction
+        ? ProductionStep.reserve
+        : status == ModelStatus.delivered && m.status != ModelStatus.delivered
+            ? ProductionStep.deliver
+            : null;
+    if (step != null) {
+      await _flush();
+      final materials = {for (final x in ref.read(materialsProvider).value ?? const <MaterialItem>[]) x.id: x};
+      final List<StockReservation> reservations;
+      try {
+        // Livraison : toutes les réservations du modèle, y compris celles d'une
+        // matière retirée de la nomenclature depuis le lancement.
+        reservations = step == ProductionStep.reserve
+            ? await _repo.reservations(materialIds: m.materialIds)
+            : await _repo.reservations(modelId: m.id);
+      } on AuthError catch (e) {
+        if (mounted) setState(() => _error = context.l10n.failure(e.failure));
+        return;
+      }
+      if (!mounted) return;
+      final need = step == ProductionStep.reserve || m.status != ModelStatus.inProduction
+          ? productionNeed(m)
+          : {for (final r in reservations) r.materialId: r.meters};
+      final confirmed = await showProductionDialog(
+        context,
+        step: step,
+        model: m,
+        meters: need,
+        materials: materials,
+        reservations: reservations,
+      );
+      if (confirmed == null) return;
+      await _structural(() => step == ProductionStep.reserve
+          ? _repo.startProduction(m.id, confirmed)
+          : _repo.deliverModel(m.id, confirmed));
+      ref.invalidate(materialsProvider);
+      ref.invalidate(hasProProvider);
+      return;
+    }
+    await _structural(() => _repo.setStatus(widget.modelId, status));
+    // Un refus « offre Pro » vient peut-être d'un changement d'offre : relecture du verrou.
+    ref.invalidate(hasProProvider);
+  }
+
+  Future<void> _setDeadline(ModelStatus stage, DateTime? date) async {
+    await _structural(() => _repo.setDeadline(widget.modelId, stage, date));
+    ref.invalidate(hasProProvider);
+  }
+
+  Future<void> _setSizeChart(String? chartId) async {
+    await _structural(() => _repo.setModelSizeChart(widget.modelId, chartId));
+    ref.invalidate(hasProProvider);
+  }
+
+  /// Quantité d'une taille : la quantité du coloris devient la somme de ses tailles.
+  void _setSizeQuantity(Colorway c, String size, int quantity) {
+    final current = _model!.colorways.firstWhere((x) => x.id == c.id);
+    final sizes = {...current.sizeQuantities, size: quantity};
+    _replaceColorway(c.id, (x) => x.copyWith(sizeQuantities: sizes, quantity: sizes.values.fold<int>(0, (a, b) => a + b)));
+    _schedule('size-${c.id}-$size', () => _repo.setSizeQuantity(c.id, size, quantity));
+  }
+
+  void _setBaseSize(String size) {
+    setState(() => _model = _model!.copyWith(baseSize: size));
+    _schedule('base', () => _repo.updateGrading(widget.modelId, baseSize: size));
+  }
+
+  void _setGradePct(double pct) {
+    setState(() => _model = _model!.copyWith(gradePct: pct));
+    _schedule('grade', () => _repo.updateGrading(widget.modelId, gradePct: pct));
+  }
+
+  void _setSizeGrade(String size, double? pct) {
+    final grades = {..._model!.sizeGrades};
+    pct == null ? grades.remove(size) : grades[size] = pct;
+    setState(() => _model = _model!.copyWith(sizeGrades: grades));
+    _schedule('grade-$size', () => _repo.setSizeGrade(widget.modelId, size, pct));
+  }
+
+  void _setPrototypeCount(int count) {
+    setState(() => _model = _model!.copyWith(prototypeCount: count));
+    _schedule('proto-count', () => _repo.updateModel(widget.modelId, prototypeCount: count));
+  }
+
+  void _setProtoLoss(BomLine line, double pct) {
+    final first = _model!.colorways.first;
+    _replaceColorway(first.id, (c) => c.copyWith(lines: [for (final l in c.lines) l.id == line.id ? l.copyWith(protoLossPct: pct) : l]));
+    _schedule('proto-loss-${line.id}', () => _repo.updateLine(line.id, protoLossPct: pct));
+  }
+
+  void _setTargetPrice(double? price) {
+    setState(() => _model = _model!.copyWith(targetPrice: price, clearTargetPrice: price == null));
+    _schedule('target-price', () => _repo.setTargetPrice(widget.modelId, price));
+  }
+
+  /// Changer le rôle conserve la consommation, la perte de prototypage et la position.
+  void _setRole(Colorway c, BomLine line, String role) {
+    _replaceColorway(c.id, (x) => x.copyWith(lines: [for (final l in x.lines) l.id == line.id ? l.copyWith(role: role) : l]));
+    _run(() => _repo.updateLine(line.id, role: role));
+    ref.invalidate(customRolesProvider);
+  }
+
+  Future<void> _pickColor(Colorway c) async {
+    final hex = await showColorPicker(context, initial: c.colorHex);
+    if (hex == null || hex == c.colorHex) return;
+    _replaceColorway(c.id, (x) => x.copyWith(colorHex: hex));
+    await _run(() => _repo.updateColorway(c.id, colorHex: hex));
+  }
+
+  Widget _colorButton(Colorway c, bool canEdit) {
+    final color = colorFromHex(c.colorHex);
+    final swatch = Container(
+      width: 28,
+      height: 28,
+      decoration: BoxDecoration(
+        color: color ?? FxColors.cloud,
+        shape: BoxShape.circle,
+        border: Border.all(color: FxColors.lineStrong),
+      ),
+      child: color == null ? const Icon(Icons.palette_outlined, size: 16, color: FxColors.inkSoft) : null,
+    );
+    if (!canEdit) return color == null ? const SizedBox.shrink() : swatch;
+    return IconButton(
+      key: ValueKey('color-${c.id}'),
+      tooltip: context.l10n.colorwayColorTitle,
+      onPressed: () => _pickColor(c),
+      icon: swatch,
+    );
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -264,14 +403,36 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   _header(m, canEdit),
                   if (_error != null) ...[const SizedBox(height: FxSpace.md), MessageBanner.error(_error!)],
                   const SizedBox(height: FxSpace.md),
+                  ModelDeadlinesCard(model: m, onChanged: _setDeadline),
+                  const SizedBox(height: FxSpace.md),
+                  ModelSizesCard(
+                    model: m,
+                    onChartChanged: _setSizeChart,
+                    onQuantity: _setSizeQuantity,
+                    onBaseSize: _setBaseSize,
+                    onGradePct: _setGradePct,
+                    onSizeGrade: _setSizeGrade,
+                  ),
+                  const SizedBox(height: FxSpace.md),
                   AlertsPanel(alerts: watchModelAlerts(ref, m)),
                   const SizedBox(height: FxSpace.md),
                   _colorwayBar(m, canEdit),
                   const SizedBox(height: FxSpace.md),
                   _colorwayPanel(m, colorway, materials, canEdit),
                   if (m.materialIds.isNotEmpty) ...[
+                    const SizedBox(height: FxSpace.md),
+                    PrototypingCard(model: m, materials: materials, onCount: _setPrototypeCount, onLoss: _setProtoLoss),
                     const SizedBox(height: FxSpace.lg),
                     _requirements(m, materials),
+                    const SizedBox(height: FxSpace.md),
+                    ModelCostCard(
+                      model: m,
+                      materials: materials,
+                      onAdd: (c) => _structural(() => _repo.addCost(m.id, c)),
+                      onUpdate: (c) => _structural(() => _repo.updateCost(c)),
+                      onDelete: (c) => _structural(() => _repo.deleteCost(c.id)),
+                      onTargetPrice: _setTargetPrice,
+                    ),
                   ],
                   const SizedBox(height: FxSpace.xxl),
                 ],
@@ -295,6 +456,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           runSpacing: FxSpace.md,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
+            ModelStatusControl(status: m.status, onChanged: _setStatus),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -348,6 +510,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
       children: [
         for (final (i, c) in m.colorways.indexed)
           ChoiceChip(
+            avatar: colorFromHex(c.colorHex) == null ? null : CircleAvatar(backgroundColor: colorFromHex(c.colorHex)),
             label: Text(l10n.colorwayName(c, i)),
             selected: i == _tab,
             onSelected: (_) => setState(() => _tab = i),
@@ -374,7 +537,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           children: [
             Row(
               children: [
-                if (canEdit)
+                // Avec une grille, la quantité est la somme des tailles (tableau Tailles).
+                if (canEdit && m.sizeChartId == null)
                   SizedBox(
                     width: 220,
                     child: TextField(
@@ -388,6 +552,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   )
                 else
                   Text('${l10n.quantityLabel} : ${c.quantity}', style: text.bodyMedium),
+                const SizedBox(width: FxSpace.sm),
+                _colorButton(c, canEdit),
                 const Spacer(),
                 if (canEdit && m.hasVariants)
                   IconButton(
@@ -447,7 +613,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     final l10n = context.l10n;
     final lang = langOf(context);
     final text = Theme.of(context).textTheme;
-    final need = lineRequirement(l.consumption, c.quantity, m.wastePct);
+    final need = colorwayLineRequirement(m, c, l);
     return Padding(
       key: ValueKey('line-${l.id}'),
       padding: const EdgeInsets.only(bottom: FxSpace.sm),
@@ -475,6 +641,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           ),
           const SizedBox(width: FxSpace.sm),
           if (canEdit) ...[
+            RoleMenuButton(type: m.productType, role: l.role, onChanged: (r) => _setRole(c, l, r)),
             SizedBox(
               width: 130,
               child: TextField(
@@ -503,6 +670,14 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     final lang = langOf(context);
     final text = Theme.of(context).textTheme;
     final totals = requirementsByMaterial(m);
+    // Offre Pro : le besoin de prototypage s'affiche à part, puis le total.
+    final proto = (ref.watch(hasProProvider).value ?? false) ? prototypeRequirements(m) : const <String, double>{};
+    String meters(double v) => l10n.stockMeters(formatNumber(v, lang, decimals: 2));
+    Widget? split(String id) => proto.isEmpty
+        ? null
+        : Text(l10n.requirementSplit(meters(totals[id] ?? 0), meters(proto[id] ?? 0)),
+            style: text.bodySmall?.copyWith(color: FxColors.inkSoft));
+    double total(String id) => (totals[id] ?? 0) + (proto[id] ?? 0);
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(FxSpace.md),
@@ -510,19 +685,45 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(l10n.requirementTitle, style: text.titleMedium),
-            Text(l10n.requirementFormula(formatNumber(m.wastePct, lang, decimals: 2)),
+            Text(
+                m.graded
+                    ? l10n.requirementFormulaGraded(formatNumber(m.wastePct, lang, decimals: 2))
+                    : l10n.requirementFormula(formatNumber(m.wastePct, lang, decimals: 2)),
                 style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
             const SizedBox(height: FxSpace.sm),
             for (final e in totals.entries)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Row(
+              if (m.graded)
+                ExpansionTile(
+                  key: ValueKey('need-${e.key}'),
+                  tilePadding: EdgeInsets.zero,
+                  title: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium),
+                  subtitle: split(e.key) ?? Text(l10n.requirementBySize, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
+                  trailing: TechText(meters(total(e.key)), size: 14),
                   children: [
-                    Expanded(child: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium)),
-                    TechText(l10n.stockMeters(formatNumber(e.value, lang, decimals: 2)), size: 14),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: RequirementDetailTable(model: m, materialId: e.key),
+                    ),
                   ],
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium),
+                            ?split(e.key),
+                          ],
+                        ),
+                      ),
+                      TechText(meters(total(e.key)), size: 14),
+                    ],
+                  ),
                 ),
-              ),
           ],
         ),
       ),

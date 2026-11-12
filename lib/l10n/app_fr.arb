@@ -1458,5 +1458,271 @@
   "adminPricingInput": "Entrée",
   "adminPricingOutput": "Sortie",
   "adminPreviousMonth": "Mois précédent",
-  "adminNextMonth": "Mois suivant"
+  "adminNextMonth": "Mois suivant",
+  "proRequired": "Fonctionnalité réservée à l'offre Pro.",
+  "proLocked": "Disponible avec l'offre Pro",
+  "modelStatusLabel": "Statut",
+  "modelStatusIdea": "Idée",
+  "modelStatusPrototype": "Prototype",
+  "modelStatusValidated": "Validé",
+  "modelStatusInProduction": "En production",
+  "modelStatusDelivered": "Livré",
+  "modelStatusAbandoned": "Abandonné",
+  "modelStatusFinal": "Un modèle livré ne change plus de statut.",
+  "deadlinesTitle": "Échéances",
+  "deadlineHelp": "Date à laquelle le modèle doit avoir atteint chaque étape.",
+  "deadlineNone": "Aucune échéance",
+  "deadlineClear": "Effacer l'échéance",
+  "deadlineOverdueTag": "En retard",
+  "tabModels": "Modèles",
+  "tabPlanning": "Planning",
+  "planningEmpty": "Aucune échéance dans cette collection. Fixez-les depuis chaque modèle.",
+  "planningNoDeadline": "Sans échéance",
+  "planningNext": "{stage} prévu le {date}",
+  "@planningNext": {
+    "placeholders": {
+      "stage": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "notifDeadlineOverdue": "Échéance dépassée : {name} — {stage} prévu le {date}",
+  "@notifDeadlineOverdue": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "stage": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sizesTitle": "Tailles",
+  "sizeChartLabel": "Grille de tailles",
+  "sizeChartNone": "Sans grille (quantité par coloris)",
+  "sizeChartAlpha": "XS–XXL",
+  "sizeChartEu": "34–48",
+  "sizeChartShoes": "Pointures 35–46",
+  "sizeChartOne": "Taille unique",
+  "sizeChartsTitle": "Grilles de tailles",
+  "sizeChartsBuiltIn": "Fournies par Filyxa",
+  "sizeChartsMine": "Grilles de l'atelier",
+  "sizeChartsMineEmpty": "Aucune grille propre à l'atelier.",
+  "sizeChartNew": "Nouvelle grille",
+  "sizeChartEdit": "Modifier la grille",
+  "sizeChartName": "Nom de la grille",
+  "sizeChartSizes": "Tailles, dans l'ordre, séparées par des virgules",
+  "sizeChartChangeTitle": "Changer de grille ?",
+  "sizeChartChangeBody": "Les quantités des tailles absentes de la nouvelle grille seront effacées.",
+  "sizeChartFromColorwaysBody": "Les quantités saisies par coloris seront remplacées par les quantités par taille, à saisir dans la grille.",
+  "sizeChartChange": "Changer",
+  "totalLabel": "Total",
+  "sizeErrorInUse": "Une taille qui a des quantités sur un modèle ne peut pas être retirée.",
+  "sizeErrorInvalid": "Les tailles doivent être distinctes et non vides (12 caractères au plus).",
+  "sizeChartInUse": "Cette grille est utilisée par un modèle : impossible de la supprimer.",
+  "sizeChartDeleteTitle": "Supprimer la grille ?",
+  "baseSizeLabel": "Taille de base",
+  "gradePctLabel": "Écart par taille (%)",
+  "gradingSummary": "Taille de base : {base} · écart de {pct} % par taille",
+  "@gradingSummary": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "gradeRowLabel": "Écart",
+  "baseSizeTag": "base",
+  "sizeGradeTitle": "Écart de la taille {size}",
+  "@sizeGradeTitle": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "sizeGradeLabel": "Écart par rapport à la base (%)",
+  "sizeGradeHelp": "Par exemple 10 pour +10 %, -5 pour −5 %.",
+  "sizeGradeReset": "Revenir à l'écart du modèle",
+  "requirementBySize": "Détail par taille et par coloris",
+  "requirementFormulaGraded": "Consommation de la taille de base × (1 + écart de la taille) × quantité × (1 + marge de {waste} %)",
+  "@requirementFormulaGraded": {
+    "placeholders": {
+      "waste": {
+        "type": "String"
+      }
+    }
+  },
+  "prototypingTitle": "Prototypage",
+  "prototypingHelp": "Mètres consommés par les prototypes (tests de colle, tests matière, sublimation avec marge sur les côtés), calculés sur la taille de base du premier coloris.",
+  "prototypeCountLabel": "Nombre de prototypes",
+  "protoLossLabel": "Perte proto (%)",
+  "requirementSplit": "Production {production} · Prototypage {prototype}",
+  "@requirementSplit": {
+    "placeholders": {
+      "production": {
+        "type": "String"
+      },
+      "prototype": {
+        "type": "String"
+      }
+    }
+  },
+  "productionReserveTitle": "Lancer en production",
+  "productionReserveBody": "Le besoin de chaque matière (production et prototypage) sera réservé sur le stock atelier.",
+  "productionDeliverTitle": "Livrer le modèle",
+  "productionDeliverBody": "Les mètres consommés seront déduits du stock atelier. Ajustez-les si la consommation réelle a différé.",
+  "productionAvailable": "Disponible : {meters}",
+  "@productionAvailable": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "productionStock": "Stock atelier : {meters}",
+  "@productionStock": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "productionShortage": "Manque : {meters}",
+  "@productionShortage": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "productionShortageNote": "Le stock disponible ne couvre pas tout le besoin. Vous pouvez commander le complément ou lancer quand même.",
+  "productionLaunch": "Réserver et lancer",
+  "productionLaunchAnyway": "Lancer quand même",
+  "productionDeliver": "Déduire et livrer",
+  "productionUsed": "Consommé",
+  "productionNoMaterial": "Aucune matière dans ce modèle.",
+  "stockReserved": "Réservé : {meters}",
+  "@stockReserved": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "stockAvailable": "Disponible : {meters}",
+  "@stockAvailable": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "costTitle": "Coût de revient",
+  "costPerPiece": "{amount} / pièce",
+  "@costPerPiece": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costPerPieceShort": "{amount} / pièce",
+  "@costPerPieceShort": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costFlat": "{amount} forfait",
+  "@costFlat": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costMaterials": "Matières (pertes incluses)",
+  "costKindSupply": "Fourniture",
+  "costKindLabor": "Façon",
+  "costKindOverhead": "Frais",
+  "costAdd": "Ajouter un coût",
+  "costEdit": "Modifier le coût",
+  "costLabel": "Libellé",
+  "costUnitPrice": "Prix unitaire",
+  "costQuantity": "Quantité par pièce",
+  "costQuantityFlat": "Quantité pour le modèle",
+  "costPerModelSwitch": "Forfait pour tout le modèle",
+  "costTotal": "Total production ({pieces} pièces)",
+  "@costTotal": {
+    "placeholders": {
+      "pieces": {
+        "type": "int"
+      }
+    }
+  },
+  "costPrototyping": "Prototypage (matières)",
+  "costIncomplete": "Coût incomplet : sans prix pour {materials}.",
+  "@costIncomplete": {
+    "placeholders": {
+      "materials": {
+        "type": "String"
+      }
+    }
+  },
+  "costIncompleteShort": "Coût incomplet : des matières n'ont pas de prix.",
+  "collectionCost": "Coût de la collection : {amount}",
+  "@collectionCost": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "collectionCostPrototyping": "Dont prototypage, à part : {amount}",
+  "@collectionCostPrototyping": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costTargetPrice": "Prix de vente visé",
+  "coefficientValue": "Coefficient : {value}",
+  "@coefficientValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "coefficientLow": "Coefficient {value} < {min}",
+  "@coefficientLow": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "min": {
+        "type": "String"
+      }
+    }
+  },
+  "coefficientNeedPrice": "Saisissez un prix de vente visé pour calculer le coefficient.",
+  "coefficientIncomplete": "Coefficient indisponible : le coût est incomplet.",
+  "workspaceTitle": "Réglages de l'atelier",
+  "minCoefficientLabel": "Coefficient minimal",
+  "minCoefficientHelp": "Un modèle dont le coefficient (prix de vente ÷ coût par pièce) passe en dessous est signalé dans le Studio.",
+  "workspaceSaved": "Réglage enregistré.",
+  "colorwayColorTitle": "Couleur du coloris",
+  "colorwayColorHex": "Code couleur (#RRGGBB)"
 }

@@ -23,8 +23,9 @@ insert into public.materials (id, org_id, name, supplier_reference_id) values
   ('f2000000-0000-0000-0000-000000000001', 'f0000000-0000-0000-0000-00000000000a', 'Mon sergé', 'f1000000-0000-0000-0000-000000000001'),
   ('f2000000-0000-0000-0000-000000000002', 'f0000000-0000-0000-0000-00000000000a', 'Pas utilisée', 'f1000000-0000-0000-0000-000000000002');
 insert into public.collections (id, org_id, name) values ('f3000000-0000-0000-0000-000000000001', 'f0000000-0000-0000-0000-00000000000a', 'AH27');
-insert into public.models (id, collection_id, name, product_type)
-  values ('f4000000-0000-0000-0000-000000000001', 'f3000000-0000-0000-0000-000000000001', 'Veste Arno', 'garment');
+-- Modèle actif (Prototype) : depuis la phase 15, un modèle en Idée d'un atelier Pro ne notifie pas.
+insert into public.models (id, collection_id, name, product_type, status)
+  values ('f4000000-0000-0000-0000-000000000001', 'f3000000-0000-0000-0000-000000000001', 'Veste Arno', 'garment', 'prototype');
 insert into public.model_materials (colorway_id, material_id, role, consumption)
 select id, 'f2000000-0000-0000-0000-000000000001', 'main', 1.8 from public.colorways
 where model_id = 'f4000000-0000-0000-0000-000000000001';

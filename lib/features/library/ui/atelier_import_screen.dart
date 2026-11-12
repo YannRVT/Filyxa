@@ -43,7 +43,9 @@ class _AtelierImportScreenState extends ConsumerState<AtelierImportScreen> {
   @override
   void initState() {
     super.initState();
-    if (_table != null) _mapping = guessAtelierMapping(_table!.headers);
+    if (_table != null) {
+      _mapping = guessAtelierMapping(_table!.headers, remembered: ref.read(atelierImportMappingProvider).value ?? const {});
+    }
   }
 
   Future<void> _pick() async {
@@ -59,10 +61,13 @@ class _AtelierImportScreenState extends ConsumerState<AtelierImportScreen> {
         setState(() => _error = l10n.importTooMany(table.rows.length));
         return;
       }
+      // Association du dernier import proposée d'office ; colonnes nouvelles devinées.
+      final remembered = await ref.read(atelierImportMappingProvider.future).catchError((_) => const <String, dynamic>{});
+      if (!mounted) return;
       setState(() {
         _table = table;
         _fileName = file.name;
-        _mapping = guessAtelierMapping(table.headers);
+        _mapping = guessAtelierMapping(table.headers, remembered: remembered);
         _error = null;
         _result = null;
       });
@@ -89,6 +94,16 @@ class _AtelierImportScreenState extends ConsumerState<AtelierImportScreen> {
           if (mounted) setState(() => _done = done);
         },
       );
+      // Mémorise l'association des colonnes pour le prochain import (sans gravité si elle échoue).
+      final table = _table;
+      if (table != null) {
+        try {
+          await ref.read(materialsRepositoryProvider).saveAtelierImportMapping(orgId, mappingToRemember(_mapping, table.headers));
+          ref.invalidate(atelierImportMappingProvider);
+        } catch (_) {
+          // L'import lui-même a réussi ; l'association sera simplement redevinée.
+        }
+      }
       ref.invalidate(materialsProvider);
       ref.invalidate(linkedReferencesProvider);
       if (mounted) {

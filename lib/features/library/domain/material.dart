@@ -105,7 +105,7 @@ class MaterialItem {
       updatedAt: json['updated_at'] == null ? null : DateTime.parse(json['updated_at'] as String).toLocal(),
       supplierReferenceId: json['supplier_reference_id'] as String?,
       linkedAt: json['linked_at'] == null ? null : DateTime.parse(json['linked_at'] as String).toLocal(),
-      pricePerM: (json['price_per_m'] as num?)?.toDouble(),
+      pricePerM: _price(json),
       tags: (json['tags'] as List<dynamic>? ?? const []).cast<String>(),
       linkPending: json['link_review'] == 'pending',
     );
@@ -237,4 +237,13 @@ String? normalizeHex(String? input) {
   final t = (input ?? '').trim();
   if (!_hexRe.hasMatch(t)) return null;
   return '#${t.replaceFirst('#', '').toUpperCase()}';
+}
+
+/// Prix au mètre : couche privée à part, lisible par les Admins et les Éditeurs seulement
+/// (null pour un Lecteur). Accepte aussi l'ancienne forme à plat.
+double? _price(Map<String, dynamic> json) {
+  final embedded = json['material_prices'];
+  final row = embedded is List ? (embedded.isEmpty ? null : embedded.first) : embedded;
+  final value = row is Map ? row['price_per_m'] : json['price_per_m'];
+  return (value as num?)?.toDouble();
 }
