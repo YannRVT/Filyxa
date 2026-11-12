@@ -2307,4 +2307,82 @@ class AppLocalizationsEs extends AppLocalizations {
   String stockAvailable(String meters) {
     return 'Disponible: $meters';
   }
+
+  @override
+  String get costTitle => 'Coste de producción';
+
+  @override
+  String costPerPiece(String amount) {
+    return '$amount / prenda';
+  }
+
+  @override
+  String costPerPieceShort(String amount) {
+    return '$amount / prenda';
+  }
+
+  @override
+  String costFlat(String amount) {
+    return '$amount a tanto alzado';
+  }
+
+  @override
+  String get costMaterials => 'Materiales (mermas incluidas)';
+
+  @override
+  String get costKindSupply => 'Avío';
+
+  @override
+  String get costKindLabor => 'Confección';
+
+  @override
+  String get costKindOverhead => 'Gastos';
+
+  @override
+  String get costAdd => 'Añadir un coste';
+
+  @override
+  String get costEdit => 'Editar coste';
+
+  @override
+  String get costLabel => 'Concepto';
+
+  @override
+  String get costUnitPrice => 'Precio unitario';
+
+  @override
+  String get costQuantity => 'Cantidad por prenda';
+
+  @override
+  String get costQuantityFlat => 'Cantidad para el modelo';
+
+  @override
+  String get costPerModelSwitch => 'Tanto alzado para todo el modelo';
+
+  @override
+  String costTotal(int pieces) {
+    return 'Total producción ($pieces prendas)';
+  }
+
+  @override
+  String get costPrototyping => 'Prototipado (materiales)';
+
+  @override
+  String costIncomplete(String materials) {
+    return 'Coste incompleto: sin precio para $materials.';
+  }
+
+  @override
+  String get costIncompleteShort =>
+      'Coste incompleto: hay materiales sin precio.';
+
+  @override
+  String collectionCost(String amount) {
+    return 'Coste de la colección: $amount';
+  }
+
+  @override
+  String collectionCostPrototyping(String amount) {
+    return 'Prototipado, aparte: $amount';
+  }
 }

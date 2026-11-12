@@ -153,6 +153,23 @@ class StudioRepository {
       .from('colorway_size_quantities')
       .upsert({'colorway_id': colorwayId, 'size': size, 'quantity': quantity}, onConflict: 'colorway_id,size'));
 
+  // Coûts ----------------------------------------------------------------------------------------
+
+  Map<String, dynamic> _costRow(CostLine c) => {
+        'kind': c.kind.name,
+        'label': c.label.trim(),
+        'unit_price': c.unitPrice,
+        'quantity': c.quantity,
+        'per': c.perModel ? 'model' : 'piece',
+      };
+
+  Future<void> addCost(String modelId, CostLine line) =>
+      _guard(() => _client.from('model_costs').insert({..._costRow(line), 'model_id': modelId, 'position': line.position}));
+
+  Future<void> updateCost(CostLine line) => _guard(() => _client.from('model_costs').update(_costRow(line)).eq('id', line.id));
+
+  Future<void> deleteCost(String id) => _guard(() => _client.from('model_costs').delete().eq('id', id));
+
   // Réservations ---------------------------------------------------------------------------------
 
   List<Map<String, dynamic>> _lines(Map<String, double> meters) => [

@@ -1625,5 +1625,75 @@
         "type": "String"
       }
     }
+  },
+  "costTitle": "Coût de revient",
+  "costPerPiece": "{amount} / pièce",
+  "@costPerPiece": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costPerPieceShort": "{amount} / pièce",
+  "@costPerPieceShort": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costFlat": "{amount} forfait",
+  "@costFlat": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "costMaterials": "Matières (pertes incluses)",
+  "costKindSupply": "Fourniture",
+  "costKindLabor": "Façon",
+  "costKindOverhead": "Frais",
+  "costAdd": "Ajouter un coût",
+  "costEdit": "Modifier le coût",
+  "costLabel": "Libellé",
+  "costUnitPrice": "Prix unitaire",
+  "costQuantity": "Quantité par pièce",
+  "costQuantityFlat": "Quantité pour le modèle",
+  "costPerModelSwitch": "Forfait pour tout le modèle",
+  "costTotal": "Total production ({pieces} pièces)",
+  "@costTotal": {
+    "placeholders": {
+      "pieces": {
+        "type": "int"
+      }
+    }
+  },
+  "costPrototyping": "Prototypage (matières)",
+  "costIncomplete": "Coût incomplet : sans prix pour {materials}.",
+  "@costIncomplete": {
+    "placeholders": {
+      "materials": {
+        "type": "String"
+      }
+    }
+  },
+  "costIncompleteShort": "Coût incomplet : des matières n'ont pas de prix.",
+  "collectionCost": "Coût de la collection : {amount}",
+  "@collectionCost": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "collectionCostPrototyping": "Dont prototypage, à part : {amount}",
+  "@collectionCostPrototyping": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
   }
 }

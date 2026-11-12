@@ -14,9 +14,10 @@ insert into public.memberships (user_id, org_id, role) values
   ('00000000-0000-0000-0000-0000000000a1', 'a1000000-0000-0000-0000-00000000000a', 'editor'),
   ('00000000-0000-0000-0000-0000000000a2', 'a1000000-0000-0000-0000-00000000000a', 'viewer'),
   ('00000000-0000-0000-0000-0000000000a3', 'a1000000-0000-0000-0000-00000000000b', 'admin');
-insert into public.materials (id, org_id, name, supplier_code, atelier_stock_m, notes, price_per_m, tags) values
+insert into public.materials (id, org_id, name, supplier_code, atelier_stock_m, notes, tags) values
   ('a2000000-0000-0000-0000-000000000001', 'a1000000-0000-0000-0000-00000000000a', 'Sergé', 'TD-1', 42.5,
-   'SECRET-NOTE', 24.5, '{SECRET-TAG}');
+   'SECRET-NOTE', '{SECRET-TAG}');
+insert into public.material_prices (material_id, price_per_m) values ('a2000000-0000-0000-0000-000000000001', 24.5);
 insert into public.textile_specs (material_id, weight_gsm, care) values ('a2000000-0000-0000-0000-000000000001', 280, '{wash_30}');
 insert into public.collections (id, org_id, name) values ('a3000000-0000-0000-0000-000000000001', 'a1000000-0000-0000-0000-00000000000a', 'AH27');
 insert into public.models (id, collection_id, name, product_type)

@@ -13,6 +13,7 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import '../domain/alerts.dart';
 import 'alert_widgets.dart';
+import 'cost_widgets.dart';
 import 'planning_widgets.dart';
 import 'studio_widgets.dart';
 
@@ -159,12 +160,13 @@ class CollectionScreen extends ConsumerWidget {
                   children: [
                     ListView.separated(
                       padding: const EdgeInsets.all(FxSpace.md),
-                      itemCount: list.length,
+                      itemCount: list.length + 1,
                       separatorBuilder: (_, _) => const SizedBox(height: FxSpace.sm),
                       itemBuilder: (_, i) => Center(
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 820),
-                          child: _ModelCard(model: list[i]),
+                          // En tête : coût de la collection (Admins et Éditeurs, offre Pro).
+                          child: i == 0 ? CollectionCostSummary(models: list) : _ModelCard(model: list[i - 1]),
                         ),
                       ),
                     ),

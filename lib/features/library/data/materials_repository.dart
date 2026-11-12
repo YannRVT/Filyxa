@@ -45,7 +45,7 @@ class AtelierImportResult {
 /// Taille des pages de chargement (limite du serveur : 1 000 lignes).
 const kMaterialsPageSize = 1000;
 const _select = 'id, org_id, name, supplier_name, supplier_code, color_name, color_hex, '
-    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, price_per_m, tags, link_review, '
+    'photo_path, atelier_stock_m, notes, updated_at, supplier_reference_id, linked_at, material_prices(price_per_m), tags, link_review, '
     'textile_specs(composition, weight_gsm, width_cm, weave, care, certifications, uses)';
 
 class MaterialsRepository {

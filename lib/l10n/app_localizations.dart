@@ -3827,6 +3827,132 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Disponible : {meters}'**
   String stockAvailable(String meters);
+
+  /// No description provided for @costTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût de revient'**
+  String get costTitle;
+
+  /// No description provided for @costPerPiece.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} / pièce'**
+  String costPerPiece(String amount);
+
+  /// No description provided for @costPerPieceShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} / pièce'**
+  String costPerPieceShort(String amount);
+
+  /// No description provided for @costFlat.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} forfait'**
+  String costFlat(String amount);
+
+  /// No description provided for @costMaterials.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matières (pertes incluses)'**
+  String get costMaterials;
+
+  /// No description provided for @costKindSupply.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fourniture'**
+  String get costKindSupply;
+
+  /// No description provided for @costKindLabor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Façon'**
+  String get costKindLabor;
+
+  /// No description provided for @costKindOverhead.
+  ///
+  /// In fr, this message translates to:
+  /// **'Frais'**
+  String get costKindOverhead;
+
+  /// No description provided for @costAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un coût'**
+  String get costAdd;
+
+  /// No description provided for @costEdit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le coût'**
+  String get costEdit;
+
+  /// No description provided for @costLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Libellé'**
+  String get costLabel;
+
+  /// No description provided for @costUnitPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix unitaire'**
+  String get costUnitPrice;
+
+  /// No description provided for @costQuantity.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité par pièce'**
+  String get costQuantity;
+
+  /// No description provided for @costQuantityFlat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité pour le modèle'**
+  String get costQuantityFlat;
+
+  /// No description provided for @costPerModelSwitch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Forfait pour tout le modèle'**
+  String get costPerModelSwitch;
+
+  /// No description provided for @costTotal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total production ({pieces} pièces)'**
+  String costTotal(int pieces);
+
+  /// No description provided for @costPrototyping.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prototypage (matières)'**
+  String get costPrototyping;
+
+  /// No description provided for @costIncomplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût incomplet : sans prix pour {materials}.'**
+  String costIncomplete(String materials);
+
+  /// No description provided for @costIncompleteShort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût incomplet : des matières n\'ont pas de prix.'**
+  String get costIncompleteShort;
+
+  /// No description provided for @collectionCost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coût de la collection : {amount}'**
+  String collectionCost(String amount);
+
+  /// No description provided for @collectionCostPrototyping.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dont prototypage, à part : {amount}'**
+  String collectionCostPrototyping(String amount);
 }
 
 class _AppLocalizationsDelegate

@@ -42,8 +42,8 @@ select is((current_setting('test.result')::jsonb ->> 'pending')::int, 2, '2 à c
 select is(jsonb_array_length(current_setting('test.result')::jsonb -> 'errors'), 1, '1 ligne refusée');
 select is((current_setting('test.result')::jsonb -> 'errors' -> 0 ->> 'row')::int, 5, 'avec son numéro de ligne');
 
-select results_eq($$select m.supplier_reference_id, m.supplier_code, s.weight_gsm, m.price_per_m from public.materials m
-  join public.textile_specs s on s.material_id = m.id where m.name = 'Mon sergé'$$,
+select results_eq($$select m.supplier_reference_id, m.supplier_code, s.weight_gsm, p.price_per_m from public.materials m
+  join public.textile_specs s on s.material_id = m.id left join public.material_prices p on p.material_id = m.id where m.name = 'Mon sergé'$$,
   $$values ('80000000-0000-0000-0000-000000000001'::uuid, 'TI-SRG-280'::text, 280, 18.00::numeric)$$,
   'correspondance sûre : liée, données du fournisseur, couche privée conservée');
 select results_eq($$select name from public.materials where org_id = '70000000-0000-0000-0000-00000000000a'
@@ -63,7 +63,8 @@ select results_eq($$select (current_setting('test.result')::jsonb ->> 'inserted'
   (current_setting('test.result')::jsonb ->> 'updated')::int$$, $$values (0, 3)$$, 'réimport : 3 mises à jour, aucune création');
 select is((select count(*)::int from public.materials where org_id = '70000000-0000-0000-0000-00000000000a'), 4,
   'un import relancé ne duplique pas les matières');
-select results_eq($$select atelier_stock_m, price_per_m, supplier_reference_id from public.materials where name = 'Mon sergé'$$,
+select results_eq($$select m.atelier_stock_m, p.price_per_m, m.supplier_reference_id from public.materials m
+  left join public.material_prices p on p.material_id = m.id where m.name = 'Mon sergé'$$,
   $$values (40.00::numeric, 18.00::numeric, '80000000-0000-0000-0000-000000000001'::uuid)$$,
   'réimport : valeurs nouvelles prises, cellules vides sans effet, lien conservé');
 select is((select link_review from public.materials where name = 'Popeline'), 'dismissed',

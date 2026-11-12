@@ -19,6 +19,7 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import 'alert_widgets.dart';
 import 'planning_widgets.dart';
+import 'cost_widgets.dart';
 import 'production_widgets.dart';
 import 'prototype_widgets.dart';
 import 'size_widgets.dart';
@@ -378,6 +379,14 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                     PrototypingCard(model: m, materials: materials, onCount: _setPrototypeCount, onLoss: _setProtoLoss),
                     const SizedBox(height: FxSpace.lg),
                     _requirements(m, materials),
+                    const SizedBox(height: FxSpace.md),
+                    ModelCostCard(
+                      model: m,
+                      materials: materials,
+                      onAdd: (c) => _structural(() => _repo.addCost(m.id, c)),
+                      onUpdate: (c) => _structural(() => _repo.updateCost(c)),
+                      onDelete: (c) => _structural(() => _repo.deleteCost(c.id)),
+                    ),
                   ],
                   const SizedBox(height: FxSpace.xxl),
                 ],

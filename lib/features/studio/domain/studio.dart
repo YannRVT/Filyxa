@@ -221,6 +221,7 @@ class StudioModel {
     this.gradePct = kDefaultGradePct,
     this.sizeGrades = const {},
     this.prototypeCount = 1,
+    this.costs = const [],
     this.colorways = const [],
   });
 
@@ -236,6 +237,9 @@ class StudioModel {
         sizes: ((json['size_charts'] as Map<String, dynamic>?)?['sizes'] as List<dynamic>? ?? const []).cast<String>(),
         baseSize: json['base_size'] as String?,
         prototypeCount: json['prototype_count'] as int? ?? 1,
+        costs: [
+          for (final c in (json['model_costs'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>()) CostLine.fromJson(c),
+        ]..sort((a, b) => a.position.compareTo(b.position)),
         gradePct: (json['grade_pct'] as num?)?.toDouble() ?? kDefaultGradePct,
         sizeGrades: {
           for (final g in (json['model_size_grades'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
@@ -251,7 +255,7 @@ class StudioModel {
       );
 
   static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, prototype_count, model_deadlines(stage, due_date), '
-      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position, proto_loss_pct))';
+      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_costs(id, kind, label, unit_price, quantity, per, position), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position, proto_loss_pct))';
 
   final String id;
   final String collectionId;
@@ -283,7 +287,13 @@ class StudioModel {
 
   /// Nombre de prototypes (taille de base, premier coloris).
   final int prototypeCount;
+
+  /// Fournitures, façon et frais annexes (vides pour un Lecteur).
+  final List<CostLine> costs;
   final List<Colorway> colorways;
+
+  /// Pièces prévues, tous coloris confondus.
+  int get pieces => colorways.fold(0, (sum, c) => sum + c.quantity);
 
   /// Taille de base effective.
   String? get effectiveBaseSize =>
@@ -335,6 +345,7 @@ class StudioModel {
     double? gradePct,
     Map<String, double>? sizeGrades,
     int? prototypeCount,
+    List<CostLine>? costs,
     List<Colorway>? colorways,
   }) =>
       StudioModel(
@@ -352,6 +363,7 @@ class StudioModel {
         gradePct: gradePct ?? this.gradePct,
         sizeGrades: sizeGrades ?? this.sizeGrades,
         prototypeCount: prototypeCount ?? this.prototypeCount,
+        costs: costs ?? this.costs,
         colorways: colorways ?? this.colorways,
       );
 }
@@ -443,3 +455,125 @@ Map<String, double> productionNeed(StudioModel model) {
 double availableStock(double? atelierStock, Iterable<StockReservation> reservations, {String? exceptModel}) =>
     (atelierStock ?? 0) -
     reservations.where((r) => r.modelId != exceptModel).fold<double>(0, (sum, r) => sum + r.meters);
+
+enum CostKind {
+  supply,
+  labor,
+  overhead;
+
+  static CostKind parse(String? v) => CostKind.values.firstWhere((k) => k.name == v, orElse: () => CostKind.supply);
+}
+
+/// Ligne de coût : fourniture, façon ou frais annexe, par pièce ou en forfait pour le modèle.
+class CostLine {
+  const CostLine({
+    required this.id,
+    required this.kind,
+    required this.label,
+    this.unitPrice = 0,
+    this.quantity = 1,
+    this.perModel = false,
+    this.position = 0,
+  });
+
+  factory CostLine.fromJson(Map<String, dynamic> json) => CostLine(
+        id: json['id'] as String,
+        kind: CostKind.parse(json['kind'] as String?),
+        label: json['label'] as String,
+        unitPrice: (json['unit_price'] as num?)?.toDouble() ?? 0,
+        quantity: (json['quantity'] as num?)?.toDouble() ?? 1,
+        perModel: json['per'] == 'model',
+        position: json['position'] as int? ?? 0,
+      );
+
+  final String id;
+  final CostKind kind;
+  final String label;
+  final double unitPrice;
+
+  /// Quantité par pièce (forfait : nombre d'unités pour tout le modèle).
+  final double quantity;
+
+  /// Forfait pour tout le modèle, réparti sur les pièces.
+  final bool perModel;
+  final int position;
+
+  double get amount => unitPrice * quantity;
+}
+
+/// Coût de revient d'un modèle (euros).
+class ModelCost {
+  const ModelCost({
+    required this.pieces,
+    required this.materials,
+    required this.perPieceExtras,
+    required this.flatExtras,
+    required this.byColorway,
+    required this.prototyping,
+    required this.missingPrices,
+  });
+
+  final int pieces;
+
+  /// Coût matières de la production (pertes incluses).
+  final double materials;
+
+  /// Fournitures, façon et frais par pièce.
+  final double perPieceExtras;
+
+  /// Frais forfaitaires pour le modèle.
+  final double flatExtras;
+
+  /// Coût par pièce de chaque coloris (null sans pièce).
+  final Map<String, double?> byColorway;
+
+  /// Coût matières du prototypage, affiché à part.
+  final double prototyping;
+
+  /// Matières sans prix : le coût est incomplet.
+  final Set<String> missingPrices;
+
+  bool get complete => missingPrices.isEmpty;
+
+  /// Coût total de la production (hors prototypage).
+  double get total => materials + perPieceExtras * pieces + flatExtras;
+
+  /// Coût par pièce = coût matières par pièce + fournitures, façon, frais par pièce + forfaits ÷ pièces.
+  double? get perPiece => pieces == 0 ? null : total / pieces;
+}
+
+ModelCost modelCost(StudioModel model, Map<String, double?> prices) {
+  final missing = <String>{};
+  double price(String id) {
+    final p = prices[id];
+    if (p == null) missing.add(id);
+    return p ?? 0;
+  }
+
+  final perPieceExtras = model.costs.where((c) => !c.perModel).fold<double>(0, (sum, c) => sum + c.amount);
+  final flatExtras = model.costs.where((c) => c.perModel).fold<double>(0, (sum, c) => sum + c.amount);
+  final pieces = model.pieces;
+  var materials = 0.0;
+  final byColorway = <String, double?>{};
+  for (final c in model.colorways) {
+    var cost = 0.0;
+    for (final l in c.lines) {
+      cost += colorwayLineRequirement(model, c, l) * price(l.materialId);
+    }
+    materials += cost;
+    byColorway[c.id] = c.quantity == 0 ? null : cost / c.quantity + perPieceExtras + (pieces == 0 ? 0 : flatExtras / pieces);
+  }
+  var prototyping = 0.0;
+  for (final MapEntry(key: id, value: meters) in prototypeRequirements(model).entries) {
+    prototyping += meters * price(id);
+  }
+  return ModelCost(
+    pieces: pieces,
+    materials: materials,
+    perPieceExtras: perPieceExtras,
+    flatExtras: flatExtras,
+    byColorway: byColorway,
+    prototyping: prototyping,
+    missingPrices: missing,
+  );
+}

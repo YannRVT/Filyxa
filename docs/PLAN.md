@@ -533,11 +533,11 @@ La section Coût du modèle calcule le coût matières à partir du prix des mat
 
 ### Critères d'acceptation
 
-- [ ] Coût par pièce = coût matières + fournitures + façon + frais par pièce + frais forfaitaires ÷ nombre de pièces. Le calcul est vérifié au centime près sur 5 modèles de référence (critère de succès V2 n° 2).
-- [ ] Le coût par coloris tient compte des tailles (besoin gradué). Le coût de la collection additionne ses modèles, avec le prototypage affiché à part.
-- [ ] Une matière sans prix fait afficher la mention « incomplet » et la liste des matières concernées.
-- [ ] Un Lecteur ne reçoit ni le prix des matières ni les coûts du serveur (test). Ces champs n'apparaissent pas dans son interface.
-- [ ] Les montants sont en euros, au format de la langue de l'interface. Ni les PDF ni les liens partagés ne contiennent de coût (test).
+- [x] Coût par pièce = coût matières + fournitures + façon + frais par pièce + frais forfaitaires ÷ nombre de pièces. Le calcul est vérifié au centime près sur 5 modèles de référence (critère de succès V2 n° 2).
+- [x] Le coût par coloris tient compte des tailles (besoin gradué). Le coût de la collection additionne ses modèles, avec le prototypage affiché à part.
+- [x] Une matière sans prix fait afficher la mention « incomplet » et la liste des matières concernées.
+- [x] Un Lecteur ne reçoit ni le prix des matières ni les coûts du serveur (test). Ces champs n'apparaissent pas dans son interface.
+- [x] Les montants sont en euros, au format de la langue de l'interface. Ni les PDF ni les liens partagés ne contiennent de coût (test).
 
 ## Bloquée par
 

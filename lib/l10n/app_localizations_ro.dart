@@ -2310,4 +2310,82 @@ class AppLocalizationsRo extends AppLocalizations {
   String stockAvailable(String meters) {
     return 'Disponibil: $meters';
   }
+
+  @override
+  String get costTitle => 'Cost de producție';
+
+  @override
+  String costPerPiece(String amount) {
+    return '$amount / bucată';
+  }
+
+  @override
+  String costPerPieceShort(String amount) {
+    return '$amount / bucată';
+  }
+
+  @override
+  String costFlat(String amount) {
+    return '$amount forfetar';
+  }
+
+  @override
+  String get costMaterials => 'Materiale (pierderi incluse)';
+
+  @override
+  String get costKindSupply => 'Accesoriu';
+
+  @override
+  String get costKindLabor => 'Confecție';
+
+  @override
+  String get costKindOverhead => 'Cheltuieli';
+
+  @override
+  String get costAdd => 'Adaugă un cost';
+
+  @override
+  String get costEdit => 'Modifică costul';
+
+  @override
+  String get costLabel => 'Denumire';
+
+  @override
+  String get costUnitPrice => 'Preț unitar';
+
+  @override
+  String get costQuantity => 'Cantitate pe bucată';
+
+  @override
+  String get costQuantityFlat => 'Cantitate pentru model';
+
+  @override
+  String get costPerModelSwitch => 'Forfetar pentru tot modelul';
+
+  @override
+  String costTotal(int pieces) {
+    return 'Total producție ($pieces bucăți)';
+  }
+
+  @override
+  String get costPrototyping => 'Prototipare (materiale)';
+
+  @override
+  String costIncomplete(String materials) {
+    return 'Cost incomplet: fără preț pentru $materials.';
+  }
+
+  @override
+  String get costIncompleteShort =>
+      'Cost incomplet: unele materiale nu au preț.';
+
+  @override
+  String collectionCost(String amount) {
+    return 'Costul colecției: $amount';
+  }
+
+  @override
+  String collectionCostPrototyping(String amount) {
+    return 'Prototipare, separat: $amount';
+  }
 }
