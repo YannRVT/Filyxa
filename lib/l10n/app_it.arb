@@ -595,5 +595,10 @@
   "sizeGradeHelp": "Per esempio 10 per +10 %, -5 per −5 %.",
   "sizeGradeReset": "Torna allo scarto del modello",
   "requirementBySize": "Dettaglio per taglia e variante",
-  "requirementFormulaGraded": "Consumo della taglia base × (1 + scarto della taglia) × quantità × (1 + {waste} % di sfrido)"
+  "requirementFormulaGraded": "Consumo della taglia base × (1 + scarto della taglia) × quantità × (1 + {waste} % di sfrido)",
+  "prototypingTitle": "Prototipazione",
+  "prototypingHelp": "Metri consumati dai prototipi (prove di colla, prove materiale, sublimazione con margine sui lati), calcolati sulla taglia base della prima variante.",
+  "prototypeCountLabel": "Numero di prototipi",
+  "protoLossLabel": "Perdita proto (%)",
+  "requirementSplit": "Produzione {production} · Prototipazione {prototype}"
 }

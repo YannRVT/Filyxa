@@ -77,11 +77,12 @@ class StudioRepository {
         return row['id'] as String;
       });
 
-  Future<void> updateModel(String id, {String? name, String? reference, double? wastePct}) => _guard(
+  Future<void> updateModel(String id, {String? name, String? reference, double? wastePct, int? prototypeCount}) => _guard(
         () => _client.from('models').update({
           'name': ?name?.trim(),
           if (reference != null) 'reference': reference.trim().isEmpty ? null : reference.trim(),
           'waste_pct': ?wastePct,
+          'prototype_count': ?prototypeCount,
         }).eq('id', id),
       );
 
@@ -201,9 +202,10 @@ class StudioRepository {
         });
       });
 
-  Future<void> updateLine(String id, {double? consumption, String? role}) => _guard(
+  Future<void> updateLine(String id, {double? consumption, String? role, double? protoLossPct}) => _guard(
         () => _client.from('model_materials').update({
           'consumption': ?consumption,
+          'proto_loss_pct': ?protoLossPct,
           if (role != null) 'role': role.trim(),
         }).eq('id', id),
       );

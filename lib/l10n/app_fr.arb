@@ -1560,5 +1560,20 @@
         "type": "String"
       }
     }
+  },
+  "prototypingTitle": "Prototypage",
+  "prototypingHelp": "Mètres consommés par les prototypes (tests de colle, tests matière, sublimation avec marge sur les côtés), calculés sur la taille de base du premier coloris.",
+  "prototypeCountLabel": "Nombre de prototypes",
+  "protoLossLabel": "Perte proto (%)",
+  "requirementSplit": "Production {production} · Prototypage {prototype}",
+  "@requirementSplit": {
+    "placeholders": {
+      "production": {
+        "type": "String"
+      },
+      "prototype": {
+        "type": "String"
+      }
+    }
   }
 }

@@ -3707,6 +3707,36 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Consommation de la taille de base × (1 + écart de la taille) × quantité × (1 + marge de {waste} %)'**
   String requirementFormulaGraded(String waste);
+
+  /// No description provided for @prototypingTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prototypage'**
+  String get prototypingTitle;
+
+  /// No description provided for @prototypingHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mètres consommés par les prototypes (tests de colle, tests matière, sublimation avec marge sur les côtés), calculés sur la taille de base du premier coloris.'**
+  String get prototypingHelp;
+
+  /// No description provided for @prototypeCountLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nombre de prototypes'**
+  String get prototypeCountLabel;
+
+  /// No description provided for @protoLossLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Perte proto (%)'**
+  String get protoLossLabel;
+
+  /// No description provided for @requirementSplit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Production {production} · Prototypage {prototype}'**
+  String requirementSplit(String production, String prototype);
 }
 
 class _AppLocalizationsDelegate

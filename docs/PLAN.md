@@ -488,9 +488,9 @@ L'Éditeur indique le nombre de prototypes du modèle (1 par défaut) et une per
 
 ### Critères d'acceptation
 
-- [ ] Besoin de prototypage = nombre de prototypes × consommation de base × (1 + perte de prototypage de la matière).
-- [ ] La perte de prototypage se règle ligne par ligne. Une nouvelle ligne reçoit 25 %.
-- [ ] Le besoin de prototypage, le besoin de production et leur total s'affichent séparément pour chaque matière.
+- [x] Besoin de prototypage = nombre de prototypes × consommation de base × (1 + perte de prototypage de la matière), calculé sur les lignes du premier coloris.
+- [x] La perte de prototypage se règle ligne par ligne. Une nouvelle ligne reçoit 25 %.
+- [x] Le besoin de prototypage, le besoin de production et leur total s'affichent séparément pour chaque matière.
 
 ## Bloquée par
 

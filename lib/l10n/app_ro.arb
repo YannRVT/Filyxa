@@ -595,5 +595,10 @@
   "sizeGradeHelp": "De exemplu 10 pentru +10 %, -5 pentru −5 %.",
   "sizeGradeReset": "Revino la diferența modelului",
   "requirementBySize": "Detaliu pe mărime și culoare",
-  "requirementFormulaGraded": "Consumul mărimii de bază × (1 + diferența mărimii) × cantitate × (1 + {waste} % pierderi)"
+  "requirementFormulaGraded": "Consumul mărimii de bază × (1 + diferența mărimii) × cantitate × (1 + {waste} % pierderi)",
+  "prototypingTitle": "Prototipare",
+  "prototypingHelp": "Metri consumați de prototipuri (teste de lipire, teste de material, sublimare cu margine pe laterale), calculați pe mărimea de bază a primei culori.",
+  "prototypeCountLabel": "Număr de prototipuri",
+  "protoLossLabel": "Pierdere proto (%)",
+  "requirementSplit": "Producție {production} · Prototipare {prototype}"
 }

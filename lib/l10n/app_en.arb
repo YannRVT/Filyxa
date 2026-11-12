@@ -595,5 +595,10 @@
   "sizeGradeHelp": "For example 10 for +10 %, -5 for −5 %.",
   "sizeGradeReset": "Use the style's grading",
   "requirementBySize": "Detail by size and colourway",
-  "requirementFormulaGraded": "Base size consumption × (1 + size grading) × quantity × (1 + {waste} % waste)"
+  "requirementFormulaGraded": "Base size consumption × (1 + size grading) × quantity × (1 + {waste} % waste)",
+  "prototypingTitle": "Prototyping",
+  "prototypingHelp": "Metres used by prototypes (glue tests, fabric tests, sublimation with side margins), based on the base size of the first colourway.",
+  "prototypeCountLabel": "Number of prototypes",
+  "protoLossLabel": "Proto loss (%)",
+  "requirementSplit": "Production {production} · Prototyping {prototype}"
 }

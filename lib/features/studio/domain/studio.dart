@@ -45,7 +45,14 @@ class StudioCollection {
 
 /// Ligne de nomenclature : une matière d'un coloris, avec son rôle et sa consommation par pièce.
 class BomLine {
-  const BomLine({required this.id, required this.materialId, required this.role, this.consumption = 0, this.position = 0});
+  const BomLine({
+    required this.id,
+    required this.materialId,
+    required this.role,
+    this.consumption = 0,
+    this.position = 0,
+    this.protoLossPct = kDefaultProtoLossPct,
+  });
 
   factory BomLine.fromJson(Map<String, dynamic> json) => BomLine(
         id: json['id'] as String,
@@ -53,18 +60,28 @@ class BomLine {
         role: json['role'] as String,
         consumption: (json['consumption'] as num?)?.toDouble() ?? 0,
         position: json['position'] as int? ?? 0,
+        protoLossPct: (json['proto_loss_pct'] as num?)?.toDouble() ?? kDefaultProtoLossPct,
       );
 
   final String id;
   final String materialId;
   final String role;
 
-  /// Mètres par pièce.
+  /// Mètres par pièce (taille de base quand le modèle a une grille).
   final double consumption;
   final int position;
 
-  BomLine copyWith({double? consumption, String? role}) =>
-      BomLine(id: id, materialId: materialId, role: role ?? this.role, consumption: consumption ?? this.consumption, position: position);
+  /// Perte de prototypage de la ligne, en % (tests de colle, tests matière, sublimation…).
+  final double protoLossPct;
+
+  BomLine copyWith({double? consumption, String? role, double? protoLossPct}) => BomLine(
+        id: id,
+        materialId: materialId,
+        role: role ?? this.role,
+        consumption: consumption ?? this.consumption,
+        position: position,
+        protoLossPct: protoLossPct ?? this.protoLossPct,
+      );
 }
 
 /// Grille de tailles : fournie par Filyxa ([code]) ou créée par l'atelier ([name]).
@@ -145,6 +162,9 @@ class Colorway {
       );
 }
 
+/// Perte de prototypage par défaut (%).
+const kDefaultProtoLossPct = 25.0;
+
 /// Écart de consommation par taille, par défaut (%).
 const kDefaultGradePct = 4.0;
 
@@ -200,6 +220,7 @@ class StudioModel {
     this.baseSize,
     this.gradePct = kDefaultGradePct,
     this.sizeGrades = const {},
+    this.prototypeCount = 1,
     this.colorways = const [],
   });
 
@@ -214,6 +235,7 @@ class StudioModel {
         sizeChartId: json['size_chart_id'] as String?,
         sizes: ((json['size_charts'] as Map<String, dynamic>?)?['sizes'] as List<dynamic>? ?? const []).cast<String>(),
         baseSize: json['base_size'] as String?,
+        prototypeCount: json['prototype_count'] as int? ?? 1,
         gradePct: (json['grade_pct'] as num?)?.toDouble() ?? kDefaultGradePct,
         sizeGrades: {
           for (final g in (json['model_size_grades'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
@@ -228,8 +250,8 @@ class StudioModel {
         ]..sort((a, b) => a.position != b.position ? a.position.compareTo(b.position) : a.id.compareTo(b.id)),
       );
 
-  static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, model_deadlines(stage, due_date), '
-      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position))';
+  static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, prototype_count, model_deadlines(stage, due_date), '
+      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position, proto_loss_pct))';
 
   final String id;
   final String collectionId;
@@ -258,6 +280,9 @@ class StudioModel {
 
   /// Écarts propres à une taille (écart total par rapport à la base, en %).
   final Map<String, double> sizeGrades;
+
+  /// Nombre de prototypes (taille de base, premier coloris).
+  final int prototypeCount;
   final List<Colorway> colorways;
 
   /// Taille de base effective.
@@ -309,6 +334,7 @@ class StudioModel {
     String? baseSize,
     double? gradePct,
     Map<String, double>? sizeGrades,
+    int? prototypeCount,
     List<Colorway>? colorways,
   }) =>
       StudioModel(
@@ -325,6 +351,7 @@ class StudioModel {
         baseSize: baseSize ?? this.baseSize,
         gradePct: gradePct ?? this.gradePct,
         sizeGrades: sizeGrades ?? this.sizeGrades,
+        prototypeCount: prototypeCount ?? this.prototypeCount,
         colorways: colorways ?? this.colorways,
       );
 }
@@ -371,4 +398,15 @@ Map<String, Map<String, double>> requirementDetail(StudioModel model, String mat
     }
   }
   return detail;
+}
+
+/// Besoin de prototypage par matière (mètres) : nombre de prototypes × consommation de base
+/// × (1 + perte de prototypage), sur les lignes du premier coloris.
+Map<String, double> prototypeRequirements(StudioModel model) {
+  final totals = <String, double>{};
+  if (model.colorways.isEmpty) return totals;
+  for (final l in model.colorways.first.lines) {
+    totals[l.materialId] = (totals[l.materialId] ?? 0) + model.prototypeCount * l.consumption * (1 + l.protoLossPct / 100);
+  }
+  return totals;
 }

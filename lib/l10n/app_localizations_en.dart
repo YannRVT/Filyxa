@@ -2224,4 +2224,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String requirementFormulaGraded(String waste) {
     return 'Base size consumption × (1 + size grading) × quantity × (1 + $waste % waste)';
   }
+
+  @override
+  String get prototypingTitle => 'Prototyping';
+
+  @override
+  String get prototypingHelp =>
+      'Metres used by prototypes (glue tests, fabric tests, sublimation with side margins), based on the base size of the first colourway.';
+
+  @override
+  String get prototypeCountLabel => 'Number of prototypes';
+
+  @override
+  String get protoLossLabel => 'Proto loss (%)';
+
+  @override
+  String requirementSplit(String production, String prototype) {
+    return 'Production $production · Prototyping $prototype';
+  }
 }

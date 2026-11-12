@@ -595,5 +595,10 @@
   "sizeGradeHelp": "Por exemplo 10 para +10 %, -5 para −5 %.",
   "sizeGradeReset": "Voltar à diferença do modelo",
   "requirementBySize": "Detalhe por tamanho e cor",
-  "requirementFormulaGraded": "Consumo do tamanho base × (1 + diferença do tamanho) × quantidade × (1 + {waste} % de perda)"
+  "requirementFormulaGraded": "Consumo do tamanho base × (1 + diferença do tamanho) × quantidade × (1 + {waste} % de perda)",
+  "prototypingTitle": "Prototipagem",
+  "prototypingHelp": "Metros consumidos pelos protótipos (testes de cola, testes de material, sublimação com margem nos lados), calculados no tamanho base da primeira cor.",
+  "prototypeCountLabel": "Número de protótipos",
+  "protoLossLabel": "Perda proto (%)",
+  "requirementSplit": "Produção {production} · Prototipagem {prototype}"
 }

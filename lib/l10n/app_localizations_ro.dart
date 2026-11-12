@@ -2234,4 +2234,22 @@ class AppLocalizationsRo extends AppLocalizations {
   String requirementFormulaGraded(String waste) {
     return 'Consumul mărimii de bază × (1 + diferența mărimii) × cantitate × (1 + $waste % pierderi)';
   }
+
+  @override
+  String get prototypingTitle => 'Prototipare';
+
+  @override
+  String get prototypingHelp =>
+      'Metri consumați de prototipuri (teste de lipire, teste de material, sublimare cu margine pe laterale), calculați pe mărimea de bază a primei culori.';
+
+  @override
+  String get prototypeCountLabel => 'Număr de prototipuri';
+
+  @override
+  String get protoLossLabel => 'Pierdere proto (%)';
+
+  @override
+  String requirementSplit(String production, String prototype) {
+    return 'Producție $production · Prototipare $prototype';
+  }
 }

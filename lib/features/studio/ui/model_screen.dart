@@ -19,6 +19,7 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import 'alert_widgets.dart';
 import 'planning_widgets.dart';
+import 'prototype_widgets.dart';
 import 'size_widgets.dart';
 import 'studio_widgets.dart';
 
@@ -220,6 +221,17 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     _schedule('grade-$size', () => _repo.setSizeGrade(widget.modelId, size, pct));
   }
 
+  void _setPrototypeCount(int count) {
+    setState(() => _model = _model!.copyWith(prototypeCount: count));
+    _schedule('proto-count', () => _repo.updateModel(widget.modelId, prototypeCount: count));
+  }
+
+  void _setProtoLoss(BomLine line, double pct) {
+    final first = _model!.colorways.first;
+    _replaceColorway(first.id, (c) => c.copyWith(lines: [for (final l in c.lines) l.id == line.id ? l.copyWith(protoLossPct: pct) : l]));
+    _schedule('proto-loss-${line.id}', () => _repo.updateLine(line.id, protoLossPct: pct));
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -324,6 +336,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   const SizedBox(height: FxSpace.md),
                   _colorwayPanel(m, colorway, materials, canEdit),
                   if (m.materialIds.isNotEmpty) ...[
+                    const SizedBox(height: FxSpace.md),
+                    PrototypingCard(model: m, materials: materials, onCount: _setPrototypeCount, onLoss: _setProtoLoss),
                     const SizedBox(height: FxSpace.lg),
                     _requirements(m, materials),
                   ],
@@ -559,6 +573,14 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     final lang = langOf(context);
     final text = Theme.of(context).textTheme;
     final totals = requirementsByMaterial(m);
+    // Offre Pro : le besoin de prototypage s'affiche à part, puis le total.
+    final proto = (ref.watch(hasProProvider).value ?? false) ? prototypeRequirements(m) : const <String, double>{};
+    String meters(double v) => l10n.stockMeters(formatNumber(v, lang, decimals: 2));
+    Widget? split(String id) => proto.isEmpty
+        ? null
+        : Text(l10n.requirementSplit(meters(totals[id] ?? 0), meters(proto[id] ?? 0)),
+            style: text.bodySmall?.copyWith(color: FxColors.inkSoft));
+    double total(String id) => (totals[id] ?? 0) + (proto[id] ?? 0);
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(FxSpace.md),
@@ -578,8 +600,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   key: ValueKey('need-${e.key}'),
                   tilePadding: EdgeInsets.zero,
                   title: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium),
-                  subtitle: Text(l10n.requirementBySize, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
-                  trailing: TechText(l10n.stockMeters(formatNumber(e.value, lang, decimals: 2)), size: 14),
+                  subtitle: split(e.key) ?? Text(l10n.requirementBySize, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
+                  trailing: TechText(meters(total(e.key)), size: 14),
                   children: [
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -592,8 +614,16 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Row(
                     children: [
-                      Expanded(child: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium)),
-                      TechText(l10n.stockMeters(formatNumber(e.value, lang, decimals: 2)), size: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium),
+                            ?split(e.key),
+                          ],
+                        ),
+                      ),
+                      TechText(meters(total(e.key)), size: 14),
                     ],
                   ),
                 ),

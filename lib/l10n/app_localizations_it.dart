@@ -2233,4 +2233,22 @@ class AppLocalizationsIt extends AppLocalizations {
   String requirementFormulaGraded(String waste) {
     return 'Consumo della taglia base × (1 + scarto della taglia) × quantità × (1 + $waste % di sfrido)';
   }
+
+  @override
+  String get prototypingTitle => 'Prototipazione';
+
+  @override
+  String get prototypingHelp =>
+      'Metri consumati dai prototipi (prove di colla, prove materiale, sublimazione con margine sui lati), calcolati sulla taglia base della prima variante.';
+
+  @override
+  String get prototypeCountLabel => 'Numero di prototipi';
+
+  @override
+  String get protoLossLabel => 'Perdita proto (%)';
+
+  @override
+  String requirementSplit(String production, String prototype) {
+    return 'Produzione $production · Prototipazione $prototype';
+  }
 }
