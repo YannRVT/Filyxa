@@ -384,7 +384,7 @@ Elles s'ajoutent aux décisions de la V1, qui restent valables :
   - `stock_reservations` : (`material_id`, `model_id`, `meters`, `created_at`). Stock disponible = stock atelier − somme des réservations.
   - `model_costs` : (`model_id`, `kind` : `supply` | `labor` | `overhead`, `label`, `unit_price`, `quantity`, `per` : `piece` | `model`).
   - `organizations` reçoit `min_coefficient` (2,5 par défaut).
-- **Calcul** : le besoin et le coût sont calculés dans l'app, instantanément et de façon déterministe, par une seule fonction de domaine couverte par des tests unitaires. Le serveur recalcule le besoin seulement pour réserver et déduire le stock.
+- **Calcul** : le besoin et le coût sont calculés dans l'app, instantanément et de façon déterministe, par une seule fonction de domaine couverte par des tests unitaires. Pour réserver et déduire le stock, le serveur enregistre les mètres affichés et confirmés par l'Éditeur, après avoir vérifié le rôle, l'offre et l'appartenance des matières.
 - **Confidentialité des prix** : le prix des matières et tous les coûts sont lisibles par les Admins et les Éditeurs uniquement. Le prix des matières passe dans une table à part, protégée par les règles d'accès. Le Lecteur ne le voit plus dans TissuTech : c'est un changement de comportement par rapport à la V1. Les PDF et les liens partagés n'incluent jamais les coûts.
 - **Temps réel** : la cloche s'abonne aux nouvelles notifications de l'utilisateur au lieu de se relire toutes les 5 minutes.
 
@@ -508,12 +508,12 @@ Au passage « En production », Filyxa montre le besoin à réserver, matière p
 
 ### Critères d'acceptation
 
-- [ ] La confirmation du passage « En production » crée une réservation par matière, égale au besoin total (production et prototypage). Le stock disponible baisse d'autant (critère de succès V2 n° 3, test).
-- [ ] Avant de confirmer, un manque s'affiche en rouge avec le nombre de mètres manquants. On peut lancer quand même.
-- [ ] La fiche matière affiche le stock atelier, le stock réservé et le stock disponible, avec la liste des modèles qui réservent.
-- [ ] Au passage « Livré », la déduction proposée est égale à la réservation, modifiable par matière. Après confirmation, le stock atelier baisse et la réservation disparaît (test).
-- [ ] Abandonner un modèle, ou le ramener avant « En production », libère la réservation (test).
-- [ ] Réservations et déductions sont refusées côté serveur hors offre Pro et pour le Lecteur.
+- [x] La confirmation du passage « En production » crée une réservation par matière, égale au besoin total (production et prototypage). Le stock disponible baisse d'autant (critère de succès V2 n° 3, test).
+- [x] Avant de confirmer, un manque s'affiche en rouge avec le nombre de mètres manquants. On peut lancer quand même.
+- [x] La fiche matière affiche le stock atelier, le stock réservé et le stock disponible, avec la liste des modèles qui réservent.
+- [x] Au passage « Livré », la déduction proposée est égale à la réservation, modifiable par matière. Après confirmation, le stock atelier baisse et la réservation disparaît (test).
+- [x] Abandonner un modèle, ou le ramener avant « En production », libère la réservation (test).
+- [x] Réservations et déductions sont refusées côté serveur hors offre Pro et pour le Lecteur.
 
 ## Bloquée par
 

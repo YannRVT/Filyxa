@@ -2252,4 +2252,62 @@ class AppLocalizationsRo extends AppLocalizations {
   String requirementSplit(String production, String prototype) {
     return 'Producție $production · Prototipare $prototype';
   }
+
+  @override
+  String get productionReserveTitle => 'Lansează în producție';
+
+  @override
+  String get productionReserveBody =>
+      'Necesarul fiecărui material (producție și prototipare) va fi rezervat din stocul atelierului.';
+
+  @override
+  String get productionDeliverTitle => 'Livrează modelul';
+
+  @override
+  String get productionDeliverBody =>
+      'Metrii consumați vor fi scăzuți din stocul atelierului. Ajustează-i dacă consumul real a fost diferit.';
+
+  @override
+  String productionAvailable(String meters) {
+    return 'Disponibil: $meters';
+  }
+
+  @override
+  String productionStock(String meters) {
+    return 'Stoc atelier: $meters';
+  }
+
+  @override
+  String productionShortage(String meters) {
+    return 'Lipsă: $meters';
+  }
+
+  @override
+  String get productionShortageNote =>
+      'Stocul disponibil nu acoperă tot necesarul. Poți comanda diferența sau lansa oricum.';
+
+  @override
+  String get productionLaunch => 'Rezervă și lansează';
+
+  @override
+  String get productionLaunchAnyway => 'Lansează oricum';
+
+  @override
+  String get productionDeliver => 'Scade și livrează';
+
+  @override
+  String get productionUsed => 'Consumat';
+
+  @override
+  String get productionNoMaterial => 'Niciun material în acest model.';
+
+  @override
+  String stockReserved(String meters) {
+    return 'Rezervat: $meters';
+  }
+
+  @override
+  String stockAvailable(String meters) {
+    return 'Disponibil: $meters';
+  }
 }

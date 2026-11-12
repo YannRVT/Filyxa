@@ -2251,4 +2251,62 @@ class AppLocalizationsIt extends AppLocalizations {
   String requirementSplit(String production, String prototype) {
     return 'Produzione $production · Prototipazione $prototype';
   }
+
+  @override
+  String get productionReserveTitle => 'Avvia la produzione';
+
+  @override
+  String get productionReserveBody =>
+      'Il fabbisogno di ogni materiale (produzione e prototipazione) sarà riservato sullo stock del laboratorio.';
+
+  @override
+  String get productionDeliverTitle => 'Consegna il modello';
+
+  @override
+  String get productionDeliverBody =>
+      'I metri consumati saranno detratti dallo stock del laboratorio. Correggili se il consumo reale è stato diverso.';
+
+  @override
+  String productionAvailable(String meters) {
+    return 'Disponibile: $meters';
+  }
+
+  @override
+  String productionStock(String meters) {
+    return 'Stock laboratorio: $meters';
+  }
+
+  @override
+  String productionShortage(String meters) {
+    return 'Mancano: $meters';
+  }
+
+  @override
+  String get productionShortageNote =>
+      'Lo stock disponibile non copre tutto il fabbisogno. Puoi ordinare il resto o avviare comunque.';
+
+  @override
+  String get productionLaunch => 'Riserva e avvia';
+
+  @override
+  String get productionLaunchAnyway => 'Avvia comunque';
+
+  @override
+  String get productionDeliver => 'Detrai e consegna';
+
+  @override
+  String get productionUsed => 'Consumato';
+
+  @override
+  String get productionNoMaterial => 'Nessun materiale in questo modello.';
+
+  @override
+  String stockReserved(String meters) {
+    return 'Riservato: $meters';
+  }
+
+  @override
+  String stockAvailable(String meters) {
+    return 'Disponibile: $meters';
+  }
 }

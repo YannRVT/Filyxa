@@ -19,6 +19,7 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import 'alert_widgets.dart';
 import 'planning_widgets.dart';
+import 'production_widgets.dart';
 import 'prototype_widgets.dart';
 import 'size_widgets.dart';
 import 'studio_widgets.dart';
@@ -181,6 +182,43 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
   }
 
   Future<void> _setStatus(ModelStatus status) async {
+    final m = _model!;
+    // Lancement en production : réservation confirmée ; livraison : déduction confirmée.
+    final step = status == ModelStatus.inProduction && m.status != ModelStatus.inProduction
+        ? ProductionStep.reserve
+        : status == ModelStatus.delivered && m.status == ModelStatus.inProduction
+            ? ProductionStep.deliver
+            : null;
+    if (step != null) {
+      await _flush();
+      final materials = {for (final x in ref.read(materialsProvider).value ?? const <MaterialItem>[]) x.id: x};
+      final List<StockReservation> reservations;
+      try {
+        reservations = await _repo.reservations(materialIds: m.materialIds);
+      } on AuthError catch (e) {
+        if (mounted) setState(() => _error = context.l10n.failure(e.failure));
+        return;
+      }
+      if (!mounted) return;
+      final need = step == ProductionStep.reserve
+          ? productionNeed(m)
+          : {for (final r in reservations.where((r) => r.modelId == m.id)) r.materialId: r.meters};
+      final confirmed = await showProductionDialog(
+        context,
+        step: step,
+        model: m,
+        meters: need,
+        materials: materials,
+        reservations: reservations,
+      );
+      if (confirmed == null) return;
+      await _structural(() => step == ProductionStep.reserve
+          ? _repo.startProduction(m.id, confirmed)
+          : _repo.deliverModel(m.id, confirmed));
+      ref.invalidate(materialsProvider);
+      ref.invalidate(hasProProvider);
+      return;
+    }
     await _structural(() => _repo.setStatus(widget.modelId, status));
     // Un refus « offre Pro » vient peut-être d'un changement d'offre : relecture du verrou.
     ref.invalidate(hasProProvider);

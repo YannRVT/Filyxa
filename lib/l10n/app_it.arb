@@ -600,5 +600,20 @@
   "prototypingHelp": "Metri consumati dai prototipi (prove di colla, prove materiale, sublimazione con margine sui lati), calcolati sulla taglia base della prima variante.",
   "prototypeCountLabel": "Numero di prototipi",
   "protoLossLabel": "Perdita proto (%)",
-  "requirementSplit": "Produzione {production} · Prototipazione {prototype}"
+  "requirementSplit": "Produzione {production} · Prototipazione {prototype}",
+  "productionReserveTitle": "Avvia la produzione",
+  "productionReserveBody": "Il fabbisogno di ogni materiale (produzione e prototipazione) sarà riservato sullo stock del laboratorio.",
+  "productionDeliverTitle": "Consegna il modello",
+  "productionDeliverBody": "I metri consumati saranno detratti dallo stock del laboratorio. Correggili se il consumo reale è stato diverso.",
+  "productionAvailable": "Disponibile: {meters}",
+  "productionStock": "Stock laboratorio: {meters}",
+  "productionShortage": "Mancano: {meters}",
+  "productionShortageNote": "Lo stock disponibile non copre tutto il fabbisogno. Puoi ordinare il resto o avviare comunque.",
+  "productionLaunch": "Riserva e avvia",
+  "productionLaunchAnyway": "Avvia comunque",
+  "productionDeliver": "Detrai e consegna",
+  "productionUsed": "Consumato",
+  "productionNoMaterial": "Nessun materiale in questo modello.",
+  "stockReserved": "Riservato: {meters}",
+  "stockAvailable": "Disponibile: {meters}"
 }

@@ -3737,6 +3737,96 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Production {production} · Prototypage {prototype}'**
   String requirementSplit(String production, String prototype);
+
+  /// No description provided for @productionReserveTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lancer en production'**
+  String get productionReserveTitle;
+
+  /// No description provided for @productionReserveBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le besoin de chaque matière (production et prototypage) sera réservé sur le stock atelier.'**
+  String get productionReserveBody;
+
+  /// No description provided for @productionDeliverTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livrer le modèle'**
+  String get productionDeliverTitle;
+
+  /// No description provided for @productionDeliverBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les mètres consommés seront déduits du stock atelier. Ajustez-les si la consommation réelle a différé.'**
+  String get productionDeliverBody;
+
+  /// No description provided for @productionAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible : {meters}'**
+  String productionAvailable(String meters);
+
+  /// No description provided for @productionStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock atelier : {meters}'**
+  String productionStock(String meters);
+
+  /// No description provided for @productionShortage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Manque : {meters}'**
+  String productionShortage(String meters);
+
+  /// No description provided for @productionShortageNote.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le stock disponible ne couvre pas tout le besoin. Vous pouvez commander le complément ou lancer quand même.'**
+  String get productionShortageNote;
+
+  /// No description provided for @productionLaunch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réserver et lancer'**
+  String get productionLaunch;
+
+  /// No description provided for @productionLaunchAnyway.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lancer quand même'**
+  String get productionLaunchAnyway;
+
+  /// No description provided for @productionDeliver.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déduire et livrer'**
+  String get productionDeliver;
+
+  /// No description provided for @productionUsed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommé'**
+  String get productionUsed;
+
+  /// No description provided for @productionNoMaterial.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune matière dans ce modèle.'**
+  String get productionNoMaterial;
+
+  /// No description provided for @stockReserved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réservé : {meters}'**
+  String stockReserved(String meters);
+
+  /// No description provided for @stockAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible : {meters}'**
+  String stockAvailable(String meters);
 }
 
 class _AppLocalizationsDelegate

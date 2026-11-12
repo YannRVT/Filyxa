@@ -8,6 +8,8 @@ import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
 import '../data/materials_repository.dart';
+import '../../studio/data/studio_repository.dart' show materialReservationsProvider;
+import '../../studio/ui/production_widgets.dart' show ReservationSummary;
 import '../domain/catalog.dart';
 import '../domain/material.dart';
 import '../../export/export_screen.dart';
@@ -380,6 +382,10 @@ class _StockCard extends ConsumerWidget {
                   Text(
                     stock == null ? l10n.noneOption : l10n.stockMeters(formatNumber(stock, lang, decimals: 2)),
                     style: text.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
+                  ),
+                  ReservationSummary(
+                    atelierStock: stock,
+                    reservations: ref.watch(materialReservationsProvider(material.id)).value ?? const [],
                   ),
                   if (canEdit)
                     TextButton(

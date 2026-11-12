@@ -153,6 +153,28 @@ class StudioRepository {
       .from('colorway_size_quantities')
       .upsert({'colorway_id': colorwayId, 'size': size, 'quantity': quantity}, onConflict: 'colorway_id,size'));
 
+  // Réservations ---------------------------------------------------------------------------------
+
+  List<Map<String, dynamic>> _lines(Map<String, double> meters) => [
+        for (final e in meters.entries) {'material_id': e.key, 'meters': double.parse(e.value.toStringAsFixed(3))},
+      ];
+
+  /// Réserve les mètres confirmés et passe le modèle « En production ».
+  Future<void> startProduction(String modelId, Map<String, double> meters) =>
+      _guard(() => _client.rpc<void>('start_production', params: {'p_model': modelId, 'p_lines': _lines(meters)}));
+
+  /// Déduit les mètres consommés du stock atelier et passe le modèle « Livré ».
+  Future<void> deliverModel(String modelId, Map<String, double> meters) =>
+      _guard(() => _client.rpc<void>('deliver_model', params: {'p_model': modelId, 'p_lines': _lines(meters)}));
+
+  Future<List<StockReservation>> reservations({String? modelId, Iterable<String>? materialIds}) => _guard(() async {
+        var query = _client.from('stock_reservations').select(StockReservation.selectColumns);
+        if (modelId != null) query = query.eq('model_id', modelId);
+        if (materialIds != null) query = query.inFilter('material_id', materialIds.toList());
+        final rows = await query;
+        return rows.map(StockReservation.fromJson).toList();
+      });
+
   /// Vrai si l'organisation a accès aux fonctionnalités Pro (relu à chaque ouverture d'écran).
   Future<bool> hasPro(String orgId) => _guard(() async {
         final result = await _client.rpc<bool>('has_pro', params: {'p_org': orgId});
@@ -249,6 +271,11 @@ final customRolesProvider = FutureProvider<List<String>>((ref) async {
   if (orgId == null) return const [];
   return ref.watch(studioRepositoryProvider).customRoles(orgId);
 });
+
+/// Réservations qui pèsent sur une matière (fiche matière).
+final materialReservationsProvider = FutureProvider.autoDispose.family<List<StockReservation>, String>(
+  (ref, materialId) => ref.watch(studioRepositoryProvider).reservations(materialIds: [materialId]),
+);
 
 final sizeChartsProvider = FutureProvider<List<SizeChart>>((ref) {
   ref.watch(userSpaceProvider);

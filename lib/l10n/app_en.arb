@@ -600,5 +600,20 @@
   "prototypingHelp": "Metres used by prototypes (glue tests, fabric tests, sublimation with side margins), based on the base size of the first colourway.",
   "prototypeCountLabel": "Number of prototypes",
   "protoLossLabel": "Proto loss (%)",
-  "requirementSplit": "Production {production} · Prototyping {prototype}"
+  "requirementSplit": "Production {production} · Prototyping {prototype}",
+  "productionReserveTitle": "Start production",
+  "productionReserveBody": "The requirement for each material (production and prototyping) will be reserved from workshop stock.",
+  "productionDeliverTitle": "Deliver the style",
+  "productionDeliverBody": "The metres used will be deducted from workshop stock. Adjust them if actual consumption differed.",
+  "productionAvailable": "Available: {meters}",
+  "productionStock": "Workshop stock: {meters}",
+  "productionShortage": "Short by: {meters}",
+  "productionShortageNote": "Available stock does not cover the whole requirement. You can order the rest or start anyway.",
+  "productionLaunch": "Reserve and start",
+  "productionLaunchAnyway": "Start anyway",
+  "productionDeliver": "Deduct and deliver",
+  "productionUsed": "Used",
+  "productionNoMaterial": "No material in this style.",
+  "stockReserved": "Reserved: {meters}",
+  "stockAvailable": "Available: {meters}"
 }

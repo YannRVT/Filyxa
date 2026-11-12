@@ -600,5 +600,20 @@
   "prototypingHelp": "Metri consumați de prototipuri (teste de lipire, teste de material, sublimare cu margine pe laterale), calculați pe mărimea de bază a primei culori.",
   "prototypeCountLabel": "Număr de prototipuri",
   "protoLossLabel": "Pierdere proto (%)",
-  "requirementSplit": "Producție {production} · Prototipare {prototype}"
+  "requirementSplit": "Producție {production} · Prototipare {prototype}",
+  "productionReserveTitle": "Lansează în producție",
+  "productionReserveBody": "Necesarul fiecărui material (producție și prototipare) va fi rezervat din stocul atelierului.",
+  "productionDeliverTitle": "Livrează modelul",
+  "productionDeliverBody": "Metrii consumați vor fi scăzuți din stocul atelierului. Ajustează-i dacă consumul real a fost diferit.",
+  "productionAvailable": "Disponibil: {meters}",
+  "productionStock": "Stoc atelier: {meters}",
+  "productionShortage": "Lipsă: {meters}",
+  "productionShortageNote": "Stocul disponibil nu acoperă tot necesarul. Poți comanda diferența sau lansa oricum.",
+  "productionLaunch": "Rezervă și lansează",
+  "productionLaunchAnyway": "Lansează oricum",
+  "productionDeliver": "Scade și livrează",
+  "productionUsed": "Consumat",
+  "productionNoMaterial": "Niciun material în acest model.",
+  "stockReserved": "Rezervat: {meters}",
+  "stockAvailable": "Disponibil: {meters}"
 }

@@ -1575,5 +1575,55 @@
         "type": "String"
       }
     }
+  },
+  "productionReserveTitle": "Lancer en production",
+  "productionReserveBody": "Le besoin de chaque matière (production et prototypage) sera réservé sur le stock atelier.",
+  "productionDeliverTitle": "Livrer le modèle",
+  "productionDeliverBody": "Les mètres consommés seront déduits du stock atelier. Ajustez-les si la consommation réelle a différé.",
+  "productionAvailable": "Disponible : {meters}",
+  "@productionAvailable": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "productionStock": "Stock atelier : {meters}",
+  "@productionStock": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "productionShortage": "Manque : {meters}",
+  "@productionShortage": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "productionShortageNote": "Le stock disponible ne couvre pas tout le besoin. Vous pouvez commander le complément ou lancer quand même.",
+  "productionLaunch": "Réserver et lancer",
+  "productionLaunchAnyway": "Lancer quand même",
+  "productionDeliver": "Déduire et livrer",
+  "productionUsed": "Consommé",
+  "productionNoMaterial": "Aucune matière dans ce modèle.",
+  "stockReserved": "Réservé : {meters}",
+  "@stockReserved": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "stockAvailable": "Disponible : {meters}",
+  "@stockAvailable": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
   }
 }

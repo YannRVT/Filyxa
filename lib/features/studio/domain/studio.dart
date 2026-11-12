@@ -410,3 +410,36 @@ Map<String, double> prototypeRequirements(StudioModel model) {
   }
   return totals;
 }
+
+/// Mètres réservés sur une matière par un modèle en production.
+class StockReservation {
+  const StockReservation({required this.modelId, required this.materialId, required this.meters, this.modelName = ''});
+
+  factory StockReservation.fromJson(Map<String, dynamic> json) => StockReservation(
+        modelId: json['model_id'] as String,
+        materialId: json['material_id'] as String,
+        meters: (json['meters'] as num).toDouble(),
+        modelName: ((json['models'] as Map<String, dynamic>?)?['name'] as String?) ?? '',
+      );
+
+  static const selectColumns = 'model_id, material_id, meters, models(name)';
+
+  final String modelId;
+  final String materialId;
+  final double meters;
+  final String modelName;
+}
+
+/// Besoin total à réserver au lancement en production : production + prototypage.
+Map<String, double> productionNeed(StudioModel model) {
+  final need = {...requirementsByMaterial(model)};
+  for (final MapEntry(key: id, value: m) in prototypeRequirements(model).entries) {
+    need[id] = (need[id] ?? 0) + m;
+  }
+  return need;
+}
+
+/// Stock disponible = stock atelier − réservations des autres modèles (négatif : manque).
+double availableStock(double? atelierStock, Iterable<StockReservation> reservations, {String? exceptModel}) =>
+    (atelierStock ?? 0) -
+    reservations.where((r) => r.modelId != exceptModel).fold<double>(0, (sum, r) => sum + r.meters);
