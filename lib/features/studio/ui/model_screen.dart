@@ -177,6 +177,12 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     );
   }
 
+  Future<void> _setStatus(ModelStatus status) async {
+    await _structural(() => _repo.setStatus(widget.modelId, status));
+    // Un refus « offre Pro » vient peut-être d'un changement d'offre : relecture du verrou.
+    ref.invalidate(hasProProvider);
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -295,6 +301,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           runSpacing: FxSpace.md,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
+            ModelStatusControl(status: m.status, onChanged: _setStatus),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [

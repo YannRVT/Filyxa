@@ -85,6 +85,16 @@ class StudioRepository {
         }).eq('id', id),
       );
 
+  /// Changement de statut (offre Pro, contrôlé par le serveur).
+  Future<void> setStatus(String id, ModelStatus status) =>
+      _guard(() => _client.from('models').update({'status': status.code}).eq('id', id));
+
+  /// Vrai si l'organisation a accès aux fonctionnalités Pro (relu à chaque ouverture d'écran).
+  Future<bool> hasPro(String orgId) => _guard(() async {
+        final result = await _client.rpc<bool>('has_pro', params: {'p_org': orgId});
+        return result;
+      });
+
   Future<void> deleteModel(String id) => _guard(() => _client.from('models').delete().eq('id', id));
 
   // Coloris -------------------------------------------------------------------------------------
@@ -173,6 +183,14 @@ final customRolesProvider = FutureProvider<List<String>>((ref) async {
   final orgId = _orgId(ref);
   if (orgId == null) return const [];
   return ref.watch(studioRepositoryProvider).customRoles(orgId);
+});
+
+/// Accès aux fonctionnalités Pro : relu à chaque ouverture d'écran, pour qu'un
+/// changement d'offre fait par le super-admin s'applique sans reconnexion.
+final hasProProvider = FutureProvider.autoDispose<bool>((ref) async {
+  final orgId = _orgId(ref);
+  if (orgId == null) return false;
+  return ref.watch(studioRepositoryProvider).hasPro(orgId);
 });
 
 /// Mêmes droits que TissuTech : les Éditeurs modifient, les Lecteurs consultent.

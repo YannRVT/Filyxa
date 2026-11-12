@@ -540,5 +540,15 @@
   "adminPricingInput": "Entrada",
   "adminPricingOutput": "Salida",
   "adminPreviousMonth": "Mes anterior",
-  "adminNextMonth": "Mes siguiente"
+  "adminNextMonth": "Mes siguiente",
+  "proRequired": "Función reservada al plan Pro.",
+  "proLocked": "Disponible con el plan Pro",
+  "modelStatusLabel": "Estado",
+  "modelStatusIdea": "Idea",
+  "modelStatusPrototype": "Prototipo",
+  "modelStatusValidated": "Validado",
+  "modelStatusInProduction": "En producción",
+  "modelStatusDelivered": "Entregado",
+  "modelStatusAbandoned": "Abandonado",
+  "modelStatusFinal": "Un modelo entregado ya no cambia de estado."
 }

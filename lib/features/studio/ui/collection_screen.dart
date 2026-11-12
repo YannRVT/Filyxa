@@ -161,6 +161,8 @@ class _ModelCard extends ConsumerWidget {
     // Alertes qui demandent une action (critiques et avertissements).
     final alerts = watchModelAlerts(ref, m).where((e) => e.alert.level != AlertLevel.info).toList();
     final worst = alerts.isEmpty ? null : alerts.first.alert.level;
+    // Hors offre Pro, un modèle encore en Idée n'affiche pas de statut.
+    final showStatus = (ref.watch(hasProProvider).value ?? false) || m.status != ModelStatus.idea;
     final details = [
       l10n.productTypeLabel(m.productType),
       if ((m.reference ?? '').isNotEmpty) m.reference!,
@@ -186,7 +188,12 @@ class _ModelCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(m.name, style: text.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Row(
+                      children: [
+                        Flexible(child: Text(m.name, style: text.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                        if (showStatus) ...[const SizedBox(width: FxSpace.sm), ModelStatusChip(status: m.status)],
+                      ],
+                    ),
                     Text(details.join(' · '), style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
                   ],
                 ),

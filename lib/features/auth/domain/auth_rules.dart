@@ -38,6 +38,7 @@ enum AuthFailure {
   alreadyMember,
   lastAdmin,
   forbidden,
+  proRequired,
   emailNotSent,
   tooManyRequests,
   network,
@@ -52,6 +53,7 @@ AuthFailure classifyFailure({String? message, String? code, int? statusCode}) {
   if (text.contains('already_member')) return AuthFailure.alreadyMember;
   if (text.contains('last_admin')) return AuthFailure.lastAdmin;
   if (text.contains('email_not_sent')) return AuthFailure.emailNotSent;
+  if (text.contains('pro_required')) return AuthFailure.proRequired;
   if (text.contains('forbidden') || statusCode == 403) return AuthFailure.forbidden;
   if (statusCode == 429 || text.contains('rate limit') || text.contains('over_') ) {
     return AuthFailure.tooManyRequests;

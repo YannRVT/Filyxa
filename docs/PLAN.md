@@ -400,12 +400,12 @@ Un modèle passe par les statuts Idée, Prototype, Validé, En production, Livr�
 
 ### Critères d'acceptation
 
-- [ ] Le statut suit l'ordre Idée → Prototype → Validé → En production → Livré, et un modèle peut passer en Abandonné depuis n'importe quel statut. On peut revenir en arrière, sauf depuis Livré.
-- [ ] Un atelier Essentiel voit la mention « Disponible avec l'offre Pro » et ne peut pas changer de statut. Le serveur refuse le changement (test).
-- [ ] Dès que le super-admin passe l'atelier en Pro, le statut se modifie sans reconnexion.
-- [ ] Après un retour en Essentiel, le statut reste affiché mais n'est plus modifiable.
-- [ ] Un modèle en Idée, Livré ou Abandonné ne déclenche plus de notification de stock ni de fiche fournisseur (test).
-- [ ] Les modèles existants passent en Idée à la migration.
+- [x] Le statut suit l'ordre Idée → Prototype → Validé → En production → Livré, et un modèle peut passer en Abandonné depuis n'importe quel statut. On peut revenir en arrière, sauf depuis Livré.
+- [x] Un atelier Essentiel voit la mention « Disponible avec l'offre Pro » et ne peut pas changer de statut. Le serveur refuse le changement (test).
+- [x] Dès que le super-admin passe l'atelier en Pro, le statut se modifie sans reconnexion.
+- [x] Après un retour en Essentiel, le statut reste affiché mais n'est plus modifiable.
+- [x] Un modèle en Idée, Livré ou Abandonné ne déclenche plus de notification de stock ni de fiche fournisseur (test).
+- [x] Les modèles existants passent en Prototype à la migration, pour continuer à recevoir les notifications comme en V1. Les nouveaux modèles partent d'Idée.
 
 ## Bloquée par
 

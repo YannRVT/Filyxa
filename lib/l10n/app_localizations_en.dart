@@ -2043,4 +2043,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminNextMonth => 'Next month';
+
+  @override
+  String get proRequired => 'This feature is part of the Pro plan.';
+
+  @override
+  String get proLocked => 'Available with the Pro plan';
+
+  @override
+  String get modelStatusLabel => 'Status';
+
+  @override
+  String get modelStatusIdea => 'Idea';
+
+  @override
+  String get modelStatusPrototype => 'Prototype';
+
+  @override
+  String get modelStatusValidated => 'Approved';
+
+  @override
+  String get modelStatusInProduction => 'In production';
+
+  @override
+  String get modelStatusDelivered => 'Delivered';
+
+  @override
+  String get modelStatusAbandoned => 'Abandoned';
+
+  @override
+  String get modelStatusFinal =>
+      'A delivered style can no longer change status.';
 }

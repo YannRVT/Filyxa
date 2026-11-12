@@ -540,5 +540,15 @@
   "adminPricingInput": "Input",
   "adminPricingOutput": "Output",
   "adminPreviousMonth": "Previous month",
-  "adminNextMonth": "Next month"
+  "adminNextMonth": "Next month",
+  "proRequired": "This feature is part of the Pro plan.",
+  "proLocked": "Available with the Pro plan",
+  "modelStatusLabel": "Status",
+  "modelStatusIdea": "Idea",
+  "modelStatusPrototype": "Prototype",
+  "modelStatusValidated": "Approved",
+  "modelStatusInProduction": "In production",
+  "modelStatusDelivered": "Delivered",
+  "modelStatusAbandoned": "Abandoned",
+  "modelStatusFinal": "A delivered style can no longer change status."
 }

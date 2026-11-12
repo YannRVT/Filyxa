@@ -102,6 +102,30 @@ class Colorway {
       );
 }
 
+/// Avancement d'un modèle (offre Pro). On revient en arrière, sauf depuis Livré.
+enum ModelStatus {
+  idea('idea'),
+  prototype('prototype'),
+  validated('validated'),
+  inProduction('in_production'),
+  delivered('delivered'),
+  abandoned('abandoned');
+
+  const ModelStatus(this.code);
+
+  final String code;
+
+  static ModelStatus parse(String? code) =>
+      ModelStatus.values.firstWhere((s) => s.code == code, orElse: () => ModelStatus.idea);
+
+  /// Prototype, Validé et En production déclenchent les alertes de stock et de fiche fournisseur.
+  bool get isActive => this == prototype || this == validated || this == inProduction;
+
+  /// Statuts vers lesquels on peut passer depuis celui-ci.
+  List<ModelStatus> get nextChoices =>
+      this == delivered ? const [] : [for (final s in ModelStatus.values) if (s != this) s];
+}
+
 class StudioModel {
   const StudioModel({
     required this.id,
@@ -110,6 +134,7 @@ class StudioModel {
     required this.productType,
     this.reference,
     this.wastePct = kDefaultWastePct,
+    this.status = ModelStatus.idea,
     this.colorways = const [],
   });
 
@@ -120,12 +145,13 @@ class StudioModel {
         reference: json['reference'] as String?,
         productType: ProductType.parse(json['product_type'] as String?),
         wastePct: (json['waste_pct'] as num?)?.toDouble() ?? kDefaultWastePct,
+        status: ModelStatus.parse(json['status'] as String?),
         colorways: [
           for (final c in (json['colorways'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>()) Colorway.fromJson(c),
         ]..sort((a, b) => a.position != b.position ? a.position.compareTo(b.position) : a.id.compareTo(b.id)),
       );
 
-  static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, '
+  static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, '
       'colorways(id, name, color_hex, quantity, position, model_materials(id, material_id, role, consumption, position))';
 
   final String id;
@@ -136,6 +162,7 @@ class StudioModel {
 
   /// Marge de perte en %.
   final double wastePct;
+  final ModelStatus status;
   final List<Colorway> colorways;
 
   /// Un seul coloris : pas de déclinaisons affichées.
@@ -144,13 +171,14 @@ class StudioModel {
   /// Matières distinctes utilisées, tous coloris confondus.
   Set<String> get materialIds => {for (final c in colorways) for (final l in c.lines) l.materialId};
 
-  StudioModel copyWith({double? wastePct, List<Colorway>? colorways}) => StudioModel(
+  StudioModel copyWith({double? wastePct, ModelStatus? status, List<Colorway>? colorways}) => StudioModel(
         id: id,
         collectionId: collectionId,
         name: name,
         reference: reference,
         productType: productType,
         wastePct: wastePct ?? this.wastePct,
+        status: status ?? this.status,
         colorways: colorways ?? this.colorways,
       );
 }

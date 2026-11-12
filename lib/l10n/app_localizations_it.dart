@@ -2052,4 +2052,34 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get adminNextMonth => 'Mese successivo';
+
+  @override
+  String get proRequired => 'Funzione riservata al piano Pro.';
+
+  @override
+  String get proLocked => 'Disponibile con il piano Pro';
+
+  @override
+  String get modelStatusLabel => 'Stato';
+
+  @override
+  String get modelStatusIdea => 'Idea';
+
+  @override
+  String get modelStatusPrototype => 'Prototipo';
+
+  @override
+  String get modelStatusValidated => 'Approvato';
+
+  @override
+  String get modelStatusInProduction => 'In produzione';
+
+  @override
+  String get modelStatusDelivered => 'Consegnato';
+
+  @override
+  String get modelStatusAbandoned => 'Abbandonato';
+
+  @override
+  String get modelStatusFinal => 'Un modello consegnato non cambia più stato.';
 }

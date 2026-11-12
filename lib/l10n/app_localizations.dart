@@ -3377,6 +3377,66 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Mois suivant'**
   String get adminNextMonth;
+
+  /// No description provided for @proRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fonctionnalité réservée à l\'offre Pro.'**
+  String get proRequired;
+
+  /// No description provided for @proLocked.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible avec l\'offre Pro'**
+  String get proLocked;
+
+  /// No description provided for @modelStatusLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Statut'**
+  String get modelStatusLabel;
+
+  /// No description provided for @modelStatusIdea.
+  ///
+  /// In fr, this message translates to:
+  /// **'Idée'**
+  String get modelStatusIdea;
+
+  /// No description provided for @modelStatusPrototype.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prototype'**
+  String get modelStatusPrototype;
+
+  /// No description provided for @modelStatusValidated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Validé'**
+  String get modelStatusValidated;
+
+  /// No description provided for @modelStatusInProduction.
+  ///
+  /// In fr, this message translates to:
+  /// **'En production'**
+  String get modelStatusInProduction;
+
+  /// No description provided for @modelStatusDelivered.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livré'**
+  String get modelStatusDelivered;
+
+  /// No description provided for @modelStatusAbandoned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Abandonné'**
+  String get modelStatusAbandoned;
+
+  /// No description provided for @modelStatusFinal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un modèle livré ne change plus de statut.'**
+  String get modelStatusFinal;
 }
 
 class _AppLocalizationsDelegate

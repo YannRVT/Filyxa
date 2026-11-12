@@ -27,6 +27,7 @@ extension AuthFieldErrorText on AppLocalizations {
         AuthFailure.alreadyMember => alreadyMember,
         AuthFailure.lastAdmin => errorLastAdmin,
         AuthFailure.forbidden => errorForbidden,
+        AuthFailure.proRequired => proRequired,
         AuthFailure.emailNotSent => errorEmailNotSent,
         AuthFailure.tooManyRequests => errorTooManyRequests,
         AuthFailure.network => errorNetwork,

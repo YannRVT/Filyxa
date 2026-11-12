@@ -12,6 +12,15 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 
 extension StudioTexts on AppLocalizations {
+  String modelStatusText(ModelStatus s) => switch (s) {
+        ModelStatus.idea => modelStatusIdea,
+        ModelStatus.prototype => modelStatusPrototype,
+        ModelStatus.validated => modelStatusValidated,
+        ModelStatus.inProduction => modelStatusInProduction,
+        ModelStatus.delivered => modelStatusDelivered,
+        ModelStatus.abandoned => modelStatusAbandoned,
+      };
+
   String productTypeLabel(ProductType t) => switch (t) {
         ProductType.garment => productGarment,
         ProductType.footwear => productFootwear,
@@ -422,6 +431,102 @@ class _AddMaterialDialogState extends ConsumerState<_AddMaterialDialog> {
           child: Text(l10n.add),
         ),
       ],
+    );
+  }
+}
+
+/// Couleur constante de chaque statut, dans toute l'app.
+Color modelStatusColor(ModelStatus s) => switch (s) {
+      ModelStatus.idea => FxColors.slate,
+      ModelStatus.prototype => FxColors.info,
+      ModelStatus.validated => FxColors.success,
+      ModelStatus.inProduction => FxColors.warning,
+      ModelStatus.delivered => FxColors.petrol,
+      ModelStatus.abandoned => FxColors.error,
+    };
+
+/// Pastille du statut d'un modèle.
+class ModelStatusChip extends StatelessWidget {
+  const ModelStatusChip({super.key, required this.status, this.locked = false});
+
+  final ModelStatus status;
+  final bool locked;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = locked ? FxColors.inkSoft : modelStatusColor(status);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: FxSpace.sm, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        border: Border.all(color: color.withValues(alpha: 0.4)),
+        borderRadius: BorderRadius.circular(FxRadius.sm),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(locked ? Icons.lock_outline : Icons.circle, size: locked ? 14 : 8, color: color),
+          const SizedBox(width: 6),
+          Text(context.l10n.modelStatusText(status), style: Theme.of(context).textTheme.labelMedium?.copyWith(color: color)),
+        ],
+      ),
+    );
+  }
+}
+
+/// Statut d'un modèle : modifiable par un Éditeur en offre Pro ; sinon verrouillé
+/// avec la mention « Disponible avec l'offre Pro ».
+class ModelStatusControl extends ConsumerWidget {
+  const ModelStatusControl({super.key, required this.status, required this.onChanged});
+
+  final ModelStatus status;
+  final ValueChanged<ModelStatus> onChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final pro = ref.watch(hasProProvider).value ?? false;
+    final canEdit = ref.watch(canEditStudioProvider);
+    final text = Theme.of(context).textTheme;
+    if (!pro) {
+      return Wrap(
+        spacing: FxSpace.sm,
+        runSpacing: FxSpace.xs,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          ModelStatusChip(status: status, locked: true),
+          Text(l10n.proLocked, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
+        ],
+      );
+    }
+    final choices = status.nextChoices;
+    if (!canEdit || choices.isEmpty) {
+      return Tooltip(
+        message: choices.isEmpty ? l10n.modelStatusFinal : '',
+        child: ModelStatusChip(status: status),
+      );
+    }
+    return PopupMenuButton<ModelStatus>(
+      tooltip: l10n.modelStatusLabel,
+      onSelected: onChanged,
+      itemBuilder: (_) => [
+        for (final s in choices)
+          PopupMenuItem(
+            value: s,
+            child: Row(children: [
+              Icon(Icons.circle, size: 10, color: modelStatusColor(s)),
+              const SizedBox(width: FxSpace.sm),
+              Text(l10n.modelStatusText(s)),
+            ]),
+          ),
+      ],
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ModelStatusChip(status: status),
+          const Icon(Icons.arrow_drop_down, color: FxColors.inkSoft),
+        ],
+      ),
     );
   }
 }

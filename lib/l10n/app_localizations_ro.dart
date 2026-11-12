@@ -2053,4 +2053,34 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get adminNextMonth => 'Luna următoare';
+
+  @override
+  String get proRequired => 'Funcție rezervată planului Pro.';
+
+  @override
+  String get proLocked => 'Disponibil cu planul Pro';
+
+  @override
+  String get modelStatusLabel => 'Stare';
+
+  @override
+  String get modelStatusIdea => 'Idee';
+
+  @override
+  String get modelStatusPrototype => 'Prototip';
+
+  @override
+  String get modelStatusValidated => 'Validat';
+
+  @override
+  String get modelStatusInProduction => 'În producție';
+
+  @override
+  String get modelStatusDelivered => 'Livrat';
+
+  @override
+  String get modelStatusAbandoned => 'Abandonat';
+
+  @override
+  String get modelStatusFinal => 'Un model livrat nu își mai schimbă starea.';
 }

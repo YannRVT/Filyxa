@@ -540,5 +540,15 @@
   "adminPricingInput": "Intrare",
   "adminPricingOutput": "Ieșire",
   "adminPreviousMonth": "Luna anterioară",
-  "adminNextMonth": "Luna următoare"
+  "adminNextMonth": "Luna următoare",
+  "proRequired": "Funcție rezervată planului Pro.",
+  "proLocked": "Disponibil cu planul Pro",
+  "modelStatusLabel": "Stare",
+  "modelStatusIdea": "Idee",
+  "modelStatusPrototype": "Prototip",
+  "modelStatusValidated": "Validat",
+  "modelStatusInProduction": "În producție",
+  "modelStatusDelivered": "Livrat",
+  "modelStatusAbandoned": "Abandonat",
+  "modelStatusFinal": "Un model livrat nu își mai schimbă starea."
 }
