@@ -151,10 +151,10 @@ class Colorway {
   /// Quantités par taille (modèle avec grille).
   final Map<String, int> sizeQuantities;
 
-  Colorway copyWith({int? quantity, List<BomLine>? lines, Map<String, int>? sizeQuantities}) => Colorway(
+  Colorway copyWith({int? quantity, List<BomLine>? lines, Map<String, int>? sizeQuantities, String? colorHex}) => Colorway(
         id: id,
         name: name,
-        colorHex: colorHex,
+        colorHex: colorHex ?? this.colorHex,
         quantity: quantity ?? this.quantity,
         sizeQuantities: sizeQuantities ?? this.sizeQuantities,
         position: position,

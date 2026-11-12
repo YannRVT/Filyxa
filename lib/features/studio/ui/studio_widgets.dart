@@ -530,3 +530,143 @@ class ModelStatusControl extends ConsumerWidget {
     );
   }
 }
+
+/// Palette proposée pour les coloris (couleurs de mode courantes).
+const kColorwayPalette = [
+  '#1B1B1B', '#4A4A4A', '#9E9E9E', '#F5F2EA', '#FFFFFF', '#2F4A6B',
+  '#1F3A5F', '#5B7DB1', '#A7C4E2', '#0F5257', '#3E7C59', '#7A8B4F',
+  '#C2B280', '#D8C3A5', '#8B5A2B', '#5C3A21', '#7B2D26', '#B23A48',
+  '#E07A5F', '#F2CC8F', '#E9C46A', '#6D597A', '#B56576', '#EAAC8B',
+];
+
+/// Choix de la couleur d'un coloris : palette ou saisie libre « #RRGGBB ».
+Future<String?> showColorPicker(BuildContext context, {String? initial}) =>
+    showDialog<String>(context: context, builder: (_) => _ColorPickerDialog(initial: initial));
+
+class _ColorPickerDialog extends StatefulWidget {
+  const _ColorPickerDialog({this.initial});
+
+  final String? initial;
+
+  @override
+  State<_ColorPickerDialog> createState() => _ColorPickerDialogState();
+}
+
+class _ColorPickerDialogState extends State<_ColorPickerDialog> {
+  late final _hex = TextEditingController(text: widget.initial ?? '#');
+  late String? _selected = widget.initial;
+
+  @override
+  void dispose() {
+    _hex.dispose();
+    super.dispose();
+  }
+
+  String? _normalize(String v) {
+    final t = v.trim().toUpperCase();
+    final hex = t.startsWith('#') ? t : '#$t';
+    return RegExp(r'^#[0-9A-F]{6}$').hasMatch(hex) ? hex : null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final valid = _selected != null;
+    return AlertDialog(
+      title: Text(l10n.colorwayColorTitle),
+      content: SizedBox(
+        width: 360,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Wrap(
+              spacing: FxSpace.sm,
+              runSpacing: FxSpace.sm,
+              children: [
+                for (final hex in kColorwayPalette)
+                  InkWell(
+                    key: ValueKey('swatch-$hex'),
+                    customBorder: const CircleBorder(),
+                    onTap: () => setState(() {
+                      _selected = hex;
+                      _hex.text = hex;
+                    }),
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: colorFromHex(hex),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: _selected == hex ? FxColors.emeraldInk : FxColors.lineStrong, width: _selected == hex ? 3 : 1),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: FxSpace.md),
+            Row(
+              children: [
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: colorFromHex(_selected) ?? FxColors.cloud,
+                    borderRadius: BorderRadius.circular(FxRadius.sm),
+                    border: Border.all(color: FxColors.lineStrong),
+                  ),
+                ),
+                const SizedBox(width: FxSpace.md),
+                Expanded(
+                  child: TextField(
+                    key: const ValueKey('color-hex'),
+                    controller: _hex,
+                    maxLength: 7,
+                    decoration: InputDecoration(labelText: l10n.colorwayColorHex, counterText: ''),
+                    onChanged: (v) => setState(() => _selected = _normalize(v)),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.cancel)),
+        FilledButton(onPressed: valid ? () => Navigator.of(context).pop(_selected) : null, child: Text(l10n.save)),
+      ],
+    );
+  }
+}
+
+/// Menu de la ligne : changer le rôle sans supprimer la ligne.
+class RoleMenuButton extends ConsumerWidget {
+  const RoleMenuButton({super.key, required this.type, required this.role, required this.onChanged});
+
+  final ProductType type;
+  final String role;
+  final ValueChanged<String> onChanged;
+
+  static const _other = '__other__';
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final custom = ref.watch(customRolesProvider).value ?? const <String>[];
+    final roles = [...type.roles, ...custom.where((r) => !type.roles.contains(r))];
+    return PopupMenuButton<String>(
+      tooltip: l10n.changeRole,
+      icon: const Icon(Icons.swap_horiz, size: 20),
+      onSelected: (v) async {
+        if (v != _other) return v == role ? null : onChanged(v);
+        final name = await showNameDialog(context, title: l10n.changeRole, label: l10n.roleCustom, confirm: l10n.save, maxLength: 60);
+        if (name != null && name.trim().isNotEmpty && name.trim() != role) onChanged(name.trim());
+      },
+      itemBuilder: (_) => [
+        for (final r in roles)
+          CheckedPopupMenuItem(value: r, checked: r == role, child: Text(l10n.roleText(r))),
+        PopupMenuItem(value: _other, child: Text(l10n.roleOther)),
+      ],
+    );
+  }
+}

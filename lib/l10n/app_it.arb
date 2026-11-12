@@ -645,5 +645,7 @@
   "workspaceTitle": "Impostazioni del laboratorio",
   "minCoefficientLabel": "Coefficiente minimo",
   "minCoefficientHelp": "Un modello con coefficiente (prezzo di vendita ÷ costo per capo) inferiore viene segnalato nello Studio.",
-  "workspaceSaved": "Impostazione salvata."
+  "workspaceSaved": "Impostazione salvata.",
+  "colorwayColorTitle": "Colore della variante",
+  "colorwayColorHex": "Codice colore (#RRGGBB)"
 }

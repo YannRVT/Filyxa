@@ -645,5 +645,7 @@
   "workspaceTitle": "Ajustes del taller",
   "minCoefficientLabel": "Coeficiente mínimo",
   "minCoefficientHelp": "Un modelo cuyo coeficiente (precio de venta ÷ coste por prenda) quede por debajo se señala en el Studio.",
-  "workspaceSaved": "Ajuste guardado."
+  "workspaceSaved": "Ajuste guardado.",
+  "colorwayColorTitle": "Color de la variante",
+  "colorwayColorHex": "Código de color (#RRGGBB)"
 }

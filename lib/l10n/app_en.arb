@@ -645,5 +645,7 @@
   "workspaceTitle": "Workshop settings",
   "minCoefficientLabel": "Minimum markup",
   "minCoefficientHelp": "A style whose markup (selling price ÷ cost per piece) falls below this is flagged in the Studio.",
-  "workspaceSaved": "Setting saved."
+  "workspaceSaved": "Setting saved.",
+  "colorwayColorTitle": "Colourway colour",
+  "colorwayColorHex": "Colour code (#RRGGBB)"
 }

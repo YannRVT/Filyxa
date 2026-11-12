@@ -645,5 +645,7 @@
   "workspaceTitle": "Definições do ateliê",
   "minCoefficientLabel": "Coeficiente mínimo",
   "minCoefficientHelp": "Um modelo cujo coeficiente (preço de venda ÷ custo por peça) fique abaixo é assinalado no Studio.",
-  "workspaceSaved": "Definição guardada."
+  "workspaceSaved": "Definição guardada.",
+  "colorwayColorTitle": "Cor da variante",
+  "colorwayColorHex": "Código de cor (#RRGGBB)"
 }

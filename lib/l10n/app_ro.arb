@@ -645,5 +645,7 @@
   "workspaceTitle": "Setările atelierului",
   "minCoefficientLabel": "Coeficient minim",
   "minCoefficientHelp": "Un model al cărui coeficient (preț de vânzare ÷ cost pe bucată) scade sub această valoare este semnalat în Studio.",
-  "workspaceSaved": "Setare salvată."
+  "workspaceSaved": "Setare salvată.",
+  "colorwayColorTitle": "Culoarea variantei",
+  "colorwayColorHex": "Cod de culoare (#RRGGBB)"
 }

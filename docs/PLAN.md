@@ -577,9 +577,9 @@ Le rôle d'une ligne de matière se change depuis un menu sur la ligne, sans la 
 
 ### Critères d'acceptation
 
-- [ ] Changer le rôle conserve la consommation, la perte de prototypage et la position de la ligne.
-- [ ] Le sélecteur propose une palette et accepte une couleur saisie en hexadécimal. La couleur choisie apparaît sur l'onglet du coloris et dans le PDF.
-- [ ] Le Lecteur ne voit ni le menu ni le sélecteur.
+- [x] Changer le rôle conserve la consommation, la perte de prototypage et la position de la ligne.
+- [x] Le sélecteur propose une palette et accepte une couleur saisie en hexadécimal. La couleur choisie apparaît sur l'onglet du coloris et dans le PDF.
+- [x] Le Lecteur ne voit ni le menu ni le sélecteur.
 
 ## Bloquée par
 

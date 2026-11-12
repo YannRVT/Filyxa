@@ -229,10 +229,11 @@ class StudioRepository {
         return id;
       });
 
-  Future<void> updateColorway(String id, {String? name, int? quantity}) => _guard(
+  Future<void> updateColorway(String id, {String? name, int? quantity, String? colorHex}) => _guard(
         () => _client.from('colorways').update({
           if (name != null) 'name': name.trim().isEmpty ? null : name.trim(),
           'quantity': ?quantity,
+          'color_hex': ?colorHex,
         }).eq('id', id),
       );
 

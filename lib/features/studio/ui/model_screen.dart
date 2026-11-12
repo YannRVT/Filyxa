@@ -276,6 +276,41 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     _schedule('target-price', () => _repo.setTargetPrice(widget.modelId, price));
   }
 
+  /// Changer le rôle conserve la consommation, la perte de prototypage et la position.
+  void _setRole(Colorway c, BomLine line, String role) {
+    _replaceColorway(c.id, (x) => x.copyWith(lines: [for (final l in x.lines) l.id == line.id ? l.copyWith(role: role) : l]));
+    _run(() => _repo.updateLine(line.id, role: role));
+    ref.invalidate(customRolesProvider);
+  }
+
+  Future<void> _pickColor(Colorway c) async {
+    final hex = await showColorPicker(context, initial: c.colorHex);
+    if (hex == null || hex == c.colorHex) return;
+    _replaceColorway(c.id, (x) => x.copyWith(colorHex: hex));
+    await _run(() => _repo.updateColorway(c.id, colorHex: hex));
+  }
+
+  Widget _colorButton(Colorway c, bool canEdit) {
+    final color = colorFromHex(c.colorHex);
+    final swatch = Container(
+      width: 28,
+      height: 28,
+      decoration: BoxDecoration(
+        color: color ?? FxColors.cloud,
+        shape: BoxShape.circle,
+        border: Border.all(color: FxColors.lineStrong),
+      ),
+      child: color == null ? const Icon(Icons.palette_outlined, size: 16, color: FxColors.inkSoft) : null,
+    );
+    if (!canEdit) return color == null ? const SizedBox.shrink() : swatch;
+    return IconButton(
+      key: ValueKey('color-${c.id}'),
+      tooltip: context.l10n.colorwayColorTitle,
+      onPressed: () => _pickColor(c),
+      icon: swatch,
+    );
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -470,6 +505,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
       children: [
         for (final (i, c) in m.colorways.indexed)
           ChoiceChip(
+            avatar: colorFromHex(c.colorHex) == null ? null : CircleAvatar(backgroundColor: colorFromHex(c.colorHex)),
             label: Text(l10n.colorwayName(c, i)),
             selected: i == _tab,
             onSelected: (_) => setState(() => _tab = i),
@@ -511,6 +547,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   )
                 else
                   Text('${l10n.quantityLabel} : ${c.quantity}', style: text.bodyMedium),
+                const SizedBox(width: FxSpace.sm),
+                _colorButton(c, canEdit),
                 const Spacer(),
                 if (canEdit && m.hasVariants)
                   IconButton(
@@ -598,6 +636,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           ),
           const SizedBox(width: FxSpace.sm),
           if (canEdit) ...[
+            RoleMenuButton(type: m.productType, role: l.role, onChanged: (r) => _setRole(c, l, r)),
             SizedBox(
               width: 130,
               child: TextField(

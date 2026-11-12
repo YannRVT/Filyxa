@@ -2422,4 +2422,10 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get workspaceSaved => 'Setare salvată.';
+
+  @override
+  String get colorwayColorTitle => 'Culoarea variantei';
+
+  @override
+  String get colorwayColorHex => 'Cod de culoare (#RRGGBB)';
 }

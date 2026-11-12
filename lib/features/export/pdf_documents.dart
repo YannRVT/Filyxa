@@ -293,7 +293,14 @@ Future<Uint8List> buildDossier(
       ),
       for (final (i, cw) in m.colorways.indexed) ...[
         if (m.hasVariants || cw.quantity > 0)
-          _label([if (m.hasVariants) l10n.colorwayName(cw, i), '${l10n.quantityLabel} : ${cw.quantity}'].join(' · ')),
+          pw.Row(children: [
+            if (_pdfColor(cw.colorHex) != null)
+              pw.Padding(
+                padding: const pw.EdgeInsets.only(top: 8, right: 6),
+                child: pw.Container(width: 8, height: 8, decoration: pw.BoxDecoration(color: _pdfColor(cw.colorHex), shape: pw.BoxShape.circle)),
+              ),
+            _label([if (m.hasVariants) l10n.colorwayName(cw, i), '${l10n.quantityLabel} : ${cw.quantity}'].join(' · ')),
+          ]),
         if (cw.lines.isEmpty)
           pw.Text(l10n.modelEmptyTitle, style: const pw.TextStyle(fontSize: 9, color: _muted))
         else

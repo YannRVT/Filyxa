@@ -32,7 +32,7 @@ class _FakeStudio implements StudioRepository {
       calls.add('model waste=$wastePct');
 
   @override
-  Future<void> updateColorway(String id, {String? name, int? quantity}) async => calls.add('colorway $id qty=$quantity name=$name');
+  Future<void> updateColorway(String id, {String? name, int? quantity, String? colorHex}) async => calls.add('colorway $id qty=$quantity name=$name');
 
   @override
   Future<void> updateLine(String id, {double? consumption, String? role, double? protoLossPct}) async =>

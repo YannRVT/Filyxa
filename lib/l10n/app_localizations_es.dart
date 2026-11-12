@@ -2419,4 +2419,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get workspaceSaved => 'Ajuste guardado.';
+
+  @override
+  String get colorwayColorTitle => 'Color de la variante';
+
+  @override
+  String get colorwayColorHex => 'Código de color (#RRGGBB)';
 }

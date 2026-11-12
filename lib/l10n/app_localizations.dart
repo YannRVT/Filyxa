@@ -4007,6 +4007,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Réglage enregistré.'**
   String get workspaceSaved;
+
+  /// No description provided for @colorwayColorTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur du coloris'**
+  String get colorwayColorTitle;
+
+  /// No description provided for @colorwayColorHex.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code couleur (#RRGGBB)'**
+  String get colorwayColorHex;
 }
 
 class _AppLocalizationsDelegate
