@@ -1502,5 +1502,28 @@
         "type": "String"
       }
     }
-  }
+  },
+  "sizesTitle": "Tailles",
+  "sizeChartLabel": "Grille de tailles",
+  "sizeChartNone": "Sans grille (quantité par coloris)",
+  "sizeChartAlpha": "XS–XXL",
+  "sizeChartEu": "34–48",
+  "sizeChartShoes": "Pointures 35–46",
+  "sizeChartOne": "Taille unique",
+  "sizeChartsTitle": "Grilles de tailles",
+  "sizeChartsBuiltIn": "Fournies par Filyxa",
+  "sizeChartsMine": "Grilles de l'atelier",
+  "sizeChartsMineEmpty": "Aucune grille propre à l'atelier.",
+  "sizeChartNew": "Nouvelle grille",
+  "sizeChartEdit": "Modifier la grille",
+  "sizeChartName": "Nom de la grille",
+  "sizeChartSizes": "Tailles, dans l'ordre, séparées par des virgules",
+  "sizeChartChangeTitle": "Changer de grille ?",
+  "sizeChartChangeBody": "Les quantités des tailles absentes de la nouvelle grille seront effacées.",
+  "sizeChartChange": "Changer",
+  "totalLabel": "Total",
+  "sizeErrorInUse": "Une taille qui a des quantités sur un modèle ne peut pas être retirée.",
+  "sizeErrorInvalid": "Les tailles doivent être distinctes et non vides (12 caractères au plus).",
+  "sizeChartInUse": "Cette grille est utilisée par un modèle : impossible de la supprimer.",
+  "sizeChartDeleteTitle": "Supprimer la grille ?"
 }

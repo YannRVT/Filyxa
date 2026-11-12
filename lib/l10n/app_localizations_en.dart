@@ -2112,4 +2112,77 @@ class AppLocalizationsEn extends AppLocalizations {
   String notifDeadlineOverdue(String name, String stage, String date) {
     return 'Deadline missed: $name — $stage due $date';
   }
+
+  @override
+  String get sizesTitle => 'Sizes';
+
+  @override
+  String get sizeChartLabel => 'Size chart';
+
+  @override
+  String get sizeChartNone => 'No size chart (quantity per colourway)';
+
+  @override
+  String get sizeChartAlpha => 'XS–XXL';
+
+  @override
+  String get sizeChartEu => '34–48';
+
+  @override
+  String get sizeChartShoes => 'Shoe sizes 35–46';
+
+  @override
+  String get sizeChartOne => 'One size';
+
+  @override
+  String get sizeChartsTitle => 'Size charts';
+
+  @override
+  String get sizeChartsBuiltIn => 'Provided by Filyxa';
+
+  @override
+  String get sizeChartsMine => 'Your workshop\'s charts';
+
+  @override
+  String get sizeChartsMineEmpty => 'No custom chart yet.';
+
+  @override
+  String get sizeChartNew => 'New chart';
+
+  @override
+  String get sizeChartEdit => 'Edit chart';
+
+  @override
+  String get sizeChartName => 'Chart name';
+
+  @override
+  String get sizeChartSizes => 'Sizes, in order, separated by commas';
+
+  @override
+  String get sizeChartChangeTitle => 'Change size chart?';
+
+  @override
+  String get sizeChartChangeBody =>
+      'Quantities for sizes missing from the new chart will be cleared.';
+
+  @override
+  String get sizeChartChange => 'Change';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sizeErrorInUse =>
+      'A size with quantities on a style cannot be removed.';
+
+  @override
+  String get sizeErrorInvalid =>
+      'Sizes must be distinct and not empty (12 characters max).';
+
+  @override
+  String get sizeChartInUse =>
+      'This chart is used by a style and cannot be deleted.';
+
+  @override
+  String get sizeChartDeleteTitle => 'Delete chart?';
 }

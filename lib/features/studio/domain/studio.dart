@@ -67,8 +67,43 @@ class BomLine {
       BomLine(id: id, materialId: materialId, role: role ?? this.role, consumption: consumption ?? this.consumption, position: position);
 }
 
+/// Grille de tailles : fournie par Filyxa ([code]) ou créée par l'atelier ([name]).
+class SizeChart {
+  const SizeChart({required this.id, required this.sizes, this.orgId, this.code, this.name});
+
+  factory SizeChart.fromJson(Map<String, dynamic> json) => SizeChart(
+        id: json['id'] as String,
+        orgId: json['org_id'] as String?,
+        code: json['code'] as String?,
+        name: json['name'] as String?,
+        sizes: (json['sizes'] as List<dynamic>).cast<String>(),
+      );
+
+  static const selectColumns = 'id, org_id, code, name, sizes, position';
+
+  final String id;
+  final String? orgId;
+  final String? code;
+  final String? name;
+  final List<String> sizes;
+
+  bool get builtIn => orgId == null;
+}
+
+/// Tailles saisies « XS, S, M » : nettoyées, sans vide.
+List<String> parseSizes(String text) =>
+    [for (final s in text.split(RegExp(r'[,;\n]'))) if (s.trim().isNotEmpty) s.trim()];
+
 class Colorway {
-  const Colorway({required this.id, this.name, this.colorHex, this.quantity = 0, this.position = 0, this.lines = const []});
+  const Colorway({
+    required this.id,
+    this.name,
+    this.colorHex,
+    this.quantity = 0,
+    this.position = 0,
+    this.lines = const [],
+    this.sizeQuantities = const {},
+  });
 
   factory Colorway.fromJson(Map<String, dynamic> json) => Colorway(
         id: json['id'] as String,
@@ -76,6 +111,10 @@ class Colorway {
         colorHex: json['color_hex'] as String?,
         quantity: json['quantity'] as int? ?? 0,
         position: json['position'] as int? ?? 0,
+        sizeQuantities: {
+          for (final q in (json['colorway_size_quantities'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
+            q['size'] as String: q['quantity'] as int? ?? 0,
+        },
         lines: [
           for (final l in (json['model_materials'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>()) BomLine.fromJson(l),
         ]..sort((a, b) => a.position != b.position ? a.position.compareTo(b.position) : a.id.compareTo(b.id)),
@@ -87,16 +126,20 @@ class Colorway {
   final String? name;
   final String? colorHex;
 
-  /// Pièces prévues.
+  /// Pièces prévues (somme des tailles quand le modèle a une grille).
   final int quantity;
   final int position;
   final List<BomLine> lines;
 
-  Colorway copyWith({int? quantity, List<BomLine>? lines}) => Colorway(
+  /// Quantités par taille (modèle avec grille).
+  final Map<String, int> sizeQuantities;
+
+  Colorway copyWith({int? quantity, List<BomLine>? lines, Map<String, int>? sizeQuantities}) => Colorway(
         id: id,
         name: name,
         colorHex: colorHex,
         quantity: quantity ?? this.quantity,
+        sizeQuantities: sizeQuantities ?? this.sizeQuantities,
         position: position,
         lines: lines ?? this.lines,
       );
@@ -149,6 +192,7 @@ class StudioModel {
     this.wastePct = kDefaultWastePct,
     this.status = ModelStatus.idea,
     this.deadlines = const {},
+    this.sizeChartId,
     this.colorways = const [],
   });
 
@@ -160,6 +204,7 @@ class StudioModel {
         productType: ProductType.parse(json['product_type'] as String?),
         wastePct: (json['waste_pct'] as num?)?.toDouble() ?? kDefaultWastePct,
         status: ModelStatus.parse(json['status'] as String?),
+        sizeChartId: json['size_chart_id'] as String?,
         deadlines: {
           for (final d in (json['model_deadlines'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
             ModelStatus.parse(d['stage'] as String?): DateTime.parse(d['due_date'] as String),
@@ -170,7 +215,7 @@ class StudioModel {
       );
 
   static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, model_deadlines(stage, due_date), '
-      'colorways(id, name, color_hex, quantity, position, model_materials(id, material_id, role, consumption, position))';
+      'size_chart_id, colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position))';
 
   final String id;
   final String collectionId;
@@ -184,6 +229,9 @@ class StudioModel {
 
   /// Échéance de chaque étape (date, sans heure).
   final Map<ModelStatus, DateTime> deadlines;
+
+  /// Grille de tailles ; null : quantité par coloris, comme en V1.
+  final String? sizeChartId;
   final List<Colorway> colorways;
 
   /// Étape déjà atteinte (ou dépassée) par le modèle.
@@ -222,6 +270,7 @@ class StudioModel {
         wastePct: wastePct ?? this.wastePct,
         status: status ?? this.status,
         deadlines: deadlines ?? this.deadlines,
+        sizeChartId: sizeChartId,
         colorways: colorways ?? this.colorways,
       );
 }

@@ -101,6 +101,42 @@ class StudioRepository {
         }
       });
 
+  // Tailles ------------------------------------------------------------------------------------
+
+  /// Grilles fournies par Filyxa puis grilles de l'atelier.
+  Future<List<SizeChart>> sizeCharts() => _guard(() async {
+        final rows = await _client
+            .from('size_charts')
+            .select(SizeChart.selectColumns)
+            .order('org_id', nullsFirst: true)
+            .order('position')
+            .order('created_at');
+        return rows.map(SizeChart.fromJson).toList();
+      });
+
+  Future<void> createSizeChart(String orgId, String name, List<String> sizes) => _guard(() async {
+        final last = await _client.from('size_charts').select('position').eq('org_id', orgId).order('position', ascending: false).limit(1);
+        await _client.from('size_charts').insert({
+          'org_id': orgId,
+          'name': name.trim(),
+          'sizes': sizes,
+          'position': last.isEmpty ? 0 : (last.first['position'] as int) + 1,
+        });
+      });
+
+  Future<void> updateSizeChart(String id, String name, List<String> sizes) =>
+      _guard(() => _client.from('size_charts').update({'name': name.trim(), 'sizes': sizes}).eq('id', id));
+
+  Future<void> deleteSizeChart(String id) => _guard(() => _client.from('size_charts').delete().eq('id', id));
+
+  /// Choisit (ou retire) la grille d'un modèle ; le serveur efface les quantités devenues sans objet.
+  Future<void> setModelSizeChart(String modelId, String? chartId) =>
+      _guard(() => _client.from('models').update({'size_chart_id': chartId}).eq('id', modelId));
+
+  Future<void> setSizeQuantity(String colorwayId, String size, int quantity) => _guard(() => _client
+      .from('colorway_size_quantities')
+      .upsert({'colorway_id': colorwayId, 'size': size, 'quantity': quantity}, onConflict: 'colorway_id,size'));
+
   /// Vrai si l'organisation a accès aux fonctionnalités Pro (relu à chaque ouverture d'écran).
   Future<bool> hasPro(String orgId) => _guard(() async {
         final result = await _client.rpc<bool>('has_pro', params: {'p_org': orgId});
@@ -195,6 +231,11 @@ final customRolesProvider = FutureProvider<List<String>>((ref) async {
   final orgId = _orgId(ref);
   if (orgId == null) return const [];
   return ref.watch(studioRepositoryProvider).customRoles(orgId);
+});
+
+final sizeChartsProvider = FutureProvider<List<SizeChart>>((ref) {
+  ref.watch(userSpaceProvider);
+  return ref.watch(studioRepositoryProvider).sizeCharts();
 });
 
 /// Accès aux fonctionnalités Pro : relu à chaque ouverture d'écran, pour qu'un

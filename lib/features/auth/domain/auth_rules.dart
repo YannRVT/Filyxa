@@ -39,6 +39,9 @@ enum AuthFailure {
   lastAdmin,
   forbidden,
   proRequired,
+  sizeInUse,
+  invalidSizes,
+  chartInUse,
   emailNotSent,
   tooManyRequests,
   network,
@@ -54,6 +57,9 @@ AuthFailure classifyFailure({String? message, String? code, int? statusCode}) {
   if (text.contains('last_admin')) return AuthFailure.lastAdmin;
   if (text.contains('email_not_sent')) return AuthFailure.emailNotSent;
   if (text.contains('pro_required')) return AuthFailure.proRequired;
+  if (text.contains('size_in_use')) return AuthFailure.sizeInUse;
+  if (text.contains('invalid_sizes')) return AuthFailure.invalidSizes;
+  if (text.contains('models_size_chart_id_fkey')) return AuthFailure.chartInUse;
   if (text.contains('forbidden') || statusCode == 403) return AuthFailure.forbidden;
   if (statusCode == 429 || text.contains('rate limit') || text.contains('over_') ) {
     return AuthFailure.tooManyRequests;

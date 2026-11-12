@@ -19,6 +19,7 @@ import '../data/studio_repository.dart';
 import '../domain/studio.dart';
 import 'alert_widgets.dart';
 import 'planning_widgets.dart';
+import 'size_widgets.dart';
 import 'studio_widgets.dart';
 
 /// Délai avant l'enregistrement d'une saisie (le calcul, lui, est immédiat).
@@ -189,6 +190,19 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     ref.invalidate(hasProProvider);
   }
 
+  Future<void> _setSizeChart(String? chartId) async {
+    await _structural(() => _repo.setModelSizeChart(widget.modelId, chartId));
+    ref.invalidate(hasProProvider);
+  }
+
+  /// Quantité d'une taille : la quantité du coloris devient la somme de ses tailles.
+  void _setSizeQuantity(Colorway c, String size, int quantity) {
+    final current = _model!.colorways.firstWhere((x) => x.id == c.id);
+    final sizes = {...current.sizeQuantities, size: quantity};
+    _replaceColorway(c.id, (x) => x.copyWith(sizeQuantities: sizes, quantity: sizes.values.fold<int>(0, (a, b) => a + b)));
+    _schedule('size-${c.id}-$size', () => _repo.setSizeQuantity(c.id, size, quantity));
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -277,6 +291,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   if (_error != null) ...[const SizedBox(height: FxSpace.md), MessageBanner.error(_error!)],
                   const SizedBox(height: FxSpace.md),
                   ModelDeadlinesCard(model: m, onChanged: _setDeadline),
+                  const SizedBox(height: FxSpace.md),
+                  ModelSizesCard(model: m, onChartChanged: _setSizeChart, onQuantity: _setSizeQuantity),
                   const SizedBox(height: FxSpace.md),
                   AlertsPanel(alerts: watchModelAlerts(ref, m)),
                   const SizedBox(height: FxSpace.md),
@@ -389,7 +405,8 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           children: [
             Row(
               children: [
-                if (canEdit)
+                // Avec une grille, la quantité est la somme des tailles (tableau Tailles).
+                if (canEdit && m.sizeChartId == null)
                   SizedBox(
                     width: 220,
                     child: TextField(

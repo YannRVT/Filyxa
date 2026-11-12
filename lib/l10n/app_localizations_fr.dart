@@ -2120,4 +2120,78 @@ class AppLocalizationsFr extends AppLocalizations {
   String notifDeadlineOverdue(String name, String stage, String date) {
     return 'Échéance dépassée : $name — $stage prévu le $date';
   }
+
+  @override
+  String get sizesTitle => 'Tailles';
+
+  @override
+  String get sizeChartLabel => 'Grille de tailles';
+
+  @override
+  String get sizeChartNone => 'Sans grille (quantité par coloris)';
+
+  @override
+  String get sizeChartAlpha => 'XS–XXL';
+
+  @override
+  String get sizeChartEu => '34–48';
+
+  @override
+  String get sizeChartShoes => 'Pointures 35–46';
+
+  @override
+  String get sizeChartOne => 'Taille unique';
+
+  @override
+  String get sizeChartsTitle => 'Grilles de tailles';
+
+  @override
+  String get sizeChartsBuiltIn => 'Fournies par Filyxa';
+
+  @override
+  String get sizeChartsMine => 'Grilles de l\'atelier';
+
+  @override
+  String get sizeChartsMineEmpty => 'Aucune grille propre à l\'atelier.';
+
+  @override
+  String get sizeChartNew => 'Nouvelle grille';
+
+  @override
+  String get sizeChartEdit => 'Modifier la grille';
+
+  @override
+  String get sizeChartName => 'Nom de la grille';
+
+  @override
+  String get sizeChartSizes =>
+      'Tailles, dans l\'ordre, séparées par des virgules';
+
+  @override
+  String get sizeChartChangeTitle => 'Changer de grille ?';
+
+  @override
+  String get sizeChartChangeBody =>
+      'Les quantités des tailles absentes de la nouvelle grille seront effacées.';
+
+  @override
+  String get sizeChartChange => 'Changer';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sizeErrorInUse =>
+      'Une taille qui a des quantités sur un modèle ne peut pas être retirée.';
+
+  @override
+  String get sizeErrorInvalid =>
+      'Les tailles doivent être distinctes et non vides (12 caractères au plus).';
+
+  @override
+  String get sizeChartInUse =>
+      'Cette grille est utilisée par un modèle : impossible de la supprimer.';
+
+  @override
+  String get sizeChartDeleteTitle => 'Supprimer la grille ?';
 }

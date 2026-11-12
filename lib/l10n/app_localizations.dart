@@ -3503,6 +3503,144 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Échéance dépassée : {name} — {stage} prévu le {date}'**
   String notifDeadlineOverdue(String name, String stage, String date);
+
+  /// No description provided for @sizesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tailles'**
+  String get sizesTitle;
+
+  /// No description provided for @sizeChartLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grille de tailles'**
+  String get sizeChartLabel;
+
+  /// No description provided for @sizeChartNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans grille (quantité par coloris)'**
+  String get sizeChartNone;
+
+  /// No description provided for @sizeChartAlpha.
+  ///
+  /// In fr, this message translates to:
+  /// **'XS–XXL'**
+  String get sizeChartAlpha;
+
+  /// No description provided for @sizeChartEu.
+  ///
+  /// In fr, this message translates to:
+  /// **'34–48'**
+  String get sizeChartEu;
+
+  /// No description provided for @sizeChartShoes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pointures 35–46'**
+  String get sizeChartShoes;
+
+  /// No description provided for @sizeChartOne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille unique'**
+  String get sizeChartOne;
+
+  /// No description provided for @sizeChartsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grilles de tailles'**
+  String get sizeChartsTitle;
+
+  /// No description provided for @sizeChartsBuiltIn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fournies par Filyxa'**
+  String get sizeChartsBuiltIn;
+
+  /// No description provided for @sizeChartsMine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Grilles de l\'atelier'**
+  String get sizeChartsMine;
+
+  /// No description provided for @sizeChartsMineEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune grille propre à l\'atelier.'**
+  String get sizeChartsMineEmpty;
+
+  /// No description provided for @sizeChartNew.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle grille'**
+  String get sizeChartNew;
+
+  /// No description provided for @sizeChartEdit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier la grille'**
+  String get sizeChartEdit;
+
+  /// No description provided for @sizeChartName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la grille'**
+  String get sizeChartName;
+
+  /// No description provided for @sizeChartSizes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tailles, dans l\'ordre, séparées par des virgules'**
+  String get sizeChartSizes;
+
+  /// No description provided for @sizeChartChangeTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer de grille ?'**
+  String get sizeChartChangeTitle;
+
+  /// No description provided for @sizeChartChangeBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les quantités des tailles absentes de la nouvelle grille seront effacées.'**
+  String get sizeChartChangeBody;
+
+  /// No description provided for @sizeChartChange.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer'**
+  String get sizeChartChange;
+
+  /// No description provided for @totalLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total'**
+  String get totalLabel;
+
+  /// No description provided for @sizeErrorInUse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une taille qui a des quantités sur un modèle ne peut pas être retirée.'**
+  String get sizeErrorInUse;
+
+  /// No description provided for @sizeErrorInvalid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les tailles doivent être distinctes et non vides (12 caractères au plus).'**
+  String get sizeErrorInvalid;
+
+  /// No description provided for @sizeChartInUse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette grille est utilisée par un modèle : impossible de la supprimer.'**
+  String get sizeChartInUse;
+
+  /// No description provided for @sizeChartDeleteTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer la grille ?'**
+  String get sizeChartDeleteTitle;
 }
 
 class _AppLocalizationsDelegate

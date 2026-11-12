@@ -2122,4 +2122,77 @@ class AppLocalizationsRo extends AppLocalizations {
   String notifDeadlineOverdue(String name, String stage, String date) {
     return 'Termen depășit: $name — $stage prevăzut pe $date';
   }
+
+  @override
+  String get sizesTitle => 'Mărimi';
+
+  @override
+  String get sizeChartLabel => 'Grilă de mărimi';
+
+  @override
+  String get sizeChartNone => 'Fără grilă (cantitate pe culoare)';
+
+  @override
+  String get sizeChartAlpha => 'XS–XXL';
+
+  @override
+  String get sizeChartEu => '34–48';
+
+  @override
+  String get sizeChartShoes => 'Numere 35–46';
+
+  @override
+  String get sizeChartOne => 'Mărime unică';
+
+  @override
+  String get sizeChartsTitle => 'Grile de mărimi';
+
+  @override
+  String get sizeChartsBuiltIn => 'Furnizate de Filyxa';
+
+  @override
+  String get sizeChartsMine => 'Grilele atelierului';
+
+  @override
+  String get sizeChartsMineEmpty => 'Nicio grilă proprie.';
+
+  @override
+  String get sizeChartNew => 'Grilă nouă';
+
+  @override
+  String get sizeChartEdit => 'Modifică grila';
+
+  @override
+  String get sizeChartName => 'Numele grilei';
+
+  @override
+  String get sizeChartSizes => 'Mărimi, în ordine, separate prin virgule';
+
+  @override
+  String get sizeChartChangeTitle => 'Schimbi grila?';
+
+  @override
+  String get sizeChartChangeBody =>
+      'Cantitățile mărimilor absente din noua grilă vor fi șterse.';
+
+  @override
+  String get sizeChartChange => 'Schimbă';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sizeErrorInUse =>
+      'O mărime cu cantități pe un model nu poate fi eliminată.';
+
+  @override
+  String get sizeErrorInvalid =>
+      'Mărimile trebuie să fie distincte și nevide (max. 12 caractere).';
+
+  @override
+  String get sizeChartInUse =>
+      'Grila este folosită de un model: nu poate fi ștearsă.';
+
+  @override
+  String get sizeChartDeleteTitle => 'Ștergi grila?';
 }

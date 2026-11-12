@@ -2116,4 +2116,77 @@ class AppLocalizationsPt extends AppLocalizations {
   String notifDeadlineOverdue(String name, String stage, String date) {
     return 'Prazo ultrapassado: $name — $stage previsto a $date';
   }
+
+  @override
+  String get sizesTitle => 'Tamanhos';
+
+  @override
+  String get sizeChartLabel => 'Tabela de tamanhos';
+
+  @override
+  String get sizeChartNone => 'Sem tabela (quantidade por cor)';
+
+  @override
+  String get sizeChartAlpha => 'XS–XXL';
+
+  @override
+  String get sizeChartEu => '34–48';
+
+  @override
+  String get sizeChartShoes => 'Números 35–46';
+
+  @override
+  String get sizeChartOne => 'Tamanho único';
+
+  @override
+  String get sizeChartsTitle => 'Tabelas de tamanhos';
+
+  @override
+  String get sizeChartsBuiltIn => 'Fornecidas pela Filyxa';
+
+  @override
+  String get sizeChartsMine => 'Tabelas do ateliê';
+
+  @override
+  String get sizeChartsMineEmpty => 'Nenhuma tabela própria.';
+
+  @override
+  String get sizeChartNew => 'Nova tabela';
+
+  @override
+  String get sizeChartEdit => 'Editar tabela';
+
+  @override
+  String get sizeChartName => 'Nome da tabela';
+
+  @override
+  String get sizeChartSizes => 'Tamanhos, por ordem, separados por vírgulas';
+
+  @override
+  String get sizeChartChangeTitle => 'Mudar de tabela?';
+
+  @override
+  String get sizeChartChangeBody =>
+      'As quantidades dos tamanhos ausentes da nova tabela serão apagadas.';
+
+  @override
+  String get sizeChartChange => 'Mudar';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sizeErrorInUse =>
+      'Um tamanho com quantidades num modelo não pode ser removido.';
+
+  @override
+  String get sizeErrorInvalid =>
+      'Os tamanhos devem ser distintos e não vazios (máx. 12 caracteres).';
+
+  @override
+  String get sizeChartInUse =>
+      'Esta tabela é usada por um modelo: impossível eliminá-la.';
+
+  @override
+  String get sizeChartDeleteTitle => 'Eliminar a tabela?';
 }

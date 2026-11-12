@@ -445,11 +445,11 @@ Filyxa fournit les grilles XS–XXL, 34–48, pointures 35–46 et taille unique
 
 ### Critères d'acceptation
 
-- [ ] Les quatre grilles fournies sont disponibles dans tous les ateliers et ne sont pas modifiables.
-- [ ] L'Admin crée, renomme et réordonne les tailles d'une grille de l'atelier. Une taille qui a des quantités sur un modèle ne peut pas être supprimée.
-- [ ] Le tableau tailles × coloris affiche les totaux par taille, par coloris et le total général.
-- [ ] Un modèle sans grille fonctionne comme en V1 (test de non-régression).
-- [ ] Un changement de grille sur un modèle qui a déjà des quantités demande une confirmation, puis efface les quantités devenues sans objet.
+- [x] Les quatre grilles fournies sont disponibles dans tous les ateliers et ne sont pas modifiables.
+- [x] L'Admin crée, renomme et réordonne les tailles d'une grille de l'atelier. Une taille qui a des quantités sur un modèle ne peut pas être supprimée.
+- [x] Le tableau tailles × coloris affiche les totaux par taille, par coloris et le total général.
+- [x] Un modèle sans grille fonctionne comme en V1 (test de non-régression).
+- [x] Un changement de grille sur un modèle qui a déjà des quantités demande une confirmation, puis efface les quantités devenues sans objet.
 
 ## Bloquée par
 

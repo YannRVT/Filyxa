@@ -94,6 +94,13 @@ class AccountScreen extends ConsumerWidget {
                               onTap: () => context.go('/account/links'),
                             ),
                             const Divider(),
+                            ListTile(
+                              leading: const Icon(Icons.straighten),
+                              title: Text(l10n.sizeChartsTitle),
+                              trailing: const Icon(Icons.chevron_right),
+                              onTap: () => context.go('/account/sizes'),
+                            ),
+                            const Divider(),
                           ],
                         ],
                         ListTile(
