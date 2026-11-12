@@ -343,7 +343,7 @@ Future<Uint8List> buildDossier(
                         child: mat == null ? pw.SizedBox() : _care(c, mat.specs.care, size: 12, labels: false),
                       ),
                       cell('${c.number(line.consumption, decimals: 3)} m', metric: true, align: pw.TextAlign.right),
-                      cell('${c.number(lineRequirement(line.consumption, cw.quantity, m.wastePct))} m',
+                      cell('${c.number(colorwayLineRequirement(m, cw, line))} m',
                           metric: true, align: pw.TextAlign.right),
                     ],
                   );

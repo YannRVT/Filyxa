@@ -584,5 +584,16 @@
   "sizeErrorInUse": "O mărime cu cantități pe un model nu poate fi eliminată.",
   "sizeErrorInvalid": "Mărimile trebuie să fie distincte și nevide (max. 12 caractere).",
   "sizeChartInUse": "Grila este folosită de un model: nu poate fi ștearsă.",
-  "sizeChartDeleteTitle": "Ștergi grila?"
+  "sizeChartDeleteTitle": "Ștergi grila?",
+  "baseSizeLabel": "Mărime de bază",
+  "gradePctLabel": "Diferență pe mărime (%)",
+  "gradingSummary": "Mărime de bază: {base} · {pct} % pe mărime",
+  "gradeRowLabel": "Diferență",
+  "baseSizeTag": "bază",
+  "sizeGradeTitle": "Diferența mărimii {size}",
+  "sizeGradeLabel": "Diferență față de bază (%)",
+  "sizeGradeHelp": "De exemplu 10 pentru +10 %, -5 pentru −5 %.",
+  "sizeGradeReset": "Revino la diferența modelului",
+  "requirementBySize": "Detaliu pe mărime și culoare",
+  "requirementFormulaGraded": "Consumul mărimii de bază × (1 + diferența mărimii) × cantitate × (1 + {waste} % pierderi)"
 }

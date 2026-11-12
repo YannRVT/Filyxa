@@ -584,5 +584,16 @@
   "sizeErrorInUse": "Um tamanho com quantidades num modelo não pode ser removido.",
   "sizeErrorInvalid": "Os tamanhos devem ser distintos e não vazios (máx. 12 caracteres).",
   "sizeChartInUse": "Esta tabela é usada por um modelo: impossível eliminá-la.",
-  "sizeChartDeleteTitle": "Eliminar a tabela?"
+  "sizeChartDeleteTitle": "Eliminar a tabela?",
+  "baseSizeLabel": "Tamanho base",
+  "gradePctLabel": "Diferença por tamanho (%)",
+  "gradingSummary": "Tamanho base: {base} · {pct} % por tamanho",
+  "gradeRowLabel": "Diferença",
+  "baseSizeTag": "base",
+  "sizeGradeTitle": "Diferença do tamanho {size}",
+  "sizeGradeLabel": "Diferença em relação à base (%)",
+  "sizeGradeHelp": "Por exemplo 10 para +10 %, -5 para −5 %.",
+  "sizeGradeReset": "Voltar à diferença do modelo",
+  "requirementBySize": "Detalhe por tamanho e cor",
+  "requirementFormulaGraded": "Consumo do tamanho base × (1 + diferença do tamanho) × quantidade × (1 + {waste} % de perda)"
 }

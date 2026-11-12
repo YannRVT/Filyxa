@@ -584,5 +584,16 @@
   "sizeErrorInUse": "Una taglia con quantità su un modello non può essere rimossa.",
   "sizeErrorInvalid": "Le taglie devono essere distinte e non vuote (max 12 caratteri).",
   "sizeChartInUse": "Questa tabella è usata da un modello: impossibile eliminarla.",
-  "sizeChartDeleteTitle": "Eliminare la tabella?"
+  "sizeChartDeleteTitle": "Eliminare la tabella?",
+  "baseSizeLabel": "Taglia base",
+  "gradePctLabel": "Scarto per taglia (%)",
+  "gradingSummary": "Taglia base: {base} · scarto del {pct} % per taglia",
+  "gradeRowLabel": "Scarto",
+  "baseSizeTag": "base",
+  "sizeGradeTitle": "Scarto della taglia {size}",
+  "sizeGradeLabel": "Scarto rispetto alla base (%)",
+  "sizeGradeHelp": "Per esempio 10 per +10 %, -5 per −5 %.",
+  "sizeGradeReset": "Torna allo scarto del modello",
+  "requirementBySize": "Dettaglio per taglia e variante",
+  "requirementFormulaGraded": "Consumo della taglia base × (1 + scarto della taglia) × quantità × (1 + {waste} % di sfrido)"
 }

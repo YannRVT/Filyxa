@@ -1525,5 +1525,40 @@
   "sizeErrorInUse": "Une taille qui a des quantités sur un modèle ne peut pas être retirée.",
   "sizeErrorInvalid": "Les tailles doivent être distinctes et non vides (12 caractères au plus).",
   "sizeChartInUse": "Cette grille est utilisée par un modèle : impossible de la supprimer.",
-  "sizeChartDeleteTitle": "Supprimer la grille ?"
+  "sizeChartDeleteTitle": "Supprimer la grille ?",
+  "baseSizeLabel": "Taille de base",
+  "gradePctLabel": "Écart par taille (%)",
+  "gradingSummary": "Taille de base : {base} · écart de {pct} % par taille",
+  "@gradingSummary": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "gradeRowLabel": "Écart",
+  "baseSizeTag": "base",
+  "sizeGradeTitle": "Écart de la taille {size}",
+  "@sizeGradeTitle": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "sizeGradeLabel": "Écart par rapport à la base (%)",
+  "sizeGradeHelp": "Par exemple 10 pour +10 %, -5 pour −5 %.",
+  "sizeGradeReset": "Revenir à l'écart du modèle",
+  "requirementBySize": "Détail par taille et par coloris",
+  "requirementFormulaGraded": "Consommation de la taille de base × (1 + écart de la taille) × quantité × (1 + marge de {waste} %)",
+  "@requirementFormulaGraded": {
+    "placeholders": {
+      "waste": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -2189,4 +2189,43 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sizeChartDeleteTitle => 'Eliminar a tabela?';
+
+  @override
+  String get baseSizeLabel => 'Tamanho base';
+
+  @override
+  String get gradePctLabel => 'Diferença por tamanho (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Tamanho base: $base · $pct % por tamanho';
+  }
+
+  @override
+  String get gradeRowLabel => 'Diferença';
+
+  @override
+  String get baseSizeTag => 'base';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Diferença do tamanho $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Diferença em relação à base (%)';
+
+  @override
+  String get sizeGradeHelp => 'Por exemplo 10 para +10 %, -5 para −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Voltar à diferença do modelo';
+
+  @override
+  String get requirementBySize => 'Detalhe por tamanho e cor';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consumo do tamanho base × (1 + diferença do tamanho) × quantidade × (1 + $waste % de perda)';
+  }
 }

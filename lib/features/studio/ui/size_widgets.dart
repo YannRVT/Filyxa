@@ -7,6 +7,8 @@ import '../../../app/theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../../shared/widgets/auth_widgets.dart';
 import '../../auth/data/auth_repository.dart';
+import '../../library/domain/material.dart' show formatNumber, parseNumber;
+import '../../library/ui/material_widgets.dart' show langOf;
 import '../../members/data/members_repository.dart' show currentRoleProvider;
 import '../../session/data/user_space_repository.dart';
 import '../../session/domain/user_space.dart';
@@ -208,11 +210,24 @@ class _SizeChartDialogState extends State<_SizeChartDialog> {
 
 /// Tailles d'un modèle : choix de la grille et tableau tailles × coloris avec totaux.
 class ModelSizesCard extends ConsumerStatefulWidget {
-  const ModelSizesCard({super.key, required this.model, required this.onChartChanged, required this.onQuantity});
+  const ModelSizesCard({
+    super.key,
+    required this.model,
+    required this.onChartChanged,
+    required this.onQuantity,
+    this.onBaseSize,
+    this.onGradePct,
+    this.onSizeGrade,
+  });
 
   final StudioModel model;
   final ValueChanged<String?> onChartChanged;
   final void Function(Colorway colorway, String size, int quantity) onQuantity;
+  final ValueChanged<String>? onBaseSize;
+  final ValueChanged<double>? onGradePct;
+
+  /// Écart propre à une taille ; null : retour à l'écart du modèle.
+  final void Function(String size, double? gradePct)? onSizeGrade;
 
   @override
   ConsumerState<ModelSizesCard> createState() => _ModelSizesCardState();
@@ -297,6 +312,8 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
                   style: text.bodyMedium),
             if (chart != null) ...[
               const SizedBox(height: FxSpace.md),
+              _grading(m, chart, canEdit),
+              const SizedBox(height: FxSpace.md),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: _table(m, chart, canEdit),
@@ -306,6 +323,79 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
         ),
       ),
     );
+  }
+
+  /// Taille de base et écart par taille.
+  Widget _grading(StudioModel m, SizeChart chart, bool canEdit) {
+    final l10n = context.l10n;
+    final lang = langOf(context);
+    final text = Theme.of(context).textTheme;
+    final base = m.effectiveBaseSize ?? chart.sizes.first;
+    if (!canEdit) {
+      return Text(l10n.gradingSummary(base, formatNumber(m.gradePct, lang, decimals: 2)), style: text.bodyMedium);
+    }
+    return Wrap(
+      spacing: FxSpace.md,
+      runSpacing: FxSpace.sm,
+      children: [
+        SizedBox(
+          width: 160,
+          child: DropdownButtonFormField<String>(
+            key: ValueKey('base-$base-${chart.id}'),
+            initialValue: base,
+            decoration: InputDecoration(labelText: l10n.baseSizeLabel, isDense: true),
+            items: [for (final s in chart.sizes) DropdownMenuItem(value: s, child: Text(s))],
+            onChanged: (v) => v == null ? null : widget.onBaseSize?.call(v),
+          ),
+        ),
+        SizedBox(
+          width: 200,
+          child: TextField(
+            key: const ValueKey('grade'),
+            controller: _controllers.putIfAbsent('grade', () => TextEditingController(text: formatNumber(m.gradePct, lang, decimals: 2))),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[-0-9.,]'))],
+            decoration: InputDecoration(labelText: l10n.gradePctLabel, isDense: true),
+            onChanged: (v) {
+              final pct = parseNumber(v);
+              if (pct != null && pct >= -50 && pct <= 50) widget.onGradePct?.call(pct);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _editGrade(String size, double? current) async {
+    final l10n = context.l10n;
+    final lang = langOf(context);
+    final controller = TextEditingController(text: current == null ? '' : formatNumber(current, lang, decimals: 2));
+    final result = await showDialog<(bool, double?)>(
+      context: context,
+      builder: (d) => AlertDialog(
+        title: Text(l10n.sizeGradeTitle(size)),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[-0-9.,]'))],
+          decoration: InputDecoration(labelText: l10n.sizeGradeLabel, helperText: l10n.sizeGradeHelp),
+        ),
+        actions: [
+          if (current != null) TextButton(onPressed: () => Navigator.of(d).pop((true, null)), child: Text(l10n.sizeGradeReset)),
+          TextButton(onPressed: () => Navigator.of(d).pop(), child: Text(l10n.cancel)),
+          FilledButton(
+            onPressed: () {
+              final v = parseNumber(controller.text);
+              if (v != null && v >= -90 && v <= 300) Navigator.of(d).pop((true, v));
+            },
+            child: Text(l10n.save),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (result != null && result.$1) widget.onSizeGrade?.call(size, result.$2);
   }
 
   Widget _table(StudioModel m, SizeChart chart, bool canEdit) {
@@ -335,6 +425,20 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
       );
     }
 
+    Widget gradeCell(String size) {
+      final lang = langOf(context);
+      final own = m.sizeGrades.containsKey(size);
+      final pct = m.sizeGrade(size);
+      final label = size == m.effectiveBaseSize ? l10n.baseSizeTag : '${pct > 0 ? '+' : ''}${formatNumber(pct, lang, decimals: 1)} %';
+      final style = text.bodySmall?.copyWith(color: own ? FxColors.emeraldInk : FxColors.inkSoft, fontWeight: own ? FontWeight.w600 : null);
+      if (!canEdit || size == m.effectiveBaseSize) return Text(label, style: style);
+      return InkWell(
+        key: ValueKey('grade-$size'),
+        onTap: () => _editGrade(size, own ? pct : null),
+        child: Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Text(label, style: style)),
+      );
+    }
+
     return Table(
       defaultColumnWidth: const IntrinsicColumnWidth(),
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
@@ -344,6 +448,11 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
           cell(const SizedBox(), width: 140),
           for (final s in chart.sizes) cell(Text(s, style: bold)),
           cell(Text(l10n.totalLabel, style: bold)),
+        ]),
+        TableRow(children: [
+          SizedBox(width: 140, child: Text(l10n.gradeRowLabel, style: text.bodySmall?.copyWith(color: FxColors.inkSoft))),
+          for (final s in chart.sizes) cell(gradeCell(s)),
+          cell(const SizedBox()),
         ]),
         for (final (i, c) in m.colorways.indexed)
           TableRow(children: [
@@ -359,6 +468,55 @@ class _ModelSizesCardState extends ConsumerState<ModelSizesCard> {
           for (final s in chart.sizes) cell(Text('${sizeTotal(s)}', style: bold)),
           cell(Text('$grand', style: bold)),
         ]),
+      ],
+    );
+  }
+}
+
+/// Besoin d'une matière détaillé par coloris (lignes) et par taille (colonnes), en mètres.
+class RequirementDetailTable extends StatelessWidget {
+  const RequirementDetailTable({super.key, required this.model, required this.materialId});
+
+  final StudioModel model;
+  final String materialId;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final lang = langOf(context);
+    final text = Theme.of(context).textTheme;
+    final bold = text.labelMedium;
+    final detail = requirementDetail(model, materialId);
+    String m(double v) => formatNumber(v, lang, decimals: 2);
+    Widget cell(String s, {TextStyle? style, double width = 64}) =>
+        SizedBox(width: width, child: Padding(padding: const EdgeInsets.all(4), child: Text(s, style: style, textAlign: TextAlign.right)));
+    final rows = [
+      for (final (i, c) in model.colorways.indexed)
+        if (detail.containsKey(c.id)) (l10n.colorwayName(c, i), detail[c.id]!),
+    ];
+    double col(String s) => rows.fold(0, (sum, r) => sum + (r.$2[s] ?? 0));
+    double row(Map<String, double> r) => r.values.fold(0, (a, b) => a + b);
+    return Table(
+      defaultColumnWidth: const IntrinsicColumnWidth(),
+      border: const TableBorder(horizontalInside: BorderSide(color: FxColors.line)),
+      children: [
+        TableRow(children: [
+          cell('', width: 120),
+          for (final s in model.sizes) cell(s, style: bold),
+          cell(l10n.totalLabel, style: bold, width: 80),
+        ]),
+        for (final r in rows)
+          TableRow(children: [
+            SizedBox(width: 120, child: Padding(padding: const EdgeInsets.all(4), child: Text(r.$1, style: text.bodySmall))),
+            for (final s in model.sizes) cell(m(r.$2[s] ?? 0), style: text.bodySmall),
+            cell(m(row(r.$2)), style: bold, width: 80),
+          ]),
+        if (rows.length > 1)
+          TableRow(children: [
+            SizedBox(width: 120, child: Padding(padding: const EdgeInsets.all(4), child: Text(l10n.totalLabel, style: bold))),
+            for (final s in model.sizes) cell(m(col(s)), style: bold),
+            cell(m(rows.fold(0.0, (a, r) => a + row(r.$2))), style: bold, width: 80),
+          ]),
       ],
     );
   }

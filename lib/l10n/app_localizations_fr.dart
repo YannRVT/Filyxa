@@ -2194,4 +2194,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get sizeChartDeleteTitle => 'Supprimer la grille ?';
+
+  @override
+  String get baseSizeLabel => 'Taille de base';
+
+  @override
+  String get gradePctLabel => 'Écart par taille (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Taille de base : $base · écart de $pct % par taille';
+  }
+
+  @override
+  String get gradeRowLabel => 'Écart';
+
+  @override
+  String get baseSizeTag => 'base';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Écart de la taille $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Écart par rapport à la base (%)';
+
+  @override
+  String get sizeGradeHelp => 'Par exemple 10 pour +10 %, -5 pour −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Revenir à l\'écart du modèle';
+
+  @override
+  String get requirementBySize => 'Détail par taille et par coloris';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consommation de la taille de base × (1 + écart de la taille) × quantité × (1 + marge de $waste %)';
+  }
 }

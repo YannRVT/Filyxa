@@ -584,5 +584,16 @@
   "sizeErrorInUse": "A size with quantities on a style cannot be removed.",
   "sizeErrorInvalid": "Sizes must be distinct and not empty (12 characters max).",
   "sizeChartInUse": "This chart is used by a style and cannot be deleted.",
-  "sizeChartDeleteTitle": "Delete chart?"
+  "sizeChartDeleteTitle": "Delete chart?",
+  "baseSizeLabel": "Base size",
+  "gradePctLabel": "Grading per size (%)",
+  "gradingSummary": "Base size: {base} · {pct} % per size",
+  "gradeRowLabel": "Grading",
+  "baseSizeTag": "base",
+  "sizeGradeTitle": "Grading for size {size}",
+  "sizeGradeLabel": "Difference from base size (%)",
+  "sizeGradeHelp": "For example 10 for +10 %, -5 for −5 %.",
+  "sizeGradeReset": "Use the style's grading",
+  "requirementBySize": "Detail by size and colourway",
+  "requirementFormulaGraded": "Base size consumption × (1 + size grading) × quantity × (1 + {waste} % waste)"
 }

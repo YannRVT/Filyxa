@@ -145,6 +145,9 @@ class Colorway {
       );
 }
 
+/// Écart de consommation par taille, par défaut (%).
+const kDefaultGradePct = 4.0;
+
 /// Avancement d'un modèle (offre Pro). On revient en arrière, sauf depuis Livré.
 enum ModelStatus {
   idea('idea'),
@@ -193,6 +196,10 @@ class StudioModel {
     this.status = ModelStatus.idea,
     this.deadlines = const {},
     this.sizeChartId,
+    this.sizes = const [],
+    this.baseSize,
+    this.gradePct = kDefaultGradePct,
+    this.sizeGrades = const {},
     this.colorways = const [],
   });
 
@@ -205,6 +212,13 @@ class StudioModel {
         wastePct: (json['waste_pct'] as num?)?.toDouble() ?? kDefaultWastePct,
         status: ModelStatus.parse(json['status'] as String?),
         sizeChartId: json['size_chart_id'] as String?,
+        sizes: ((json['size_charts'] as Map<String, dynamic>?)?['sizes'] as List<dynamic>? ?? const []).cast<String>(),
+        baseSize: json['base_size'] as String?,
+        gradePct: (json['grade_pct'] as num?)?.toDouble() ?? kDefaultGradePct,
+        sizeGrades: {
+          for (final g in (json['model_size_grades'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
+            g['size'] as String: (g['grade_pct'] as num).toDouble(),
+        },
         deadlines: {
           for (final d in (json['model_deadlines'] as List<dynamic>? ?? const []).cast<Map<String, dynamic>>())
             ModelStatus.parse(d['stage'] as String?): DateTime.parse(d['due_date'] as String),
@@ -215,7 +229,7 @@ class StudioModel {
       );
 
   static const selectColumns = 'id, collection_id, name, reference, product_type, waste_pct, status, model_deadlines(stage, due_date), '
-      'size_chart_id, colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position))';
+      'size_chart_id, base_size, grade_pct, size_charts(sizes), model_size_grades(size, grade_pct), colorways(id, name, color_hex, quantity, position, colorway_size_quantities(size, quantity), model_materials(id, material_id, role, consumption, position))';
 
   final String id;
   final String collectionId;
@@ -232,7 +246,35 @@ class StudioModel {
 
   /// Grille de tailles ; null : quantité par coloris, comme en V1.
   final String? sizeChartId;
+
+  /// Tailles de la grille, dans l'ordre (vide sans grille).
+  final List<String> sizes;
+
+  /// Taille de base choisie ; null : la taille du milieu de la grille.
+  final String? baseSize;
+
+  /// Écart de consommation par taille d'écart avec la base, en %.
+  final double gradePct;
+
+  /// Écarts propres à une taille (écart total par rapport à la base, en %).
+  final Map<String, double> sizeGrades;
   final List<Colorway> colorways;
+
+  /// Taille de base effective.
+  String? get effectiveBaseSize =>
+      sizes.isEmpty ? null : (baseSize != null && sizes.contains(baseSize) ? baseSize : sizes[(sizes.length - 1) ~/ 2]);
+
+  /// Écart de consommation d'une taille par rapport à la base, en %.
+  double sizeGrade(String size) {
+    final own = sizeGrades[size];
+    if (own != null) return own;
+    final base = effectiveBaseSize;
+    if (base == null) return 0;
+    return (sizes.indexOf(size) - sizes.indexOf(base)) * gradePct;
+  }
+
+  /// Le besoin tient compte des tailles (grille choisie).
+  bool get graded => sizeChartId != null && sizes.isNotEmpty;
 
   /// Étape déjà atteinte (ou dépassée) par le modèle.
   bool reached(ModelStatus stage) => status == ModelStatus.delivered || (status.rank ?? -1) >= (stage.rank ?? 99);
@@ -260,7 +302,15 @@ class StudioModel {
   /// Matières distinctes utilisées, tous coloris confondus.
   Set<String> get materialIds => {for (final c in colorways) for (final l in c.lines) l.materialId};
 
-  StudioModel copyWith({double? wastePct, ModelStatus? status, Map<ModelStatus, DateTime>? deadlines, List<Colorway>? colorways}) =>
+  StudioModel copyWith({
+    double? wastePct,
+    ModelStatus? status,
+    Map<ModelStatus, DateTime>? deadlines,
+    String? baseSize,
+    double? gradePct,
+    Map<String, double>? sizeGrades,
+    List<Colorway>? colorways,
+  }) =>
       StudioModel(
         id: id,
         collectionId: collectionId,
@@ -271,6 +321,10 @@ class StudioModel {
         status: status ?? this.status,
         deadlines: deadlines ?? this.deadlines,
         sizeChartId: sizeChartId,
+        sizes: sizes,
+        baseSize: baseSize ?? this.baseSize,
+        gradePct: gradePct ?? this.gradePct,
+        sizeGrades: sizeGrades ?? this.sizeGrades,
         colorways: colorways ?? this.colorways,
       );
 }
@@ -279,13 +333,42 @@ class StudioModel {
 double lineRequirement(double consumption, int quantity, double wastePct) =>
     consumption * quantity * (1 + wastePct / 100);
 
+/// Besoin d'une ligne pour un coloris : par taille avec la gradation si le modèle a une grille,
+/// sinon consommation × quantité × (1 + marge), comme en V1.
+double colorwayLineRequirement(StudioModel model, Colorway colorway, BomLine line) {
+  if (!model.graded) return lineRequirement(line.consumption, colorway.quantity, model.wastePct);
+  var total = 0.0;
+  for (final size in model.sizes) {
+    total += sizeRequirement(model, colorway, line, size);
+  }
+  return total;
+}
+
+/// Besoin d'une ligne pour une taille : consommation de base × (1 + écart) × quantité × (1 + marge).
+double sizeRequirement(StudioModel model, Colorway colorway, BomLine line, String size) =>
+    line.consumption * (1 + model.sizeGrade(size) / 100) * (colorway.sizeQuantities[size] ?? 0) * (1 + model.wastePct / 100);
+
 /// Besoin total par matière, tous coloris confondus (mètres), dans l'ordre d'apparition.
 Map<String, double> requirementsByMaterial(StudioModel model) {
   final totals = <String, double>{};
   for (final c in model.colorways) {
     for (final l in c.lines) {
-      totals[l.materialId] = (totals[l.materialId] ?? 0) + lineRequirement(l.consumption, c.quantity, model.wastePct);
+      totals[l.materialId] = (totals[l.materialId] ?? 0) + colorwayLineRequirement(model, c, l);
     }
   }
   return totals;
+}
+
+/// Détail du besoin d'une matière : par coloris, puis par taille (mètres).
+Map<String, Map<String, double>> requirementDetail(StudioModel model, String materialId) {
+  final detail = <String, Map<String, double>>{};
+  for (final c in model.colorways) {
+    for (final l in c.lines.where((l) => l.materialId == materialId)) {
+      final row = detail.putIfAbsent(c.id, () => {});
+      for (final size in model.sizes) {
+        row[size] = (row[size] ?? 0) + sizeRequirement(model, c, l, size);
+      }
+    }
+  }
+  return detail;
 }

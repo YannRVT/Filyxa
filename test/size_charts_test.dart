@@ -61,7 +61,7 @@ void main() {
     await tester.pumpWidget(_app(ModelSizesCard(model: _model(chart: 'kids'), onChartChanged: (_) {}, onQuantity: (_, _, _) {})));
     await tester.pumpAndSettle();
     for (final s in ['4A', '6A', '8A']) {
-      expect(find.text(s), findsOneWidget);
+      expect(find.descendant(of: find.byType(Table), matching: find.text(s)), findsOneWidget);
     }
     expect(find.text('30'), findsOneWidget, reason: 'total Marine');
     expect(find.text('35'), findsOneWidget, reason: 'total général');

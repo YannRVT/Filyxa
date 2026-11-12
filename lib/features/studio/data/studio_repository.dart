@@ -133,6 +133,21 @@ class StudioRepository {
   Future<void> setModelSizeChart(String modelId, String? chartId) =>
       _guard(() => _client.from('models').update({'size_chart_id': chartId}).eq('id', modelId));
 
+  Future<void> updateGrading(String modelId, {String? baseSize, double? gradePct}) => _guard(() => _client
+      .from('models')
+      .update({'base_size': ?baseSize, 'grade_pct': ?gradePct}).eq('id', modelId));
+
+  /// Écart propre à une taille ; null : retour à l'écart du modèle.
+  Future<void> setSizeGrade(String modelId, String size, double? gradePct) => _guard(() async {
+        if (gradePct == null) {
+          await _client.from('model_size_grades').delete().eq('model_id', modelId).eq('size', size);
+        } else {
+          await _client
+              .from('model_size_grades')
+              .upsert({'model_id': modelId, 'size': size, 'grade_pct': gradePct}, onConflict: 'model_id,size');
+        }
+      });
+
   Future<void> setSizeQuantity(String colorwayId, String size, int quantity) => _guard(() => _client
       .from('colorway_size_quantities')
       .upsert({'colorway_id': colorwayId, 'size': size, 'quantity': quantity}, onConflict: 'colorway_id,size'));

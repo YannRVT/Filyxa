@@ -2192,4 +2192,43 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sizeChartDeleteTitle => '¿Eliminar la tabla?';
+
+  @override
+  String get baseSizeLabel => 'Talla base';
+
+  @override
+  String get gradePctLabel => 'Diferencia por talla (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Talla base: $base · $pct % por talla';
+  }
+
+  @override
+  String get gradeRowLabel => 'Diferencia';
+
+  @override
+  String get baseSizeTag => 'base';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Diferencia de la talla $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Diferencia respecto a la base (%)';
+
+  @override
+  String get sizeGradeHelp => 'Por ejemplo 10 para +10 %, -5 para −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Volver a la diferencia del modelo';
+
+  @override
+  String get requirementBySize => 'Detalle por talla y color';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consumo de la talla base × (1 + diferencia de la talla) × cantidad × (1 + $waste % de merma)';
+  }
 }

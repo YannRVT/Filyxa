@@ -2195,4 +2195,43 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get sizeChartDeleteTitle => 'Ștergi grila?';
+
+  @override
+  String get baseSizeLabel => 'Mărime de bază';
+
+  @override
+  String get gradePctLabel => 'Diferență pe mărime (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Mărime de bază: $base · $pct % pe mărime';
+  }
+
+  @override
+  String get gradeRowLabel => 'Diferență';
+
+  @override
+  String get baseSizeTag => 'bază';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Diferența mărimii $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Diferență față de bază (%)';
+
+  @override
+  String get sizeGradeHelp => 'De exemplu 10 pentru +10 %, -5 pentru −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Revino la diferența modelului';
+
+  @override
+  String get requirementBySize => 'Detaliu pe mărime și culoare';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consumul mărimii de bază × (1 + diferența mărimii) × cantitate × (1 + $waste % pierderi)';
+  }
 }

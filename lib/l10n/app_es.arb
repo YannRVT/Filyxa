@@ -584,5 +584,16 @@
   "sizeErrorInUse": "No se puede quitar una talla con cantidades en un modelo.",
   "sizeErrorInvalid": "Las tallas deben ser distintas y no vacías (máx. 12 caracteres).",
   "sizeChartInUse": "Un modelo usa esta tabla: no se puede eliminar.",
-  "sizeChartDeleteTitle": "¿Eliminar la tabla?"
+  "sizeChartDeleteTitle": "¿Eliminar la tabla?",
+  "baseSizeLabel": "Talla base",
+  "gradePctLabel": "Diferencia por talla (%)",
+  "gradingSummary": "Talla base: {base} · {pct} % por talla",
+  "gradeRowLabel": "Diferencia",
+  "baseSizeTag": "base",
+  "sizeGradeTitle": "Diferencia de la talla {size}",
+  "sizeGradeLabel": "Diferencia respecto a la base (%)",
+  "sizeGradeHelp": "Por ejemplo 10 para +10 %, -5 para −5 %.",
+  "sizeGradeReset": "Volver a la diferencia del modelo",
+  "requirementBySize": "Detalle por talla y color",
+  "requirementFormulaGraded": "Consumo de la talla base × (1 + diferencia de la talla) × cantidad × (1 + {waste} % de merma)"
 }

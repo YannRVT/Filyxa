@@ -3641,6 +3641,72 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Supprimer la grille ?'**
   String get sizeChartDeleteTitle;
+
+  /// No description provided for @baseSizeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille de base'**
+  String get baseSizeLabel;
+
+  /// No description provided for @gradePctLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart par taille (%)'**
+  String get gradePctLabel;
+
+  /// No description provided for @gradingSummary.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille de base : {base} · écart de {pct} % par taille'**
+  String gradingSummary(String base, String pct);
+
+  /// No description provided for @gradeRowLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart'**
+  String get gradeRowLabel;
+
+  /// No description provided for @baseSizeTag.
+  ///
+  /// In fr, this message translates to:
+  /// **'base'**
+  String get baseSizeTag;
+
+  /// No description provided for @sizeGradeTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart de la taille {size}'**
+  String sizeGradeTitle(String size);
+
+  /// No description provided for @sizeGradeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écart par rapport à la base (%)'**
+  String get sizeGradeLabel;
+
+  /// No description provided for @sizeGradeHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par exemple 10 pour +10 %, -5 pour −5 %.'**
+  String get sizeGradeHelp;
+
+  /// No description provided for @sizeGradeReset.
+  ///
+  /// In fr, this message translates to:
+  /// **'Revenir à l\'écart du modèle'**
+  String get sizeGradeReset;
+
+  /// No description provided for @requirementBySize.
+  ///
+  /// In fr, this message translates to:
+  /// **'Détail par taille et par coloris'**
+  String get requirementBySize;
+
+  /// No description provided for @requirementFormulaGraded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Consommation de la taille de base × (1 + écart de la taille) × quantité × (1 + marge de {waste} %)'**
+  String requirementFormulaGraded(String waste);
 }
 
 class _AppLocalizationsDelegate

@@ -203,6 +203,23 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     _schedule('size-${c.id}-$size', () => _repo.setSizeQuantity(c.id, size, quantity));
   }
 
+  void _setBaseSize(String size) {
+    setState(() => _model = _model!.copyWith(baseSize: size));
+    _schedule('base', () => _repo.updateGrading(widget.modelId, baseSize: size));
+  }
+
+  void _setGradePct(double pct) {
+    setState(() => _model = _model!.copyWith(gradePct: pct));
+    _schedule('grade', () => _repo.updateGrading(widget.modelId, gradePct: pct));
+  }
+
+  void _setSizeGrade(String size, double? pct) {
+    final grades = {..._model!.sizeGrades};
+    pct == null ? grades.remove(size) : grades[size] = pct;
+    setState(() => _model = _model!.copyWith(sizeGrades: grades));
+    _schedule('grade-$size', () => _repo.setSizeGrade(widget.modelId, size, pct));
+  }
+
   Future<void> _rename() async {
     final l10n = context.l10n;
     final name = await showNameDialog(context,
@@ -292,7 +309,14 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
                   const SizedBox(height: FxSpace.md),
                   ModelDeadlinesCard(model: m, onChanged: _setDeadline),
                   const SizedBox(height: FxSpace.md),
-                  ModelSizesCard(model: m, onChartChanged: _setSizeChart, onQuantity: _setSizeQuantity),
+                  ModelSizesCard(
+                    model: m,
+                    onChartChanged: _setSizeChart,
+                    onQuantity: _setSizeQuantity,
+                    onBaseSize: _setBaseSize,
+                    onGradePct: _setGradePct,
+                    onSizeGrade: _setSizeGrade,
+                  ),
                   const SizedBox(height: FxSpace.md),
                   AlertsPanel(alerts: watchModelAlerts(ref, m)),
                   const SizedBox(height: FxSpace.md),
@@ -479,7 +503,7 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
     final l10n = context.l10n;
     final lang = langOf(context);
     final text = Theme.of(context).textTheme;
-    final need = lineRequirement(l.consumption, c.quantity, m.wastePct);
+    final need = colorwayLineRequirement(m, c, l);
     return Padding(
       key: ValueKey('line-${l.id}'),
       padding: const EdgeInsets.only(bottom: FxSpace.sm),
@@ -542,19 +566,37 @@ class _ModelScreenState extends ConsumerState<ModelScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(l10n.requirementTitle, style: text.titleMedium),
-            Text(l10n.requirementFormula(formatNumber(m.wastePct, lang, decimals: 2)),
+            Text(
+                m.graded
+                    ? l10n.requirementFormulaGraded(formatNumber(m.wastePct, lang, decimals: 2))
+                    : l10n.requirementFormula(formatNumber(m.wastePct, lang, decimals: 2)),
                 style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
             const SizedBox(height: FxSpace.sm),
             for (final e in totals.entries)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Row(
+              if (m.graded)
+                ExpansionTile(
+                  key: ValueKey('need-${e.key}'),
+                  tilePadding: EdgeInsets.zero,
+                  title: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium),
+                  subtitle: Text(l10n.requirementBySize, style: text.bodySmall?.copyWith(color: FxColors.inkSoft)),
+                  trailing: TechText(l10n.stockMeters(formatNumber(e.value, lang, decimals: 2)), size: 14),
                   children: [
-                    Expanded(child: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium)),
-                    TechText(l10n.stockMeters(formatNumber(e.value, lang, decimals: 2)), size: 14),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: RequirementDetailTable(model: m, materialId: e.key),
+                    ),
                   ],
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      Expanded(child: Text(materials[e.key]?.name ?? l10n.materialMissing, style: text.bodyMedium)),
+                      TechText(l10n.stockMeters(formatNumber(e.value, lang, decimals: 2)), size: 14),
+                    ],
+                  ),
                 ),
-              ),
           ],
         ),
       ),

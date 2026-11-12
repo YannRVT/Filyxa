@@ -2185,4 +2185,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sizeChartDeleteTitle => 'Delete chart?';
+
+  @override
+  String get baseSizeLabel => 'Base size';
+
+  @override
+  String get gradePctLabel => 'Grading per size (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Base size: $base · $pct % per size';
+  }
+
+  @override
+  String get gradeRowLabel => 'Grading';
+
+  @override
+  String get baseSizeTag => 'base';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Grading for size $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Difference from base size (%)';
+
+  @override
+  String get sizeGradeHelp => 'For example 10 for +10 %, -5 for −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Use the style\'s grading';
+
+  @override
+  String get requirementBySize => 'Detail by size and colourway';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Base size consumption × (1 + size grading) × quantity × (1 + $waste % waste)';
+  }
 }

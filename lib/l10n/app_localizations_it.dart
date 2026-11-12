@@ -2194,4 +2194,43 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sizeChartDeleteTitle => 'Eliminare la tabella?';
+
+  @override
+  String get baseSizeLabel => 'Taglia base';
+
+  @override
+  String get gradePctLabel => 'Scarto per taglia (%)';
+
+  @override
+  String gradingSummary(String base, String pct) {
+    return 'Taglia base: $base · scarto del $pct % per taglia';
+  }
+
+  @override
+  String get gradeRowLabel => 'Scarto';
+
+  @override
+  String get baseSizeTag => 'base';
+
+  @override
+  String sizeGradeTitle(String size) {
+    return 'Scarto della taglia $size';
+  }
+
+  @override
+  String get sizeGradeLabel => 'Scarto rispetto alla base (%)';
+
+  @override
+  String get sizeGradeHelp => 'Per esempio 10 per +10 %, -5 per −5 %.';
+
+  @override
+  String get sizeGradeReset => 'Torna allo scarto del modello';
+
+  @override
+  String get requirementBySize => 'Dettaglio per taglia e variante';
+
+  @override
+  String requirementFormulaGraded(String waste) {
+    return 'Consumo della taglia base × (1 + scarto della taglia) × quantità × (1 + $waste % di sfrido)';
+  }
 }

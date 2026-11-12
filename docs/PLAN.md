@@ -467,10 +467,10 @@ L'Éditeur désigne la taille de base du modèle. La consommation saisie corresp
 
 ### Critères d'acceptation
 
-- [ ] Besoin d'une taille = consommation de base × (1 + écart) × quantité × (1 + marge de perte). Le calcul est vérifié au centimètre près sur 5 modèles de référence (critère de succès V2 n° 2).
-- [ ] L'écart du modèle et l'écart propre à une taille se modifient, et le besoin se recalcule en moins de 1 s pour un modèle de 10 matières, 6 tailles et 3 coloris (critère de succès V2 n° 1).
-- [ ] Le détail du besoin par taille et par coloris s'affiche pour chaque matière, avec le total.
-- [ ] Les alertes de stock du Studio utilisent le besoin gradué.
+- [x] Besoin d'une taille = consommation de base × (1 + écart) × quantité × (1 + marge de perte). Le calcul est vérifié au centimètre près sur 5 modèles de référence (critère de succès V2 n° 2).
+- [x] L'écart du modèle et l'écart propre à une taille se modifient, et le besoin se recalcule en moins de 1 s pour un modèle de 10 matières, 6 tailles et 3 coloris (critère de succès V2 n° 1).
+- [x] Le détail du besoin par taille et par coloris s'affiche pour chaque matière, avec le total.
+- [x] Les alertes de stock du Studio utilisent le besoin gradué.
 
 ## Bloquée par
 
